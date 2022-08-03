@@ -10,7 +10,7 @@ export default function LandingPage() {
         
        
           <h1 /* className={style.h1} */>LANDING PAGE , VA A ESTAR LA PRIEMRA PAGINA DEL WIX</h1>
-          <Link  to={'/home'}><button >click para ver mas medicos</button></Link>
+          <Link  to='/home'><button >clias mck para ver medicos</button></Link>
         
       </div>
     )}
