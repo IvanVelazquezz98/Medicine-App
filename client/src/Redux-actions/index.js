@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-export function getDogs () {
+export function getAds () {
     return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/dogs");
-        return dispatch({type: 'GET_DOGS', payload: json.data});
-
+        var json = await axios.get("http://localhost:3001/Ad");
+     
+        return dispatch({type: 'GET_ADS', payload: json.data});
     }
+    
 };
 export function getDogsById (id) {
 
