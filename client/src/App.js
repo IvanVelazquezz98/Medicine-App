@@ -1,21 +1,16 @@
-import { BrowserRouter, Route } from "react-router-dom";
-import Ads from './components/Ads/Ads'
-import LandingPage from "./components/LandingPage/LandingPage";
-import Home from './components/Home/Home'
+import {  Route, Routes } from "react-router-dom";
+import Validate from './Component/Validate/Validate'
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
 
-    
-        <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/home" component={Home} />
-        {/* <Route exact path="/home" component={Home} />
-        <Route exact path="/detail/:id" component={DogDetail} />
-        <Route exact path="/create" component={FormDog} /> */}
+      <div className="App">
+        <Routes>
+        <Route path="/" element={<Validate /> } />
+
+        </Routes>
       </div>
-    </BrowserRouter>
+
   );
 }
 
