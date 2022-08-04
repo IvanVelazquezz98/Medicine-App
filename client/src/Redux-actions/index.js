@@ -8,11 +8,11 @@ export function getAds () {
     }
     
 };
-export function getDogsById (id) {
+export function getProfessionalById (id) {
 
     return async function (dispatch){
-        var json = await axios.get(`http://localhost:3001/dogs/${id}`);
-        return dispatch({type: 'GET_DETAILS', payload: json.data});
+        var json = await axios.get(`http://localhost:3001/professionals/${id}`);
+        return dispatch({type: 'GET_PROFESSIONAL_DETAILS', payload: json.data});
 
     }
 
