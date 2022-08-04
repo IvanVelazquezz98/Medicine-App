@@ -9,8 +9,21 @@ import axios from 'axios';
     
 };
 
+export function getProfessionalById (id) {
+
+    return async function (dispatch){
+        var json = await axios.get(`http://localhost:3001/professionals/${id}`);
+        return dispatch({type: 'GET_PROFESSIONAL_DETAILS', payload: json.data});
+
+    }
+
+};
+
+        
+
     export function postUser(payload){
     return async function(dispatch){
+
         try {
             var json = await axios.post(`http://localhost:3001/users`, payload)
             return json
