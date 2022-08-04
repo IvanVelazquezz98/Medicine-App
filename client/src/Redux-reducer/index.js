@@ -3,11 +3,28 @@ const inicialState = {
   allAds:[],
   professionalProfile:{},
   adDetail:{}
+  users:[],
+  allUsers:[],
+  userDetail:[]
+
   
 };
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {
+
+    case "GET_USERS":
+      return{
+        ...state,
+        users : action.payload,
+        allUsers: action.payload
+
+      }
+    case "GET_USER_DETAIL":
+      return{
+        ...state,
+        userDetail: action.payload
+      }
 
     case "GET_ADS":
       return {
