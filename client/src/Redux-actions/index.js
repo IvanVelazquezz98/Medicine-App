@@ -2,7 +2,7 @@ import axios from 'axios';
 
     export function getAds () {
     return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/Ad");
+        var json = await axios.get("http://localhost:3001/ad");
      
         return dispatch({type: 'GET_ADS', payload: json.data});
     }
@@ -18,11 +18,18 @@ export function getProfessionalById (id) {
     }
 
 };
+export function getAdById (id) {
 
-        
+    return async function (dispatch){
+        var json = await axios.get(`http://localhost:3001/ad/${id}`);
+        return dispatch({type: 'GET_AD_DETAILS', payload: json.data});
+
+    }
+
+};
 
     export function postUser(payload){
-    return async function(dispatch){
+    return async function(){ 
 
         try {
             var json = await axios.post(`http://localhost:3001/users`, payload)
@@ -33,7 +40,7 @@ export function getProfessionalById (id) {
     }
 
     export function postProfessional(payload){
-        return async function(dispatch){
+        return async function(){ 
             try {
                 var json = await axios.post(`http://localhost:3001/professionals`, payload)
                 return json

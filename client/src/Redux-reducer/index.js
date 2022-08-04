@@ -2,6 +2,7 @@ const inicialState = {
   ads: [],
   allAds:[],
   professionalProfile:{},
+  adDetail:{}
   
 };
 
@@ -19,6 +20,12 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         professionalProfile:action.payload
       }
+    case 'GET_AD_DETAILS':
+      return {
+        ...state,
+        adDetail:action.payload
+      }
+
   
     default:
       return state;

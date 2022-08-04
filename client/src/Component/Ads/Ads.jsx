@@ -18,7 +18,8 @@ export default function Ads() {
     <div>
       {ads?ads.map(ad=>{
         return(
-          <Ad name = {ad.professional.user.name}
+          <Ad adID={ad.id}
+              name = {ad.professional.user.name}
               medicalLicense = {ad.professionalMedicalLicense}
               especialidad = {ad.specialty}
               serviceType = {ad.serviceType}
