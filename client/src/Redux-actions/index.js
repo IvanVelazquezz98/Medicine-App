@@ -1,47 +1,69 @@
 import axios from 'axios';
 
-    export function getAds () {
+export function getDogs () {
     return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/Ad");
-     
-        return dispatch({type: 'GET_ADS', payload: json.data});
+        var json = await axios.get("http://localhost:3001/dogs");
+        return dispatch({type: 'GET_DOGS', payload: json.data});
+
     }
-    
 };
-
-export function getProfessionalById (id) {
+export function getDogsById (id) {
 
     return async function (dispatch){
-        var json = await axios.get(`http://localhost:3001/professionals/${id}`);
-        return dispatch({type: 'GET_PROFESSIONAL_DETAILS', payload: json.data});
+        var json = await axios.get(`http://localhost:3001/dogs/${id}`);
+        return dispatch({type: 'GET_DETAILS', payload: json.data});
 
     }
 
 };
-
+export function getName(name) {
+    return async (dispatch) =>{
         
-
-    export function postUser(payload){
-    return async function(dispatch){
-
         try {
-            var json = await axios.post(`http://localhost:3001/users`, payload)
-            return json
+            var json= await axios.get(`http://localhost:3001/dogs?name=${name}`);
+        return dispatch({type:'GET_NAME', payload: json.data})
         } catch (error) {
-            console.log(error)}
+            alert('no found dogs')
         }
     }
+};
+export function getTemperaments () {
 
-    export function postProfessional(payload){
-        return async function(dispatch){
-            try {
-                var json = await axios.post(`http://localhost:3001/professionals`, payload)
-                return json
-            } catch (error) {
-                console.log(error)}
-            }
-        }
+    
+    return async function (dispatch){
+        var json = await axios.get("http://localhost:3001/temperaments");
+        return dispatch({type: 'GET_TEMPER', payload: json.data});
 
+    }
+
+};
+
+export function filterByTemp (payload){
+    return{
+        type: 'FILTER_TEMPER',
+        payload
+    }
+};
+
+export function orderName (payload)  {
+    return{
+        type:'ORDER_NAME',
+        payload
+    }
+};
+
+export function orderByWeight(payload) {
+    return{
+        type:'ORDER_WEIGHT',
+        payload
+    }
+};
+export function filterCreated(payload) {
+    return{
+        type:'FILTER_CREATED',
+        payload
+    }
+}
 export function cleanDetail(){
     return{
         type: 'CLEAN_DETAIL'
