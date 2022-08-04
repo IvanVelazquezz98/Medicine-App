@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function getAds () {
+    export function getAds () {
     return async function (dispatch){
         var json = await axios.get("http://localhost:3001/Ad");
      
@@ -8,6 +8,7 @@ export function getAds () {
     }
     
 };
+
 export function getProfessionalById (id) {
 
     return async function (dispatch){
@@ -17,54 +18,30 @@ export function getProfessionalById (id) {
     }
 
 };
-export function getName(name) {
-    return async (dispatch) =>{
+
         
+
+    export function postUser(payload){
+    return async function(dispatch){
+
         try {
-            var json= await axios.get(`http://localhost:3001/dogs?name=${name}`);
-        return dispatch({type:'GET_NAME', payload: json.data})
+            var json = await axios.post(`http://localhost:3001/users`, payload)
+            return json
         } catch (error) {
-            alert('no found dogs')
+            console.log(error)}
         }
     }
-};
-export function getTemperaments () {
 
-    
-    return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/temperaments");
-        return dispatch({type: 'GET_TEMPER', payload: json.data});
+    export function postProfessional(payload){
+        return async function(dispatch){
+            try {
+                var json = await axios.post(`http://localhost:3001/professionals`, payload)
+                return json
+            } catch (error) {
+                console.log(error)}
+            }
+        }
 
-    }
-
-};
-
-export function filterByTemp (payload){
-    return{
-        type: 'FILTER_TEMPER',
-        payload
-    }
-};
-
-export function orderName (payload)  {
-    return{
-        type:'ORDER_NAME',
-        payload
-    }
-};
-
-export function orderByWeight(payload) {
-    return{
-        type:'ORDER_WEIGHT',
-        payload
-    }
-};
-export function filterCreated(payload) {
-    return{
-        type:'FILTER_CREATED',
-        payload
-    }
-}
 export function cleanDetail(){
     return{
         type: 'CLEAN_DETAIL'

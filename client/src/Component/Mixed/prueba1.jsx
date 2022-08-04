@@ -9,7 +9,7 @@ const auth = getAuth(firebaseApp)
 function prueba1({user}) {
   return (
     <div>
-      <button onClick ={signOut(auth)}>Cerrar session</button> <br/>
+      <button onClick ={() => signOut(auth)}>Cerrar session</button> <br/>
 
       {user.rol === "user" ? <Prueba2 /> : <Prueba3 /> }
     </div>
