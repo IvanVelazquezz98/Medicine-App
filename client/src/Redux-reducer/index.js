@@ -2,7 +2,7 @@ const inicialState = {
   ads: [],
   allAds:[],
   professionalProfile:{},
-  adDetail:{}
+  adDetail:{},
   users:[],
   allUsers:[],
   userDetail:[]
