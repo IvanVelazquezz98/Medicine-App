@@ -36,7 +36,7 @@ function Login() {
     country: "",
     city: "",
     address: "",
-    cp: "",
+    province: "",
     phone: "",
     rol: "",
     gps: ""
@@ -97,7 +97,7 @@ function Login() {
       country: post.country,
       city: post.city,
       address: post.address,
-      cp: post.cp,
+      province: post.province,
       phone: post.phone,
       rol: post.rol,
       gps: post.gps
@@ -123,7 +123,7 @@ function Login() {
       country: "",
       city: "",
       address: "",
-      cp: "",
+      province: "",
       phone: "",
       rol: "",
       gps: ""
@@ -211,7 +211,7 @@ function Login() {
 
             <label>
               Codigo Postal:
-              <input type="text" value={post.cp} name="cp" onChange={(e) => handleChange(e)}></input>
+              <input type="text" value={post.province} name="province" onChange={(e) => handleChange(e)}></input>
             </label>
 
             <label>
