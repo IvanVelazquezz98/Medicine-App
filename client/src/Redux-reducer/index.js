@@ -5,7 +5,7 @@ const inicialState = {
   adDetail:{},
   users:[],
   allUsers:[],
-  userDetail:[]
+  userDetail:{}
 
   
 };

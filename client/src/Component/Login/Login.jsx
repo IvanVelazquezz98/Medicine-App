@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import firebaseApp from "../../Credential/index";
 import { useDispatch, useSelector } from "react-redux"
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
-import AllUsers from './AllUsers';
 import { postUser ,postProfessional } from '../../Redux-actions/index'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import './Login.css'
 
 const auth = getAuth(firebaseApp);
 
@@ -25,6 +24,20 @@ function Login() {
   })
 
 
+  
+//*****************************esto va en otro componente********************** */
+  //reset password  PASAR LOGICA AL MODAL OLVIDO CONTRASEÑA
+  const resetPassword = (email) => sendPasswordResetEmail(auth, email)
+  const handleRessetPassword = async  () =>{
+    try {
+      await resetPassword(post.email)
+      //crear MODAL con correo electronico y send
+      return alert("Enviamos un correo para reestablecer tu contraseña")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+//********************************** */
   const [post, setPost] = useState({
     name: "",
     email: "",
@@ -36,7 +49,7 @@ function Login() {
     country: "",
     city: "",
     address: "",
-    cp: "",
+    province: "",
     phone: "",
     rol: "",
     gps: ""
@@ -56,6 +69,8 @@ function Login() {
 
   }
 
+
+  // registrar usuario
   async function userRegister(email, password, rol) {
     const userInfo = await createUserWithEmailAndPassword(
       auth,
@@ -70,9 +85,6 @@ function Login() {
   }
 
   
-
-  
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -97,7 +109,7 @@ function Login() {
       country: post.country,
       city: post.city,
       address: post.address,
-      cp: post.cp,
+      province: post.province,
       phone: post.phone,
       rol: post.rol,
       gps: post.gps
@@ -123,7 +135,7 @@ function Login() {
       country: "",
       city: "",
       address: "",
-      cp: "",
+      province: "",
       phone: "",
       rol: "",
       gps: ""
@@ -145,119 +157,234 @@ function Login() {
   }
 
   return (
-    <div>
-      <h1> {isRegister ? "Registrate" : "inicia Sesión"} </h1>
+    <div className="ValidateCOntainer">
 
-      <form onSubmit={handleSubmit} >
-        <label>
-          Correo:
-          <input type="email" id="email" name="email" value={post.email} onChange={(e) => handleChange(e)} />
-        </label>
 
-        <label>
-          Password:
-          <input type="password" id="password" name="password" value={post.password} onChange={(e) => handleChange(e)} />
-        </label>
-
-        {!isRegister ? <p></p> :
-          
-          <>
-          <label>
-              Nombre:
-              <input type="text" value={post.name} name="name" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Rol:
-              <select id= "rol" name="rol" onChange={(e) => handleChange(e)}>
-                <option  value="user">Usuario</option>
-                <option value="professional">Profesional</option>
-              </select>
-            </label>
-            <label>
-              Fecha de Nacimiento:
-              <input type="date" value={post.dateOfBirth} name="dateOfBirth" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Identificacion:
-              <input type="text" value={post.identification} name="identification" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Imagen de usuario:
-              <input type="text" value={post.idImage} name="idImage" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              User Imagen:
-              <input type="text" value={post.userimage} name="userimage" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Pais:
-              <input type="text" value={post.country} name="country" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Ciudad:
-              <input type="text" value={post.city} name="city" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Direccion:
-              <input type="text" value={post.address} name="address" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Codigo Postal:
-              <input type="text" value={post.cp} name="cp" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Numero de celular:
-              <input type="text" value={post.phone} name="phone" onChange={(e) => handleChange(e)}></input>
-            </label>
-
-            <label>
-              Marca tu ibicacion en el mapa:
-              <input type="text" value={post.gps} name="gps" onChange={(e) => handleChange(e)}></input>
-            </label>
     
-            { 
-              (post.rol === "professional")  ?
-          <>
-          
-          <label>
-            Licencia Medica:
-            <input  type="text" value={postprofessional.medicalLicense} name="medicalLicense" onChange={(e) => handleChange(e)}></input>
-            </label>
+    <div className="Validate">
+      <h2> {isRegister ? "Registrate" : "Inicia Sesión"} </h2>
+      <Form onSubmit={handleSubmit} className="formContainer mb-2" >
+      {/* mail */}
+      <Form.Group className="mb-3" >
+        <Form.Label>Correo: </Form.Label>
+        <Form.Control 
+          type="email" 
+          id="email" 
+          name="email" 
+          value={post.email} 
+          onChange={(e) => handleChange(e)} 
+        />
+      </Form.Group>
+      {/* password */}
+      <Form.Group className="mb-3" >
+        <Form.Label>Password: </Form.Label>
+        <Form.Control 
+          type="password" 
+          id="password" 
+          name="password" 
+          value={post.password} 
+          onChange={(e) => handleChange(e)} 
+        />
+      </Form.Group>
+      {
+        isRegister &&
+        <>
+        {/* name */}
+        <Form.Group className="mb-3" >
+          <Form.Label>Nombre: </Form.Label>
+          <Form.Control 
+            type="text" 
+            value={post.name} 
+            name="name" 
+            onChange={(e) => handleChange(e)}
+            />
+        </Form.Group>
+
+        {/* rol */}
+        <Form.Group className="mb-3" >
+          <Form.Label>Rol: </Form.Label>
+          <Form.Select id= "rol" name="rol" onChange={(e) => handleChange(e)}>
             
-            <label>
-            Imagen de licencia :
-           <input  type="text" value={postprofessional.licenceImage} name="licenceImage" onChange={(e) => handleChange(e)}></input>
-            </label>
+            <option value="1">...</option>
+            <option value="user">Usuario</option>
+            <option value="professional">Profesional</option>
+          </Form.Select>
+        </Form.Group>
+
+          {/* fecha de nacimiento */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Fecha de nacimiento: </Form.Label>
+            <Form.Control 
+              type="date" 
+              value={post.dateOfBirth} 
+              name="dateOfBirth" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+          <Form.Group className="mb-3" >
+            <Form.Label>Identificación: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.identification} 
+              name="identification" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+          
+          {/* Imagen usuario */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Imagen Usuario: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.idImage} 
+              name="idImage" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+          
+
+            {/* Pais */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Pais: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.country} 
+              name="country" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+          {/* Ciudad  */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Ciudad: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.city} 
+              name="city" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+           {/*  codigo postal */}
+           <Form.Group className="mb-3" >
+            <Form.Label>Codigo Postal: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.cp} 
+              name="cp" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+          {/*  Telefono */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Telefono: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.phone} 
+              name="phone" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+          {/*  Ubicacion GPS */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Ubicacion GPS: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.gps} 
+              name="gps" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+           {/*  Ubicacion GPS */}
+           <Form.Group className="mb-3" >
+            <Form.Label>Ubicacion GPS: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.gps} 
+              name="gps" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+
+
+          {
+            //we check whether or not he/she is a professional 
+            (post.rol === "professional") &&
+            <>
+              {/* Licencia Medica  */}
+              <Form.Group className="mb-3" >
+                <Form.Label>Licencia Medica: </Form.Label>
+                <Form.Control 
+                  type="text" 
+                  value={postprofessional.medicalLicense} 
+                  name="medicalLicense" 
+                  onChange={(e) => handleChange(e)}
+                  />
+              </Form.Group>
+
+              {/* Imagen Licencia */}
+              <Form.Group className="mb-3" >
+                <Form.Label>Imagen de Licencia: </Form.Label>
+                <Form.Control 
+                  type="text" 
+                  value={postprofessional.licenceImage} 
+                  name="licenceImage" 
+                  onChange={(e) => handleChange(e)}
+                  />
+              </Form.Group>
+
+
             </>
+          }
+
+        </>
+      }
+
+      <div className="formButtons">
+
+      {/* Submit form button */}
+      <Button 
+        variant="success" 
+        type="submit"  
+        >
+          {isRegister ? "Registrarse" : " Inicia Sesión"}
+      </Button>
+    </div>
+    </Form>
+
+      <div className="registerNforgottenButtons">
+        {/* Register Button */}
+        <Button 
+          variant="info" 
+          size="sm"
+          type="submit"  
+          onClick={() => setIsRegister(!isRegister)}>
+
+          {isRegister ? "Ya estoy Registrado" : "Quiero Registrarme "}
+        </Button>
 
 
-                :
-                <p></p>
-
-            }
-          </>
-
-
-
-        }
-        <input type="submit"  value={isRegister ? "Registrarse" : " Inicia Session"} />
-
-      </form>
-      <button onClick={() => setIsRegister(!isRegister)}>
-        {isRegister ? "Ya estoy Registrado" : "Quiero Registrarme "}
-      </button>
-
+        {/* Forgotten password  --->   */}
+        <Button 
+          variant="danger" 
+          size="sm"
+          onClick={handleRessetPassword} 
+          >
+          ¿Olvidó su contraseña?
+        </Button>
+      </div>
+     
+    </div>
     </div>
   );
 }
 
 export default Login;
+
+
+//css 
