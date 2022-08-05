@@ -58,9 +58,9 @@ export function getUsers() {
  export function getUsersById(id) {
     return async function (dispatch) {
       var json = await axios.get(`http://localhost:3001/user/${id}`);
-      return dispatch({ type: "GET_PROFESSIONAL_DETAILS", payload: json.data });
+      return dispatch({ type: "GET_USER_DETAIL", payload: json.data });
     };
-  }
+  };
 
 export function getAdById (id) {
 
