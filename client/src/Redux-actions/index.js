@@ -71,3 +71,45 @@ export function getAdById (id) {
     }
 
 };
+export function OrederAdByPrice(payload) {
+  return{
+      type:'ORDER_PRICE',
+      payload
+  }
+}
+export function filterSpecialty(payload) {
+  return{
+      type:'FILTER_SPECIALTY',
+      payload
+  }
+}
+export function filterCountry(payload) {
+  return{
+      type:'FILTER_COUNTRY',
+      payload
+  }
+}
+export function filterProvince(payload) {
+  return{
+      type:'FILTER_PROVINCE',
+      payload
+  }
+}
+export function filterCity(payload) {
+  return{
+      type:'FILTER_CITY',
+      payload
+  }
+}
+export function filterTypeService(payload) {
+  return{
+      type:'FILTER_TYPE_SERVICE',
+      payload
+  }
+}
+export function filterRanking(payload) {
+  return{
+      type:'FILTER_RANKING',
+      payload
+  }
+}
