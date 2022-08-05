@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import firebaseApp from "../../Credential/index";
 import { useDispatch, useSelector } from "react-redux"
-import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-
+import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { postUser ,postProfessional } from '../../Redux-actions/index'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ModalForgotPsw from './ModalForgotPsw'
 import './Login.css'
 
 const auth = getAuth(firebaseApp);
@@ -25,19 +25,7 @@ function Login() {
 
 
   
-//*****************************esto va en otro componente********************** */
-  //reset password  PASAR LOGICA AL MODAL OLVIDO CONTRASEÑA
-  const resetPassword = (email) => sendPasswordResetEmail(auth, email)
-  const handleRessetPassword = async  () =>{
-    try {
-      await resetPassword(post.email)
-      //crear MODAL con correo electronico y send
-      return alert("Enviamos un correo para reestablecer tu contraseña")
-    } catch (error) {
-      console.log(error)
-    }
-  }
-//********************************** */
+
   const [post, setPost] = useState({
     name: "",
     email: "",
@@ -223,7 +211,7 @@ function Login() {
           </Form.Group>
 
           <Form.Group className="mb-3" >
-            <Form.Label>Identificación: </Form.Label>
+            <Form.Label>Numero Documento: </Form.Label>
             <Form.Control 
               type="text" 
               value={post.identification} 
@@ -232,9 +220,20 @@ function Login() {
               />
           </Form.Group>
           
-          {/* Imagen usuario */}
+           {/*  Imagen de usuario */}
+           <Form.Group className="mb-3" >
+            <Form.Label>Imagen de usuario: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.userimage} 
+              name="userimage" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
+          {/* ID Imagen */}
           <Form.Group className="mb-3" >
-            <Form.Label>Imagen Usuario: </Form.Label>
+            <Form.Label>ID Imagen: </Form.Label>
             <Form.Control 
               type="text" 
               value={post.idImage} 
@@ -255,6 +254,18 @@ function Login() {
               />
           </Form.Group>
 
+
+           {/*  Provincia */}
+           <Form.Group className="mb-3" >
+            <Form.Label>Provincia: </Form.Label>
+            <Form.Control 
+              type="text" 
+              value={post.province} 
+              name="province" 
+              onChange={(e) => handleChange(e)}
+              />
+          </Form.Group>
+
           {/* Ciudad  */}
           <Form.Group className="mb-3" >
             <Form.Label>Ciudad: </Form.Label>
@@ -266,20 +277,22 @@ function Login() {
               />
           </Form.Group>
 
-           {/*  codigo postal */}
-           <Form.Group className="mb-3" >
-            <Form.Label>Codigo Postal: </Form.Label>
+          {/*  Address */}
+          <Form.Group className="mb-3" >
+            <Form.Label>Dirección: </Form.Label>
             <Form.Control 
               type="text" 
-              value={post.cp} 
-              name="cp" 
+              value={post.address} 
+              name="address" 
               onChange={(e) => handleChange(e)}
               />
           </Form.Group>
 
+
+
           {/*  Telefono */}
           <Form.Group className="mb-3" >
-            <Form.Label>Telefono: </Form.Label>
+            <Form.Label>Teléfono: </Form.Label>
             <Form.Control 
               type="text" 
               value={post.phone} 
@@ -299,18 +312,7 @@ function Login() {
               />
           </Form.Group>
 
-           {/*  Ubicacion GPS */}
-           <Form.Group className="mb-3" >
-            <Form.Label>Ubicacion GPS: </Form.Label>
-            <Form.Control 
-              type="text" 
-              value={post.gps} 
-              name="gps" 
-              onChange={(e) => handleChange(e)}
-              />
-          </Form.Group>
-
-
+          
 
           {
             //we check whether or not he/she is a professional 
@@ -347,13 +349,13 @@ function Login() {
 
       <div className="formButtons">
 
-      {/* Submit form button */}
-      <Button 
-        variant="success" 
-        type="submit"  
-        >
-          {isRegister ? "Registrarse" : " Inicia Sesión"}
-      </Button>
+        {/* Submit form button */}
+        <Button 
+          variant="success" 
+          type="submit"  
+          >
+            {isRegister ? "Registrarse" : " Inicia Sesión"}
+        </Button>
     </div>
     </Form>
 
@@ -368,15 +370,9 @@ function Login() {
           {isRegister ? "Ya estoy Registrado" : "Quiero Registrarme "}
         </Button>
 
-
-        {/* Forgotten password  --->   */}
-        <Button 
-          variant="danger" 
-          size="sm"
-          onClick={handleRessetPassword} 
-          >
-          ¿Olvidó su contraseña?
-        </Button>
+        {/* Olvido contraseña */}
+        <ModalForgotPsw/>
+       
       </div>
      
     </div>
