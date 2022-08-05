@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getName } from "../Redux-actions/index";
+import { getName } from "../../Redux-actions";
 
 
 const SearchBar = () => {
@@ -22,7 +22,7 @@ const SearchBar = () => {
 
 
   return (
-    <div key="search1" className={s.search}>
+    <div key="search1" >
       <input 
     
         type="text"
@@ -32,7 +32,7 @@ const SearchBar = () => {
         onChange={(e) => inputHandler(e)}
       />
      
-        <button className={s.boton} onClick={(e) => onClickHandler(e)}>
+        <button  onClick={(e) => onClickHandler(e)}>
           Buscar
         </button>
     

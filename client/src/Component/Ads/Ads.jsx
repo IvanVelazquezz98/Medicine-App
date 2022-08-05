@@ -17,10 +17,11 @@ export default function Ads() {
 
   return (
     <div>
+      <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
         return(
           <div>
-          <AllFilterAndOrder /> 
+          
 
           <Ad adID={ad.id}
               name = {ad.professional.user.name}

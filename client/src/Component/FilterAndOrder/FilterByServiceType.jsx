@@ -12,7 +12,7 @@ function FilterByServiceType() {
     <select name='select' onChange={handleFilter}> 
         <option value='selected' hidden > Filtrar por tipo de servicio: </option>
         <option value={'Presencial'}> Presencial </option>
-        <option value={'Virtual'}> Virtual </option>
+        <option value={'virtual'}> Virtual </option>
         <option value={'A domicilio'}> A domicilio </option>
       </select>
   )

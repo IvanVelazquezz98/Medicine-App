@@ -8,7 +8,7 @@ function FilterByProvince() {
   let prov= ads.map(e=>{
    return e.professional.user.province
   })
-  let setProvince= new Set(prov)
+  let setProvince= [...new Set(prov)]
 
   function handleFilter(e){
      dispatch(filterProvince(e.target.value))
@@ -30,4 +30,4 @@ return (
 }
 
 
-export default FilterByCity
+export default FilterByProvince

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { filterCountry} from '../../Redux-actions'
 
 function FilterByCountry() {
@@ -8,8 +8,9 @@ function FilterByCountry() {
   let countries= ads.map(e=>{
    return e.professional.user.country
   })
-  let setCountry= new Set(countries)
+  let setCountry=[ ...new Set(countries)]
 
+console.log(setCountry);
   function handleFilter(e){
      dispatch(filterCountry(e.target.value))
      //setPageActual(1)
