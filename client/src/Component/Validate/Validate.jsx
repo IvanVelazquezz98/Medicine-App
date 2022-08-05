@@ -6,11 +6,13 @@ import Prueba1 from '../Mixed/prueba1'
 import firebaseApp from '../../Credential/index'
 import {getAuth, onAuthStateChanged } from 'firebase/auth'
 import {getFirestore, doc, getDoc } from 'firebase/firestore'
+import UserProfile from '../UserProfile/UserProfile'
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp)
 
 function Validate() {
+  
  const [user, setUser] = useState(null);
  
  async function getRol(uid) {
@@ -44,7 +46,7 @@ return finalInfo
 
   return (
     <div>
-      {user ? <Prueba1 user={user} /> : <Login />}
+      {user ? <UserProfile user={user} /> : <Login />}
     </div>
   )
 }

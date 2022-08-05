@@ -1,6 +1,7 @@
 import React from "react";
 
-const Favorites = ({ image, name, specialty }) => {
+const Favorites = ({image, name}) => {
+
   return (
     <div>
       <div>
@@ -9,7 +10,6 @@ const Favorites = ({ image, name, specialty }) => {
 
       <div>
         <h4>{name}</h4>
-        <h4>{specialty}</h4>
       </div>
     </div>
   );
