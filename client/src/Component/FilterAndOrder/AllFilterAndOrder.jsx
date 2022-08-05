@@ -2,10 +2,11 @@ import React from 'react'
 import FilterBySpecialty from './FilterBySpecialty'
 import FilterByCountry from './FilterByCountry'
 import FilterByProvince from './FilterByProvince'
-import FilterByCity from './FilterByProvince'
+import FilterByCity from './FilterByCity'
 import FilterByServiceType from './FilterByServiceType'
 import OrderByPrice from './OrderByPrice'
 import OrderByRanking from './OrderByRanking'
+import SearchBar from './SearchBar'
 
 
 function AllFilterAndOrder() {
@@ -31,6 +32,9 @@ function AllFilterAndOrder() {
     </div>
     <div>
         <OrderByRanking/>
+    </div>
+    <div>
+        <SearchBar/>
     </div>
     </>
   )

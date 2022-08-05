@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { filterCity} from '../../Redux-actions'
 
 function FilterByCity() {
@@ -8,7 +8,7 @@ function FilterByCity() {
   let cities= ads.map(e=>{
    return e.professional.user.city
   })
-  let setCity= new Set(cities)
+  let setCity= [...new Set(cities)]
 
   function handleFilter(e){
      dispatch(filterCity(e.target.value))

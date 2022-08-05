@@ -71,6 +71,48 @@ export function getAdById (id) {
     }
 
 };
+export function orderByPrice(payload) {
+  return{
+      type:'ORDER_PRICE',
+      payload
+  }
+}
+export function filterSpecialty(payload) {
+  return{
+      type:'FILTER_SPECIALTY',
+      payload
+  }
+}
+export function filterCountry(payload) {
+  return{
+      type:'FILTER_COUNTRY',
+      payload
+  }
+}
+export function filterProvince(payload) {
+  return{
+      type:'FILTER_PROVINCE',
+      payload
+  }
+}
+export function filterCity(payload) {
+  return{
+      type:'FILTER_CITY',
+      payload
+  }
+}
+export function filterTypeService(payload) {
+  return{
+      type:'FILTER_TYPE_SERVICE',
+      payload
+  }
+}
+export function orderByRanking(payload) {
+  return{
+      type:'FILTER_RANKING',
+      payload
+  }
+}
 
 export function postAdd(payload) {
   return async function (dispatch) {
@@ -82,3 +124,14 @@ export function postAdd(payload) {
     }
   };
 }
+export function getName(name) {
+  return async (dispatch) =>{
+      
+      try {
+          var json= await axios.get(`http://localhost:3001/ads?name=${name}`);
+      return dispatch({type:'GET_NAME', payload: json.data})
+      } catch (error) {
+          alert('no tenemos un profesional con ese nombre')
+      }
+  }
+};
