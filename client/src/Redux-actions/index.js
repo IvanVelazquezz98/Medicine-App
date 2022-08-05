@@ -71,3 +71,14 @@ export function getAdById (id) {
     }
 
 };
+
+export function postAdd(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.post(`http://localhost:3001/ad`, payload);
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
