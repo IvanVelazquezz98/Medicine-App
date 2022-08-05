@@ -46,8 +46,9 @@ function ModalUnsubscribe() {
               <Form.Label>Nombre </Form.Label>
               <Form.Control
                 type="text"
-                name="name"
+                
                 placeholder="Tu nombre aquí..."
+                name="name"
                 autoFocus
               />
             </Form.Group>
