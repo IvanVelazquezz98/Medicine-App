@@ -3,6 +3,7 @@ import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds} from '../../Redux-actions'
 import Ad from '../Card/Ad'
+import AllFilterAndOrder from '../FilterAndOrder/AllFilterAndOrder';
 
 
 export default function Ads() {
@@ -18,6 +19,9 @@ export default function Ads() {
     <div>
       {ads?ads.map(ad=>{
         return(
+          <div>
+          <AllFilterAndOrder /> 
+
           <Ad adID={ad.id}
               name = {ad.professional.user.name}
               medicalLicense = {ad.professionalMedicalLicense}
@@ -27,6 +31,7 @@ export default function Ads() {
               ranking = {ad.professional.ranking}
               
           />
+          </div>
         )
         }):null}
     </div>

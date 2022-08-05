@@ -93,6 +93,12 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         ads: filterRanking,
       };
+    case 'GET_NAME':
+      
+      return{
+        ...state,
+        ads: action.payload
+      }  
       
 
     default:

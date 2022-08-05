@@ -71,7 +71,7 @@ export function getAdById (id) {
     }
 
 };
-export function OrederAdByPrice(payload) {
+export function orderByPrice(payload) {
   return{
       type:'ORDER_PRICE',
       payload
@@ -107,9 +107,31 @@ export function filterTypeService(payload) {
       payload
   }
 }
-export function filterRanking(payload) {
+export function orderByRanking(payload) {
   return{
       type:'FILTER_RANKING',
       payload
   }
 }
+
+export function postAdd(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.post(`http://localhost:3001/ad`, payload);
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getName(name) {
+  return async (dispatch) =>{
+      
+      try {
+          var json= await axios.get(`http://localhost:3001/ads?name=${name}`);
+      return dispatch({type:'GET_NAME', payload: json.data})
+      } catch (error) {
+          alert('no tenemos un profesional con ese nombre')
+      }
+  }
+};
