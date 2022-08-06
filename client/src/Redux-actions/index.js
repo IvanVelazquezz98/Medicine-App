@@ -135,3 +135,26 @@ export function getName(name) {
       }
   }
 };
+
+export function addFavorite(payload) {
+    return async function (dispatch) {
+        console.log(payload)
+      try {
+        var json = await axios.put(`http://localhost:3001/addFavorites`, payload);
+        return json;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+  export function removeFavorite(payload) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.put(`http://localhost:3001/removeFavorites`, payload);
+        return json;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
