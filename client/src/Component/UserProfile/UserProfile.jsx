@@ -4,62 +4,60 @@ import ImageUser from "./imageProfile";
 import Favorites from "./favoritesProfessionalUser";
 import InfoUser from "./InfoUserProfile";
 import HistoryAppointment from "./historyAppointmentUser";
-import { useSelector, useDispatch} from "react-redux";
+import CreateAd from "../CreateAd";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import {getUsersById} from '../../Redux-actions/index.js'
+import { getUsersById } from "../../Redux-actions/index.js";
+import { Link } from "react-router-dom";
 
+import firebaseApp from "../../Credential/index";
+import { getAuth, signOut } from "firebase/auth";
 
-import firebaseApp from '../../Credential/index'
-import { getAuth, signOut } from 'firebase/auth'
-const auth = getAuth(firebaseApp)
+const UserProfile = ({ user }) => {
+  const auth = getAuth(firebaseApp);
+  const User = useSelector((state) => state.userDetail);
+  const dispatch = useDispatch();
 
+  const [button, setButton] = React.useState(false);
 
-
-const UserProfile = ({user}) => {
-
-const User = useSelector(state=> state.userDetail)
-const dispatch = useDispatch();
- 
-   useEffect(() => {
+  useEffect(() => {
     console.log(user.email);
-      dispatch(getUsersById(user.email))
+    dispatch(getUsersById(user.email));
+  }, [dispatch]);
 
-  },[dispatch])
-console.log(User)
-    return (<div>
+  console.log(User);
 
+  return (
+    <div>
+      {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
+      <Link to = '/home'>
+        <button> Voy a Home! hagan la NAVBAR </button> 
+      </Link>
+      <ImageUser image={User.userimage} />
 
-        <ImageUser
-        image={User.userimage}
-        />
+      <InfoUser
+        name={User.name}
+        email={User.email}
+        country={User.country}
+        province={User.province}
+        city={User.city}
+        birthdate={User.dateOfBirth}
+      />
+      <MedicalRecordUser />
+      <HistoryAppointment />
+      <div>
+        {User.favorites?.map((pro) => (
+          <Favorites image={pro.userimage} />
+        ))}
+      </div>
 
-        <InfoUser
-         name={User.name}
-         email={User.email}
-         country={User.country}
-         province={User.province}
-          city={User.city}
-          birthdate={User.dateOfBirth}
-          />
-        <MedicalRecordUser
-        />
-        <HistoryAppointment
-        />
-        <div>
-            {User.favorites?.map(pro =>
-                
-                <Favorites image={pro.userimage} />
-                )}
-<button onClick ={() => signOut(auth)}>Cerrar session</button> <br/>
-        </div>
+      {/* boton crear anuncio momentaneamente esta aca */}
+      {User.rol === "professional" && <CreateAd user={user} />}
+        <button onClick={() => signOut(auth)}>Cerrar session</button> <br />
+    </div>
+  );
+};
 
-
-
-
-
-    </div> );
-}
- 
 export default UserProfile;
 
 // email,
