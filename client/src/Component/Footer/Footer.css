@@ -1,0 +1,76 @@
+.FooterContainer{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #4f869e;
+    border:1px solid black;
+    min-height: 12rem;
+    margin: 2rem;
+}
+
+
+
+.contactoDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.OpeningHoursDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.subscribeMailingDiv{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+.rightMailingContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.socialMediaBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+.icons{
+    display: flex; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 23px;
+}
+
+
+
+/*social media Icons*/
+.FB svg,.IG svg,.LinkedIn svg{
+    width:2em;
+    height:2em;
+    color: black;
+}
+.FB:hover,.IG:hover,.LinkedIn:hover{
+    cursor: pointer;
+    background-color: #0d6efd;
+    border-radius: 35%;
+    transition: background-color 800ms;   
+}
+
+.FB svg:hover,.IG svg:hover,.LinkedIn svg:hover{
+    color: white;
+}
+h4{
+    color: white;
+}
+.homeBtn{
+    color:black;
+    border-color: black;
+    background-color: unset;
+}
