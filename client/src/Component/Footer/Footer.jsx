@@ -24,7 +24,7 @@ function Footer() {
             <div className='OpeningHoursDiv'>
             <h4>Opening Hours</h4>
               <h6>Completar esto con lo que queramos</h6>
-              <Link to='/home'>
+              <Link to='/'>
                 <Button  className='homeBtn' >
                     Home
                 </Button>

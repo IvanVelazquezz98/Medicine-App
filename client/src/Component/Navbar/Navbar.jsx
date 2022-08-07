@@ -13,11 +13,11 @@ const NavBarExample = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                <Nav.Link as={Link} to="/#">servicios</Nav.Link> 
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/services">servicios</Nav.Link> 
                 <Nav.Link as={Link} to="/#">Perfil</Nav.Link> 
-                <Nav.Link as={Link} to="/contact">Contacto</Nav.Link>     
-                <Nav.Link as={Link} to="/home/validate">Inicia Sección</Nav.Link>      
+                {/* <Nav.Link as={Link} to="/contact">Contacto</Nav.Link>      */}
+                <Nav.Link as={Link} to="/home/validate">Inicia Sesión</Nav.Link>      
             </Nav>
             </Navbar.Collapse>
         </Container>
@@ -25,7 +25,7 @@ const NavBarExample = () => {
 
         <section>
             <Outlet>
-               <Nav.Link as={Link} to="/home">Home</Nav.Link>
+               <Nav.Link as={Link} to="/">Home</Nav.Link>
                 <Nav.Link as={Link} to="/home/validate">Inicia Sección</Nav.Link>     
             </Outlet>
         </section> 
