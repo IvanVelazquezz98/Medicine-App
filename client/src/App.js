@@ -4,6 +4,7 @@ import LandingPage from "./Component/LandingPage/LandingPage";
 import Home from "./Component/Home/Home";
 import ProfessionalProfile from "./Component/ProfessionalProfile/ProfessionalProfile";
 import AdDetail from "./Component/AdDetail/AdDetail";
+import Contact from './Component/Contacto/ContactoForm'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/home/validate" element={<Validate /> } />
           <Route path= '/home/:adID' element ={<AdDetail/>}/>
           <Route path='/professional/:professionalID' element={<ProfessionalProfile />}/>
+          <Route path="/contact" element={<Contact /> } />
         </Routes>
       </div>
 

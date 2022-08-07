@@ -1,0 +1,10 @@
+.navBg {
+    background-color: rgb(0, 99, 160, 1);
+  }
+  .me-auto{
+      margin-left: 60%;
+      justify-content: space-between;
+  }
+  .nav2{
+      margin-top: -10px;
+  }
