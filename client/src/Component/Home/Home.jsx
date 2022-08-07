@@ -1,20 +1,16 @@
-import React from 'react'
-import Ads from '../Ads/Ads'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar'
 
-function Home() {
-  return (
-    //el user profile iria en la navbar, pero aun no hay, lo pongo aca par probarlo
-    <div>
-      <Navbar />
+export default function Home() {
 
-      <h1>Soy Home</h1>
-      <Ads/>
-      <Link to="/home/validate">validate</Link>
-      
-    </div>
-  )
-}
-
-export default Home
+    
+    return (
+      <div>
+        <Navbar />
+          <h1 /* className={style.h1} */>LANDING PAGE , VA A ESTAR LA PRIEMR PAGINA DEL WIX</h1>
+          <Link  to='/services'><button >click aca para ver medicos</button></Link>
+          <Footer/>
+      </div>
+    )}

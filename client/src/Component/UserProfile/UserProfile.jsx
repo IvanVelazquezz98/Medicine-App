@@ -32,8 +32,8 @@ const UserProfile = ({ user }) => {
     <div>
       <Navbar />
       {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
-      <Link to = '/home'>
-        <button> Voy a Home! hagan la NAVBAR </button> 
+      <Link to = '/'>
+        <button> Home</button> 
       </Link>
       <ImageUser image={User.userimage} />
 
