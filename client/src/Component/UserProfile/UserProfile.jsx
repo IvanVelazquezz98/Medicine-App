@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
+import Navbar from '../Navbar/Navbar'
 
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
@@ -29,6 +30,7 @@ const UserProfile = ({ user }) => {
 
   return (
     <div>
+      <Navbar />
       {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
       <Link to = '/home'>
         <button> Voy a Home! hagan la NAVBAR </button> 

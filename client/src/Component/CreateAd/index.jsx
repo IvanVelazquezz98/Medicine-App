@@ -36,7 +36,6 @@ export default function CreateAd({ user }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     dispatch(postAdd(post));
     alert("Add Created");
     setPost({
