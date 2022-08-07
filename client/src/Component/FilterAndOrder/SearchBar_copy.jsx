@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getName } from "../../Redux-actions";
+import { filterAllAds} from "../../Redux-actions";
 
 
-const SearchBar = () => {
-  const [input, setInput] = useState("");
+const SearchBar1 = () => {
+  const [name, setName] = useState("");
 
   const dispatch = useDispatch();
 
   const inputHandler = (e) => {
-    setInput(e.target.value);
+    setName(e.target.value);
     
   };
   const onClickHandler = (e) => {
-    if(input.length===0) return alert('ingresa un nombre');
-    
-    dispatch(getName(input));
-    setInput('')
+    console.log('soy el target del search=>', name)
+    if(name.length===0) return alert('ingresa un nombre');
+    let payload={
+      name: name
+     }
+    dispatch(filterAllAds(payload));
+    setName('')
   };
 
 
@@ -24,11 +27,10 @@ const SearchBar = () => {
   return (
     <div key="search1" >
       <input 
-    
         type="text"
         placeholder="busca por nombre"
-        name="input"
-        value={input}
+        name="name"
+        value={name}
         onChange={(e) => inputHandler(e)}
       />
      
@@ -41,4 +43,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchBar1;
