@@ -1,21 +1,38 @@
 import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
-import { filterCity} from '../../Redux-actions'
+import { filterAllAds} from '../../Redux-actions'
 
-function FilterByCity() {
+function FilterByCity1() {
   let dispatch= useDispatch()
   let ads = useSelector(state=>state.ads)
-  let cities= ads.map(e=>{
+  let filterAd=useSelector(state=>state.filterAd)
+
+  let city= ads.map(e=>{
    return e.professional.user.city
   })
-  let setCity= [...new Set(cities)]
+
+  let cityFilter=filterAd.map(e=>{
+    return e.professional.user.city
+   })
+
+  let setCity= [...new Set(city)]
+
+  let setCity2= [...new Set(cityFilter)]
 
   function handleFilter(e){
-     dispatch(filterCity(e.target.value))
+    let payload={
+      city: e.target.value
+     }
+    dispatch(filterAllAds(payload))
      //setPageActual(1)
   }
+
+  
 return (
-  <select  onChange={handleFilter} name={'city'}>
+  <div>
+    {
+      
+       <select  onChange={handleFilter} name={'city'}>
           <option value='selected' hidden> Ciudades </option>
           {setCity.map(el=>{
             return (
@@ -26,8 +43,11 @@ return (
           })
           }
         </select>
+      
+    }
+  </div>
 )
 }
 
 
-export default FilterByCity
+export default FilterByCity1

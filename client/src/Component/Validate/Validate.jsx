@@ -4,6 +4,7 @@ import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import UserProfile from "../UserProfile/UserProfile";
+import CreateAd from "../CreateAd";
 
 
 const auth = getAuth(firebaseApp);
@@ -40,7 +41,8 @@ function Validate() {
     }
   });
 
-  return <div>{user ? <UserProfile user={user} /> : <Login />}</div>;
+  return <div>{user ? <UserProfile user={user} />  : <Login />}</div>
+  ;
 }
 
 export default Validate;
