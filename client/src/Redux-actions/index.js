@@ -2,7 +2,7 @@ import axios from "axios";
 
     export function getAds () {
     return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/ads");
+        var json = await axios.get("http://localhost:3001/ad");
      
         return dispatch({type: 'GET_ADS', payload: json.data});
     }
@@ -71,24 +71,42 @@ export function getAdById (id) {
     }
 
 };
-
-export function filterAllAds(payload) {
- 
-  return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3001/filter?name=${payload?.name}&specialty=${payload?.specialty}&country=${payload?.country}&province=${payload?.province}&city=${payload?.city}`)
-    return dispatch({ type: 'FILTER_ALL_ADS', payload: json.data})
-  }
-
-
-}
-
 export function orderByPrice(payload) {
   return{
       type:'ORDER_PRICE',
       payload
   }
 }
-
+export function filterSpecialty(payload) {
+  return{
+      type:'FILTER_SPECIALTY',
+      payload
+  }
+}
+export function filterCountry(payload) {
+  return{
+      type:'FILTER_COUNTRY',
+      payload
+  }
+}
+export function filterProvince(payload) {
+  return{
+      type:'FILTER_PROVINCE',
+      payload
+  }
+}
+export function filterCity(payload) {
+  return{
+      type:'FILTER_CITY',
+      payload
+  }
+}
+export function filterTypeService(payload) {
+  return{
+      type:'FILTER_TYPE_SERVICE',
+      payload
+  }
+}
 export function orderByRanking(payload) {
   return{
       type:'FILTER_RANKING',
