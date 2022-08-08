@@ -5,6 +5,7 @@ import { postAdd } from "../../Redux-actions";
 import { getUsersById } from "../../Redux-actions";
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
+import {useNavigate} from 'react-router-dom'
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./CreateAd.css";
@@ -13,6 +14,7 @@ const auth = getAuth(firebaseApp);
 export default function CreateAd({ user }) {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.userDetail);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUsersById(user.email));
@@ -35,7 +37,7 @@ export default function CreateAd({ user }) {
   });
 
   function handleSubmit(e) {
-    e.preventDefault();
+    
     dispatch(postAdd(post));
     alert("Add Created");
     setPost({
@@ -45,6 +47,7 @@ export default function CreateAd({ user }) {
       serviceType: "",
       professionalMedicalLicense: "",
     });
+    navigate('/services')
   }
 
   return (

@@ -23,7 +23,7 @@ const UserProfile = ({ user }) => {
 
   useEffect(() => {
     console.log(user.email);
-    dispatch(getUsersById(user.email));
+    dispatch(getUsersById(user.email.toLowerCase()));
   }, [dispatch]);
 
   console.log(User);
