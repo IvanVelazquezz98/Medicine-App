@@ -15,8 +15,8 @@ function Validate() {
   async function getRol(uid) {
     const docuRef = doc(firestore, `user/${uid}`);
     const encryptedDoc = await getDoc(docuRef);
-    const finalInfo = encryptedDoc.data().rol;
-    return finalInfo;
+    //const finalInfo = encryptedDoc.data().rol;
+    return encryptedDoc;
   }
 
   function setUserWithFirebaseAndRol(userFirebase) {

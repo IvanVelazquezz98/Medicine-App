@@ -11,7 +11,7 @@ function Services() {
       <Navbar />
 
       <h1>aca estan todos servicios</h1>
-      <Ads/>
+      <Ads />
       <Footer/>
       
     </div>
