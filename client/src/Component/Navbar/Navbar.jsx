@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom"
 import navlog from '../../assets/navbarlog.png'
 import './Navbar.css'
 
-
+//b
 const NavBarExample = () => {
     return(
        <>    

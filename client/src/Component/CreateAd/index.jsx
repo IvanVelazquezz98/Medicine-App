@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./CreateAd.css";
 const auth = getAuth(firebaseApp);
-
+//b
 export default function CreateAd({ user }) {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.userDetail);

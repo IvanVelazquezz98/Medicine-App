@@ -121,12 +121,11 @@ function Login() {
         gps: post.gps
 
       }
-
+//b
       let professional = {
         medicalLicense: postprofessional.medicalLicense,
         licenceImage: image,
         userEmail: postprofessional.userEmail
-
       }
 
 
