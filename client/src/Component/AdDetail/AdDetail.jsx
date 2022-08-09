@@ -20,6 +20,7 @@ export default function AdDetail() {
     return (
     <div>
         <Navbar/>
+        
         <div className={'imagenPerfil'}>
             {adDetail.id}
         </div>
