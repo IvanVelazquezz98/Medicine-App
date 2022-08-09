@@ -1,15 +1,16 @@
-import React from 'react'
-import Ads from '../Ads/Ads'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import Navbar from '../Navbar/Navbar'
 
-function Home() {
-  return (
-    <div>
-      <h1>Soy Home</h1>
-      <Ads/>
-      <Link to="/home/validate">validate</Link>
-    </div>
-  )
-}
+export default function Home() {
 
-export default Home
+    
+    return (
+      <div>
+        <Navbar />
+         
+          <Link  to='/services'><button > Ver los anuncios</button></Link>
+          <Footer/>
+      </div>
+    )}

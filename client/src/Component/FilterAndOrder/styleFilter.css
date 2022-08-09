@@ -1,0 +1,51 @@
+.filterNav{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: darkturquoise;
+    
+}
+.specialty{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 25px;
+    margin-bottom: 17px;
+}
+.country{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 17px;
+
+}
+.province{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 17px;
+}
+.city{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 17px;
+}
+.service{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 17px;
+}
+.price{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 17px;
+}
+.ranking{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 17px;
+}
+.search{
+    display: flex;
+    margin-right: 5px;
+    
+}
