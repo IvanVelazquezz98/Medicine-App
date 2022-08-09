@@ -36,7 +36,7 @@ function Login() {
     phone: "",
     rol: "",
     gps: "",
-    favoorites: []
+    favorites: []
   })
 
   const [postprofessional, setpostprofessional] = useState({
