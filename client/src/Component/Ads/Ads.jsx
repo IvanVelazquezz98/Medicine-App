@@ -24,7 +24,7 @@ export default function Ads() {
   if(user.email){
     let favorites = {
         userEmail : user.email,
-        medicalLicense : e.target.value,
+        medicalLicense : [e.target.value],
     }
     e.preventDefault();
     dispatch(addFavorite(favorites))
