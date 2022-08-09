@@ -18,23 +18,32 @@ export default function Ads() {
     dispatch(getAds())
  },[dispatch])
 
+ let favoritesLocalstorage = []
 
  function handleAddFavorites(e){
+  if(user.email){
     let favorites = {
         userEmail : user.email,
         medicalLicense : e.target.value,
     }
     e.preventDefault();
     dispatch(addFavorite(favorites))
+  }else{
+    favoritesLocalstorage.push(e.target.value)
+    localStorage.setItem("ml", JSON.stringify(favoritesLocalstorage));}
 }
 
 function handleRemoveFavorites(e){
+  if(user.email){
     let favorites = {
         userEmail : user.email,
-        medicalLicense : e.target.value, 
+        medicalLicense : [e.target.value], 
     }
     e.preventDefault();
     dispatch(removeFavorite(favorites))
+}else{
+  localStorage.removeItem("ml", e.target.value)
+}
 }
 
   return (

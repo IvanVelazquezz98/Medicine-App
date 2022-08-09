@@ -35,7 +35,8 @@ function Login() {
     province: "",
     phone: "",
     rol: "",
-    gps: ""
+    gps: "",
+    favoorites: []
   })
 
   const [postprofessional, setpostprofessional] = useState({
@@ -120,8 +121,8 @@ function Login() {
         province: post.province,
         phone: post.phone,
         rol: post.rol,
-        gps: post.gps
-
+        gps: post.gps,
+        favorites:[]
       }
 //b
       let professional = {
@@ -150,7 +151,8 @@ function Login() {
         province: "",
         phone: "",
         rol: "",
-        gps: ""
+        gps: "",
+        favorites:[]
       })
 
     } else {

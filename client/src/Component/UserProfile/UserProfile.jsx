@@ -7,7 +7,7 @@ import HistoryAppointment from "./historyAppointmentUser";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getUsersById } from "../../Redux-actions/index.js";
+import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
 
@@ -25,9 +25,28 @@ const UserProfile = ({ user }) => {
   useEffect(() => {
     console.log(user.email);
     dispatch(getUsersById(user.email.toLowerCase()));
+    if(favML){
+    dispatch(addFavorite(favorites))
+    }
   }, [dispatch]);
 
   console.log(User);
+
+
+
+  let favML = JSON.parse(localStorage.getItem("ml")); 
+  console.log(favML)
+
+
+  let favorites = {
+    userEmail : user.email,
+    medicalLicense: favML
+  }
+
+
+
+
+
 
   return (
     <div>
@@ -62,12 +81,12 @@ const UserProfile = ({ user }) => {
       <div className="miHistoryApp">
         <HistoryAppointment />
       </div>
-      <div className="miFavorites">
+      {/* <div className="miFavorites">
         <h1>Favoritos</h1>
         {User.favorites.length?.map((pro) => (
           <Favorites image={pro.user.userimage} />
           ))}
-      </div>
+      </div> */}
       </div>
       <div className="misbotones">
 
