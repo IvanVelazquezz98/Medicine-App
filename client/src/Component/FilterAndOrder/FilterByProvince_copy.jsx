@@ -27,7 +27,17 @@ return (
     {
     <Select  onChange={handleFilter} name={'province'} options={options1} placeholder='filtra por provincia'/>
 
-
+ 
+          <option value='selected' hidden> Provincias </option>
+          {setProvince.map(el=>{
+            return (
+              <option value={el??""} key={el.id} className='option'>
+                {el}            
+              </option>
+            ) 
+          })
+          }
+    </select>
     }
   </div>
 )

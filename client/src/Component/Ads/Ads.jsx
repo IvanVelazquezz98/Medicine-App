@@ -46,7 +46,7 @@ function handleRemoveFavorites(e){
           
 
           <Ad adID={ad.id}
-              name = {ad.professional.user.name}
+              name = {ad.professional.user?.name}
               medicalLicense = {ad.professionalMedicalLicense}
               especialidad = {ad.specialty}
               serviceType = {ad.serviceType}

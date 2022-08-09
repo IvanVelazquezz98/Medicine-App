@@ -4,11 +4,11 @@ import { filterAllAds} from '../../Redux-actions';
 import Select from 'react-select'
 
 function FilterByCity1() {
+
   let ads = useSelector(state=>state.ads)
-
-  
-
   let dispatch= useDispatch()
+  let filterAd=useSelector(state=>state.filterAd)
+
 
   let city= ads.map(e=>{
    return e.professional.user.city

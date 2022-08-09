@@ -21,6 +21,14 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [postprofessional, setpostprofessional] = useState({
+    medicalLicense: "",
+    licenceImage: "",
+    userEmail: ""
+  })
+
+
+
   const [post, setPost] = useState({
     name: "",
     email: "",
@@ -130,10 +138,11 @@ function Login() {
         userEmail: postprofessional.userEmail
       }
 
+
         
       let userCreate = await dispatch(postUser(user))
       if (post.rol === "professional") {
-       await dispatch(postProfessional(professional))
+      await dispatch(postProfessional(professional))
       }
       alert("User Created")
       setPost({

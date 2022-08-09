@@ -27,7 +27,7 @@ const UserProfile = ({ user }) => {
     dispatch(getUsersById(user.email.toLowerCase()));
   }, [dispatch]);
 
-  console.log(User);
+ //b
 
   return (
     <div>

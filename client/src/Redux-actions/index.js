@@ -2,7 +2,7 @@ import axios from "axios";
 
     export function getAds () {
     return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/ads");
+        var json = await axios.get("http://localhost:3001/ad");
      
         return dispatch({type: 'GET_ADS', payload: json.data});
     }
