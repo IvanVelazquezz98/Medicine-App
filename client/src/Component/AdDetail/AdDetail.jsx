@@ -1,9 +1,11 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
+// import { Navbar } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {getAdById} from '../../Redux-actions'
-
+import Footer from "../Footer/Footer.jsx"
+import Navbar from '../Navbar/Navbar'
 
 export default function AdDetail() {
     const dispatch = useDispatch()
@@ -17,6 +19,7 @@ export default function AdDetail() {
     
     return (
     <div>
+        <Navbar/>
         <div className={'imagenPerfil'}>
             {adDetail.id}
         </div>
@@ -26,6 +29,7 @@ export default function AdDetail() {
         <div>
             About Me
         </div>
+        <Footer/>
     </div>
     
   )

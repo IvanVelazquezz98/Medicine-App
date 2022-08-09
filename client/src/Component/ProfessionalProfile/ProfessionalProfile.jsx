@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {getProfessionalById, getAds} from '../../Redux-actions'
 import Ad from '../Card/Ad'
-
+import Footer from "../Footer/Footer.jsx"
+import Navbar from '../Navbar/Navbar'
 
 export default function ProfessionalProfile() {
     const dispatch = useDispatch()
@@ -26,6 +27,7 @@ export default function ProfessionalProfile() {
     
     return (
     <div>
+        <Navbar/>
         <div className={'imagenPerfil'}>
             {professionalProfile.user?.userimage}
         </div>
@@ -55,6 +57,8 @@ export default function ProfessionalProfile() {
                     
                 />
             )}):'no tiene servicios aun'}
+                <Footer/>
+
         </div>
     </div>
     
