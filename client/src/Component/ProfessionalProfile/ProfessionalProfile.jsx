@@ -28,7 +28,6 @@ export default function ProfessionalProfile() {
     return (
     <div>
         <Navbar/>
-        
         <div className={'imagenPerfil'}>
             {professionalProfile.user?.userimage}
         </div>
