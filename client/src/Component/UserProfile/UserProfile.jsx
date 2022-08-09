@@ -25,7 +25,7 @@ const UserProfile = ({ user }) => {
   useEffect(() => {
     console.log(user.email);
     dispatch(getUsersById(user.email.toLowerCase()));
-    if(favML){
+    if(favML && user.email){
     dispatch(addFavorite(favorites))
     }
   }, [dispatch]);
