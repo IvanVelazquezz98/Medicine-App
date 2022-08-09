@@ -9,8 +9,8 @@ export default function Home() {
     return (
       <div>
         <Navbar />
-          <h1 /* className={style.h1} */>LANDING PAGE , VA A ESTAR LA PRIEMR PAGINA DEL WIX</h1>
-          <Link  to='/services'><button >click aca para ver medicos</button></Link>
+         
+          <Link  to='/services'><button > Ver los anuncios</button></Link>
           <Footer/>
       </div>
     )}

@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
 import { postUser, postProfessional } from '../../Redux-actions/index'
+import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ModalForgotPsw from './ModalForgotPsw'
@@ -18,14 +19,7 @@ function Login() {
   const [isRegister, setIsRegister] = useState(false);
   const [file, setFile] = useState(null)
   const dispatch = useDispatch();
-
-  const [postprofessional, setpostprofessional] = useState({
-    medicalLicense: "",
-    licenceImage: "",
-    userEmail: ""
-  })
-
-
+  const navigate = useNavigate();
 
   const [post, setPost] = useState({
     name: "",
@@ -44,7 +38,17 @@ function Login() {
     gps: ""
   })
 
-  function handleChange(e) {
+  const [postprofessional, setpostprofessional] = useState({
+    medicalLicense: "",
+    licenceImage: "",
+    userEmail: ""
+  })
+
+
+
+
+
+  async function handleChange(e) {
     e.preventDefault();
     setPost({
       ...post,
@@ -58,7 +62,6 @@ function Login() {
 
   }
 
-  localStorage.setItem("Email", post.email);
 
 
   // registrar usuario
@@ -91,70 +94,68 @@ function Login() {
   const [image, setImage] = useState(null)
 
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-
-
-    let user = {
-      name: post.name,
-      email: post.email,
-      password: post.password,
-      dateOfBirth: post.dateOfBirth,
-      identification: post.identification,
-      userimage: image,
-      idImage: image,
-      country: post.country,
-      city: post.city,
-      address: post.address,
-      province: post.province,
-      phone: post.phone,
-      rol: post.rol,
-      gps: post.gps
-
-    }
-
-    let professional = {
-      medicalLicense: postprofessional.medicalLicense,
-      licenceImage: image,
-      userEmail: postprofessional.userEmail
-
-    }
-  
-
-    dispatch(postUser(user))
-    if (post.rol === "professional") {
-      dispatch(postProfessional(professional))
-    }
-    alert("User Created")
-    setPost({
-      name: "",
-      email: "",
-      password: "",
-      dateOfBirth: "",
-      identification: "",
-      userimage: "",
-      idImage: "",
-      country: "",
-      city: "",
-      address: "",
-      province: "",
-      phone: "",
-      rol: "",
-      gps: ""
-    })
-
-
-
-
 
     var email = e.target.elements.email.value;
     var password = e.target.elements.password.value;
-    var rol = e.target.elements.rol.value;
 
     if (isRegister) {
-      userRegister(email, password, rol)
+
+      userRegister(email, password)
+
+
+      localStorage.setItem("Email", post.email);
+      let user = {
+        name: post.name,
+        email: post.email,
+        password: post.password,
+        dateOfBirth: post.dateOfBirth,
+        identification: post.identification,
+        userimage: image,
+        idImage: image,
+        country: post.country,
+        city: post.city,
+        address: post.address,
+        province: post.province,
+        phone: post.phone,
+        rol: post.rol,
+        gps: post.gps
+
+      }
+//b
+      let professional = {
+        medicalLicense: postprofessional.medicalLicense,
+        licenceImage: image,
+        userEmail: postprofessional.userEmail
+      }
+
+        
+      let userCreate = await dispatch(postUser(user))
+      if (post.rol === "professional") {
+       await dispatch(postProfessional(professional))
+      }
+      alert("User Created")
+      setPost({
+        name: "",
+        email: "",
+        password: "",
+        dateOfBirth: "",
+        identification: "",
+        userimage: "",
+        idImage: "",
+        country: "",
+        city: "",
+        address: "",
+        province: "",
+        phone: "",
+        rol: "",
+        gps: ""
+      })
+
     } else {
       signInWithEmailAndPassword(auth, email, password)
+      navigate('/services')
     }
   }
 
@@ -395,6 +396,3 @@ function Login() {
 }
 
 export default Login;
-
-
-//css 

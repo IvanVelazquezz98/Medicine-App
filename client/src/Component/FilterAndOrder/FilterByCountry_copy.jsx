@@ -1,45 +1,36 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterAllAds} from '../../Redux-actions'
+import Select from 'react-select'
+
 
 function FilterByCountry1() {
   let dispatch= useDispatch()
   let ads = useSelector(state=>state.ads)
-  let filterAd=useSelector(state=>state.filterAd)
+  
   let country= ads.map(e=>{
    return e.professional.user.country
   })
-  let countryFilter=filterAd.map(e=>{
-    return e.professional.user.country
-   })
+ 
   let setCountry= [...new Set(country)]
-  let setCountry2= [...new Set(countryFilter)]
+  const options= setCountry.map(e=> {return{value:e, label:e}})
 
 
-console.log(setCountry);
-
-  function handleFilter(e){
+  function handleFilter(value){
+    console.log(value)
+    
     let payload={
-      country: e.target.value
+      country: value.value
      }
     dispatch(filterAllAds(payload))
      //setPageActual(1)
   }
+  
 return (
   <div>
     {
     
-          <select  onChange={handleFilter} name={'country'}>
-            <option value='selected' hidden> Paises </option>
-            {setCountry.map(el=>{
-              return (
-                <option value={el??""} key={el.id} className='option'>
-                  {el}            
-                </option>
-              ) 
-            })
-            }
-          </select>
+    <Select  onChange={handleFilter} name={'country'} options={options} placeholder='filtra por pais'/>
      
     }
   </div>

@@ -35,7 +35,7 @@ export default function CreateAd({ user }) {
   });
 
   function handleSubmit(e) {
-    e.preventDefault();
+    //e.preventDefault();
     dispatch(postAdd(post));
     alert("Add Created");
     setPost({
@@ -46,6 +46,7 @@ export default function CreateAd({ user }) {
       professionalMedicalLicense: "",
     });
   }
+
 
   return (
     <div>

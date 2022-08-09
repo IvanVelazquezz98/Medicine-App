@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterAllAds } from '../../Redux-actions'
-//import Select from 'react-select'
+import Select from 'react-select'
 
 function FilterBySpecialty1() {
   let ads = useSelector(state=>state.allAds)
 
   // console.log('me trajite de allAds', ads)
 
-  let filter = useSelector(state=>state.filterAd)
+  
 
   // console.log('me trajite de filterAd', filter)
   let specialtyAds=ads.map(e=>e.specialty)
@@ -23,28 +23,19 @@ function FilterBySpecialty1() {
   // console.log('especialidades filtradas de filterAd', SetFilter)
 
   let dispatch= useDispatch()
-  function handleFilter(e){
+  function handleFilter(value){
     let payload={
-      specialty: e.target.value
+      specialty: value.value
      }
      dispatch(filterAllAds(payload))
      //setPageActual(1)
   }
+  let specialty1= SetSpecialty.map(e=> {return {value: e.name, label : e.name}}  )
 return (
   <div>
   
     {/* // (filter.length < 1)? */}
-      <select  onChange={handleFilter} name={'specialty'}>
-          <option value='selected' hidden> Especialidad </option>
-          {SetSpecialty.map(el=>{
-            return (
-              <option value={el ??""} key={el.id} className='option'>
-                {el}            
-              </option>
-            ) 
-          })
-          }
-        </select> 
+    <Select  onChange={handleFilter} name={'specialty'} options= {specialty1} placeholder='filtrar por especialidad'/>
           {/* <select  onChange={handleFilter} name={'specialty'}>
             <option value='selected' hidden> Especialidad </option>
               {SetFilter.map(el=>{

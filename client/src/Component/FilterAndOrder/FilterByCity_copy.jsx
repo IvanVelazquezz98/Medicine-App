@@ -1,11 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
-import { filterAllAds} from '../../Redux-actions'
+import { filterAllAds} from '../../Redux-actions';
+import Select from 'react-select'
 
-function FilterByCity1({handleFilter}) {
+function FilterByCity1() {
   let ads = useSelector(state=>state.ads)
 
-  let filterAd=useSelector(state=>state.filterAd)
+  
 
   let dispatch= useDispatch()
 
@@ -13,17 +14,14 @@ function FilterByCity1({handleFilter}) {
    return e.professional.user.city
   })
 
-  let cityFilter=filterAd.map(e=>{
-    return e.professional.user.city
-   })
-
+  
   let setCity= [...new Set(city)]
 
-  let setCity2= [...new Set(cityFilter)]
+  const options= setCity.map(e=> {return{value:e, label:e}})
 
-  function handleFilter(e){
+  function handleFilter(value){
     let payload={
-      city: e.target.value
+      city: value.value
      }
     dispatch(filterAllAds(payload))
      //setPageActual(1)
@@ -31,23 +29,11 @@ function FilterByCity1({handleFilter}) {
 
   
 return (
-  <div>
-    {
+  
       
-       <select  onChange={handleFilter} name={'city'}>
-          <option value='selected' hidden> Ciudades </option>
-          {setCity.map(el=>{
-            return (
-              <option value={el??""} key={el.id} className='option'>
-                {el}            
-              </option>
-            ) 
-          })
-          }
-        </select>
-      
-    }
-  </div>
+      <Select  onChange={handleFilter} name={'city'} options={options} placeholder='filtra por cuidad'/>
+          
+   
 )
 }
 

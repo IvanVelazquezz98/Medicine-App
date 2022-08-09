@@ -4,50 +4,48 @@ import FilterByCountry1 from './FilterByCountry_copy'
 import FilterByProvince1 from './FilterByProvince_copy'
 import FilterByCity1 from './FilterByCity_copy'
 import SearchBar1 from './SearchBar_copy'
+import FilterByServiceType from './FilterByServiceType copy'
+//import OrderByPrice from './OrderByPrice copy'
+//import OrderByRanking from './OrderByRanking copy'
 import { useDispatch} from 'react-redux'
 import { getAds } from '../../Redux-actions'
-
+import './styleFilter.css'
 
 function AllFilterAndOrder() {
     
     let dispatch=useDispatch()
-    function HandleReload(e){
+    function handleReload(){
         dispatch(getAds())
     }
   return (
-<>
-    <div>
-       <FilterBySpecialty1  />
-        {/* <FilterBySpecialty/> */}
+<div className='filterNav'>
+    {/* <div className='specialty'>
+        <FilterBySpecialty1/>
+    </div> */}
+    <div className='country'>
+        <FilterByCountry1 />
     </div>
-    <div>
-        <FilterByCountry1/>
-        {/* <FilterByCountry /> */}
-    </div>
-    <div>
+    <div className='province'>
         <FilterByProvince1/>
-        {/* <FilterByProvince/> */}
     </div>
-    <div>
+    <div className='city'>
         <FilterByCity1/>
-        {/* <FilterByCity/> */}
     </div>
-    <div>
-        {/* <FilterByServiceType/> */}
+    <div className='service'>
+        <FilterByServiceType/>
     </div>
-    <div>
-        {/* <OrderByPrice/> */}
+    {/* <div className='price'>
+        <OrderByPrice/>
     </div>
-    <div>
-        {/* <OrderByRanking/> */}
-    </div>
-    <div>
+    <div className='ranking'>
+        <OrderByRanking/>
+    </div> */}
+    <div className='search'>
         <SearchBar1/>
-        {/* <SearchBar/> */}
+    </div>
+    <button onClick={handleReload}>Todos los Anuncios</button>
     </div>
 
-    <button onClick={HandleReload}>Todos los servicios</button>
-    </>
   )
 }
 

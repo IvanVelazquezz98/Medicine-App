@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { filterAllAds} from "../../Redux-actions";
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 const SearchBar1 = () => {
@@ -26,18 +29,18 @@ const SearchBar1 = () => {
 
   return (
     <div key="search1" >
-      <input 
-        type="text"
-        placeholder="busca por nombre"
-        name="name"
-        value={name}
+       <InputGroup className="mb-3">
+        <Form.Control
+          placeholder="buscar por nombre"
+          aria-label="buscar por nombre"
+          aria-describedby="basic-addon2"
+          value={name}
         onChange={(e) => inputHandler(e)}
-      />
-     
-        <button  onClick={(e) => onClickHandler(e)}>
+        />
+        <Button variant="outline-secondary" id="button-addon2" onClick={(e) => onClickHandler(e)}>
           Buscar
-        </button>
-    
+        </Button>
+      </InputGroup>
       
     </div>
   );
