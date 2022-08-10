@@ -17,22 +17,39 @@ export default function EditInfo(props) {
  let User = useSelector(state=> state.userDetail)
  let [activo, setActivo] = useState(false)
  let [editUser , setEditUser] = useState({
-    name: "",
-    password: "",
-    dateOfBirth: "",
-    identification: "",
-    userimage: "",
-    idImage: "",
-    country: "",
-    city: "",
-    address: "",
-    province: "",
-    phone: "",
-    rol: "",
-    gps: "",
-    favorites :[]
+    name: User.name,
+    password: User.password,
+    dateOfBirth: User.dateOfBirth,
+    identification: User.identification,
+    userimage: User.userimage,
+    idImage: User.idImage,
+    country: User.country,
+    city: User.city,
+    address: User.address,
+    province: User.province,
+    phone: User.phone,
+    rol: User.rol,
+    gps: User.gps,
+    favorites :userId.favorites
   })
 
+  let [editProfessional , setEditProfessional] = useState({
+    aboutMe: User.professional?.aboutMe,
+    college: User.professional?.college,
+  })
+
+
+  function handleDisingageProfessional(e){
+        e.preventDefault();
+        setEditUser({
+        rol : "usuario",
+    })}
+
+  function handleRegisterProfessional(e){
+    e.preventDefault();
+    setEditUser({
+    rol : "professional",
+})}
 
   function handleChange(e){
     e.preventDefault();
@@ -42,9 +59,17 @@ export default function EditInfo(props) {
     })
   }
 
+  function handleChangeProfessional(e){
+    e.preventDefault();
+    setEditProfessional({
+        ...editProfessional,
+    [e.target.name] : e.target.value
+    })
+  }
+
   function handleSubmit(e){
     e.preventDefault();
-    // dispatch(putEditInfoProfessional(editProfessional));
+    dispatch(putEditInfoProfessional(editProfessional, User.professional.medicalLicense));
     dispatch(putEditInfoUser(editUser , userId));
     // dispatch(putEditInfoAdd(editAdd))
     setEditUser({
@@ -61,8 +86,12 @@ export default function EditInfo(props) {
         phone: "",
         rol: "",
         gps: "",
-        favorites :[]
     })
+    setEditUser({
+        aboutMe: "",
+        college: "",
+    })
+
   }
   console.log(editUser)
 
@@ -240,6 +269,53 @@ export default function EditInfo(props) {
            </Form.Group>
                
    </div>
+   {(User.rol == "professional") &&
+   <div className='hola'>
+   <Button onClick={e=>handleDisingageProfessional(e)}>Dejar de brindar mis servicios de Profesional</Button>
+   </div>
+   }
+
+   {(User.rol === "usuario") &&
+   <div className='hola'>
+   <Button onClick={e=>handleRegisterProfessional(e)}>registrarme como profesional de la salud</Button>
+   </div>
+   }
+    {(User.rol == "professional") &&
+    
+
+    <div>
+   
+    <Form.Group className="mb-3" >
+    <Form.Label>Sobre Mi: </Form.Label>
+    <Form.Control 
+      type="text"
+      id="aboutMe"
+      name="aboutMe"
+      value={editProfessional.aboutMe}
+      placeholder={User.professional.aboutMe ? User.professional.aboutMe : "complete"}
+      onChange={(e) => handleChangeProfessional(e)}
+      />
+  </Form.Group>
+
+  <div>
+   
+   <Form.Group className="mb-3" >
+   <Form.Label>Estudios: </Form.Label>
+   <Form.Control 
+     type="text"
+     id="college"
+     name="college"
+     value={editProfessional.college}
+     placeholder={User.professional.college ? User.professional.college : "complete"}
+     onChange={(e) => handleChangeProfessional(e)}
+     />
+ </Form.Group>
+    
+</div>
+     
+</div>
+
+    }
    <Button type="submit" >
               Modificar Datos
             </Button>
