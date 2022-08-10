@@ -187,7 +187,6 @@ export function addFavorite(payload) {
   export function putEditInfoUser(payload , idUser) {
     return async function (dispatch) {
       console.log(payload , idUser)
-      console.log("llegue aca")
       try {
          await axios.put(`http://localhost:3001/user/${idUser}`, payload);
       } catch (error) {
@@ -200,6 +199,7 @@ export function addFavorite(payload) {
   export function putEditInfoProfessional(payload , idUser) {
     return async function (dispatch) {
       console.log(payload , idUser)
+      console.log("llegue aca")
       try {
          await axios.put(`http://localhost:3001/professional/${idUser}`, payload);
       } catch (error) {
