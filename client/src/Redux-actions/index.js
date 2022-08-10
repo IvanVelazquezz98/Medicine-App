@@ -140,3 +140,70 @@ export function addFavorite(payload) {
       }
     };
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  export function putEditInfoAdd(payload, idUser) {
+    return async function (dispatch) {
+      console.log(payload , idUser)
+      try {
+        await axios.put(`http://localhost:3001/Ad/${idUser}`, payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+
+  export function putEditInfoUser(payload , idUser) {
+    return async function (dispatch) {
+      console.log(payload , idUser)
+      console.log("llegue aca")
+      try {
+         await axios.put(`http://localhost:3001/user/${idUser}`, payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  
+  
+  export function putEditInfoProfessional(payload , idUser) {
+    return async function (dispatch) {
+      console.log(payload , idUser)
+      try {
+         await axios.put(`http://localhost:3001/professional/${idUser}`, payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
