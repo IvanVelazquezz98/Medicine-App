@@ -1,77 +1,57 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import emailjs from '@emailjs/browser';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import { useDispatch } from "react-redux";
+import FormLabel from "react-bootstrap/esm/FormLabel";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import './ModalUnsubscribe.css'
+import { Link } from "react-router-dom";
 
 function ModalUnsubscribe() {
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  //mail aqui
-  function sendEmail (e){
-    e.preventDefault()
-   
-    emailjs.sendForm('service_5qp9enm','template_cktuhyc',e.target,'jeekxUefyAsuBBz5j')
-    .then(res => console.log(res))
-    .catch(e=> console.log(e))
 
+  function handleSubmit (e){
+    e.preventDefault()
+    //dispatch (deleteUser(user))
+    alert ('Realizar la lógica ---> ir a la action')
   }
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow}>
-        Darse de baja
-      </Button>
+      <Button onClick={handleShow} size="sm" className="bajaButton" >¿Darse de baja?</Button>
 
       <Modal show={show} onHide={handleClose}>
-        
-        <Modal.Header closeButton>
-          <Modal.Title>Formulario de baja</Modal.Title>
+        <Modal.Header closeButton className="headerBaja">
+          <Modal.Title className="modalTitleBaja">¿Seguro quieres la baja?</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-
-          <Form onSubmit={(e) => sendEmail(e)}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email </Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-              <Form.Label>Nombre </Form.Label>
-              <Form.Control
-                type="text"
-                
-                placeholder="Tu nombre aquí..."
-                name="name"
-                autoFocus
-              />
+              <FormLabel className="formLabelBaja">
+                Recuerde que su desvinculación de la aplicación tendrá consecuencias
+                directas sobre la visualización del contenido como así también
+                su historial médico y sus citas reservadas. Cualquier Consulta
+                no dude en comunicarse con el área de <Link to='/'>soporte</Link> al pie de página.
+              </FormLabel>
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Contanos el por qué de tu baja.</Form.Label>
-              <Form.Control as="textarea" rows={3}  name="message"/>
-            </Form.Group>
+
             <Button variant="secondary" onClick={handleClose}>
-              Cerrar
+              No
             </Button>
-            <Button variant="primary" onClick={handleClose} type="submit">
-              Enviar
+            <Button variant="danger" onClick={handleClose} type="submit" className="yesButtonBaja" >
+              Darme de baja
             </Button>
           </Form>
-
         </Modal.Body>
-        
       </Modal>
     </>
   );
 }
 
-export default ModalUnsubscribe
+export default ModalUnsubscribe;
