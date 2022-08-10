@@ -95,6 +95,11 @@ const UserProfile = ({ user }) => {
 
       <div className="SignOut">
       <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button> 
+      <div className="botonUser">
+        <Link to ={"/profile/" + User.email}>
+        editar informacion de perfil
+        </Link>
+      </div>
       </div>
 
       </div>

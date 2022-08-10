@@ -10,6 +10,7 @@ import Navbar from '../Navbar/Navbar'
 export default function AdDetail() {
     const dispatch = useDispatch()
     const {adID} = useParams()
+    console.log(adID)
     
     useEffect(()=>{
         dispatch(getAdById(adID))
