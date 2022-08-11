@@ -6,20 +6,48 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
 import { postUser, postProfessional } from '../../Redux-actions/index'
 import { useNavigate } from 'react-router-dom'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { validate, validateProfessional} from './validate'
+import './Login.css'
 import ModalForgotPsw from './ModalForgotPsw'
 import './Login.css'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
+
+
+
 
 const auth = getAuth(firebaseApp);
 
 
 function Login() {
+
+
   const firestore = getFirestore(firebaseApp);
   const [isRegister, setIsRegister] = useState(false);
   const [file, setFile] = useState(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [image, setImage] = useState(null)
+
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    dateOfBirth: "",
+    identification: "",
+    userimage: "",
+    idImage: "",
+    country: "",
+    city: "",
+    address: "",
+    province: "",
+    phone: "",
+    rol: "",
+    gps: "",
+    favorites: [],
+  })
 
   const [post, setPost] = useState({
     name: "",
@@ -39,13 +67,15 @@ function Login() {
     favorites: []
   })
 
+  const [professionalError, setprofessionalError] = useState({
+    medicalLicense: ""
+  })
+
   const [postprofessional, setpostprofessional] = useState({
     medicalLicense: "",
     licenceImage: "",
     userEmail: ""
   })
-
-
 
 
 
@@ -60,6 +90,15 @@ function Login() {
       [e.target.name]: e.target.value,
       userEmail: post.email
     })
+    setErrors(validate({
+      ...post,
+      [e.target.name]: e.target.value
+    }))
+    setprofessionalError(validateProfessional({
+      ...postprofessional,
+      [e.target.name]: e.target.value
+    }))
+
 
   }
 
@@ -92,11 +131,14 @@ function Login() {
     }
   }
 
-  const [image, setImage] = useState(null)
+
 
 
   async function handleSubmit(e) {
     e.preventDefault();
+    validate(post);
+    validateProfessional(postprofessional);
+
 
     var email = e.target.elements.email.value;
     var password = e.target.elements.password.value;
@@ -107,6 +149,10 @@ function Login() {
 
 
       localStorage.setItem("Email", post.email);
+
+
+
+
       let user = {
         name: post.name,
         email: post.email,
@@ -122,19 +168,19 @@ function Login() {
         phone: post.phone,
         rol: post.rol,
         gps: post.gps,
-        favorites:[]
+        favorites: []
       }
-//b
+      //b
       let professional = {
         medicalLicense: postprofessional.medicalLicense,
         licenceImage: image,
         userEmail: postprofessional.userEmail
       }
 
-        
+
       let userCreate = await dispatch(postUser(user))
       if (post.rol === "professional") {
-       await dispatch(postProfessional(professional))
+        await dispatch(postProfessional(professional))
       }
       alert("User Created")
       setPost({
@@ -152,7 +198,7 @@ function Login() {
         phone: "",
         rol: "",
         gps: "",
-        favorites:[]
+        favorites: []
       })
 
     } else {
@@ -179,7 +225,9 @@ function Login() {
               value={post.email}
               onChange={(e) => handleChange(e)}
             />
+            {errors.email && (<Alert variant='warning' className="error" >{errors.email}</Alert>)}
           </Form.Group>
+
           {/* password */}
           <Form.Group className="mb-3" >
             <Form.Label>Password: </Form.Label>
@@ -190,19 +238,21 @@ function Login() {
               value={post.password}
               onChange={(e) => handleChange(e)}
             />
+            {errors.password && (<Alert variant='warning' className="error" >{errors.password}</Alert>)}
           </Form.Group>
           {
             isRegister &&
             <>
               {/* name */}
               <Form.Group className="mb-3" >
-                <Form.Label>Nombre: </Form.Label>
+                <Form.Label>Nombre y Apellido: </Form.Label>
                 <Form.Control
                   type="text"
                   value={post.name}
                   name="name"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.name && (<Alert variant='warning' className="error" >{errors.name}</Alert>)}
               </Form.Group>
 
               {/* rol */}
@@ -213,7 +263,9 @@ function Login() {
                   <option value="1">...</option>
                   <option value="user">Usuario</option>
                   <option value="professional">Profesional</option>
+
                 </Form.Select>
+                {errors.rol && (<Alert variant='warning' className="error" >{errors.rol}</Alert>)}
               </Form.Group>
 
               {/* fecha de nacimiento */}
@@ -225,6 +277,7 @@ function Login() {
                   name="dateOfBirth"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.dateOfBirth && (<Alert variant='warning' className="error" >{errors.dateOfBirth}</Alert>)}
               </Form.Group>
 
               <Form.Group className="mb-3" >
@@ -235,6 +288,7 @@ function Login() {
                   name="identification"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.identification && (<Alert variant='warning' className="error" >{errors.identification}</Alert>)}
               </Form.Group>
 
               {/*  Imagen de usuario */}
@@ -257,6 +311,7 @@ function Login() {
                   onChange={(e) => setFile(e.target.files[0])}
                 />
                 <button onClick={(e) => handlefile(e)}>Subir Imagen</button>
+                {errors.idImage && (<p className="error">{errors.idImage}</p>)}
               </Form.Group>
 
 
@@ -269,6 +324,7 @@ function Login() {
                   name="country"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)}
               </Form.Group>
 
 
@@ -281,6 +337,7 @@ function Login() {
                   name="province"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.province && (<Alert variant='warning' className="error" >{errors.province}</Alert>)}
               </Form.Group>
 
               {/* Ciudad  */}
@@ -292,6 +349,7 @@ function Login() {
                   name="city"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.city && (<Alert variant='warning' className="error" >{errors.city}</Alert>)}
               </Form.Group>
 
               {/*  Address */}
@@ -303,6 +361,7 @@ function Login() {
                   name="address"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.address && (<Alert variant='warning' className="error" >{errors.address}</Alert>)}
               </Form.Group>
 
 
@@ -316,6 +375,7 @@ function Login() {
                   name="phone"
                   onChange={(e) => handleChange(e)}
                 />
+                {errors.phone && (<Alert variant='warning' className="error" >{errors.phone}</Alert>)}
               </Form.Group>
 
               {/*  Ubicacion GPS */}
@@ -335,7 +395,7 @@ function Login() {
                 //we check whether or not he/she is a professional 
                 (post.rol === "professional") &&
                 <>
-                  {/* Licencia Medica  */}
+
                   <Form.Group className="mb-3" >
                     <Form.Label>Licencia Medica: </Form.Label>
                     <Form.Control
@@ -344,6 +404,7 @@ function Login() {
                       name="medicalLicense"
                       onChange={(e) => handleChange(e)}
                     />
+                    {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicensea}</Alert>)}
                   </Form.Group>
 
                   {/* Imagen Licencia */}
