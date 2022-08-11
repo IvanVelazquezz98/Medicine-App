@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState} from 'react';
+import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds, removeFavorite, addFavorite} from '../../Redux-actions'
 import Ad from '../Card/Ad'
@@ -11,7 +11,6 @@ export default function Ads() {
 
  let ads = useSelector(state=>state.ads)
  let user = useSelector(state=>state.userDetail)
- console.log(user)
  
 
  useEffect(()=>{
@@ -50,6 +49,7 @@ function handleRemoveFavorites(e){
     <div>
       <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
+        if (ad.professional.user.rol === "professional"){
         return(
           <div>
           
@@ -65,7 +65,7 @@ function handleRemoveFavorites(e){
           <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
           <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
           </div>
-        )
+        )}
         }):null}
     </div>
   )

@@ -21,9 +21,7 @@ export default function ProfessionalProfile() {
     },[dispatch, professionalID])
     
     let professionalAds = ads.filter(ad=>ad.professionalMedicalLicense === professionalID)
-    console.log(professionalID);
-    console.log(ads[0]);
-    console.log(professionalAds);
+
     
     return (
     <div>
