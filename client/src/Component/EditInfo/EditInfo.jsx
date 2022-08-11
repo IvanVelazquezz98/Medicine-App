@@ -1,21 +1,29 @@
 import React from 'react'
 import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getUsersById, putEditInfoProfessional, putEditInfoUser, putEditInfoAdd} from '../../Redux-actions'
-import {useParams} from 'react-router-dom'
+import {getUsersById, putEditInfoProfessional, putEditInfoUser} from '../../Redux-actions'
+import {Link, useParams} from 'react-router-dom'
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './EditInfo.css'
+import Ad from '../Card/Ad.jsx'
 
 
-export default function EditInfo(props) {
+export default function EditInfo() {
+
+
  
  let {userId} =useParams();
  let dispatch = useDispatch();
  let User = useSelector(state=> state.userDetail)
- let [activo, setActivo] = useState(false)
+
+ useEffect(()=>{
+    dispatch(getUsersById(userId));
+ },[dispatch])
+ 
+ 
  let [editUser , setEditUser] = useState({
     name: User.name,
     password: User.password,
@@ -30,28 +38,30 @@ export default function EditInfo(props) {
     phone: User.phone,
     rol: User.rol,
     gps: User.gps,
-    favorites :userId.favorites
   })
 
   let [editProfessional , setEditProfessional] = useState({
     aboutMe: User.professional?.aboutMe,
-    college: User.professional?.college,
+    college: User.professional?.college
   })
+
 
 
   function handleDisingageProfessional(e){
         e.preventDefault();
         setEditUser({
+            ...editProfessional,
         rol : "usuario",
     })}
 
   function handleRegisterProfessional(e){
     e.preventDefault();
     setEditUser({
+        ...editUser,
     rol : "professional",
 })}
 
-  function handleChange(e){
+  function handleChangeUser(e){
     e.preventDefault();
     setEditUser({
         ...editUser,
@@ -67,11 +77,11 @@ export default function EditInfo(props) {
     })
   }
 
+
   function handleSubmit(e){
     e.preventDefault();
     dispatch(putEditInfoProfessional(editProfessional, User.professional.medicalLicense));
     dispatch(putEditInfoUser(editUser , userId));
-    // dispatch(putEditInfoAdd(editAdd))
     setEditUser({
         name: "",
         password: "",
@@ -91,13 +101,8 @@ export default function EditInfo(props) {
         aboutMe: "",
         college: "",
     })
-
   }
-  console.log(editUser)
-
-    useEffect(()=>{
-    dispatch(getUsersById(userId));
- },[dispatch])
+  
 
 
   return (
@@ -114,7 +119,7 @@ export default function EditInfo(props) {
                name="name"
                value={editUser.name}
                placeholder={User.name}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
             
@@ -129,7 +134,7 @@ export default function EditInfo(props) {
                name="password"
                value={editUser.password}
                placeholder={User.password}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
                
@@ -144,7 +149,7 @@ export default function EditInfo(props) {
                name="dateOfBirth"
                value={editUser.dateOfBirth}
                placeholder={User.dateOfBirth}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
                
@@ -159,7 +164,7 @@ export default function EditInfo(props) {
                name="identification"
                value={editUser.identification}
                placeholder={User.identification}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
                
@@ -174,7 +179,7 @@ export default function EditInfo(props) {
                name="userimage"
                value={editUser.userimage}
                placeholder={User.userimage}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
               
@@ -189,7 +194,7 @@ export default function EditInfo(props) {
                name="country"
                value={editUser.country}
                placeholder={User.country}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
               
@@ -204,7 +209,7 @@ export default function EditInfo(props) {
                name="city"
                value={editUser.city}
                placeholder={User.city}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
               
@@ -219,7 +224,7 @@ export default function EditInfo(props) {
                name="address"
                value={editUser.address}
                placeholder={User.address}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
                
@@ -234,7 +239,7 @@ export default function EditInfo(props) {
                name="province"
                value={editUser.province}
                placeholder={User.province}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
               
@@ -249,7 +254,7 @@ export default function EditInfo(props) {
                name="phone"
                value={editUser.phone}
                placeholder={User.phone}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
                
@@ -264,19 +269,19 @@ export default function EditInfo(props) {
                name="gps"
                value={editUser.gps}
                placeholder={User.gps}
-               onChange={(e) => handleChange(e)}
+               onChange={(e) => handleChangeUser(e)}
                />
            </Form.Group>
                
    </div>
    {(User.rol == "professional") &&
-   <div className='hola'>
+   <div >
    <Button onClick={e=>handleDisingageProfessional(e)}>Dejar de brindar mis servicios de Profesional</Button>
    </div>
    }
 
    {(User.rol === "usuario") &&
-   <div className='hola'>
+   <div>
    <Button onClick={e=>handleRegisterProfessional(e)}>registrarme como profesional de la salud</Button>
    </div>
    }
@@ -311,15 +316,38 @@ export default function EditInfo(props) {
      />
  </Form.Group>
     
+</div>  
 </div>
-     
+  
+    }
+<Button type="submit" >
+           Modificar Datos
+         </Button>
+</Form>
+
+
+    {(User.rol === "professional")&&(User.professional?.ads) &&
+   
+    User.professional?.ads.map((e)=>{
+        return (
+<div>
+<h1>Tus Anuncios</h1>
+        <Ad
+        adID={e.id}
+        name = {User.name}
+        medicalLicense = {User.professional.professionalMedicalLicense}
+        especialidad = {e.specialty}
+        serviceType = {e.serviceType}
+        precio = {User.price}
+        ranking = {User.professional.ranking} 
+           />  
+    <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
+ 
 </div>
 
-    }
-   <Button type="submit" >
-              Modificar Datos
-            </Button>
-   </Form>
+)})}
+
+
 
 
 
