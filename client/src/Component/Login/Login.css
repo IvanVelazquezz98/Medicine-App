@@ -39,3 +39,7 @@
 .registerNforgottenButtons button{
     margin: 5px 0px 5px 0px;
 }
+
+.error{
+    color:rgba(248, 28, 28, 0.6)
+}
