@@ -12,7 +12,6 @@ export default function Ads() {
  let ads = useSelector(state=>state.ads)
  let user = useSelector(state=>state.userDetail)
  
-
  useEffect(()=>{
     dispatch(getAds())
  },[dispatch])
@@ -49,23 +48,26 @@ function handleRemoveFavorites(e){
     <div>
       <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
-        if (ad.professional.user.rol === "professional"){
-        return(
-          <div>
-          
+        if(ad.professional.user?.rol==="professional" && ad.professional.user !== null){
 
-          <Ad adID={ad.id}
-              name = {ad.professional.user.name}
-              medicalLicense = {ad.professionalMedicalLicense}
-              especialidad = {ad.specialty}
-              serviceType = {ad.serviceType}
-              precio = {ad.price}
-              ranking = {ad.professional.ranking}
-          />
-          <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
-          <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
-          </div>
-        )}
+          return(
+            <div>
+            
+  
+            <Ad adID={ad.id}
+                name = {ad.professional.user.name}
+                medicalLicense = {ad.professionalMedicalLicense}
+                especialidad = {ad.specialty}
+                serviceType = {ad.serviceType}
+                precio = {ad.price}
+                ranking = {ad.professional.ranking}
+            />
+            <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
+            <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
+            </div>
+          )
+        }
+
         }):null}
     </div>
   )
