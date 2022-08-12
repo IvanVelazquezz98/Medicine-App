@@ -16,6 +16,7 @@ import './StyleProfile.css';
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
+import CreateAppointments from "../CreateAppointments/CreateAppointments";
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
@@ -93,7 +94,13 @@ const UserProfile = ({ user }) => {
       <div className="misbotones">
 
       {/* boton crear anuncio momentaneamente esta aca */}
-      {User.rol === "professional" && <CreateAd user={user} />}
+      {User.rol === "professional" && 
+        <div>
+          <CreateAd user={user} />
+          <CreateAppointments user={user} />
+          </div>}
+
+      
 
       <div className="SignOut">
       <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button> 

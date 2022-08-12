@@ -164,6 +164,19 @@ export function addFavorite(payload) {
     };
   }
 
+  export function createMorningHours (payload) {
+      return{
+        type:'CREATE_MORNING_HOURS',
+        payload
+    }
+  }
+
+  export function createAfternoonHours (payload) {
+    return{
+      type:' CREATE_AFTERNOON_HOURS',
+      payload
+  }
+}
 
 // soft delete user from Data Base. 
 export function deleteUserByID(userId){
