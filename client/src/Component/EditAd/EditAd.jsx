@@ -26,6 +26,7 @@ export default function EditAd() {
         serviceType: Ad.serviceType,
     })
 
+
     function handleChange(e){
         e.preventDefault();
         setEditAd({
@@ -116,6 +117,7 @@ export default function EditAd() {
 
 <Button type='Submit'>Editar Anuncio</Button>
    </Form>
+
 
        <Footer/>
       </div>
