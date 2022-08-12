@@ -79,7 +79,11 @@ function Login() {
     licenceImage: "",
     userEmail: "",
   })
-
+  const [postprofessional, setpostprofessional] = useState({
+    medicalLicense: "",
+    licenceImage: "",
+    userEmail: ""
+  })
   
 
   async function handleChange(e) {
@@ -139,7 +143,7 @@ function Login() {
   };
 
 
-  const [image, setImage] = useState(null);
+  //const [image, setImage] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();

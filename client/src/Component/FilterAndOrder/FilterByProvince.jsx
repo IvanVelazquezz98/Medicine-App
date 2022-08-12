@@ -8,7 +8,7 @@ function FilterByProvince1() {
   let ads = useSelector(state=>state.ads)
   
   let prov= ads.map(e=>{
-   return e.professional.user?.province
+   return e.professional?.user?.province
   })
   
   let setProvince= [...new Set(prov)]

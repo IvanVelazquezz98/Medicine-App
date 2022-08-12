@@ -11,7 +11,7 @@ function FilterByCity1() {
   let dispatch= useDispatch()
 
   let city= ads.map(e=>{
-   return e.professional.user?.city
+   return e.professional?.user?.city
   })
 
   
