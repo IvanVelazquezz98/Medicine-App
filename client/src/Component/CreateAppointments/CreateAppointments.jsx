@@ -15,8 +15,9 @@ function CreateAppointments({user}) {
   const User = useSelector((state) => state.userDetail)
 
   const morningHours = useSelector((state)=>state.morningHours)
+  console.log('estado', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
-
+  console.log('estado', afternoonHours);
 
   useEffect(() => {
     dispatch(getUsersById(user.email));
@@ -53,14 +54,14 @@ function CreateAppointments({user}) {
     setMorningEndTime(`${end.hour()}:${end.minute()}`)
    
     let morningHours={
-        morningStartTime:morningStartTime,
-        morningEndTime:morningEndTime,
+        morningStartTime:`${start.hour()}:${start.minute()}`,
+        morningEndTime:`${end.hour()}:${end.minute()}`,
         duration:duration
     }
     dispatch(createMorningHours(morningHours))
    }
 
-   function submitTimeRange(){
+   /* function submitTimeRange2(){
     const start = moment(new Date(startTime))
     const end = moment(new Date(endTime))
     setMorningStartTime(`${start.hour()}:${start.minute()}`)
@@ -68,20 +69,20 @@ function CreateAppointments({user}) {
 
     setStartTime(moment())
     setEndTime(moment())
-   }
+   } */
 
    function submitTimeRange2(){
     const start = moment(new Date(startTime))
     const end = moment(new Date(endTime))
     setAfternoonStartTime(`${start.hour()}:${start.minute()}`)
     setAfternoonEndTime(`${end.hour()}:${end.minute()}`)
-    setStartTime(moment())
+    /* setStartTime(moment())
     setEndTime(moment())
-
+ */
     let afternoonHours={
-        afternoonStartTime,
-        afternoonEndTime,
-        duration
+        afternoonStartTime:`${start.hour()}:${start.minute()}`,
+        afternoonEndTime:`${end.hour()}:${end.minute()}`,
+        duration:duration
     }
     dispatch(createAfternoonHours(afternoonHours))
    }
@@ -118,9 +119,11 @@ function CreateAppointments({user}) {
       <h1>Crea tus turnos</h1>
       <div style={{ textAlign: "center" }}>
       <p>cuanto dura su turno</p>
-      <input placeholder='Cuanto dura su turno?'  type="range" min="10" max="60" name='duration' step='0.5' onChange={(e)=>handleChange(e)}></input>
+      <input placeholder='Cuanto dura su turno?'  type="range" min="10" max="60" name='duration' step='10' onChange={(e)=>handleChange(e)}></input>
         <p>{duration} mins</p>
+        <p>elegi tus dias de trabajo</p>
         <DatePicker
+            placeholder="elige tus fechas"
           value={dates}
           onChange={setDates}
           multiple
@@ -143,20 +146,23 @@ function CreateAppointments({user}) {
         onStartTimeChange={handleStartTimeChange}
         onEndTimeChange={handleEndTimeChange}
         />
+        {/* <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p> */}    
         <button onClick={submitTimeRange}>confirme rango horario</button>
-
         {morningHours.length>0?morningHours.map((h,i)=><p key={i}>{h};</p>):null}
 
         <button onClick={newTimeRange}>Seleccione otro rango horario para el mismo dia</button>
         
-        <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p>
+        
         {timeRanges?<><TimeRange
         startMoment={startTime}
         endMoment={endTime}
         onStartTimeChange={handleStartTimeChange}
         onEndTimeChange={handleEndTimeChange} />
+        {/* <p>rango horario turno tarde: {afternoonStartTime} - {afternoonEndTime}</p> */}
         <button onClick={submitTimeRange2}>confirme rango horario</button>
-        <p>rango horario turno tarde: {afternoonStartTime} - {afternoonEndTime}</p></>
+        {afternoonHours.length>0?afternoonHours.map((h,i)=><p key={i}>{h};</p>):null}
+        </>
+        
         :null}
 
         <button onclick={(e)=>submit(e)}>confirma tus turnos</button>

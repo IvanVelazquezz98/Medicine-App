@@ -49,12 +49,10 @@ function handleRemoveFavorites(e){
     <div >
       <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
-        if(ad.professional.user?.rol==="professional" && ad.professional.user !== null){
+        if(ad.professional?.user?.rol==="professional" && ad.professional?.user !== null){
 
           return(
             <div>
-            
-  
             <Ad adID={ad.id}
                 name = {ad.professional.user.name}
                 medicalLicense = {ad.professionalMedicalLicense}
@@ -62,9 +60,10 @@ function handleRemoveFavorites(e){
                 serviceType = {ad.serviceType}
                 precio = {ad.price}
                 ranking = {ad.professional.ranking}
+                userimage={ad.professional.user.userimage}
             />
-          //  <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
-          //  <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
+               {/* <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button> */}
+           <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
             </div>
           )
         }

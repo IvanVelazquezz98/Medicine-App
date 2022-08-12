@@ -173,7 +173,7 @@ export function addFavorite(payload) {
 
   export function createAfternoonHours (payload) {
     return{
-      type:' CREATE_AFTERNOON_HOURS',
+      type:'CREATE_AFTERNOON_HOURS',
       payload
   }
 }
