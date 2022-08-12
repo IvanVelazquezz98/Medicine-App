@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState} from 'react';
+import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds, removeFavorite, addFavorite} from '../../Redux-actions'
 import Ad from '../Card/Ad'
@@ -12,8 +12,6 @@ export default function Ads() {
  let ads = useSelector(state=>state.ads)
  let user = useSelector(state=>state.userDetail)
  
- 
-
  useEffect(()=>{
     dispatch(getAds())
  },[dispatch])
@@ -69,6 +67,7 @@ function handleRemoveFavorites(e){
             </div>
           )
         }
+
         }):null}
     </div>
   )

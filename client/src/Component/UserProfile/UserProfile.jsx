@@ -26,19 +26,16 @@ const UserProfile = ({ user }) => {
   const [button, setButton] = React.useState(false);
 
   useEffect(() => {
-    console.log(user.email);
     dispatch(getUsersById(user.email.toLowerCase()));
     if(favML && user.email){
     dispatch(addFavorite(favorites))
     }
   }, [dispatch]);
 
-  console.log(User);
 
 
 
   let favML = JSON.parse(localStorage.getItem("ml")); 
-  console.log(favML)
 
 
   let favorites = {

@@ -25,7 +25,7 @@ export default function EditAd() {
         timeAvailability: Ad.timeAvailability,
         serviceType: Ad.serviceType,
     })
-    console.log(editAd)
+
 
     function handleChange(e){
         e.preventDefault();
@@ -119,7 +119,6 @@ export default function EditAd() {
    </Form>
 
 
-       <h1>estas aca</h1>
        <Footer/>
       </div>
   

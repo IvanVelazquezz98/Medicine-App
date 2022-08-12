@@ -1,5 +1,5 @@
 import React from 'react'
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 // import { Navbar } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import {useParams} from 'react-router-dom'
@@ -10,7 +10,6 @@ import Navbar from '../Navbar/Navbar'
 export default function AdDetail() {
     const dispatch = useDispatch()
     const {adID} = useParams()
-    console.log(adID)
     
     useEffect(()=>{
         dispatch(getAdById(adID))
