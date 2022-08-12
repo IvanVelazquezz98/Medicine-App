@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import './ModalUnsubscribe.css'
 import { Link } from "react-router-dom";
+import {deleteUserByID,getAds} from '../../Redux-actions/index'
 
-function ModalUnsubscribe() {
+function ModalUnsubscribe(props) {
   const [show, setShow] = useState(false);
+  
   const dispatch = useDispatch()
-
+ 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   function handleSubmit (e){
     e.preventDefault()
-    //dispatch (deleteUser(user))
-    alert ('Realizar la lógica ---> ir a la action')
+    dispatch (deleteUserByID(props.user.id))
+    alert ('Realizar la lógica ---> ir a la action')//dar de firebase y redirigir a home
   }
 
   return (

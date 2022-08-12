@@ -4,12 +4,14 @@ import ImageUser from "./imageProfile";
 import Favorites from "./favoritesProfessionalUser";
 import InfoUser from "./InfoUserProfile";
 import HistoryAppointment from "./historyAppointmentUser";
+import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
+
 
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
@@ -100,6 +102,9 @@ const UserProfile = ({ user }) => {
         editar informacion de perfil
         </Link>
       </div>
+      </div>
+      <div>
+      <ModalUnsubscribe user={User}/>
       </div>
 
       </div>
