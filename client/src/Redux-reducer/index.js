@@ -91,6 +91,7 @@ const rootReducer = (state = inicialState, action) => {
       }  
 
     case 'CREATE_MORNING_HOURS':
+       
         let timeEnd=action.payload.morningEndTime.split(':')
         
         let timeM=action.payload.morningStartTime.split(':')
@@ -103,24 +104,36 @@ const rootReducer = (state = inicialState, action) => {
         
         let siguiente= actual
         let horarioEntero=[]
-        let durationtime=parseFloat((action.payload.duration).toFixed(2))
+        let durationtime=parseFloat((action.payload.duration/60).toFixed(2))
         do {
-            actual =siguiente+ durationtime
+            actual =siguiente + durationtime
             horarioEntero.push(siguiente)
             siguiente=actual
         } 
         while (siguiente < y);
-        let hours=horarioEntero.map(el=>{
+        let hours = horarioEntero.map(el=>{
+
             let hour=el.toString().split('.')[0]
             hour = (hour < 10)? '0' + hour : hour;
             var min = Math.round((el-Number(hour))*60)
             let r = min.toString().split('')
-            if(r[1]!==0 || r[1]!== 5){
-                min=min-Number(r[1])   
-            }
-            let minute = min
-            minute = (minute < 10)? '0' + minute : minute;
-            return hour + ':' + minute;
+            if(r[1]!=='0' || r[1]!== '5'){
+              if(r.length===1 && Number(r[0]) < 10){
+                r[0]= '0'
+                r=[r[0]]
+                min='0'
+              }
+                r[1]= '0'
+                r=[r[0], r[1]]
+            
+            min= r.join('')  
+        }
+    
+        let minute = min
+        // minute = (minute < 10)? '0' + minute : minute;
+            if(minute===0){
+              return hour + ': 00'
+            }return hour + ':' + minute;
         })
         return {
           ...state,
@@ -136,7 +149,7 @@ const rootReducer = (state = inicialState, action) => {
         let aftActual =aftX
         let aftSiguiente= aftActual
         let aftHorarioEntero=[]
-        let aftDurationtime=parseFloat((action.payload.duration).toFixed(2))  
+        let aftDurationtime=parseFloat((action.payload.duration/60).toFixed(2))  
         do {
           aftActual =aftSiguiente+ aftDurationtime
           aftHorarioEntero.push(aftSiguiente)
@@ -148,13 +161,25 @@ const rootReducer = (state = inicialState, action) => {
             hour = (hour < 10)? '0' + hour : hour;
             var min = Math.round((el-Number(hour))*60)
             let r = min.toString().split('') 
-            if(r[1]!==0 || r[1]!== 5){
-                min=min-Number(r[1])   
-            } 
-            let minute = min
-            minute = (minute < 10)? '0' + minute : minute;
-            return hour + ':' + minute;
+            if(r[1]!=='0' || r[1]!== '5'){
+              if(r.length===1 && Number(r[0]) < 10){
+                r[0]= '0'
+                r=[r[0]]
+                min='0'
+              }
+                r[1]= '0'
+                r=[r[0], r[1]]
+            
+            min= r.join('')  
+        }
+    
+        let minute = min
+        // minute = (minute < 10)? '0' + minute : minute;
+        if(minute===0){
+          return hour + ': 00'
+        }return hour + ':' + minute;
         })
+        console.log('aftHours',aftHours)
         return {
           ...state,
           afternoonHours:aftHours
