@@ -223,11 +223,11 @@ export function deleteUserByID(userId,rol){
 
 
 
-  export function putEditInfoAdd(payload, idUser) {
+  export function putEditInfoAd(payload, idAd) {
     return async function (dispatch) {
-      console.log(payload , idUser)
+      console.log(payload , idAd)
       try {
-        await axios.put(`http://localhost:3001/Ad/${idUser}`, payload);
+        await axios.put(`http://localhost:3001/Ad/${idAd}`, payload);
       } catch (error) {
         console.log(error);
       }

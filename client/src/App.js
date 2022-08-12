@@ -6,6 +6,7 @@ import ProfessionalProfile from "./Component/ProfessionalProfile/ProfessionalPro
 import AdDetail from "./Component/AdDetail/AdDetail";
 import Contact from './Component/Contacto/ContactoForm'
 import EditInfo from "./Component/EditInfo/EditInfo"
+import EditAd from "./Component/EditAd/EditAd";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/professional/:professionalID' element={<ProfessionalProfile />}/>
           <Route path="/contact" element={<Contact /> } />
           <Route path="/profile/:userId" element={<EditInfo/>}/>
+          <Route path="/ProfileAd/:AdId" element= {<EditAd/>}/>
         </Routes>
       </div>
 
