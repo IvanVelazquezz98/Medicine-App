@@ -1,0 +1,228 @@
+.perfil-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 10%;
+    min-height: fit-content;
+  }
+  .perfil-parent {
+    display: flex;
+    align-items: center;
+    color: antiquewhite;
+  }
+  .perfil-details-name {
+    font-size: 24px;
+    font-family: "Poppins SemiBold";
+  }
+  .perfil-details-role {
+    display: flex;
+    flex-direction: column;
+    margin: 14px 0 24px 0;
+  }
+  .perfil-details-role h1 {
+    font-size: 24px;
+    font-family: cursive;
+  }
+  .primary-text {
+   color: rgb(0, 99, 160, 1);
+    font-size: 50px;
+  }
+  .looper{
+    font-size: 50px;
+      color:rgb(60, 163, 228);
+  }
+  .highlighted-text {
+    color: rgb(0, 99, 160, 1);
+  }
+  .perfil-role-tagline {
+    font-size: 40px;
+    margin: 5px 0 0 0;
+    font-family: "Poppins Light";
+  }
+  .perfil-role-tagline2 {
+    font-size: 40px;
+    margin: 5px 0 0 0;
+    font-family: "Poppins Light";
+    color: rgb(0, 99, 160, 1);
+  }
+  .perfil-options .highlighted-btn {
+    margin: 0 0 0 28px;
+  }
+  .perfil-options .highlighted-btn:hover {
+    margin: 0 0 0 28px;
+    background-color: azure;
+    color: #111;
+  }
+  .perfil-picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 0px 0px var(--white);
+    border-radius: 50%;
+    height: 380px;
+    width: 380px;
+    margin: 0 0px 0 100px; 
+  }
+  .perfil-picture-background {
+    height: 92%;
+    width: 92%;
+    background-image: url(../../assets/logo.png);
+    background-size: cover;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .perfil-picture-background:hover {
+    transform: scale(1.07);
+    transition: 1s ease-out;
+  }
+  .colz .colz-icon i {
+    color: antiquewhite;
+    padding: 8px;
+    padding-left: 0px;
+  }
+  .colz .colz-icon i:hover {
+    transform: scale(1.5);
+  }
+  .primary-btn {
+    color: var(--white);
+    border: 2px solid linen;
+    font-size: 20px;
+    background-color: #1f2235;
+  }
+  .highlighted-btn {
+    color: var(--white);
+  
+    font-size: 20 px;
+    background-color: #3ba752;
+  }
+  
+  
+  @media screen and (max-width: 1110px) {
+    .perfil-picture {
+      margin: 0 0px 0 80px;
+    }
+    .perfil-details-name {
+      font-size: 20px;
+    }
+    .perfil-details-role .primary-text {
+      font-size: 12px;
+    }
+    .perfil-options .btn {
+      width: 120px;
+      padding: 11px 0;
+      z-index: 700;
+    }
+  }
+  
+  @media screen and (max-width: 910px) {
+    .perfil-picture {
+      height: 320px;
+      width: 320px;
+      margin: 0 0 0 4px;
+    }
+  }
+  
+  @media screen and (max-width: 810px) {
+    .perfil-picture {
+      margin: 0 !important;
+    }
+    .perfil-parent {
+      flex-direction: column-reverse;
+      margin: 40px 0 0 0;
+    }
+    .perfil-options {
+      display: flex;
+      justify-content: space-between;
+    }
+    .perfil-details {
+      margin: 25px 0 0;
+    }
+    .perfil-options .highlighted-btn {
+      margin: 0 !important;
+    }
+    .perfil-options,
+    .perfil-details-role {
+      text-align: center;
+    }
+  }
+  
+  @media screen and (max-width: 375px) {
+    .perfil-picture {
+      height: 275px;
+      width: 275px;
+      margin-top: -90px;
+    }
+    .perfil-details {
+      width: 90%;
+    }
+    .primary-btn {
+        color: var(--white);
+        border: 2px solid linen;
+        margin-left: 70%;
+        font-size: 10px;
+        background-color: #1f2235;
+      }
+      .perfil-role-tagline {
+        font-size: 25px;
+        margin: 20px 10px 100px 0;
+        font-family: "Poppins Light";
+      }
+      .perfil-role-tagline2 {
+        font-size: 25px;
+        margin-right: 50%;
+        font-family: "Poppins Light";
+      }
+
+  }
+  
+
+
+
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    min-height:50vh;
+    background:rgb(0, 99, 160, 1); ;
+}
+.t.wrapper{
+    display: flex;
+}
+.t.wrapper .static-text{
+    color: White;
+    font-size: 60px;
+    font-weight: 400;
+} 
+.t.wrapper .dynamic-txts{
+margin-left: 15px;
+height: 90px;
+line-height: 90px;
+overflow: hidden;
+}
+
+.dynamic-txts li{
+list-style: none;
+color: White;
+font-size: 60px ;
+font-weight: 500;
+position: relative;
+top : 0;
+animation: slide 12s steps(3) infinite;
+}
+@keyframes slide{
+    100%{top: -30%;}
+}
+
+.dynamic-txts li span{
+    position: relative;
+    margin: 5px 0;
+    line-height:80px;
+} */
