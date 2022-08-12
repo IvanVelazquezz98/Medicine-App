@@ -6,8 +6,9 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import './ModalUnsubscribe.css'
 import { Link } from "react-router-dom";
+import {deleteUserByID} from '../../Redux-actions/index'
 
-function ModalUnsubscribe() {
+function ModalUnsubscribe(props) {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch()
 
@@ -17,7 +18,7 @@ function ModalUnsubscribe() {
 
   function handleSubmit (e){
     e.preventDefault()
-    //dispatch (deleteUser(user))
+    dispatch (deleteUserByID(props.user.id))
     alert ('Realizar la lógica ---> ir a la action')
   }
 
