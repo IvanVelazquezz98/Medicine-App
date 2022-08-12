@@ -141,8 +141,20 @@ export function addFavorite(payload) {
     };
   }
 
+  export function createMorningHours (payload) {
+      return{
+        type:'CREATE_MORNING_HOURS',
+        payload
+    }
+  }
 
-
+  export function createAfternoonHours (payload) {
+    return{
+      type:' CREATE_AFTERNOON_HOURS',
+      payload
+  }
+}
+ 
 
 
 

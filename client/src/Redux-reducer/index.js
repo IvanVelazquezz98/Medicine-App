@@ -7,6 +7,8 @@ const inicialState = {
   professionalProfile: {},
   userDetail: {},
   users: [],
+  morningHours:[],
+  afternoonHours:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -87,8 +89,76 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         ads: action.payload
       }  
-      
 
+    case 'CREATE_MORNING_HOURS':
+        let timeEnd=action.payload.morningEndTime.split(':')
+        
+        let timeM=action.payload.morningStartTime.split(':')
+
+        let x=Number(timeM[0])+Number(timeM[1])/60
+        
+        let y= Number(timeEnd[0])+ Number(timeEnd[1])/60
+        
+        let actual = x
+        
+        let siguiente= actual
+        let horarioEntero=[]
+        let durationtime=parseFloat((action.payload.duration).toFixed(2))
+        do {
+            actual =siguiente+ durationtime
+            horarioEntero.push(siguiente)
+            siguiente=actual
+        } 
+        while (siguiente < y);
+        let hours=horarioEntero.map(el=>{
+            let hour=el.toString().split('.')[0]
+            hour = (hour < 10)? '0' + hour : hour;
+            var min = Math.round((el-Number(hour))*60)
+            let r = min.toString().split('')
+            if(r[1]!==0 || r[1]!== 5){
+                min=min-Number(r[1])   
+            }
+            let minute = min
+            minute = (minute < 10)? '0' + minute : minute;
+            return hour + ':' + minute;
+        })
+        return {
+          ...state,
+          morningHours:hours
+
+        }
+      
+      case 'CREATE_AFTERNOON_HOURS':
+        let afternoonTimeEnd=action.payload.afternoonEndTime.split(':') 
+        let afternoonTimeM=action.payload.afternoonStartTime.split(':')
+        let aftX=Number(afternoonTimeM[0])+Number(afternoonTimeM[1])/60
+        let aftY= Number(afternoonTimeEnd[0])+ Number(afternoonTimeEnd[1])/60
+        let aftActual =aftX
+        let aftSiguiente= aftActual
+        let aftHorarioEntero=[]
+        let aftDurationtime=parseFloat((action.payload.duration).toFixed(2))  
+        do {
+          aftActual =aftSiguiente+ aftDurationtime
+          aftHorarioEntero.push(aftSiguiente)
+            aftSiguiente=aftActual
+        } 
+        while (aftSiguiente < aftY);
+        let aftHours=aftHorarioEntero.map(el=>{
+            let hour=el.toString().split('.')[0]
+            hour = (hour < 10)? '0' + hour : hour;
+            var min = Math.round((el-Number(hour))*60)
+            let r = min.toString().split('') 
+            if(r[1]!==0 || r[1]!== 5){
+                min=min-Number(r[1])   
+            } 
+            let minute = min
+            minute = (minute < 10)? '0' + minute : minute;
+            return hour + ':' + minute;
+        })
+        return {
+          ...state,
+          afternoonHours:aftHours
+        }
     default:
       return state;
   }
