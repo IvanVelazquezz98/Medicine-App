@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//get all ads
     export function getAds () {
     return async function (dispatch){
         var json = await axios.get("http://localhost:3001/ads");
@@ -9,7 +10,7 @@ import axios from "axios";
     
 };
 
-
+// get professional by ID
 export function getProfessionalById(id) {
   return async function (dispatch) {
     var json = await axios.get(`http://localhost:3001/professionals/${id}`);
@@ -17,6 +18,7 @@ export function getProfessionalById(id) {
   };
 }
 
+// Create a  USER
 export function postUser(payload) {
   return async function (dispatch) {
     try {
@@ -28,6 +30,8 @@ export function postUser(payload) {
   };
 }
 
+
+//Create a Professional
 export function postProfessional(payload) {
   return async function (dispatch) {
     try {
@@ -42,12 +46,15 @@ export function postProfessional(payload) {
   }
 };
 
+//clear Detail object
 export function cleanDetail() {
   return {
     type: "CLEAN_DETAIL",
   }
 };
 
+
+//Get all Users
 export function getUsers() {
   return async function (dispatch) {
     var json = await axios.get("http://localhost:3001/users");
@@ -55,6 +62,8 @@ export function getUsers() {
   }
  };
  
+
+ //get user by id
  export function getUsersById(id) {
     return async function (dispatch) {
       var json = await axios.get(`http://localhost:3001/user/${id}`);
@@ -62,6 +71,8 @@ export function getUsers() {
     };
   };
 
+
+  //get add by ID
 export function getAdById (id) {
 
     return async function (dispatch){
@@ -72,6 +83,7 @@ export function getAdById (id) {
 
 };
 
+// filters
 export function filterAllAds(payload) {
  
   return async function (dispatch) {
@@ -82,6 +94,8 @@ export function filterAllAds(payload) {
 
 }
 
+
+//order by price
 export function orderByPrice(payload) {
   return{
       type:'ORDER_PRICE',
@@ -89,6 +103,9 @@ export function orderByPrice(payload) {
   }
 }
 
+
+
+//order by ranking
 export function orderByRanking(payload) {
   return{
       type:'FILTER_RANKING',
@@ -96,6 +113,8 @@ export function orderByRanking(payload) {
   }
 }
 
+
+//Create Ad 
 export function postAdd(payload) {
   return async function (dispatch) {
     try {
@@ -106,6 +125,8 @@ export function postAdd(payload) {
     }
   };
 }
+
+//ger professional by name
 export function getName(name) {
   return async (dispatch) =>{
       
@@ -118,6 +139,7 @@ export function getName(name) {
   }
 };
 
+//ad professional to favourites
 export function addFavorite(payload) {
     return async function (dispatch) {
         console.log(payload)
@@ -130,11 +152,95 @@ export function addFavorite(payload) {
     };
   }
 
+  //remove favourites
   export function removeFavorite(payload) {
     return async function (dispatch) {
       try {
         var json = await axios.put(`http://localhost:3001/removeFavorites`, payload);
         return json;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+  export function createMorningHours (payload) {
+      return{
+        type:'CREATE_MORNING_HOURS',
+        payload
+    }
+  }
+
+  export function createAfternoonHours (payload) {
+    return{
+      type:' CREATE_AFTERNOON_HOURS',
+      payload
+  }
+}
+
+// soft delete user from Data Base. 
+export function deleteUserByID(userId){
+  return async function (dispatch){
+    try {
+      const dbResponse = await axios.post(`http://localhost:3001/delete/${userId}`)
+      console.log('delete by id',dbResponse)
+      return dispatch({
+        type:'USER_DELETED',
+        payload:dbResponse.data
+      })
+    } catch (e) {
+      //console.log('este es el error de la action',e)
+      if(e.response.data.message){
+        return dispatch({
+          type:'ERROR',
+          payload:{
+            message:e.response.data.message
+          }
+        })
+      }else{
+        return dispatch({
+          type:'ERROR',
+          payload:{
+            message:e.message
+          }
+        })
+      }
+    }
+  }
+}
+
+
+
+  export function putEditInfoAd(payload, idAd) {
+    return async function (dispatch) {
+      console.log(payload , idAd)
+      try {
+        await axios.put(`http://localhost:3001/Ad/${idAd}`, payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+
+  export function putEditInfoUser(payload , idUser) {
+    return async function (dispatch) {
+      console.log(payload , idUser)
+      try {
+         await axios.put(`http://localhost:3001/user/${idUser}`, payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  
+  
+  export function putEditInfoProfessional(payload , idUser) {
+    return async function (dispatch) {
+      console.log(payload , idUser)
+      console.log("llegue aca")
+      try {
+         await axios.put(`http://localhost:3001/professional/${idUser}`, payload);
       } catch (error) {
         console.log(error);
       }

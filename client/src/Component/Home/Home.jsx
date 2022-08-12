@@ -7,6 +7,7 @@ import ModalPayment from './ModalPayment'
 
 
 
+
 export default function Home() {
 
  
@@ -17,8 +18,6 @@ export default function Home() {
          <ModalPayment />
           <Link  to='/services'><button > Ver los anuncios</button></Link>
 
-        
-          
           <Footer/>
       </div>
     )}

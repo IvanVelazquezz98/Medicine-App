@@ -74,7 +74,7 @@ export default function CreateAd({ user }) {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
             <Form.Label>Turnos disponibles: </Form.Label>
             <Form.Control
               type="text"
@@ -83,7 +83,7 @@ export default function CreateAd({ user }) {
               value={post.timeAvailability}
               onChange={(e) => handleChange(e)}
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group className="mb-3">
             <Form.Label>Tipo de servicio: </Form.Label>

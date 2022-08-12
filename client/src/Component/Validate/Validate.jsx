@@ -4,7 +4,11 @@ import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import UserProfile from "../UserProfile/UserProfile";
-import Navbar from '../Navbar/Navbar'
+import NavBar from '../Navbar/Navbar'
+import Footer from '../Footer/Footer'
+import './Validate.css'
+
+
 
 
 const auth = getAuth(firebaseApp);
@@ -41,7 +45,7 @@ function Validate() {
     }
   });
 
-  return <div>{user ? <UserProfile user={user} /> : <Login />}</div>;
+  return <div>{user ? <UserProfile user={user} /> : (<div> <NavBar/> <div ><Login  /> </div><div className='space'> <Footer/></div> </div>)}</div>;
 }
 
 export default Validate;
