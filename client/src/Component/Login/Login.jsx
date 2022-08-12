@@ -7,12 +7,12 @@ import { uploadFile } from "../../Credential/index";
 import { postUser, postProfessional } from '../../Redux-actions/index'
 import { useNavigate } from 'react-router-dom'
 import { validate, validateProfessional} from './validate'
-import './Login.css'
 import ModalForgotPsw from './ModalForgotPsw'
-import './Login.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import './Login.css'
+import './Login.css'
 
 
 

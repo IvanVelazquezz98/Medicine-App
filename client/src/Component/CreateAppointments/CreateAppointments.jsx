@@ -4,17 +4,27 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimeRange from 'react-time-range';
 import moment from 'moment';
 import { useDispatch, useSelector } from "react-redux"
+<<<<<<< HEAD
 import { getUsersById, createMorningHours, createAfternoonHours} from '../../Redux-actions'
 //const auth = getAuth(firebaseApp);
 //import { getAuth, signOut } from "firebase/auth";
+=======
+import {postAppointments, getUsersById} from '../../Redux-actions'
+const auth = getAuth(firebaseApp);
+import { getAuth, signOut } from "firebase/auth";
+>>>>>>> 35bca314d2ce2b770999894db9cb284efa1ac361
 //import './App.css';
 const format = "DD/MM/YYYY";
 function CreateAppointments({user}) {
 
   const dispatch = useDispatch();
   const User = useSelector((state) => state.userDetail)
+<<<<<<< HEAD
   const morningHours = useSelector((state)=>state.morningHours)
   const afternoonHours = useSelector((state)=>state.afternoonHours)
+=======
+
+>>>>>>> 35bca314d2ce2b770999894db9cb284efa1ac361
   useEffect(() => {
     dispatch(getUsersById(user.email));
   }, [dispatch]);
@@ -40,6 +50,7 @@ function CreateAppointments({user}) {
     setEndTime(e.endTime) 
    }
 
+<<<<<<< HEAD
 
    
    function submitTimeRange(){
@@ -55,6 +66,13 @@ function CreateAppointments({user}) {
         duration
     }
     dispatch(createMorningHours(morningHours))
+=======
+   function submitTimeRange(){
+    const start = moment(new Date(startTime))
+    const end = moment(new Date(endTime))
+    setMorningStartTime(`${start.hour()}:${start.minute()}`)
+    setMorningEndTime(`${end.hour()}:${end.minute()}`)
+>>>>>>> 35bca314d2ce2b770999894db9cb284efa1ac361
     setStartTime(moment())
     setEndTime(moment())
    }
@@ -66,6 +84,7 @@ function CreateAppointments({user}) {
     setAfternoonEndTime(`${end.hour()}:${end.minute()}`)
     setStartTime(moment())
     setEndTime(moment())
+<<<<<<< HEAD
     
     let afternoonHours={
         afternoonStartTime,
@@ -73,6 +92,8 @@ function CreateAppointments({user}) {
         duration
     }
     dispatch(createAfternoonHours(afternoonHours))
+=======
+>>>>>>> 35bca314d2ce2b770999894db9cb284efa1ac361
    }
 
    function newTimeRange(){
@@ -95,7 +116,11 @@ function CreateAppointments({user}) {
       duration: duration,
       medicalLicense: null//pasarle el medical license del usuario
     }
+<<<<<<< HEAD
     //dispatch(postAppointments(appointments))
+=======
+    dispatch(postAppointments(appointments))
+>>>>>>> 35bca314d2ce2b770999894db9cb284efa1ac361
    }
 
    console.log(dates)
@@ -131,7 +156,10 @@ function CreateAppointments({user}) {
         onEndTimeChange={handleEndTimeChange}
         />
         <button onClick={submitTimeRange}>confirme rango horario</button>
+<<<<<<< HEAD
         {morningHours.length>0?morningHours.map((h,i)=><p key={i}>{h};</p>):null}
+=======
+>>>>>>> 35bca314d2ce2b770999894db9cb284efa1ac361
         <button onClick={newTimeRange}>Seleccione otro rango horario para el mismo dia</button>
         
         <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p>
