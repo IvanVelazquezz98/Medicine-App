@@ -1,11 +1,12 @@
 .FooterContainer{
+    
     display: flex;
     justify-content: space-evenly;
     background-color: rgb(0, 99, 160, 1);
     border:1px solid black;
     min-height: 12rem;
     /* Para que el footer quede abajo */
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

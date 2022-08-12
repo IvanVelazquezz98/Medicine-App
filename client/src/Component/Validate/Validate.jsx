@@ -4,6 +4,7 @@ import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import UserProfile from "../UserProfile/UserProfile";
+import Navbar from '../Navbar/Navbar'
 
 
 const auth = getAuth(firebaseApp);

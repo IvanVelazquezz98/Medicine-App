@@ -10,7 +10,9 @@ function Services() {
     //el user profile iria en la navbar, pero aun no hay, lo pongo aca par probarlo
     <div>
       <Navbar />
+      <div className="prueba">
       <Ads/>
+      </div>
       <div className='hola'></div>
       <Footer/>
       

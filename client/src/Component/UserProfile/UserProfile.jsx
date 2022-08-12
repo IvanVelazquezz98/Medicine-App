@@ -62,12 +62,12 @@ const UserProfile = ({ user }) => {
       <div className="miHistoryApp">
         <HistoryAppointment />
       </div>
-      <div className="miFavorites">
+      {/* <div className="miFavorites">
         <h1>Favoritos</h1>
         {User.favorites.length?.map((pro) => (
           <Favorites image={pro.user.userimage} />
           ))}
-      </div>
+      </div> */}
       </div>
       <div className="misbotones">
 
