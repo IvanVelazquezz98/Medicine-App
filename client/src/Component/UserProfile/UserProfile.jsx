@@ -4,6 +4,7 @@ import ImageUser from "./imageProfile";
 import Favorites from "./favoritesProfessionalUser";
 import InfoUser from "./InfoUserProfile";
 import HistoryAppointment from "./historyAppointmentUser";
+import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -11,9 +12,11 @@ import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
 
+
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
+import CreateAppointments from "../CreateAppointments/CreateAppointments";
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
@@ -88,7 +91,13 @@ const UserProfile = ({ user }) => {
       <div className="misbotones">
 
       {/* boton crear anuncio momentaneamente esta aca */}
-      {User.rol === "professional" && <CreateAd user={user} />}
+      {User.rol === "professional" && 
+        <div>
+          <CreateAd user={user} />
+          <CreateAppointments user={user} />
+          </div>}
+
+      
 
       <div className="SignOut">
       <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button> 
@@ -97,6 +106,9 @@ const UserProfile = ({ user }) => {
         editar informacion de perfil
         </Link>
       </div>
+      </div>
+      <div>
+      <ModalUnsubscribe user={User}/>
       </div>
 
       </div>
