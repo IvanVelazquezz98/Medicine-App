@@ -11,12 +11,15 @@ import { useEffect } from "react";
 import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
+import Ad from "../Card/Ad";
 
 
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
 import CreateAppointments from "../CreateAppointments/CreateAppointments";
+
+
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
@@ -32,7 +35,7 @@ const UserProfile = ({ user }) => {
     }
   }, [dispatch]);
 
-
+  console.log(User.rol)
 
 
   let favML = JSON.parse(localStorage.getItem("ml")); 
@@ -110,6 +113,27 @@ const UserProfile = ({ user }) => {
       <div>
       <ModalUnsubscribe user={User}/>
       </div>
+      {(User.rol === "professional")&&(User.professional?.ads) &&
+   
+   User.professional?.ads.map((e)=>{
+    console.log(User)
+       return (
+<div>
+<h1>Tus Anuncios</h1>
+       <Ad
+       adID={e.id}
+       name = {User.name}
+       medicalLicense = {User.professional.professionalMedicalLicense}
+       especialidad = {e.specialty}
+       serviceType = {e.serviceType}
+       precio = {User.price}
+       ranking = {User.professional.ranking} 
+          />  
+   <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
+
+</div>
+
+)})}
 
       </div>
       <div>

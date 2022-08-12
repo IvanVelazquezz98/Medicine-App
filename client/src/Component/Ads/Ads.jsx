@@ -3,16 +3,17 @@ import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds, removeFavorite, addFavorite} from '../../Redux-actions'
 import Ad from '../Card/Ad'
-import './Ad.css'
 import AllFilterAndOrder from '../FilterAndOrder/AllFilterAndOrder';
-
+import './Ad.css'
 
 export default function Ads() {
  const dispatch = useDispatch();
 
  let ads = useSelector(state=>state.ads)
  let user = useSelector(state=>state.userDetail)
+
  
+
  useEffect(()=>{
     dispatch(getAds())
  },[dispatch])
@@ -46,27 +47,27 @@ function handleRemoveFavorites(e){
 }
 
   return (
-    <div >
+    <div>
       <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
-        if(ad.professional?.user?.rol==="professional" && ad.professional?.user !== null){
+if(ad.professional?.user?.rol==="professional" && ad.professional?.user !== null){
+        return(
+          <div>
+          
 
-          return(
-            <div>
-            <Ad adID={ad.id}
-                name = {ad.professional.user.name}
-                medicalLicense = {ad.professionalMedicalLicense}
-                especialidad = {ad.specialty}
-                serviceType = {ad.serviceType}
-                precio = {ad.price}
-                ranking = {ad.professional.ranking}
-                userimage={ad.professional.user.userimage}
-            />
-               {/* <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button> */}
-           <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
-            </div>
-          )
-        }
+          <Ad adID={ad.id}
+              name = {ad.professional.user.name}
+              medicalLicense = {ad.professionalMedicalLicense}
+              especialidad = {ad.specialty}
+              serviceType = {ad.serviceType}
+              precio = {ad.price}
+              ranking = {ad.professional.ranking}
+              userimage={ad.professional.user.userimage}
+          />
+          {/* <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
+          <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button> */}
+          </div>
+        )}
         }):null}
     </div>
   )
