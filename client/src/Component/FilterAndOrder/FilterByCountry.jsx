@@ -9,7 +9,7 @@ function FilterByCountry1() {
   let ads = useSelector(state=>state.ads)
   
   let country= ads.map(e=>{
-   return e.professional.user.country
+   return e.professional.user?.country
   })
  
   let setCountry= [...new Set(country)]
