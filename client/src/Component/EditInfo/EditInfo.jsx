@@ -282,7 +282,7 @@ export default function EditInfo() {
 
    {(User.rol === "usuario") &&
    <div>
-   <Button onClick={e=>handleRegisterProfessional(e)}>registrarme como profesional de la salud</Button>
+   <Button onClick={e=>handleRegisterProfessional(e) }>registrarme como profesional de la salud</Button>
    </div>
    }
     {(User.rol == "professional") &&
@@ -324,29 +324,6 @@ export default function EditInfo() {
            Modificar Datos
          </Button>
 </Form>
-
-
-    {(User.rol === "professional")&&(User.professional?.ads) &&
-   
-    User.professional?.ads.map((e)=>{
-        return (
-<div>
-<h1>Tus Anuncios</h1>
-        <Ad
-        adID={e.id}
-        name = {User.name}
-        medicalLicense = {User.professional.professionalMedicalLicense}
-        especialidad = {e.specialty}
-        serviceType = {e.serviceType}
-        precio = {User.price}
-        ranking = {User.professional.ranking} 
-           />  
-    <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
- 
-</div>
-
-)})}
-
 
 
 
