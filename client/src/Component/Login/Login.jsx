@@ -1,31 +1,37 @@
 import React, { useState } from "react";
 import firebaseApp from "../../Credential/index";
-import { useDispatch, useSelector } from "react-redux"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAuth,
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional } from '../../Redux-actions/index'
-import { useNavigate } from 'react-router-dom'
+import { postUser, postProfessional } from "../../Redux-actions/index";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import ModalForgotPsw from "./ModalForgotPsw";
+import "./Login.css";
 import { validate, validateProfessional} from './validate'
-import ModalForgotPsw from './ModalForgotPsw'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
-import './Login.css'
-import './Login.css'
 
 
 
 
 const auth = getAuth(firebaseApp);
-
+const googleProvider = new GoogleAuthProvider();
 
 function Login() {
 
 
   const firestore = getFirestore(firebaseApp);
   const [isRegister, setIsRegister] = useState(false);
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null)
@@ -65,26 +71,23 @@ function Login() {
     rol: "",
     gps: "",
     favorites: []
-  })
+  });
+
 
   const [professionalError, setprofessionalError] = useState({
-    medicalLicense: ""
-  })
-
-  const [postprofessional, setpostprofessional] = useState({
     medicalLicense: "",
     licenceImage: "",
-    userEmail: ""
+    userEmail: "",
   })
 
-
+  
 
   async function handleChange(e) {
     e.preventDefault();
     setPost({
       ...post,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
     setpostprofessional({
       ...postprofessional,
       [e.target.name]: e.target.value,
@@ -98,11 +101,15 @@ function Login() {
       ...postprofessional,
       [e.target.name]: e.target.value
     }))
-
-
   }
 
-
+  function Verify() {
+    sendEmailVerification(auth.currentUser)
+  .then(() => {
+    // Email verification sent!
+    // ...
+  });
+  }
 
   // registrar usuario
   async function userRegister(email, password, rol) {
@@ -112,27 +119,27 @@ function Login() {
       password
     ).then((userFirebase) => {
       return userFirebase;
-    });
-    console.log(userInfo.user.uid)
+    }).then(function(){
+      Verify()
+    })
+    console.log(userInfo.user.uid);
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
 
-
-
   const handlefile = async (e) => {
     e.preventDefault();
     try {
-      let url = await uploadFile(file)
-      setImage(url)
-
+      let url = await uploadFile(file);
+      setImage(url);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+
+  };
 
 
-
+  const [image, setImage] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -144,9 +151,7 @@ function Login() {
     var password = e.target.elements.password.value;
 
     if (isRegister) {
-
-      userRegister(email, password)
-
+      userRegister(email, password);
 
       localStorage.setItem("Email", post.email);
 
@@ -169,20 +174,21 @@ function Login() {
         rol: post.rol,
         gps: post.gps,
         favorites: []
-      }
+      };
+
       //b
       let professional = {
         medicalLicense: postprofessional.medicalLicense,
         licenceImage: image,
-        userEmail: postprofessional.userEmail
-      }
+        userEmail: postprofessional.userEmail,
+      };
 
 
-      let userCreate = await dispatch(postUser(user))
+      let userCreate = await dispatch(postUser(user));
       if (post.rol === "professional") {
-        await dispatch(postProfessional(professional))
+        await dispatch(postProfessional(professional));
       }
-      alert("User Created")
+      alert("User Created");
       setPost({
         name: "",
         email: "",
@@ -199,24 +205,21 @@ function Login() {
         rol: "",
         gps: "",
         favorites: []
-      })
+      });
 
     } else {
-      signInWithEmailAndPassword(auth, email, password)
-      navigate('/services')
+      signInWithEmailAndPassword(auth, email, password);
+      navigate("/services");
     }
   }
 
   return (
     <div className="ValidateCOntainer">
-
-
-
       <div className="Validate">
         <h2> {isRegister ? "Registrate" : "Inicia Sesión"} </h2>
-        <Form onSubmit={handleSubmit} className="formContainer mb-2" >
+        <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
-          <Form.Group className="mb-3" >
+          <Form.Group className="mb-3">
             <Form.Label>Correo: </Form.Label>
             <Form.Control
               type="email"
@@ -229,7 +232,7 @@ function Login() {
           </Form.Group>
 
           {/* password */}
-          <Form.Group className="mb-3" >
+          <Form.Group className="mb-3">
             <Form.Label>Password: </Form.Label>
             <Form.Control
               type="password"
@@ -240,10 +243,11 @@ function Login() {
             />
             {errors.password && (<Alert variant='warning' className="error" >{errors.password}</Alert>)}
           </Form.Group>
-          {
-            isRegister &&
+          {isRegister && (
             <>
               {/* name */}
+
+
               <Form.Group className="mb-3" >
                 <Form.Label>Nombre y Apellido: </Form.Label>
                 <Form.Control
@@ -256,10 +260,13 @@ function Login() {
               </Form.Group>
 
               {/* rol */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Rol: </Form.Label>
-                <Form.Select id="rol" name="rol" onChange={(e) => handleChange(e)}>
-
+                <Form.Select
+                  id="rol"
+                  name="rol"
+                  onChange={(e) => handleChange(e)}
+                >
                   <option value="1">...</option>
                   <option value="user">Usuario</option>
                   <option value="professional">Profesional</option>
@@ -269,7 +276,7 @@ function Login() {
               </Form.Group>
 
               {/* fecha de nacimiento */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Fecha de nacimiento: </Form.Label>
                 <Form.Control
                   type="date"
@@ -280,7 +287,7 @@ function Login() {
                 {errors.dateOfBirth && (<Alert variant='warning' className="error" >{errors.dateOfBirth}</Alert>)}
               </Form.Group>
 
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Numero Documento: </Form.Label>
                 <Form.Control
                   type="text"
@@ -292,7 +299,7 @@ function Login() {
               </Form.Group>
 
               {/*  Imagen de usuario */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Imagen de Usuario: </Form.Label>
                 <Form.Control
                   type="file"
@@ -303,7 +310,7 @@ function Login() {
               </Form.Group>
 
               {/* ID Imagen */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>ID Imagen: </Form.Label>
                 <Form.Control
                   type="file"
@@ -314,9 +321,8 @@ function Login() {
                 {errors.idImage && (<p className="error">{errors.idImage}</p>)}
               </Form.Group>
 
-
               {/* Pais */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Pais: </Form.Label>
                 <Form.Control
                   type="text"
@@ -327,9 +333,8 @@ function Login() {
                 {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)}
               </Form.Group>
 
-
               {/*  Provincia */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Provincia: </Form.Label>
                 <Form.Control
                   type="text"
@@ -341,7 +346,7 @@ function Login() {
               </Form.Group>
 
               {/* Ciudad  */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Ciudad: </Form.Label>
                 <Form.Control
                   type="text"
@@ -353,7 +358,7 @@ function Login() {
               </Form.Group>
 
               {/*  Address */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Dirección: </Form.Label>
                 <Form.Control
                   type="text"
@@ -364,10 +369,8 @@ function Login() {
                 {errors.address && (<Alert variant='warning' className="error" >{errors.address}</Alert>)}
               </Form.Group>
 
-
-
               {/*  Telefono */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Teléfono: </Form.Label>
                 <Form.Control
                   type="text"
@@ -379,7 +382,7 @@ function Login() {
               </Form.Group>
 
               {/*  Ubicacion GPS */}
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label>Ubicacion GPS: </Form.Label>
                 <Form.Control
                   type="text"
@@ -389,9 +392,8 @@ function Login() {
                 />
               </Form.Group>
 
-
-
               {
+
                 //we check whether or not he/she is a professional 
                 (post.rol === "professional") &&
                 <>
@@ -421,17 +423,12 @@ function Login() {
 
                 </>
               }
-
             </>
-          }
+          )}
 
           <div className="formButtons">
-
             {/* Submit form button */}
-            <Button
-              variant="success"
-              type="submit"
-            >
+            <Button variant="success" type="submit">
               {isRegister ? "Registrarse" : " Inicia Sesión"}
             </Button>
           </div>
@@ -443,16 +440,22 @@ function Login() {
             variant="info"
             size="sm"
             type="submit"
-            onClick={() => setIsRegister(!isRegister)}>
-
+            onClick={() => setIsRegister(!isRegister)}
+          >
             {isRegister ? "Ya estoy Registrado" : "Quiero Registrarme "}
           </Button>
 
           {/* Olvido contraseña */}
           <ModalForgotPsw />
-
+          <Button
+            variant="info"
+            size="sm"
+            type="submit"
+            onClick={() => signInWithRedirect(auth, googleProvider)}
+          >
+            Accede con Google
+          </Button>
         </div>
-
       </div>
     </div>
   );

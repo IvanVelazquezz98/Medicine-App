@@ -10,6 +10,7 @@ import './Validate.css'
 
 
 
+
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 

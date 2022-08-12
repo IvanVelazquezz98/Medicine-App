@@ -3,6 +3,7 @@ import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds, removeFavorite, addFavorite} from '../../Redux-actions'
 import Ad from '../Card/Ad'
+import './Ad.css'
 import AllFilterAndOrder from '../FilterAndOrder/AllFilterAndOrder';
 
 
@@ -45,7 +46,7 @@ function handleRemoveFavorites(e){
 }
 
   return (
-    <div>
+    <div >
       <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
         if(ad.professional.user?.rol==="professional" && ad.professional.user !== null){
@@ -62,12 +63,11 @@ function handleRemoveFavorites(e){
                 precio = {ad.price}
                 ranking = {ad.professional.ranking}
             />
-            <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
-            <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
+          //  <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
+          //  <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button>
             </div>
           )
         }
-
         }):null}
     </div>
   )
