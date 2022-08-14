@@ -12,13 +12,11 @@ import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
 import Ad from "../Card/Ad";
-
-
+import  AppCalendario  from '../AppCalendario/AppCalendario.jsx'
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
 import CreateAppointments from "../CreateAppointments/CreateAppointments";
-
 
 
 const UserProfile = ({ user }) => {
@@ -98,6 +96,7 @@ const UserProfile = ({ user }) => {
         <div>
           <CreateAd user={user} />
           <CreateAppointments user={user} />
+          <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/>
           </div>}
 
       
@@ -116,7 +115,6 @@ const UserProfile = ({ user }) => {
       {(User.rol === "professional")&&(User.professional?.ads) &&
    
    User.professional?.ads.map((e)=>{
-    console.log(User)
        return (
 <div>
 <h1>Tus Anuncios</h1>
@@ -146,17 +144,3 @@ const UserProfile = ({ user }) => {
 
 export default UserProfile;
 
-// email,
-//             password,
-//             name,
-//             dateOfBirth,
-//             identification,
-//             userimage,
-//             idImage,
-//             country,
-//             city,
-//             address,
-//             cp,
-//             phone,
-//             rol,
-//             gps

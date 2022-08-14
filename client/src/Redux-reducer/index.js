@@ -8,7 +8,8 @@ const inicialState = {
   userDetail: {},
   users: [],
   morningHours:[],
-  afternoonHours:[]
+  afternoonHours:[],
+  professionalAppointments:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -184,6 +185,15 @@ const rootReducer = (state = inicialState, action) => {
           ...state,
           afternoonHours:aftHours
         }
+
+    case 'GET_PROFESSIONAL_APPOINTMENTS':
+      console.log('reducer', action.payload)
+      return{
+        ...state,
+        professionalAppointments:action.payload
+      }
+
+
     default:
       return state;
   }
