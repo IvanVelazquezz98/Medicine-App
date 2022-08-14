@@ -3,7 +3,7 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimeRange from 'react-time-range';
 import { useDispatch, useSelector } from "react-redux"
-import { getUsersById, createMorningHours, createAfternoonHours} from '../../Redux-actions'
+import { getUsersById, createMorningHours, createAfternoonHours, postAppointments} from '../../Redux-actions'
 //const auth = getAuth(firebaseApp);
 //import { getAuth, signOut } from "firebase/auth";
 //import './App.css';
@@ -23,7 +23,7 @@ function CreateAppointments({user}) {
     dispatch(getUsersById(user.email));
   }, [dispatch]);
 
-  const [dates, setDates] = useState([]);
+  const [date, setDate] = useState([]);
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -94,25 +94,25 @@ function CreateAppointments({user}) {
    function handleChange(e){
     setDuration(e.target.value)
    }
- 
+   let hours= morningHours
+   if(afternoonHours){
+    hours.concat(afternoonHours)
+   }
    
-   function submit(e){
-    let dateArray = dates.map(d=>({day:d.day, month:d.month.index, year:d.year}))
+   function submitAll(e){
+    console.log('soy e',e);
+    let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
     let appointments={
       dates:dateArray,
-      morningStartTime: morningStartTime,
-      morningEndTime: morningEndTime,
-      afternoonStartTime: afternoonStartTime,
-      afternoonEndTime: afternoonEndTime,
-      duration: duration,
-      medicalLicense: null//pasarle el medical license del usuario
+      hours: morningHours.concat(afternoonHours),
+      professionalMedicalLicense: User.professional.medicalLicense,
+      ad:User.professional.ads[0].id
     }
-    
-
-    //dispatch(postAppointments(appointments))
+    console.log(appointments);
+    dispatch(postAppointments(appointments))
    }
 
-   console.log(dates)
+   
 
   return (
     <div className="App">
@@ -124,8 +124,8 @@ function CreateAppointments({user}) {
         <p>elegi tus dias de trabajo</p>
         <DatePicker
             placeholder="elige tus fechas"
-          value={dates}
-          onChange={setDates}
+          value={date}
+          onChange={setDate}
           multiple
           sort
           format={format}
@@ -134,7 +134,7 @@ function CreateAppointments({user}) {
         />
       </div>
       <ul>
-        {dates.map((date, index) => (
+        {date.map((date, index) => (
           <li key={index}>{date.format()}</li>
         ))}
       </ul>
@@ -165,7 +165,7 @@ function CreateAppointments({user}) {
         
         :null}
 
-        <button onclick={(e)=>submit(e)}>confirma tus turnos</button>
+        <button onClick={(e)=>submitAll(e)}>confirma tus turnos</button>
         
     </div>
     
