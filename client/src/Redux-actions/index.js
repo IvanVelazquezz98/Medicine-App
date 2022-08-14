@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'http:localhost:3001';
+const BASE_URL = 'http://localhost:3001';
 
 
 //get all ads
@@ -65,7 +65,6 @@ export function getUsers() {
   }
  };
  
-
  //get user by id
  export function getUsersById(id) {
     return async function (dispatch) {
@@ -73,7 +72,6 @@ export function getUsers() {
       return dispatch({ type: "GET_USER_DETAIL", payload: json.data });
     };
   };
-
 
   //get add by ID
 export function getAdById (id) {
