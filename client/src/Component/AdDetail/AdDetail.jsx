@@ -6,11 +6,11 @@ import {useParams} from 'react-router-dom'
 import {getAdById, getUsersById} from '../../Redux-actions'
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
-
+import AppCalendario from '../AppCalendario/AppCalendario'
 export default function AdDetail() {
     const dispatch = useDispatch()
     const {adID} = useParams()
-    const User = useSelector((state) => state.userDetail);
+    //const User = useSelector((state) => state.userDetail);
     let adDetail = useSelector(state=>state.adDetail)
     
 
@@ -42,6 +42,9 @@ export default function AdDetail() {
             }
         </div>
         <div>
+          {
+            <AppCalendario professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
+          }
         
         </div>
         <Footer/>

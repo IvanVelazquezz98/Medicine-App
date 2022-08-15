@@ -102,8 +102,8 @@ const UserProfile = ({ user }) => {
         <div>
           <ModalCreateAdd user={user}/>
           
-          <CreateAppointments user={user} />
-          <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/>
+          {/* <CreateAppointments user={user} /> */}
+          {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
           </div>}
 
       
