@@ -57,7 +57,7 @@ export default function ModalCalendar({info, professionalMedicalLicense}) {
           <Button variant="primary" onClick={handleonclick}>
             Confirmar
           </Button>
-          {pay? <ModalPayment/> : null}
+          {pay ? <ModalPayment/> : null}
 
         </Modal.Footer>
       </Modal>
