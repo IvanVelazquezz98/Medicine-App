@@ -65,9 +65,11 @@ const UserProfile = ({ user }) => {
 
       <div className="micontainerImage">
         <ImageUser image={User.userimage} />
-        <div className="miboton">
-          <button  className="botonUser">Editar</button>
-        </div>
+        <div className="botonUser">
+        <Link to ={"/profile/" + User.email}>
+        Editar
+        </Link>
+      </div>
       </div>
       <div className="micontainerInfo ">  
           <InfoUser
@@ -101,7 +103,6 @@ const UserProfile = ({ user }) => {
       {User.rol === "professional" && 
         <div>
           <ModalCreateAdd user={user}/>
-          
           {/* <CreateAppointments user={user} /> */}
           {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
           </div>}

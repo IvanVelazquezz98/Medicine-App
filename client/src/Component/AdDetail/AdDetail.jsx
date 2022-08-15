@@ -19,14 +19,16 @@ export default function AdDetail() {
         dispatch(getAdById(adID))
     },[dispatch, adID])
 
-    useEffect(() => {
-        dispatch(getUsersById(adDetail.professional?.userEmail));
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getUsersById(adDetail.professional?.userEmail));
+    //   }, [dispatch]);
     
     const [buttonLi, setbuttonLi] = useState(true)
 
 
     return (
+
+      
     <div>
         <Navbar/>
         <div className={'imagenPerfil'}>
@@ -42,7 +44,7 @@ export default function AdDetail() {
             }
         </div>
         <div>
-          {
+          { !adDetail.professional?.medicalLicense ? <p>Loading ..</p>:
             <AppCalendario professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
           }
         
