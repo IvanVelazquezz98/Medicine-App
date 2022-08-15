@@ -2,19 +2,19 @@ import React from 'react'
 import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getUsersById, putEditInfoProfessional, putEditInfoUser} from '../../Redux-actions'
-import {Link, useParams} from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './EditInfo.css'
-import Ad from '../Card/Ad.jsx'
+
 
 
 export default function EditInfo() {
 
 
- 
+ const navigate = useNavigate();
  let {userId} =useParams();
  let dispatch = useDispatch();
  let User = useSelector(state=> state.userDetail)
@@ -101,6 +101,8 @@ export default function EditInfo() {
         aboutMe: "",
         college: "",
     })
+    let path = "/home/validate"
+    navigate(path)
   }
   
 

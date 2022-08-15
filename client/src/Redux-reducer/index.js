@@ -193,6 +193,12 @@ const rootReducer = (state = inicialState, action) => {
           afternoonHours:aftHoursFilter
         }
 
+        case "CLEAR_USER_DETAIL":
+          return {
+            ...state,
+            userDetail: {},
+          }    
+
     case 'GET_PROFESSIONAL_APPOINTMENTS':
       console.log('reducer', action.payload)
       return{
@@ -200,10 +206,11 @@ const rootReducer = (state = inicialState, action) => {
         professionalAppointments:action.payload
       }
 
-
     default:
       return state;
   }
 };
+
+
 
 export default rootReducer;

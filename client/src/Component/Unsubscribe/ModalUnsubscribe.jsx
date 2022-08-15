@@ -1,42 +1,33 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import "./ModalUnsubscribe.css";
-import { Link } from "react-router-dom";
-import { deleteUserByID } from "../../Redux-actions/index";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import './ModalUnsubscribe.css'
+import { Link, useNavigate } from "react-router-dom";
+import {deleteUserByID, clearUserDetail } from '../../Redux-actions/index'
+import { getAuth, signOut } from "firebase/auth";
+import firebaseApp from "../../Credential/index";
+
 
 function ModalUnsubscribe(props) {
-  useEffect(() => {
-
-    //get the uid from firebase
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log("este es el uid del que esta logueado", uid);
-      } else {
-        console.log("El usuario se deslogueó.");
-      }
-    });
-  }, []);
-
-  
-
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const auth = getAuth(firebaseApp);
+  const dispatch = useDispatch()
 
-  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function handleSubmit(e) {
+  function handleSubmit (e){
     e.preventDefault();
-     dispatch(deleteUserByID(props.user.id));
-      
+    dispatch (deleteUserByID(props.user.id));
+    dispatch(clearUserDetail());
+    signOut(auth);
+    let path = "/home/validate"
+    navigate(path)
   }
   
 

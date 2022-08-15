@@ -30,23 +30,25 @@ const localizer = dateFnsLocalizer({
 
 
 function AppCalendario({professionalMedicalLicense}) {
-
+const dispatch = useDispatch();
  const [selected, setSelected] = useState(false);
  const [eventSelected, setEventSelected]=useState({})
 //  console.log('lo se todo', selected)
- console.log('lo se todo2', eventSelected)
+ console.log('lo se todo2', professionalMedicalLicense)
+const professionalAppointments =  useSelector((state)=>state.professionalAppointments)
+ 
 
+useEffect(() => {
+    dispatch(getProfessionalApps(professionalMedicalLicense));
+  }, [dispatch]);
+
+ 
+
+  
 const handleSelected = (e) => {
   setEventSelected(e)
   setSelected(true);
 }; 
-
-
- const dispatch = useDispatch();
- const professionalAppointments = useSelector((state)=>state.professionalAppointments)
-  useEffect(() => {
-    dispatch(getProfessionalApps(professionalMedicalLicense));
-  }, [dispatch]);
 
  
 

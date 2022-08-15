@@ -1,15 +1,17 @@
 import React from 'react';
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import {getAdById, putEditInfoAd} from '../../Redux-actions'
 import Form from 'react-bootstrap/Form';
 
+
 export default function EditAd() {
  
+    const navigate = useNavigate();
     let {AdId} =useParams();
     let dispatch = useDispatch();
     let Ad = useSelector(state=> state.adDetail)
@@ -44,6 +46,8 @@ export default function EditAd() {
             timeAvailability: "",
             serviceType: "",
         })
+        let path = "/home/validate"
+        navigate(path)
       }
 
 

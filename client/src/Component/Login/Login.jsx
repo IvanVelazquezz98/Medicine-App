@@ -8,10 +8,11 @@ import {
   signInWithEmailAndPassword,
   signInWithRedirect,
   GoogleAuthProvider,
+  signOut
 } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional } from "../../Redux-actions/index";
+import { postUser, postProfessional} from "../../Redux-actions/index";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -19,6 +20,8 @@ import ModalForgotPsw from "./ModalForgotPsw";
 import "./Login.css";
 import { validate, validateProfessional} from './validate'
 import Alert from 'react-bootstrap/Alert';
+
+
 
 
 
@@ -56,7 +59,12 @@ function Login() {
 
   const [post, setPost] = useState({
     name: "",
+<<<<<<< HEAD
     email: "",
+=======
+    email: auth?.currentUser?.email ? auth?.currentUser?.email : "",
+    password: "",
+>>>>>>> 42a06e78868e0f752404952aa12cad075de10425
     dateOfBirth: "",
     identification: "",
     userimage: "",
@@ -120,12 +128,16 @@ function Login() {
       auth,
       email,
       password
+      
     ).then((userFirebase) => {
       return userFirebase;
     }).then(function(){
       Verify()
     })
+<<<<<<< HEAD
     console.log('es el uid del usuario',userInfo.user.uid);
+=======
+>>>>>>> 42a06e78868e0f752404952aa12cad075de10425
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
@@ -152,9 +164,9 @@ function Login() {
     var email = e.target.elements.email.value;
     var password = e.target.elements.password.value;
 
-    if (isRegister) {
+    if (isRegister || auth?.currentUser?.email) {
       userRegister(email, password);
-
+      console.log("entre aca")
       localStorage.setItem("Email", post.email);
 
 
@@ -184,7 +196,7 @@ function Login() {
         userEmail: postprofessional.userEmail,
       };
 
-
+      console.log("estoy entrando aca")
       let userCreate = await dispatch(postUser(user));
       if (post.rol === "professional") {
         await dispatch(postProfessional(professional));
@@ -206,17 +218,18 @@ function Login() {
         gps: "",
         favorites: []
       });
-
+      navigate("/")
     } else {
       signInWithEmailAndPassword(auth, email, password);
-      navigate("/services");
+      navigate("/");
     }
   }
+
 
   return (
     <div className="ValidateCOntainer">
       <div className="Validate">
-        <h2> {isRegister ? "Registrate" : "Inicia Sesión"} </h2>
+        <h2> {isRegister ? "Registrate" : auth?.currentUser?.email ? "termina de completar tus datos" : "Inicia Sesion"} </h2>
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
           <Form.Group className="mb-3">
@@ -225,6 +238,7 @@ function Login() {
               type="email"
               id="email"
               name="email"
+              placeholder = {auth.currentUser?.email ? auth.currentUser?.email : null}
               value={post.email}
               onChange={(e) => handleChange(e)}
             />
@@ -243,7 +257,7 @@ function Login() {
             />
             {errors.password && (<Alert variant='warning' className="error" >{errors.password}</Alert>)}
           </Form.Group>
-          {isRegister && (
+          {(isRegister || auth?.currentUser?.email) && (
             <>
               {/* name */}
 
@@ -429,7 +443,7 @@ function Login() {
           <div className="formButtons">
             {/* Submit form button */}
             <Button variant="success" type="submit">
-              {isRegister ? "Registrarse" : " Inicia Sesión"}
+              {isRegister || auth?.currentUser?.email? "Registrarse" : " Inicia Sesión"}
             </Button>
           </div>
         </Form>
@@ -442,7 +456,7 @@ function Login() {
             type="submit"
             onClick={() => setIsRegister(!isRegister)}
           >
-            {isRegister ? "Ya estoy Registrado" : "Quiero Registrarme "}
+            {isRegister || auth?.currentUser?.email ? "Ya estoy Registrado" : "Quiero Registrarme "}
           </Button>
 
           {/* Olvido contraseña */}
@@ -454,6 +468,14 @@ function Login() {
             onClick={() => signInWithRedirect(auth, googleProvider)}
           >
             Accede con Google
+          </Button>
+          <Button
+            variant="info"
+            size="sm"
+            // type="submit"
+            onClick={() =>  signOut(auth)}
+          >
+            Cerrar sesion
           </Button>
         </div>
       </div>

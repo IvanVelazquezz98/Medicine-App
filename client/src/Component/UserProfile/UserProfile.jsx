@@ -7,7 +7,7 @@ import HistoryAppointment from "./historyAppointmentUser";
 import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect , useState} from "react";
 import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
@@ -17,41 +17,51 @@ import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
 import CreateAppointments from "../CreateAppointments/CreateAppointments";
+import Login from "../Login/Login";
+import Footer from '../Footer/Footer'
 import ModalCreateAdd from "../CreateAd/Modal";
+import { useNavigate } from "react-router-dom";
 
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [button, setButton] = React.useState(false);
+  const [button, setButton] = useState(false);
 
   useEffect(() => {
-    dispatch(getUsersById(user.email.toLowerCase()));
-    if(favML && user.email){
+    dispatch(getUsersById(user?.email?.toLowerCase()));
+    if(favML && user?.email){
     dispatch(addFavorite(favorites))
+
     }
   }, [dispatch]);
 
-  console.log(User.rol)
+  
 
 
   let favML = JSON.parse(localStorage.getItem("ml")); 
 
 
   let favorites = {
-    userEmail : user.email,
+    userEmail : user?.email,
     medicalLicense: favML
   }
 
 
-
-
-
-
+  
+  console.log(User.active)
+  
   return (
     <div>
+      {User.email && !User.active &&
+      navigate("/recover")
+      }
+
+    { User.email ? 
+      <div>
       <Navbar/>
     <div className="nuestracontainer">
       {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
@@ -60,9 +70,11 @@ const UserProfile = ({ user }) => {
 
       <div className="micontainerImage">
         <ImageUser image={User.userimage} />
-        <div className="miboton">
-          <button  className="botonUser">Editar</button>
-        </div>
+        <div className="botonUser">
+        <Link to ={"/profile/" + User.email}>
+        Editar
+        </Link>
+      </div>
       </div>
       <div className="micontainerInfo ">  
           <InfoUser
@@ -96,9 +108,8 @@ const UserProfile = ({ user }) => {
       {User.rol === "professional" && 
         <div>
           <ModalCreateAdd user={user}/>
-          
-          <CreateAppointments user={user} />
-          <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/>
+          {/* <CreateAppointments user={user} /> */}
+          {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
           </div>}
 
       
@@ -141,6 +152,11 @@ const UserProfile = ({ user }) => {
        {/*  <Footer/> */}
       </div>
     </div>
+  </div>
+  
+  :
+  
+  <div> <Navbar/> <div ><Login  /> </div><div className='space'> <Footer/></div></div>}
   </div>
   );
 };
