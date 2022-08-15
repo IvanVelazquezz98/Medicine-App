@@ -8,6 +8,7 @@ import Contact from './Component/Contacto/ContactoForm'
 import EditInfo from "./Component/EditInfo/EditInfo"
 import EditAd from "./Component/EditAd/EditAd";
 import CreateAppointments from "./Component/CreateAppointments/CreateAppointments";
+import Recover from "./Component/Recover/Recover"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile/:userId" element={<EditInfo/>}/>
           <Route path="/ProfileAd/:AdId" element= {<EditAd/>}/>
           <Route path="/calendar/:adId" element= {<CreateAppointments/>}/>
+          <Route path="/recover" element= {<Recover/>}/>
         </Routes>
       </div>
 

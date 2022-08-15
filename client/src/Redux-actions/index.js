@@ -187,9 +187,10 @@ export function addFavorite(payload) {
 
 // soft delete user from Data Base. 
 export function deleteUserByID(userId){
+  console.log(userId)
   return async function (dispatch){
     try {
-      const dbResponse = await axios.post(`${BASE_URL}/delete/${userId}`)
+      const dbResponse = await axios.put(`${BASE_URL}/delete/${userId}`)
       console.log('delete by id',dbResponse)
       return dispatch({
         type:'USER_DELETED',

@@ -60,7 +60,7 @@ function Login() {
 
   const [post, setPost] = useState({
     name: "",
-    email: "",
+    email: auth?.currentUser?.email ? auth?.currentUser?.email : "",
     password: "",
     dateOfBirth: "",
     identification: "",
