@@ -8,11 +8,13 @@ import startOfWeek from "date-fns/startOfWeek";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import es from 'date-fns/locale/es/'
-import DatePicker, { DateObject } from "react-multi-date-picker";
-import DatePanel from "react-multi-date-picker/plugins/date_panel";
+//import DatePicker, { DateObject } from "react-multi-date-picker";
+//import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import { getProfessionalApps } from '../../Redux-actions';
+import Modal from './Modal';
+import ModalCalendar from './Modal';
 
 
 const locales = {
@@ -27,58 +29,40 @@ const localizer = dateFnsLocalizer({
 })
 
 
-  const events = [
-  { 
-    title: 'turno con agustin' ,
-    start: new Date(2022,7,1,16),
-    end: new Date(2022,7,1,18)
-  },
-  { 
-    title: 'turno con b' ,
-    start: new Date(2022,7,1,8),
-    end: new Date(2022,7,1,9)
-  },
-  { 
-    title: 'turno con v' ,
-    start: new Date(2022,7,1,10),
-    end: new Date(2022,7,1,11)
-  },
-  { 
-    title: 'turno con f ',
-    start: new Date(2022,7,1,12),
-    end: new Date(2022,7,1,13)
-  }
- ] 
-
- 
-
-
-
 function AppCalendario({professionalMedicalLicense}) {
+
+ const [selected, setSelected] = useState(false);
+ const [eventSelected, setEventSelected]=useState({})
+//  console.log('lo se todo', selected)
+ console.log('lo se todo2', eventSelected)
+
+const handleSelected = (e) => {
+  setEventSelected(e)
+  setSelected(true);
+}; 
+
+
  const dispatch = useDispatch();
  const professionalAppointments = useSelector((state)=>state.professionalAppointments)
   useEffect(() => {
     dispatch(getProfessionalApps(professionalMedicalLicense));
   }, [dispatch]);
 
-  function handleEvent(e){
-    e.preventDefault(e);
-
-  }
+ 
 
   console.log('apps',professionalAppointments);
  
   
 const appsEvents = professionalAppointments.map(app=>{
   return({
-    title: '',
+    title: app.id,
     start: new Date(app.date[0],app.date[1],app.date[2], app.startTime[0],app.startTime[1]),
     end: new Date(app.date[0],app.date[1],app.date[2], app.endTime[0],app.endTime[1])
   }
 )})
 
 
-  console.log(appsEvents);
+  
 
   return (
     <div className="App">
@@ -98,14 +82,18 @@ const appsEvents = professionalAppointments.map(app=>{
         ),
       }} */
 
-      step={5}
-      views={{month:true, week:true}}
+      step={30}
+      timeslots={1}
+      views={{month:true, week:true, day:true}}
+      defaultView="week"
       localizer={localizer} 
       events ={appsEvents} 
+      onSelectEvent={handleSelected}
       startAccessor='start' endAccessor='end' 
       style = {{height: 400, width: 500, margin: '10px'}}/>
-      
+       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense}/>:null} 
     </div>
+    
   );
 }
 

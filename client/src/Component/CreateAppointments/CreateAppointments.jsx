@@ -15,9 +15,9 @@ function CreateAppointments({user}) {
   const User = useSelector((state) => state.userDetail)
 
   const morningHours = useSelector((state)=>state.morningHours)
-  console.log('estado', morningHours);
+  //console.log('estado', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
-  console.log('estado', afternoonHours);
+  console.log('estado', morningHours);
 
   useEffect(() => {
     dispatch(getUsersById(user.email));
@@ -49,7 +49,7 @@ function CreateAppointments({user}) {
    function submitTimeRange(){
     const start = moment(new Date(startTime))
     const end = moment(new Date(endTime))
-    console.log(end)
+    //console.log(end)
     setMorningStartTime(`${start.hour()}:${start.minute()}`)
     setMorningEndTime(`${end.hour()}:${end.minute()}`)
    
@@ -74,6 +74,7 @@ function CreateAppointments({user}) {
    function submitTimeRange2(){
     const start = moment(new Date(startTime))
     const end = moment(new Date(endTime))
+    console.log('soy end=>',end)
     setAfternoonStartTime(`${start.hour()}:${start.minute()}`)
     setAfternoonEndTime(`${end.hour()}:${end.minute()}`)
     /* setStartTime(moment())

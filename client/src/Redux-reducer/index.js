@@ -21,6 +21,7 @@ const rootReducer = (state = inicialState, action) => {
         allUsers: action.payload,
       };
     case "GET_USER_DETAIL":
+      console.log('soy el user', action)
       return {
         ...state,
         userDetail: action.payload,
