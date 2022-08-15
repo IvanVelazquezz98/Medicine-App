@@ -19,6 +19,9 @@ function CreateAppointments({user}) {
   const afternoonHours = useSelector((state)=>state.afternoonHours)
   console.log('estado', morningHours);
 
+  
+
+
   useEffect(() => {
     dispatch(getUsersById(user.email));
   }, [dispatch]);

@@ -182,9 +182,15 @@ const rootReducer = (state = inicialState, action) => {
         }return hour + ':' + minute;
         })
         console.log('aftHours',aftHours)
+        const aftHoursFilter=[]
+        aftHours.map(el=>{
+          if(!state.morningHours.includes(el)){
+              aftHoursFilter.push(el)
+            }          
+        })
         return {
           ...state,
-          afternoonHours:aftHours
+          afternoonHours:aftHoursFilter
         }
 
     case 'GET_PROFESSIONAL_APPOINTMENTS':
