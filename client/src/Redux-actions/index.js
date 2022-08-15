@@ -72,6 +72,7 @@ export function getUsers() {
  
  //get user by id
  export function getUsersById(id) {
+  console.log('soy id',id)
     return async function (dispatch) {
       var json = await axios.get(`${BASE_URL}/user/${id}`);
       return dispatch({ type: "GET_USER_DETAIL", payload: json.data });
@@ -256,6 +257,7 @@ export function deleteUserByID(userId){
   
 
   export function getProfessionalApps(professionalMedicalLicense) {
+    console.log('llegue')
     return async (dispatch) =>{
         
         try {
