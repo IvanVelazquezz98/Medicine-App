@@ -7,17 +7,17 @@ import HistoryAppointment from "./historyAppointmentUser";
 import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect , useState} from "react";
 import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
 import Ad from "../Card/Ad";
-
-
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
 import CreateAppointments from "../CreateAppointments/CreateAppointments";
+import Login from "../Login/Login";
+import Footer from '../Footer/Footer'
 
 
 
@@ -26,33 +26,35 @@ const UserProfile = ({ user }) => {
   const User = useSelector((state) => state.userDetail);
   const dispatch = useDispatch();
 
-  const [button, setButton] = React.useState(false);
+  const [button, setButton] = useState(false);
 
   useEffect(() => {
-    dispatch(getUsersById(user.email.toLowerCase()));
-    if(favML && user.email){
+    dispatch(getUsersById(user?.email?.toLowerCase()));
+    if(favML && user?.email){
     dispatch(addFavorite(favorites))
+
     }
   }, [dispatch]);
 
-  console.log(User.rol)
+  
 
 
   let favML = JSON.parse(localStorage.getItem("ml")); 
 
 
   let favorites = {
-    userEmail : user.email,
+    userEmail : user?.email,
     medicalLicense: favML
   }
 
 
-
-
-
-
+  
+  
+  
   return (
     <div>
+    { User.email ? 
+      <div>
       <Navbar/>
     <div className="nuestracontainer">
       {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
@@ -140,6 +142,11 @@ const UserProfile = ({ user }) => {
        {/*  <Footer/> */}
       </div>
     </div>
+  </div>
+  
+  :
+  
+  <div> <Navbar/> <div ><Login  /> </div><div className='space'> <Footer/></div></div>}
   </div>
   );
 };

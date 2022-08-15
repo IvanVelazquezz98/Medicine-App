@@ -247,3 +247,9 @@ export function deleteUserByID(userId){
       }
     };
   }
+
+  export function clearUserDetail() {
+    return{
+        type:'CLEAR_USER_DETAIL',
+    }
+}

@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import './ModalUnsubscribe.css'
-import { Link } from "react-router-dom";
-import {deleteUserByID,getAds} from '../../Redux-actions/index'
+import { Link, useNavigate } from "react-router-dom";
+import {deleteUserByID, clearUserDetail } from '../../Redux-actions/index'
+import { getAuth, signOut } from "firebase/auth";
+import firebaseApp from "../../Credential/index";
+
 
 function ModalUnsubscribe(props) {
   const [show, setShow] = useState(false);
-  
+  const navigate = useNavigate();
+  const auth = getAuth(firebaseApp);
   const dispatch = useDispatch()
- 
+
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   function handleSubmit (e){
-    e.preventDefault()
-    dispatch (deleteUserByID(props.user.id))
-    alert ('Realizar la lógica ---> ir a la action')//dar de firebase y redirigir a home
+    e.preventDefault();
+    dispatch (deleteUserByID(props.user.id));
+    dispatch(clearUserDetail());
+    signOut(auth);
+    let path = "/home/validate"
+    navigate(path)
   }
 
   return (

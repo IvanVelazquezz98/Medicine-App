@@ -184,9 +184,17 @@ const rootReducer = (state = inicialState, action) => {
           ...state,
           afternoonHours:aftHours
         }
+
+        case "CLEAR_USER_DETAIL":
+          return {
+            ...state,
+            userDetail: {},
+          }    
     default:
       return state;
   }
 };
+
+
 
 export default rootReducer;
