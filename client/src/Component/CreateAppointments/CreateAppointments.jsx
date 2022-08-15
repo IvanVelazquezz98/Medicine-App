@@ -3,27 +3,33 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimeRange from 'react-time-range';
 import { useDispatch, useSelector } from "react-redux"
-import { getUsersById, createMorningHours, createAfternoonHours, postAppointments} from '../../Redux-actions'
+import { getUsersById, createMorningHours, createAfternoonHours, postAppointments, getAdById} from '../../Redux-actions'
 //const auth = getAuth(firebaseApp);
 //import { getAuth, signOut } from "firebase/auth";
 //import './App.css';
 import moment from 'moment';
+import { useNavigate, useParams } from "react-router-dom";
+import ModalErrors from "../ModalsErrors/ErrorsRouta";
 const format = "DD/MM/YYYY";
 function CreateAppointments({user}) {
+  const {adId} = useParams()
+  console.log('soy Params', )
+  
 
   const dispatch = useDispatch();
-  const User = useSelector((state) => state.userDetail)
+  // const User = useSelector((state) => state.userDetail)
+  const ad = useSelector((state) => state.adDetail)
 
   const morningHours = useSelector((state)=>state.morningHours)
   //console.log('estado', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
   console.log('estado', morningHours);
 
-  
+
 
 
   useEffect(() => {
-    dispatch(getUsersById(user.email));
+    dispatch(getAdById(adId));
   }, [dispatch]);
 
   const [date, setDate] = useState([]);
@@ -102,18 +108,24 @@ function CreateAppointments({user}) {
    if(afternoonHours){
     hours.concat(afternoonHours)
    }
-   
+   const navigate=useNavigate()
    function submitAll(e){
-    console.log('soy e',e);
-    let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
-    let appointments={
-      dates:dateArray,
-      hours: morningHours.concat(afternoonHours),
-      professionalMedicalLicense: User.professional.medicalLicense,
-      ad:User.professional.ads[0].id
+    try {
+      console.log('soy e',e);
+      let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
+      let appointments={
+        dates:dateArray,
+        hours: morningHours.concat(afternoonHours),
+        professionalMedicalLicense: ad.professionalMedicalLicense,
+        ad:adId
+      }
+      console.log(appointments);
+      dispatch(postAppointments(appointments))
+      navigate(`/home/`+ adId)
+      
+    } catch (error) {
+      <ModalErrors error={'no se pudieron crear los turnos'}/>
     }
-    console.log(appointments);
-    dispatch(postAppointments(appointments))
    }
 
    
