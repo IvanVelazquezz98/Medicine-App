@@ -8,6 +8,9 @@ import { getAuth, signOut } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./CreateAd.css";
+import { useNavigate } from "react-router-dom";
+import ModalErrors from "../ModalsErrors/ErrorsRouta";
+import CreateAppointments from "../CreateAppointments/CreateAppointments";
 const auth = getAuth(firebaseApp);
 
 export default function CreateAd({ user }) {
@@ -36,15 +39,19 @@ export default function CreateAd({ user }) {
 
   function handleSubmit(e) {
     //e.preventDefault();
-    dispatch(postAdd(post));
-    alert("Add Created");
-    setPost({
-      specialty: "",
-      price: "",
-      timeAvailability: "",
-      serviceType: "",
-      professionalMedicalLicense: "",
-    });
+    try {
+      dispatch(postAdd(post));
+      setPost({
+        specialty: "",
+        price: "",
+        timeAvailability: "",
+        serviceType: "",
+        professionalMedicalLicense: "",
+      });
+
+    } catch (error) {
+      <ModalErrors error={'No se pudo crear el Anuncio'}/>
+    }
   }
 
 
@@ -107,6 +114,7 @@ export default function CreateAd({ user }) {
             >
               CREAR ANUNCIO
             </Button>
+      
           </div>
         </Form>
       </div>

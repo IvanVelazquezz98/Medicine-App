@@ -17,6 +17,7 @@ import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
 import CreateAppointments from "../CreateAppointments/CreateAppointments";
+import ModalCreateAdd from "../CreateAd/Modal";
 
 
 const UserProfile = ({ user }) => {
@@ -94,7 +95,8 @@ const UserProfile = ({ user }) => {
       {/* boton crear anuncio momentaneamente esta aca */}
       {User.rol === "professional" && 
         <div>
-          <CreateAd user={user} />
+          <ModalCreateAdd user={user}/>
+          
           <CreateAppointments user={user} />
           <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/>
           </div>}
@@ -114,22 +116,23 @@ const UserProfile = ({ user }) => {
       </div>
       {(User.rol === "professional")&&(User.professional?.ads) &&
    
-   User.professional?.ads.map((e)=>{
-       return (
-<div>
-<h1>Tus Anuncios</h1>
-       <Ad
-       adID={e.id}
-       name = {User.name}
-       medicalLicense = {User.professional.professionalMedicalLicense}
-       especialidad = {e.specialty}
-       serviceType = {e.serviceType}
-       precio = {User.price}
-       ranking = {User.professional.ranking} 
-          />  
-   <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
+            User.professional?.ads.map((e)=>{
+                return (
+          <div>
+            <h1>Tus Anuncios</h1>
+                <Ad
+                adID={e.id}
+                name = {User.name}
+                email= {User.email }
+                medicalLicense = {User.professional.professionalMedicalLicense}
+                especialidad = {e.specialty}
+                serviceType = {e.serviceType}
+                precio = {User.price}
+                ranking = {User.professional.ranking} 
+                isProfesional={true}   />  
+            <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
 
-</div>
+          </div>
 
 )})}
 
