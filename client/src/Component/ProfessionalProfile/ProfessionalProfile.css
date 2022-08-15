@@ -1,0 +1,122 @@
+.navper{
+    display: flex;
+    
+}
+.nuestracontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    height: 2500px;
+}
+.primercont{
+    
+   display: flex;
+   flex-direction: row;
+   margin-bottom: 30px;
+    
+}
+.micontainerImage{
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: white;
+    border-color: #e4f4f6;
+    border-radius: 1px;
+    background-size: cover;
+    border-style: solid;
+    scroll-margin: 200px;
+}
+.image{
+    max-width:100%;
+    max-width: 100%;
+}
+.micontainerInfo{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-color: #e4f4f6;
+    border-radius: 1px;
+    background-size: cover;
+    border-style: solid;
+    scroll-margin: 200px;
+    width: 550px;
+    height: 350px;
+
+}
+.sobreMi{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-color: #e4f4f6;
+    border-radius: 1px;
+    background-size: cover;
+    border-style: solid;
+    scroll-margin: 200px;
+    width: 550px;
+    height: 400px;
+    text-align: center;
+}
+.miHistoryApp{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-color: #e4f4f6;
+    border-radius: 1px;
+    background-size: cover;
+    border-style: solid;
+    scroll-margin: 200px;
+    width: 550px;
+    height: 400px;
+}
+.miFavorites{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-color: #e4f4f6;
+    border-radius: 1px;
+    background-size: cover;
+    border-style: solid;
+    scroll-margin: 200px;
+    width: 550px;
+    height: 380px;
+    padding: 10px;
+}
+.SignOut{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.miboton{
+    margin-top:50px ;
+   
+   
+}
+.seconcont{
+    
+    display: flex;
+    flex-direction: row;
+}
+.misbotones{
+    display: flex;
+    flex-direction: row;
+}
+.botonUser{
+    background-color:#0dcaf0 ;
+    border-radius: 5px;
+    border-color: #0dcaf0;
+    width: 120px;
+
+}
