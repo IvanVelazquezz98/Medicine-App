@@ -165,7 +165,7 @@ function CreateAppointments({user}) {
         
         :null}
 
-        <button onclick={(e)=>submit(e)}>confirma tus turnos</button>
+        <button onClick={(e)=>submit(e)}>confirma tus turnos</button>
         
     </div>
     
