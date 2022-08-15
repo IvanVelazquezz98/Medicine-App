@@ -3,27 +3,36 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimeRange from 'react-time-range';
 import { useDispatch, useSelector } from "react-redux"
-import { getUsersById, createMorningHours, createAfternoonHours} from '../../Redux-actions'
+import { getUsersById, createMorningHours, createAfternoonHours, postAppointments, getAdById} from '../../Redux-actions'
 //const auth = getAuth(firebaseApp);
 //import { getAuth, signOut } from "firebase/auth";
 //import './App.css';
 import moment from 'moment';
+import { useNavigate, useParams } from "react-router-dom";
+import ModalErrors from "../ModalsErrors/ErrorsRouta";
 const format = "DD/MM/YYYY";
 function CreateAppointments({user}) {
+  const {adId} = useParams()
+  console.log('soy Params', )
+  
 
   const dispatch = useDispatch();
-  const User = useSelector((state) => state.userDetail)
+  // const User = useSelector((state) => state.userDetail)
+  const ad = useSelector((state) => state.adDetail)
 
   const morningHours = useSelector((state)=>state.morningHours)
-  console.log('estado', morningHours);
+  //console.log('estado', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
-  console.log('estado', afternoonHours);
+  console.log('estado', morningHours);
+
+
+
 
   useEffect(() => {
-    dispatch(getUsersById(user.email));
+    dispatch(getAdById(adId));
   }, [dispatch]);
 
-  const [dates, setDates] = useState([]);
+  const [date, setDate] = useState([]);
 
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
@@ -49,7 +58,7 @@ function CreateAppointments({user}) {
    function submitTimeRange(){
     const start = moment(new Date(startTime))
     const end = moment(new Date(endTime))
-    console.log(end)
+    //console.log(end)
     setMorningStartTime(`${start.hour()}:${start.minute()}`)
     setMorningEndTime(`${end.hour()}:${end.minute()}`)
    
@@ -74,6 +83,7 @@ function CreateAppointments({user}) {
    function submitTimeRange2(){
     const start = moment(new Date(startTime))
     const end = moment(new Date(endTime))
+    console.log('soy end=>',end)
     setAfternoonStartTime(`${start.hour()}:${start.minute()}`)
     setAfternoonEndTime(`${end.hour()}:${end.minute()}`)
     /* setStartTime(moment())
@@ -94,25 +104,31 @@ function CreateAppointments({user}) {
    function handleChange(e){
     setDuration(e.target.value)
    }
- 
-   
-   function submit(e){
-    let dateArray = dates.map(d=>({day:d.day, month:d.month.index, year:d.year}))
-    let appointments={
-      dates:dateArray,
-      morningStartTime: morningStartTime,
-      morningEndTime: morningEndTime,
-      afternoonStartTime: afternoonStartTime,
-      afternoonEndTime: afternoonEndTime,
-      duration: duration,
-      medicalLicense: null//pasarle el medical license del usuario
+   let hours= morningHours
+   if(afternoonHours){
+    hours.concat(afternoonHours)
+   }
+   const navigate=useNavigate()
+   function submitAll(e){
+    try {
+      console.log('soy e',e);
+      let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
+      let appointments={
+        dates:dateArray,
+        hours: morningHours.concat(afternoonHours),
+        professionalMedicalLicense: ad.professionalMedicalLicense,
+        ad:adId
+      }
+      console.log(appointments);
+      dispatch(postAppointments(appointments))
+      navigate(`/home/`+ adId)
+      
+    } catch (error) {
+      <ModalErrors error={'no se pudieron crear los turnos'}/>
     }
-    
-
-    //dispatch(postAppointments(appointments))
    }
 
-   console.log(dates)
+   
 
   return (
     <div className="App">
@@ -124,8 +140,8 @@ function CreateAppointments({user}) {
         <p>elegi tus dias de trabajo</p>
         <DatePicker
             placeholder="elige tus fechas"
-          value={dates}
-          onChange={setDates}
+          value={date}
+          onChange={setDate}
           multiple
           sort
           format={format}
@@ -134,7 +150,7 @@ function CreateAppointments({user}) {
         />
       </div>
       <ul>
-        {dates.map((date, index) => (
+        {date.map((date, index) => (
           <li key={index}>{date.format()}</li>
         ))}
       </ul>
@@ -165,7 +181,7 @@ function CreateAppointments({user}) {
         
         :null}
 
-        <button onclick={(e)=>submit(e)}>confirma tus turnos</button>
+        <button onClick={(e)=>submitAll(e)}>confirma tus turnos</button>
         
     </div>
     

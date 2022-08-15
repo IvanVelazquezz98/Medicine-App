@@ -8,7 +8,8 @@ const inicialState = {
   userDetail: {},
   users: [],
   morningHours:[],
-  afternoonHours:[]
+  afternoonHours:[],
+  professionalAppointments:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -20,6 +21,7 @@ const rootReducer = (state = inicialState, action) => {
         allUsers: action.payload,
       };
     case "GET_USER_DETAIL":
+      console.log('soy el user', action)
       return {
         ...state,
         userDetail: action.payload,
@@ -180,9 +182,15 @@ const rootReducer = (state = inicialState, action) => {
         }return hour + ':' + minute;
         })
         console.log('aftHours',aftHours)
+        const aftHoursFilter=[]
+        aftHours.map(el=>{
+          if(!state.morningHours.includes(el)){
+              aftHoursFilter.push(el)
+            }          
+        })
         return {
           ...state,
-          afternoonHours:aftHours
+          afternoonHours:aftHoursFilter
         }
 
         case "CLEAR_USER_DETAIL":
@@ -190,6 +198,14 @@ const rootReducer = (state = inicialState, action) => {
             ...state,
             userDetail: {},
           }    
+
+    case 'GET_PROFESSIONAL_APPOINTMENTS':
+      console.log('reducer', action.payload)
+      return{
+        ...state,
+        professionalAppointments:action.payload
+      }
+
     default:
       return state;
   }
