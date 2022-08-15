@@ -50,7 +50,7 @@ function handleRemoveFavorites(e){
     <div>
       <AllFilterAndOrder /> 
       {ads?ads.map(ad=>{
-if(ad.professional?.user?.rol==="professional" && ad.professional?.user !== null){
+          if(ad.professional?.user?.rol==="professional" && ad.professional.user.active){
         return(
           <div>
           

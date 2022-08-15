@@ -20,13 +20,14 @@ import CreateAppointments from "../CreateAppointments/CreateAppointments";
 import Login from "../Login/Login";
 import Footer from '../Footer/Footer'
 import ModalCreateAdd from "../CreateAd/Modal";
-
+import { useNavigate } from "react-router-dom";
 
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
 
@@ -51,10 +52,14 @@ const UserProfile = ({ user }) => {
 
 
   
-  
+  console.log(User.active)
   
   return (
     <div>
+      {User.email && !User.active &&
+      navigate("/recover")
+      }
+
     { User.email ? 
       <div>
       <Navbar/>
