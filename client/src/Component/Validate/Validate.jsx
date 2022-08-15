@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Login from "../Login/Login";
 import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -7,12 +8,14 @@ import UserProfile from "../UserProfile/UserProfile";
 import NavBar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import './Validate.css'
+import { getUsersById } from "../../Redux-actions";
 
 
 
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
+
 
 function Validate() {
   const [user, setUser] = useState(null);
@@ -23,6 +26,7 @@ function Validate() {
     //const finalInfo = encryptedDoc.data().rol;
     return encryptedDoc;
   }
+  
 
   function setUserWithFirebaseAndRol(userFirebase) {
     getRol(userFirebase.uid).then((rol) => {
@@ -34,7 +38,7 @@ function Validate() {
       setUser(userData);
     });
   }
-
+ 
   onAuthStateChanged(auth, (userFirebase) => {
     if (userFirebase) {
       if (!user) {
@@ -44,8 +48,7 @@ function Validate() {
       setUser(null);
     }
   });
-
-  return <div>{user ? <UserProfile user={user} /> : (<div> <NavBar/> <div ><Login  /> </div><div className='space'> <Footer/></div> </div>)}</div>;
+  return <div>{ user ? <UserProfile user={user} /> : (<div> <NavBar/> <div ><Login  /> </div><div className='space'> <Footer/></div> </div>)}</div>;
 }
 
 export default Validate;

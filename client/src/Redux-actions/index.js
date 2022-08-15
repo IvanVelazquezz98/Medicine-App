@@ -254,6 +254,11 @@ export function deleteUserByID(userId){
     };
   }
 
+  export function clearUserDetail() {
+    return{
+        type:'CLEAR_USER_DETAIL',
+    }
+}
   
 
   export function getProfessionalApps(professionalMedicalLicense) {
@@ -279,3 +284,4 @@ export function deleteUserByID(userId){
       }
     };
   }
+
