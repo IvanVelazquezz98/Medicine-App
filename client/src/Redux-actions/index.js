@@ -249,7 +249,33 @@ export function deleteUserByID(userId){
   }
 
   export function clearUserDetail() {
+    return async function (dispatch) {
     return{
         type:'CLEAR_USER_DETAIL',
     }
+  }
 }
+  export function getProfessionalApps(professionalMedicalLicense) {
+    console.log('llegue')
+    return async (dispatch) =>{
+        
+        try {
+            var json= await axios.get(`http://localhost:3001/appointments/${professionalMedicalLicense}`);
+        return dispatch({type:'GET_PROFESSIONAL_APPOINTMENTS', payload: json.data})
+        } catch (error) {
+            console.log(error, 'error en action professional Appointment')
+        }
+    }
+  };
+  
+  export function postAppointments(payload) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`http://localhost:3001/appointment`, payload);
+        return json;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+}
+  
