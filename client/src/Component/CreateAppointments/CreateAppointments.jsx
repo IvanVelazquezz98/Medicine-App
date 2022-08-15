@@ -70,15 +70,7 @@ function CreateAppointments({user}) {
     dispatch(createMorningHours(morningHours))
    }
 
-   /* function submitTimeRange2(){
-    const start = moment(new Date(startTime))
-    const end = moment(new Date(endTime))
-    setMorningStartTime(`${start.hour()}:${start.minute()}`)
-    setMorningEndTime(`${end.hour()}:${end.minute()}`)
-
-    setStartTime(moment())
-    setEndTime(moment())
-   } */
+   
 
    function submitTimeRange2(){
     const start = moment(new Date(startTime))
