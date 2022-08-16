@@ -12,7 +12,8 @@ const inicialState = {
   professionalAppointments:[],
   userRestore:{},
   eventClick:{},
-  selected:false
+  selected:false,
+  availablesApps:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -226,6 +227,12 @@ const rootReducer = (state = inicialState, action) => {
           eventClick: action.payload,
           selected:true
         }
+        case 'GET_AVAILABLE_APPS':
+      console.log('reducer', action.payload)
+      return{
+        ...state,
+        availablesApps:action.payload
+      }
     default:
       return state;
   }

@@ -139,12 +139,12 @@ function Login() {
     try {
       let url = await uploadFile(file);
       setImage(url);
+      setFile(null)
     } catch (err) {
       console.log(err);
     }
 
   };
-
 
  //const [image, setImage] = useState(null);
   async function handleSubmit(e) {

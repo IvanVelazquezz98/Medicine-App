@@ -306,7 +306,7 @@ export function deleteUserByID(userId){
   
 
   export function getProfessionalApps(professionalMedicalLicense) {
-    console.log('llegue')
+    // console.log('llegue')
     return async (dispatch) =>{
         
         try {
@@ -335,3 +335,16 @@ export function deleteUserByID(userId){
         payload: e
     }
 }
+
+export function getAppointmentsByAdAvailable(adId) {
+  console.log('llegue')
+  
+  return async (dispatch) =>{
+      try {
+          var json= await axios.get(`${BASE_URL}/appointments/ad/${adId}`);
+      return dispatch({type:'GET_AVAILABLE_APPS', payload: json.data})
+      } catch (error) {
+          console.log(error, 'error en action available ad')
+      }
+  }
+};

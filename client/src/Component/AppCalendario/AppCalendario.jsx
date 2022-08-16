@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import es from 'date-fns/locale/es/'
 //import DatePicker, { DateObject } from "react-multi-date-picker";
 //import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import { getProfessionalApps } from '../../Redux-actions';
+import { getAppointmentsByAdAvailable, getProfessionalApps } from '../../Redux-actions';
 import Modal from './Modal';
 import ModalCalendar from './Modal';
 
@@ -29,20 +29,26 @@ const localizer = dateFnsLocalizer({
 })
 
 
-function AppCalendario({professionalMedicalLicense,adId,name, ad}) {
+function AppCalendario({professionalMedicalLicense,name, ad, isProfessional}) {
 const dispatch = useDispatch();
-
-console.log('licencia=>',professionalMedicalLicense,'adID=>',adId,'name=>',name,'ad=>',ad)
+const availablesApps =  useSelector((state)=>state.availablesApps)
+const professionalApps =  useSelector((state)=>state.professionalAppointments)
+// console.log('licencia=>',professionalMedicalLicense,'adID=>',adId,'name=>',name,'ad=>',ad)
 
  const [selected, setSelected] = useState(false);
  const [eventSelected, setEventSelected]=useState({})
 //  console.log('lo se todo', selected)
- console.log('lo se todo2', professionalMedicalLicense)
-const professionalAppointments =  useSelector((state)=>state.professionalAppointments)
+//  console.log('lo se todo2', professionalMedicalLicense)
+
+
  
 
 useEffect(() => {
-    dispatch(getProfessionalApps(professionalMedicalLicense));
+  
+    if(isProfessional){
+      return dispatch(getProfessionalApps(professionalMedicalLicense))
+    }
+    dispatch(getAppointmentsByAdAvailable(ad.id));
   }, [dispatch]);
 
   // useEffect(() => {
@@ -54,25 +60,44 @@ useEffect(() => {
   
 const handleSelected = (e) => {
   setEventSelected(e)
-  console.log('soy SetEventSelected', e )
+  // console.log('soy SetEventSelected', e )
   setSelected(true);
 
 }; 
-console.log('soy eventSelected',eventSelected)
+// console.log('soy eventSelected',eventSelected)
 
  
 
-  console.log('apps',professionalAppointments);
- 
-  
-const appsEvents = professionalAppointments.map(app=>{
-  return({
-    id: app.id,
-    title: app.professionalMedicalLicense,
-    start: new Date(app.date[0],app.date[1],app.date[2], app.startTime[0],app.startTime[1]),
-    end: new Date(app.date[0],app.date[1],app.date[2], app.endTime[0],app.endTime[1])
-  }
-)})
+//   console.log('apps',professionalAppointments);
+ let appsEvents
+if(isProfessional){
+  appsEvents = professionalApps.map(app=>{
+    return({
+      id: app.id,
+      title: app.professionalMedicalLicense,
+      start: new Date(app.date[0],app.date[1],app.date[2], app.startTime[0],app.startTime[1]),
+      end: new Date(app.date[0],app.date[1],app.date[2], app.endTime[0],app.endTime[1]),
+      status:app.status
+
+    })
+
+})
+}else{
+  console.log('entrassssss??????')
+  appsEvents = availablesApps.map(app=>{
+
+    return({
+      id: app.id,
+      title: app.professionalMedicalLicense,
+      start: new Date(app.date[0],app.date[1],app.date[2], app.startTime[0],app.startTime[1]),
+      end: new Date(app.date[0],app.date[1],app.date[2], app.endTime[0],app.endTime[1])
+    }
+    )})
+}
+
+console.log('availablesApps=>', availablesApps)
+
+
 
 
   
@@ -104,7 +129,7 @@ const appsEvents = professionalAppointments.map(app=>{
       onSelectEvent={handleSelected}
       startAccessor='start' endAccessor='end' 
       style = {{height: 400, width: 500, margin: '10px'}}/>
-       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense}adId={adId}name={name}ad={ad} />:null} 
+       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense} name={name}ad={ad} />:null} 
     </div>
     
   );
