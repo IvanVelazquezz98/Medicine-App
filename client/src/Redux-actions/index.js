@@ -283,6 +283,21 @@ export function deleteUserByID(userId){
     };
   }
 
+
+  export function putEditAppointment(payload , idApp) {
+    return async function (dispatch) {
+      console.log('modifico de App=>',payload , 'Soy appID=>',idApp)
+      try {
+         await axios.put(`${BASE_URL}/appointments/edit/${idApp}`, payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+
+
+
   export function clearUserDetail() {
     return{
         type:'CLEAR_USER_DETAIL',
@@ -295,7 +310,7 @@ export function deleteUserByID(userId){
     return async (dispatch) =>{
         
         try {
-            var json= await axios.get(`http://localhost:3001/appointments/${professionalMedicalLicense}`);
+            var json= await axios.get(`${BASE_URL}/appointments/${professionalMedicalLicense}`);
         return dispatch({type:'GET_PROFESSIONAL_APPOINTMENTS', payload: json.data})
         } catch (error) {
             console.log(error, 'error en action professional Appointment')
@@ -306,7 +321,7 @@ export function deleteUserByID(userId){
   export function postAppointments(payload) {
     return async function (dispatch) {
       try {
-        var json = await axios.post(`http://localhost:3001/appointment`, payload);
+        var json = await axios.post(`${BASE_URL}/appointment`, payload);
         return json;
       } catch (error) {
         console.log(error);
@@ -314,3 +329,9 @@ export function deleteUserByID(userId){
     };
   }
 
+  export function infoCalendarEvent(e) {
+    return{
+        type:'INFO_CALENDAR_EVENT',
+        payload: e
+    }
+}

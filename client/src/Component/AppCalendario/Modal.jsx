@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfessionalById } from '../../Redux-actions';
 import ModalPayment from '../Home/ModalPayment';
 
-export default function ModalCalendar({info, professionalMedicalLicense}) {
+export default function ModalCalendar({info, professionalMedicalLicense,adId,name, ad}) {
   const [show, setShow] = useState(true);
   const [pay, setPay] = useState(false);
  console.log('Modal',info)
+ let idApp= info.id
+ console.log('info.id', idApp)
  let date= info.start.getDate()
  let month= info.start.getMonth()
  let hr= info.start.getHours()
@@ -57,7 +59,7 @@ export default function ModalCalendar({info, professionalMedicalLicense}) {
           <Button variant="primary" onClick={handleonclick}>
             Confirmar
           </Button>
-          {pay ? <ModalPayment/> : null}
+          {pay ? <ModalPayment info={idApp} adId={adId}name={name} ad={ad}/> : null}
 
         </Modal.Footer>
       </Modal>
