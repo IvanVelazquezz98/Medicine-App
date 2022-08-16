@@ -365,6 +365,7 @@ export function getCities (countryId, stateId){
 }
 
 
+
   export function infoCalendarEvent(e) {
     return{
         type:'INFO_CALENDAR_EVENT',
@@ -383,5 +384,9 @@ export function getAppointmentsByAdAvailable(adId) {
           console.log(error, 'error en action available ad')
       }
   }
+
 };
+
+
+
 

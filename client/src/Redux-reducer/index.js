@@ -11,9 +11,12 @@ const inicialState = {
   afternoonHours:[],
   professionalAppointments:[],
 
+
   countries:[],
   states:[],
   cities:[],
+
+
   userRestore:{},
   eventClick:{},
   selected:false,
@@ -186,6 +189,7 @@ const rootReducer = (state = inicialState, action) => {
         professionalAppointments:action.payload
       }
 
+
       case 'GET_COUNTRIES':
           return{
             ...state,
@@ -205,6 +209,7 @@ const rootReducer = (state = inicialState, action) => {
 
           }
    
+
 
 
       case 'USER_RESTORE':
