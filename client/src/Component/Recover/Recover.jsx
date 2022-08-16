@@ -1,80 +1,108 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import emailjs from '@emailjs/browser';
-import '../Contacto/Contacto.css';
+import React from "react";
+import Navbar from "../Navbar/Navbar";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import firebaseApp from "../../Credential/index";
+import { restoreUser } from "../../Redux-actions/index";
+import { useDispatch } from "react-redux";
+import "./Recover.css";
 
 function Recover() {
-  const [show, setShow] = useState(false);
+  //local state
+  const [inputRestore, setInputRecover] = React.useState({
+    email: "",
+    password: "",
+  });
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = getAuth(firebaseApp); //to get the authorization from credentials.
+  //const userRestoreMessage = useSelector((state)=> state.userRestore)
+  //console.log('mensaje de usuario restaurado',userRestoreMessage)
+  //si trae el mensaje mostrarlo en pantalla!
 
-  //mail aqui
-  function sendEmail (e){
-    e.preventDefault()
-   
-    emailjs.sendForm('service_5qp9enm','template_cktuhyc',e.target,'jeekxUefyAsuBBz5j')
-    .then(res => console.log(res))
-    .catch(e=> console.log(e))
-
+  function handelOnChange(e) {
+    setInputRecover({ ...inputRestore, [e.target.name]: e.target.value });
   }
-  
 
-  
+  //go home/validate to register
+  function goRegister() {
+    signOut(auth); //log out
+    let path = "/home/validate";
+    navigate(path);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    dispatch(
+      restoreUser({
+        email: inputRestore.email,
+        password: inputRestore.password,
+      })
+    );
+  }
+
   return (
     <>
-      
+      <Navbar />
+      <div className="mainRecoverContainer">
+        <h3 className="titleRecover">Usuario deshabilitado temporalmente</h3>
+        <h6 className="secondTitleRecover">
+          Si desea recuperar su perfil de usuario complete el formulario y haga{" "}
+          <strong>click</strong> en el botón enviar luego de completar sus
+          datos.
+        </h6>
+        <Form className="formRecover" onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label className="labelRecoverForm">
+              Dirección de Correo
+            </Form.Label>
+            <Form.Control
+              type="email"
+              placeholder=" Email"
+              name="email"
+              value={inputRestore.email}
+              onChange={handelOnChange}
+            />
+            <Form.Text className="text-muted">
+              Su información no será compartida.
+            </Form.Text>
+          </Form.Group>
 
-     <Button  onClick={handleShow} className='mainButton' >
-        Formulario
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        
-        <Modal.Header closeButton>
-          <Modal.Title>Formulario de Contacto</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-
-          <Form onSubmit={(e) => sendEmail(e)}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email </Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="nombre@ejemplo.com"
-                autoFocus
-              />
-              <Form.Label>Nombre </Form.Label>
-              <Form.Control
-                type="text"
-                
-                placeholder="Tu nombre aquí..."
-                name="name"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label className="labelRecoverForm">Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Contraseña"
+              name="password"
+              value={inputRestore.password}
+              onChange={handelOnChange}
+            />
+            <Form.Text className="text-muted">
+              No comparta su contraseña.
+            </Form.Text>
+          </Form.Group>
+          <div className="buttonRecoverContainer">
+            <Button
+              variant="secondary"
+              className="registerButton"
+              onClick={goRegister}
             >
-              <Form.Label>Escribí tu consulta.</Form.Label>
-              <Form.Control as="textarea" rows={3}  name="message"/>
-            </Form.Group>
-            <Button variant="secondary" onClick={handleClose}>
-              Cerrar
+              Registrarse
             </Button>
-            <Button variant="primary" onClick={handleClose} type="submit">
-              Enviar
+            <Button variant="primary" type="submit" className="submitButton">
+              Reactiva tu perfil
             </Button>
-          </Form>
-
-        </Modal.Body>
-        
-      </Modal>
+          </div>
+        </Form>
+        <h6 className="secondTitleRecover">
+          *En caso que desee registrarse con otro usuario haga click en el boton{" "}
+          <span>registrarse</span> que lo redireccionará a la página de
+          registro.
+        </h6>
+      </div>
     </>
   );
 }

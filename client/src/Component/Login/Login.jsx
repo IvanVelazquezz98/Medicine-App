@@ -59,12 +59,8 @@ function Login() {
 
   const [post, setPost] = useState({
     name: "",
-<<<<<<< HEAD
-    email: "",
-=======
     email: auth?.currentUser?.email ? auth?.currentUser?.email : "",
     password: "",
->>>>>>> 42a06e78868e0f752404952aa12cad075de10425
     dateOfBirth: "",
     identification: "",
     userimage: "",
@@ -134,10 +130,6 @@ function Login() {
     }).then(function(){
       Verify()
     })
-<<<<<<< HEAD
-    console.log('es el uid del usuario',userInfo.user.uid);
-=======
->>>>>>> 42a06e78868e0f752404952aa12cad075de10425
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
@@ -175,6 +167,7 @@ function Login() {
       let user = {
         name: post.name,
         email: post.email,
+        password:post.password,
         dateOfBirth: post.dateOfBirth,
         identification: post.identification,
         userimage: image,
@@ -205,6 +198,7 @@ function Login() {
       setPost({
         name: "",
         email: "",
+        password:"",
         dateOfBirth: "",
         identification: "",
         userimage: "",

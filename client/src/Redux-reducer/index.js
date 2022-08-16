@@ -9,7 +9,8 @@ const inicialState = {
   users: [],
   morningHours:[],
   afternoonHours:[],
-  professionalAppointments:[]
+  professionalAppointments:[],
+  userRestore:{}
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -205,6 +206,16 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         professionalAppointments:action.payload
       }
+
+      case 'USER_RESTORE':
+        return {
+          ...state,
+          userRestore:action.payload
+        }
+
+
+
+
 
     default:
       return state;
