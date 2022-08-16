@@ -28,13 +28,13 @@ function Recover() {
       
 
      <Button  onClick={handleShow} className='mainButton' >
-        Formulario
+        Recupera tu cuenta
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         
         <Modal.Header closeButton>
-          <Modal.Title>Formulario de Contacto</Modal.Title>
+          <Modal.Title>Recupera tu cuenta</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -65,11 +65,11 @@ function Recover() {
               <Form.Control as="textarea" rows={3}  name="message"/>
             </Form.Group>
             <Button variant="secondary" onClick={handleClose}>
-              Cerrar
+              recuperar
             </Button>
-            <Button variant="primary" onClick={handleClose} type="submit">
+            {/* <Button variant="primary" onClick={handleClose} type="submit">
               Enviar
-            </Button>
+            </Button> */}
           </Form>
 
         </Modal.Body>
