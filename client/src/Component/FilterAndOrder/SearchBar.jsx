@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterAllAds} from "../../Redux-actions";
+import { getName} from "../../Redux-actions";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -18,10 +18,8 @@ const SearchBar1 = () => {
   const onClickHandler = (e) => {
     console.log('soy el target del search=>', name)
     if(name.length===0) return alert('ingresa un nombre');
-    let payload={
-      name: name
-     }
-    dispatch(filterAllAds(payload));
+  
+    dispatch(getName(name));
     setName('')
   };
 
