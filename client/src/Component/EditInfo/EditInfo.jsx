@@ -298,8 +298,8 @@ export default function EditInfo() {
       type="text"
       id="aboutMe"
       name="aboutMe"
-      value={editProfessional.aboutMe}
-      placeholder={User.professional.aboutMe ? User.professional.aboutMe : "complete"}
+      value={editProfessional?.aboutMe}
+      placeholder={User.professional?.aboutMe ? User.professional?.aboutMe : "complete"}
       onChange={(e) => handleChangeProfessional(e)}
       />
   </Form.Group>
@@ -312,8 +312,8 @@ export default function EditInfo() {
      type="text"
      id="college"
      name="college"
-     value={editProfessional.college}
-     placeholder={User.professional.college ? User.professional.college : "complete"}
+     value={editProfessional?.college}
+     placeholder={User.professional?.college ? User.professional.college : "complete"}
      onChange={(e) => handleChangeProfessional(e)}
      />
  </Form.Group>

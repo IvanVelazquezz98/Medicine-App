@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 import FormLabel from "react-bootstrap/esm/FormLabel";
@@ -29,31 +29,42 @@ function ModalUnsubscribe(props) {
     let path = "/home/validate"
     navigate(path)
   }
+  
 
   return (
     <>
-      <Button onClick={handleShow} size="sm" className="bajaButton" >¿Darse de baja?</Button>
+      <Button onClick={handleShow} size="sm" className="bajaButton">
+        ¿Darse de baja?
+      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="headerBaja">
-          <Modal.Title className="modalTitleBaja">¿Seguro quieres la baja?</Modal.Title>
+          <Modal.Title className="modalTitleBaja">
+            ¿Seguro quieres la baja?
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <FormLabel className="formLabelBaja">
-                Recuerde que su desvinculación de la aplicación tendrá consecuencias
-                directas sobre la visualización del contenido como así también
-                su historial médico y sus citas reservadas. Cualquier Consulta
-                no dude en comunicarse con el área de <Link to='/'>soporte</Link> al pie de página.
+                Recuerde que su desvinculación de la aplicación tendrá
+                consecuencias directas sobre la visualización del contenido como
+                así también su historial médico y sus citas reservadas.
+                Cualquier Consulta no dude en comunicarse con el área de{" "}
+                <Link to="/">soporte</Link> al pie de página.
               </FormLabel>
             </Form.Group>
 
             <Button variant="secondary" onClick={handleClose}>
               No
             </Button>
-            <Button variant="danger" onClick={handleClose} type="submit" className="yesButtonBaja" >
+            <Button
+              variant="danger"
+              onClick={handleClose}
+              type="submit"
+              className="yesButtonBaja"
+            >
               Darme de baja
             </Button>
           </Form>

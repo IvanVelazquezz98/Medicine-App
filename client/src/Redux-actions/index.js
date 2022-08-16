@@ -185,13 +185,41 @@ export function addFavorite(payload) {
   }
 }
 
+
+
+// restore user by email and password
+export function restoreUser(userRestore){ 
+ 
+  return async function (dispatch){
+    console.log('entra en la action',userRestore)
+    try {
+      const dbResponse =  await axios.put(`${BASE_URL}/restore`,userRestore)
+      if(dbResponse){
+        return dispatch({
+            type:'USER_RESTORE',
+            payload:dbResponse.data
+          })
+      }
+    } catch (e) {
+       return dispatch ({
+        type:'USER_RESTORE',
+        payload:e.message
+       })
+    }
+  }
+}
+
+
+
+
+
 // soft delete user from Data Base. 
 export function deleteUserByID(userId){
   console.log(userId)
   return async function (dispatch){
     try {
       const dbResponse = await axios.put(`${BASE_URL}/delete/${userId}`)
-      console.log('delete by id',dbResponse)
+      
       return dispatch({
         type:'USER_DELETED',
         payload:dbResponse.data

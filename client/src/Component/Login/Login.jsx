@@ -43,7 +43,6 @@ function Login() {
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    password: "",
     dateOfBirth: "",
     identification: "",
     userimage: "",
@@ -168,7 +167,7 @@ function Login() {
       let user = {
         name: post.name,
         email: post.email,
-        password: post.password,
+        password:post.password,
         dateOfBirth: post.dateOfBirth,
         identification: post.identification,
         userimage: image,
@@ -199,7 +198,7 @@ function Login() {
       setPost({
         name: "",
         email: "",
-        password: "",
+        password:"",
         dateOfBirth: "",
         identification: "",
         userimage: "",
