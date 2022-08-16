@@ -44,7 +44,6 @@ function Login() {
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    password: "",
     dateOfBirth: "",
     identification: "",
     userimage: "",
@@ -141,6 +140,7 @@ function Login() {
     try {
       let url = await uploadFile(file);
       setImage(url);
+      setFile(null)
     } catch (err) {
       console.log(err);
     }
@@ -207,7 +207,6 @@ function Login() {
   }
  
 
-
  //const [image, setImage] = useState(null);
   async function handleSubmit(e) {
     e.preventDefault();
@@ -229,7 +228,7 @@ function Login() {
       let user = {
         name: post.name,
         email: post.email,
-        password: post.password,
+        password:post.password,
         dateOfBirth: post.dateOfBirth,
         identification: post.identification,
         userimage: image,
@@ -260,7 +259,7 @@ function Login() {
       setPost({
         name: "",
         email: "",
-        password: "",
+        password:"",
         dateOfBirth: "",
         identification: "",
         userimage: "",
@@ -508,14 +507,14 @@ function Login() {
           >
             Accede con Google
           </Button>
-          <Button
+          {/* <Button
             variant="info"
             size="sm"
             // type="submit"
             onClick={() =>  signOut(auth)}
           >
             Cerrar sesion
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

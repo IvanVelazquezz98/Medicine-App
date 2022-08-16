@@ -185,13 +185,41 @@ export function addFavorite(payload) {
   }
 }
 
+
+
+// restore user by email and password
+export function restoreUser(userRestore){ 
+ 
+  return async function (dispatch){
+    console.log('entra en la action',userRestore)
+    try {
+      const dbResponse =  await axios.put(`${BASE_URL}/restore`,userRestore)
+      if(dbResponse){
+        return dispatch({
+            type:'USER_RESTORE',
+            payload:dbResponse.data
+          })
+      }
+    } catch (e) {
+       return dispatch ({
+        type:'USER_RESTORE',
+        payload:e.message
+       })
+    }
+  }
+}
+
+
+
+
+
 // soft delete user from Data Base. 
 export function deleteUserByID(userId){
   console.log(userId)
   return async function (dispatch){
     try {
       const dbResponse = await axios.put(`${BASE_URL}/delete/${userId}`)
-      console.log('delete by id',dbResponse)
+      
       return dispatch({
         type:'USER_DELETED',
         payload:dbResponse.data
@@ -278,7 +306,7 @@ export function deleteUserByID(userId){
   
 
   export function getProfessionalApps(professionalMedicalLicense) {
-    console.log('llegue')
+    // console.log('llegue')
     return async (dispatch) =>{
         
         try {
@@ -300,6 +328,7 @@ export function deleteUserByID(userId){
       }
     };
   }
+
 //get  countries, states and citys for input login
 export function getCountries (){
   return async (dispatch) =>{
@@ -334,3 +363,25 @@ export function getCities (countryId, stateId){
     }
 }
 }
+
+
+  export function infoCalendarEvent(e) {
+    return{
+        type:'INFO_CALENDAR_EVENT',
+        payload: e
+    }
+}
+
+export function getAppointmentsByAdAvailable(adId) {
+  console.log('llegue')
+  
+  return async (dispatch) =>{
+      try {
+          var json= await axios.get(`${BASE_URL}/appointments/ad/${adId}`);
+      return dispatch({type:'GET_AVAILABLE_APPS', payload: json.data})
+      } catch (error) {
+          console.log(error, 'error en action available ad')
+      }
+  }
+};
+

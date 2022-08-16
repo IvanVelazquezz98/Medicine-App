@@ -6,6 +6,8 @@ import {getProfessionalById, getAds} from '../../Redux-actions'
 import Ad from '../Card/Ad'
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
+import './ProfessionalProfile.css';
+import ImageUser from "../UserProfile/imageProfile";
 
 export default function ProfessionalProfile() {
     const dispatch = useDispatch()
@@ -26,23 +28,32 @@ export default function ProfessionalProfile() {
     return (
     <div>
         <Navbar/>
-        <div className={'imagenPerfil'}>
-            {professionalProfile.user?.userimage}
-        </div>
+        <div className="primercont">
+        <div className="micontainerImage">
+        <img src={professionalProfile.user?.userimage}  className="image"/>
+      </div>
         <div>
-            <h3>{professionalProfile.medicalLicense}</h3>
-            <h3>{professionalProfile.user?.name}</h3>
-            {/* hay que modificar esto {professionalProfile.specialty}
-            hay que modificar esto {professionalProfile.university} */}
-            <h4>{professionalProfile.user?.dateOfBirth}</h4>
-            <h4>{professionalProfile.user?.country}, {professionalProfile.user?.city}</h4>
-            <div>{professionalProfile?.ranking}</div>
+            <div className="micontainerInfo ">  
+         
+          <h3>{professionalProfile.medicalLicense} </h3>
+          <h3>{professionalProfile.user?.name}</h3>
+          <h3>{professionalProfile.user?.dateOfBirth}</h3>
+          <h3>{professionalProfile.user?.country}, {professionalProfile.user?.city}</h3>
+          <h3>{professionalProfile?.ranking}</h3>
+          <h3>{professionalProfile?.User?.dateOfBirth}</h3>
+      </div>
         </div>
-        <div>
-            About Me
         </div>
+        <div className="sobreMi">
+        <h1>Sobre Mi</h1>
+        <p>
+        {professionalProfile?.aboutMe}
+        </p>
+      </div>
         <div>
-            Anuncios del Profesional {professionalProfile.user?.name}
+            <h3>MIRA LA DISPONIBILIDAD QUE OFRECE EL PROFESIONAL EN SUS SERVICIOS</h3> 
+            
+          
             {professionalAds?professionalAds.map(ad=>{
             return(
                 <Ad adID={ad.id}
@@ -58,6 +69,7 @@ export default function ProfessionalProfile() {
                 <Footer/>
 
         </div>
+        
     </div>
     
   )
