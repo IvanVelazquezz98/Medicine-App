@@ -9,14 +9,15 @@ const Public_key =
 
 const stripeTestPromise = loadStripe(Public_key);
 
-function ModalPayment() {
+function ModalPayment({info,professionalMedicalLicense,adId,name,ad}) {
+  console.log('info',info)
   
   return (
     <div>
       <h3>$10.00</h3>
       <img src={doc} alt="Doc" />
       <Elements stripe={stripeTestPromise}>
-        <PaymentForm />
+        <PaymentForm info={info} professionalMedicalLicense={professionalMedicalLicense}adId={adId}name={name}ad={ad}/>
       </Elements>
     </div>
 

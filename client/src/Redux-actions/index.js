@@ -301,3 +301,9 @@ export function deleteUserByID(userId){
     };
   }
 
+  export function infoCalendarEvent(e) {
+    return{
+        type:'INFO_CALENDAR_EVENT',
+        payload: e
+    }
+}
