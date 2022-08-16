@@ -10,6 +10,7 @@ const inicialState = {
   morningHours:[],
   afternoonHours:[],
   professionalAppointments:[],
+  userRestore:{},
   eventClick:{},
   selected:false,
   availablesApps:[]
@@ -208,6 +209,17 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         professionalAppointments:action.payload
       }
+
+      case 'USER_RESTORE':
+        return {
+          ...state,
+          userRestore:action.payload
+        }
+
+
+
+
+
     
       case 'INFO_CALENDAR_EVENT':
         return{

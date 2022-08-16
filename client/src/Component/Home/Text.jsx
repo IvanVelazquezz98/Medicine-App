@@ -30,11 +30,11 @@ function Text() {
           <div className="perfil-details-role">
             <span className="primary-text">
               {" "}
-              <h1>
+             {/*  <h1>
                 {" "}
                 <Circuito
                 />
-              </h1>
+              </h1> */}
               <span className="perfil-role-tagline">
                 Escoge como atenderte
               </span>
