@@ -9,7 +9,10 @@ const inicialState = {
   users: [],
   morningHours:[],
   afternoonHours:[],
-  professionalAppointments:[]
+  professionalAppointments:[],
+  countries:[],
+  states:[],
+  cities:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -45,35 +48,6 @@ const rootReducer = (state = inicialState, action) => {
         adDetail: action.payload,
       };
 
-    case "FILTER_ALL_ADS":
-      return {
-        ...state,
-        ads:action.payload,
-        filterAd: action.payload
-      }
-      case 'FILTER_TYPE_SERVICE':
-        let allAds3 = state.ads;
-        let filterAd = state.filterAd
-        if (filterAd.length===0){
-          let filterTypeService = allAds3.filter(
-            (a) => a.serviceType === action.payload
-          );
-          return {
-            ...state,
-            filterAd: filterTypeService,
-            ads:filterTypeService
-          };
-        }
-        else{
-           let filterTypeService = filterAd.filter(
-            (a) => a.serviceType === action.payload
-          );
-          return {
-            ...state,
-            filterAd: filterTypeService,
-            ads:filterTypeService
-          };
-        }
    
    
     // case 'FILTER_RANKING':
@@ -205,6 +179,26 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         professionalAppointments:action.payload
       }
+
+      case 'GET_COUNTRIES':
+          return{
+            ...state,
+            countries: action.payload
+
+          };
+          case 'GET_STATES':
+          return{
+            ...state,
+            states: action.payload
+
+          }
+          case 'GET_CITIES':
+          return{
+            ...state,
+            cities: action.payload
+
+          }
+   
 
     default:
       return state;
