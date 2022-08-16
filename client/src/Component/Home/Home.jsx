@@ -16,7 +16,7 @@ export default function Home() {
         <Navbar />
          <Header />
          {/* <ModalPayment /> */}
-          <Link  to='/services'><button > Ver los anuncios</button></Link>
+         
 
           <Footer/>
       </div>

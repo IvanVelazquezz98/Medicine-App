@@ -1,6 +1,6 @@
 import React from 'react'
 import './Text.css'
-import Typical from "react-typical"
+import Circuito from './circuito'
 import {Link} from 'react-router-dom'
 
 
@@ -32,16 +32,7 @@ function Text() {
               {" "}
               <h1>
                 {" "}
-                <Typical className="looper"
-                  loop={Infinity} 
-                  steps={[
-                    "Citas Presenciales",
-                    2000,
-                    "Citas Virtuales",
-                    2000,
-                    "Citas a Domicilio",
-                    2000,
-                  ]}
+                <Circuito
                 />
               </h1>
               <span className="perfil-role-tagline">
@@ -50,8 +41,8 @@ function Text() {
             </span>
           </div>
           <div className="perfil-options">
-          <Link  to='/services'>
-            <button className="btn primary-btn">Ver mas</button> <br/>
+          <Link  to='/services' style={{textDecoration: 'inherit', color: 'inherit'}}>
+            <button className="btn highlighted-btn">Ver mas</button> <br/>
             </Link>
             <span className="perfil-role-tagline2"><br/>
                ¿Eres profesional de salud?

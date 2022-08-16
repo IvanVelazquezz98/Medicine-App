@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { putEditAppointment } from "../../Redux-actions";
 // import './Payment.css'
 
 const CARD_OPTIONS = {
@@ -26,15 +29,34 @@ const CARD_OPTIONS = {
   },
 };
 
-export default function PaymentForm({price}) {
+export default function PaymentForm({ adId, name, ad,info}) {
+  
+
+console.log('soy adId', adId)
+console.log('soy name', ad.professional.user.name)
+console.log('soy ad', ad)
+console.log('soy info', info)
+console.log('soy professionalMedicalLicense',ad.professional.medicalLicense)
+
+let idApp=info
   const [success, setSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-
+  const dispatch=useDispatch()
+  const navigate= useNavigate()
+  //localStorage.setItem("Email", post.email)
+ //userEmail
+ const userEmail=localStorage.getItem("Email")
+ 
   //modal Elements
-  const handleClose = () => setShow(false);
+  const handleClose = () =>{
+    setShow(false)
+    dispatch(putEditAppointment({status:'available', userEmail: userEmail},idApp))
+  } ;
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
+
+  let price= Number(ad.price)*100
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,15 +69,17 @@ export default function PaymentForm({price}) {
       try {
         const { id } = paymentMethod;
         const response = await axios.post("http://localhost:3001/payment", {
-          amount: 1000000 ,
+          amount: price ,
           id,
           currency: "ars",
-			    description: "Turno con Pepito",
+			    description: `Turno con ${name}`,
         });
 
         if (response.data.success) {
           console.log("Successful payment");
           setSuccess(true);
+          dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
+          navigate('/home/validate')
         }
       } catch (error) {
         console.log("Error", error);

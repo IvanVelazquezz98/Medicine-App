@@ -29,8 +29,11 @@ const localizer = dateFnsLocalizer({
 })
 
 
-function AppCalendario({professionalMedicalLicense}) {
+function AppCalendario({professionalMedicalLicense,adId,name, ad}) {
 const dispatch = useDispatch();
+
+console.log('licencia=>',professionalMedicalLicense,'adID=>',adId,'name=>',name,'ad=>',ad)
+
  const [selected, setSelected] = useState(false);
  const [eventSelected, setEventSelected]=useState({})
 //  console.log('lo se todo', selected)
@@ -42,13 +45,20 @@ useEffect(() => {
     dispatch(getProfessionalApps(professionalMedicalLicense));
   }, [dispatch]);
 
- 
+  // useEffect(() => {
+  //   dispatch(getProfessionalApps(professionalMedicalLicense));
+  // }, [dispatch]);
+
+
 
   
 const handleSelected = (e) => {
   setEventSelected(e)
+  console.log('soy SetEventSelected', e )
   setSelected(true);
+
 }; 
+console.log('soy eventSelected',eventSelected)
 
  
 
@@ -57,7 +67,8 @@ const handleSelected = (e) => {
   
 const appsEvents = professionalAppointments.map(app=>{
   return({
-    title: app.id,
+    id: app.id,
+    title: app.professionalMedicalLicense,
     start: new Date(app.date[0],app.date[1],app.date[2], app.startTime[0],app.startTime[1]),
     end: new Date(app.date[0],app.date[1],app.date[2], app.endTime[0],app.endTime[1])
   }
@@ -93,7 +104,7 @@ const appsEvents = professionalAppointments.map(app=>{
       onSelectEvent={handleSelected}
       startAccessor='start' endAccessor='end' 
       style = {{height: 400, width: 500, margin: '10px'}}/>
-       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense}/>:null} 
+       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense}adId={adId}name={name}ad={ad} />:null} 
     </div>
     
   );
