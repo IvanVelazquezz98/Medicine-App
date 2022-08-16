@@ -15,7 +15,6 @@ export default function Home() {
       <div>
         <Navbar />
          <Header />
-         {/* <ModalPayment /> */}
          
 
           <Footer/>
