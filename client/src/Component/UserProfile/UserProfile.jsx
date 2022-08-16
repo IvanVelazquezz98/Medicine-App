@@ -61,7 +61,7 @@ const UserProfile = ({ user }) => {
 
     { User.email ? 
       <div>
-      <Navbar/>
+      <Navbar user={user}/>
     <div className="nuestracontainer">
       {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
       
@@ -109,14 +109,14 @@ const UserProfile = ({ user }) => {
 
       
 
-      <div className="SignOut">
-      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button> 
+      {/* <div className="SignOut">
+      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */}
       <div className="botonUser">
         <Link to ={"/profile/" + User.email}>
         editar informacion de perfil
         </Link>
       </div>
-      </div>
+      {/* </div> */}
       <div>
       <ModalUnsubscribe user={User}/>
       </div>

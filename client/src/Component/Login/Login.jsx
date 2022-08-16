@@ -463,14 +463,14 @@ function Login() {
           >
             Accede con Google
           </Button>
-          <Button
+          {/* <Button
             variant="info"
             size="sm"
             // type="submit"
             onClick={() =>  signOut(auth)}
           >
             Cerrar sesion
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
