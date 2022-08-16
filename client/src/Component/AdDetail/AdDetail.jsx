@@ -20,9 +20,9 @@ export default function AdDetail() {
         dispatch(getAdById(adID))
     },[dispatch, adID])
 
-    useEffect(() => {
-        dispatch(getUsersById(adDetail.professional?.userEmail));
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getUsersById(adDetail.professional?.userEmail));
+    //   }, [dispatch]);
     
     const [buttonLi, setbuttonLi] = useState(true)
 
@@ -41,9 +41,12 @@ export default function AdDetail() {
             { !buttonLi ? <img  src={adDetail.professional?.licenceImage} />
             : <p></p>     
             }
+
         </div>
         <div>
-        <AppCalendario adId={adID} name={adDetail.professional?.user?.name} ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
+          { !adDetail.professional?.medicalLicense ? <p>Loading ..</p>:
+            <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={false}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
+          }
         </div>
         <Footer/>
     </div>
