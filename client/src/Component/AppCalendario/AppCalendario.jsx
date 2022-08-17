@@ -60,9 +60,11 @@ useEffect(() => {
   
 const handleSelected = (e) => {
   setEventSelected(e)
-  // console.log('soy SetEventSelected', e )
+  if(selected == true){
+    setSelected(false)
+  }// console.log('soy SetEventSelected', e )
   setSelected(true);
-
+  
 }; 
 // console.log('soy eventSelected',eventSelected)
 

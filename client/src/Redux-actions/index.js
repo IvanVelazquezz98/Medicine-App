@@ -317,6 +317,23 @@ export function deleteUserByID(userId){
         }
     }
   };
+
+  
+
+  export function getUserApps(userEmail) {
+    // console.log('llegue')
+    return async (dispatch) =>{
+        
+        try {
+            var json= await axios.get(`${BASE_URL}/appointments/user/${userEmail}`);
+        return dispatch({type:'GET_USER_APPOINTMENTS', payload: json.data})
+        } catch (error) {
+            console.log(error, 'error en action professional Appointment')
+        }
+    }
+  };
+
+  
   
   export function postAppointments(payload) {
     return async function (dispatch) {
