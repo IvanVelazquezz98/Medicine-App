@@ -6,8 +6,8 @@ import './Header.css'
 function Header() {
   return (
     <div className="home-container">
-      <Text />
-      <Image />
+      {/* <Text /> */}
+      {/* <Image /> */}
     </div>
   )
 }

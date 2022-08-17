@@ -12,11 +12,11 @@ export default function Home() {
 
  
     return (
-      <div>
+      <>
         <Navbar />
-         <Header />
+         {/* <Header /> */}
          
 
           <Footer/>
-      </div>
+      </>
     )}

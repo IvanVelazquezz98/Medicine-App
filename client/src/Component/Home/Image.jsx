@@ -6,7 +6,7 @@ function Image() {
   return (
     <div className="footer-container">
         <div className="footer-parent">
-            <img src={fondo} alt='No hay conexión a internet '/>
+            <img src={fondo} alt='No hay conexión a internet ' className='Im'/>
             </div>
      
    </div>
