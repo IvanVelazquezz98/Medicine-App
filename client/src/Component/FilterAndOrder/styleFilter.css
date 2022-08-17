@@ -1,51 +1,40 @@
-.filterNav{
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-    align-items: center;
-    justify-content: center;
-    background-color: darkturquoise;
-    
-}
+
 .specialty{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 25px;
-    margin-bottom: 17px;
+    flex-direction: row;
+    margin: 8%;
 }
 .country{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 17px;
-
+    margin: 8%;
+   
 }
 .province{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 17px;
+   margin: 8%;
 }
 .city{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 17px;
+    margin: 8%;
 }
 .service{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 17px;
+    margin: 8%;
 }
 .price{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 17px;
+    margin: 8%;
 }
 .ranking{
     display: flex;
-    margin-right: 5px;
-    margin-bottom: 17px;
+    
 }
 .search{
     display: flex;
-    margin-right: 5px;
     
+    
+}
+.buttonFilter{
+    margin:2%;
+    border-radius: 25px;
 }

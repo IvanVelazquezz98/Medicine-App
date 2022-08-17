@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import firebaseApp from "../../Credential/index";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional } from "../../Redux-actions/index";
+import { postUser, postProfessional,getStates, getCountries, getCities } from "../../Redux-actions/index";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -21,6 +21,8 @@ import "./Login.css";
 import { validate, validateProfessional } from './validate'
 import Alert from 'react-bootstrap/Alert';
 import ModalsErrors from '../ModalsErrors/ErrorsRouta'
+import Select from "react-select";
+
 
 
 
@@ -170,6 +172,68 @@ function Login() {
     }
 
   };
+  //---select ----input de paises--
+  const [countryId,setCountryId]= useState({
+    cid:"",
+    sid:""
+   })
+   
+ 
+   useEffect(() => {
+     dispatch(getCountries())
+     dispatch(getStates(countryId.cid))
+     if(countryId.sid.length)dispatch(getCities(countryId.cid, countryId.sid))
+     
+     
+     
+   }, [dispatch, countryId])
+   //estados globales de paises, estados y ciudades
+   const countries=useSelector(state=>state.countries)
+   const states=useSelector(state=>state.states)
+   const cities=useSelector(state=>state.cities)
+   //--opciones del select
+   const countriesOptions= countries.map(e=> {return{value:e.countryId, label:e.name}});
+   const statesOptions= states.map(e=> {return{value:e.provinceId, label:e.name}});
+   const citiesOptions= cities.map(e=> {return{value:e.name, label:e.name}});
+   
+   //handle de esos input
+   function handleCountries(value, action){
+    
+    
+    if(action.name==="countries"){
+       
+      setCountryId({
+        ...countryId,
+        cid:value.value
+      })
+      setPost({
+        ...post,
+        country: value.label
+      })
+      console.log(value.value);
+    }
+    if(action.name==="states"){
+      setCountryId({
+        ...countryId,
+        sid:value.value
+      })
+     
+      setPost({
+        ...post,
+        province:value.label
+      })
+    }
+    if(action.name==="cities"){
+      setPost({
+        ...post,
+        city: value.value
+      })
+    }
+
+
+  }
+ 
+
 
   //const [image, setImage] = useState(null);
   async function handleSubmit(e) {
@@ -354,40 +418,23 @@ function Login() {
                 {errors.idImage && (<p className="error">{errors.idImage}</p>)}
               </Form.Group>
 
-              {/* Pais */}
-              <Form.Group className="mb-3">
-                <Form.Label>Pais: </Form.Label>
-                <Form.Control
-                  type="text"
-                  value={post.country}
-                  name="country"
-                  onChange={(e) => handleChange(e)}
-                />
-                {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)}
-              </Form.Group>
+               {/* Pais */}
+               <Form.Group className="mb-3" >
+              <Form.Label>Pais: </Form.Label>
+                <Select  onChange={handleCountries} name='countries' options= {countriesOptions} placeholder='Seleccione un Pais'/>
+                </Form.Group>
+
 
               {/*  Provincia */}
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" >
                 <Form.Label>Provincia: </Form.Label>
-                <Form.Control
-                  type="text"
-                  value={post.province}
-                  name="province"
-                  onChange={(e) => handleChange(e)}
-                />
-                {errors.province && (<Alert variant='warning' className="error" >{errors.province}</Alert>)}
+                <Select  onChange={handleCountries} name={'states'} options= {statesOptions} placeholder='Seleccione una Provincia'/>
               </Form.Group>
 
               {/* Ciudad  */}
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" >
                 <Form.Label>Ciudad: </Form.Label>
-                <Form.Control
-                  type="text"
-                  value={post.city}
-                  name="city"
-                  onChange={(e) => handleChange(e)}
-                />
-                {errors.city && (<Alert variant='warning' className="error" >{errors.city}</Alert>)}
+                <Select  onChange={handleCountries} name={'cities'} options= {citiesOptions} placeholder='Seleccione una Ciudad'/>
               </Form.Group>
 
               {/*  Address */}

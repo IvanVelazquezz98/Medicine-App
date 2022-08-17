@@ -3,8 +3,10 @@ import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds, removeFavorite, addFavorite} from '../../Redux-actions'
 import Ad from '../Card/Ad'
-import AllFilterAndOrder from '../FilterAndOrder/AllFilterAndOrder';
-import './Ad.css'
+import Suppafilter from '../FilterAndOrder/Suppafilter';
+import SearchBar from '../FilterAndOrder/SearchBar'
+
+import '../Card/Ad.css'
 
 export default function Ads() {
  const dispatch = useDispatch();
@@ -47,8 +49,11 @@ function handleRemoveFavorites(e){
 }
 
   return (
-    <div>
-      <AllFilterAndOrder /> 
+    <div className='all'>
+      
+      <div className='sidebar'>
+      <Suppafilter /> 
+      </div>
       {ads?ads.map(ad=>{
           if(ad.professional?.user?.rol==="professional" && ad.professional.user.active){
         return(

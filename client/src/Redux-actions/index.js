@@ -91,10 +91,10 @@ export function getAdById (id) {
 };
 
 // filters
-export function filterAllAds(payload) {
+export function filterAllAds({specialty,country,province, city, typeService}) {
  
   return async function (dispatch) {
-    var json = await axios.get(`${BASE_URL}/filter?name=${payload?.name}&specialty=${payload?.specialty}&country=${payload?.country}&province=${payload?.province}&city=${payload?.city}`)
+    var json = await axios.get(`http://localhost:3001/filter?typeService=${typeService}&specialty=${specialty}&country=${country}&province=${province}&city=${city}`)
     return dispatch({ type: 'FILTER_ALL_ADS', payload: json.data})
   }
 
@@ -115,7 +115,7 @@ export function orderByPrice(payload) {
 //order by ranking
 export function orderByRanking(payload) {
   return{
-      type:'FILTER_RANKING',
+      type:'ORDER_RANKING',
       payload
   }
 }
@@ -133,7 +133,7 @@ export function postAdd(payload) {
   };
 }
 
-//ger professional by name
+//get professional by name
 export function getName(name) {
   return async (dispatch) =>{
       
@@ -346,6 +346,43 @@ export function deleteUserByID(userId){
     };
   }
 
+//get  countries, states and citys for input login
+export function getCountries (){
+  return async (dispatch) =>{
+    
+    try {
+        var json= await axios.get(`http://localhost:3001/countries`);
+    return dispatch({type:'GET_COUNTRIES', payload: json.data})
+    } catch (error) {
+     console.log(error)
+    }
+}
+}
+export function getStates (countryId){
+  return async (dispatch) =>{
+    
+    try {
+        var json= await axios.get(`http://localhost:3001/states/${countryId}`);
+    return dispatch({type:'GET_STATES', payload: json.data})
+    } catch (error) {
+     console.log(error)
+    }
+}
+}
+export function getCities (countryId, stateId){
+  return async (dispatch) =>{
+    
+    try {
+        var json= await axios.get(`http://localhost:3001/cities/${countryId}/${stateId}`);
+    return dispatch({type:'GET_CITIES', payload: json.data})
+    } catch (error) {
+     console.log(error)
+    }
+}
+}
+
+
+
   export function infoCalendarEvent(e) {
     return{
         type:'INFO_CALENDAR_EVENT',
@@ -364,4 +401,9 @@ export function getAppointmentsByAdAvailable(adId) {
           console.log(error, 'error en action available ad')
       }
   }
+
 };
+
+
+
+
