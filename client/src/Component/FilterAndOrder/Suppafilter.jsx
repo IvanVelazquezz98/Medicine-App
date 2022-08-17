@@ -89,6 +89,9 @@ export default function Suppafilter() {
     searchParams.set([action.name], value.value);
     setSearchParams(searchParams)
     console.log(action)
+
+    
+
     
   };
  
@@ -104,6 +107,7 @@ export default function Suppafilter() {
     useEffect(() => {
       console.log(Object.fromEntries([...searchParams]));
       dispatch(filterAllAds(Object.fromEntries([...searchParams])))
+      
     }, [searchParams])
     
 
@@ -143,7 +147,7 @@ export default function Suppafilter() {
      
   </div>
   <div className="service">
-  <Select isClearable={true} name={'serviceType'} onChange={handleFilter} options={services} placeholder='filtra por tipo de servicio'/> 
+  <Select isClearable={true} name={'typeService'} onChange={handleFilter} options={services} placeholder='filtra por tipo de servicio'/> 
   
   </div>
   </>

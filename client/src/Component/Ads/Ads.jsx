@@ -3,6 +3,7 @@ import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAds, removeFavorite, addFavorite} from '../../Redux-actions'
 import Ad from '../Card/Ad'
+
 import Suppafilter from '../FilterAndOrder/Suppafilter';
 import SearchBar from '../FilterAndOrder/SearchBar'
 
@@ -57,7 +58,7 @@ function handleRemoveFavorites(e){
       {ads?ads.map(ad=>{
           if(ad.professional?.user?.rol==="professional" && ad.professional.user.active){
         return(
-          <div>
+          <div className='ads'>
           
 
           <Ad adID={ad.id}

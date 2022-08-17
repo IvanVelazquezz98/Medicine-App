@@ -22,8 +22,8 @@ function Footer() {
             
 
             <div className='OpeningHoursDiv'>
-            <h4>Opening Hours</h4>
-              <h6>Completar esto con lo que queramos</h6>
+            <h4>Contanos tu experiencia con AYDOC! </h4>
+              <h6>Tu opinion nos ayuda a mejorar</h6>
               <Link to='/'>
                 <Button  className='homeBtn' >
                     Home
