@@ -39,6 +39,8 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null)
+  const [imageId, setImageId] = useState(null)
+  const [prolicenceImage , setProLicenceImage] = useState(null)
 
 
   const [errors, setErrors] = useState({
@@ -134,13 +136,35 @@ function Login() {
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
+  console.log('image' , image)
+  console.log('imageid' , imageId)
+  console.log('licence' , prolicenceImage)
 
   const handlefile = async (e) => {
     e.preventDefault();
     try {
       let url = await uploadFile(file);
       setImage(url);
-      setFile(null)
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
+  const handleImageId= async (e) => {
+    e.preventDefault();
+    try {
+      let url = await uploadFile(file);
+      setImageId(url);
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
+  const handleLicenceImage = async (e) => {
+    e.preventDefault();
+    try {
+      let url = await uploadFile(file);
+      setProLicenceImage(url);
     } catch (err) {
       console.log(err);
     }
@@ -234,7 +258,7 @@ function Login() {
         dateOfBirth: post.dateOfBirth,
         identification: post.identification,
         userimage: image,
-        idImage: image,
+        idImage: imageId,
         country: post.country,
         city: post.city,
         address: post.address,
@@ -248,7 +272,7 @@ function Login() {
       //b
       let professional = {
         medicalLicense: postprofessional.medicalLicense,
-        licenceImage: image,
+        licenceImage: prolicenceImage,
         userEmail: postprofessional.userEmail,
       };
 
@@ -388,7 +412,7 @@ function Login() {
                   name="idImage"
                   onChange={(e) => setFile(e.target.files[0])}
                 />
-                <button onClick={(e) => handlefile(e)}>Subir Imagen</button>
+                <button onClick={(e) => handleImageId(e)}>Subir Imagen</button>
                 {errors.idImage && (<p className="error">{errors.idImage}</p>)}
               </Form.Group>
 
@@ -471,7 +495,7 @@ function Login() {
                       name="licenceImage"
                       onChange={(e) => setFile(e.target.files[0])}
                     />
-                    <button onClick={(e) => handlefile(e)}>Subir Imagen</button>
+                    <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button>
                   </Form.Group>
 
 
