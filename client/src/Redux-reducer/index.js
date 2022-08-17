@@ -7,18 +7,18 @@ const inicialState = {
   professionalProfile: {},
   userDetail: {},
   users: [],
-  morningHours: [],
-  afternoonHours: [],
-  professionalAppointments: [],
+  morningHours:[],
+  afternoonHours:[],
+  professionalAppointments:[],
+  countries:[],
+  states:[],
+  cities:[],
+  userRestore:{},
+  eventClick:{},
+  selected:false,
+  availablesApps:[],
+  userAppointments:[]
 
-  countries: [],
-  states: [],
-  cities: [],
-
-  userRestore: {},
-  eventClick: {},
-  selected: false,
-  availablesApps: [],
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -77,7 +77,9 @@ const rootReducer = (state = inicialState, action) => {
 
       let y = Number(timeEnd[0]) + Number(timeEnd[1]) / 60;
 
+
       let actual = x;
+
 
       let siguiente = actual;
       let horarioEntero = [];

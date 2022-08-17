@@ -60,9 +60,11 @@ useEffect(() => {
   
 const handleSelected = (e) => {
   setEventSelected(e)
-  // console.log('soy SetEventSelected', e )
+  if(selected == true){
+    setSelected(false)
+  }// console.log('soy SetEventSelected', e )
   setSelected(true);
-
+  
 }; 
 // console.log('soy eventSelected',eventSelected)
 
@@ -128,6 +130,8 @@ console.log('availablesApps=>', availablesApps)
       events ={appsEvents} 
       onSelectEvent={handleSelected}
       startAccessor='start' endAccessor='end' 
+      min={new Date(1, 1, 1, 8, 0, 0)}
+      max={new Date(1, 1, 1, 21, 59, 0)}
       style = {{height: 400, width: 500, margin: '10px'}}/>
        {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense} name={name}ad={ad} />:null} 
     </div>

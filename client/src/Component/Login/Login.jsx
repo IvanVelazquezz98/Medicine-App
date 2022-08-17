@@ -18,9 +18,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalForgotPsw from "./ModalForgotPsw";
 import "./Login.css";
-import { validate, validateProfessional} from './validate'
+import { validate, validateProfessional } from './validate'
 import Alert from 'react-bootstrap/Alert';
+import ModalsErrors from '../ModalsErrors/ErrorsRouta'
 import Select from "react-select";
+
 
 
 
@@ -39,6 +41,8 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null)
+  const [imageId, setImageId] = useState(null)
+  const [prolicenceImage, setProLicenceImage] = useState(null)
 
 
   const [errors, setErrors] = useState({
@@ -87,8 +91,8 @@ function Login() {
     licenceImage: "",
     userEmail: ""
   })
-  
-  
+
+
 
   async function handleChange(e) {
     e.preventDefault();
@@ -113,10 +117,10 @@ function Login() {
 
   function Verify() {
     sendEmailVerification(auth.currentUser)
-  .then(() => {
-    // Email verification sent!
-    // ...
-  });
+      .then(() => {
+        // Email verification sent!
+        // ...
+      });
   }
 
   // registrar usuario
@@ -125,22 +129,44 @@ function Login() {
       auth,
       email,
       password
-      
+
     ).then((userFirebase) => {
       return userFirebase;
-    }).then(function(){
+    }).then(function () {
       Verify()
     })
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
+  console.log('image', image)
+  console.log('imageid', imageId)
+  console.log('licence', prolicenceImage)
 
   const handlefile = async (e) => {
     e.preventDefault();
     try {
       let url = await uploadFile(file);
       setImage(url);
-      setFile(null)
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
+  const handleImageId = async (e) => {
+    e.preventDefault();
+    try {
+      let url = await uploadFile(file);
+      setImageId(url);
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
+  const handleLicenceImage = async (e) => {
+    e.preventDefault();
+    try {
+      let url = await uploadFile(file);
+      setProLicenceImage(url);
     } catch (err) {
       console.log(err);
     }
@@ -209,7 +235,7 @@ function Login() {
  
 
 
- //const [image, setImage] = useState(null);
+  //const [image, setImage] = useState(null);
   async function handleSubmit(e) {
     e.preventDefault();
     validate(post);
@@ -230,11 +256,11 @@ function Login() {
       let user = {
         name: post.name,
         email: post.email,
-        password:post.password,
+        password: post.password,
         dateOfBirth: post.dateOfBirth,
         identification: post.identification,
         userimage: image,
-        idImage: image,
+        idImage: imageId,
         country: post.country,
         city: post.city,
         address: post.address,
@@ -249,7 +275,7 @@ function Login() {
       //b
       let professional = {
         medicalLicense: postprofessional.medicalLicense,
-        licenceImage: image,
+        licenceImage: prolicenceImage,
         userEmail: postprofessional.userEmail,
       };
 
@@ -262,7 +288,7 @@ function Login() {
       setPost({
         name: "",
         email: "",
-        password:"",
+        password: "",
         dateOfBirth: "",
         identification: "",
         userimage: "",
@@ -296,7 +322,7 @@ function Login() {
               type="email"
               id="email"
               name="email"
-              placeholder = {auth.currentUser?.email ? auth.currentUser?.email : null}
+              placeholder={auth.currentUser?.email ? auth.currentUser?.email : null}
               value={post.email}
               onChange={(e) => handleChange(e)}
             />
@@ -389,7 +415,7 @@ function Login() {
                   name="idImage"
                   onChange={(e) => setFile(e.target.files[0])}
                 />
-                <button onClick={(e) => handlefile(e)}>Subir Imagen</button>
+                <button onClick={(e) => handleImageId(e)}>Subir Imagen</button>
                 {errors.idImage && (<p className="error">{errors.idImage}</p>)}
               </Form.Group>
 
@@ -454,6 +480,16 @@ function Login() {
                 <>
 
                   <Form.Group className="mb-3" >
+                    <Form.Label>Imagen de Licencia: </Form.Label>
+                    <Form.Control
+                      type="file"
+                      name="licenceImage"
+                      onChange={(e) => setFile(e.target.files[0])}
+                    />
+                    <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" >
                     <Form.Label>Licencia Medica: </Form.Label>
                     <Form.Control
                       type="text"
@@ -464,16 +500,7 @@ function Login() {
                     {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicensea}</Alert>)}
                   </Form.Group>
 
-                  {/* Imagen Licencia */}
-                  <Form.Group className="mb-3" >
-                    <Form.Label>Imagen de Licencia: </Form.Label>
-                    <Form.Control
-                      type="file"
-                      name="licenceImage"
-                      onChange={(e) => setFile(e.target.files[0])}
-                    />
-                    <button onClick={(e) => handlefile(e)}>Subir Imagen</button>
-                  </Form.Group>
+
 
 
                 </>
@@ -484,7 +511,7 @@ function Login() {
           <div className="formButtons">
             {/* Submit form button */}
             <Button variant="success" type="submit">
-              {isRegister || auth?.currentUser?.email? "Registrarse" : " Inicia Sesión"}
+              {isRegister || auth?.currentUser?.email ? "Registrarse" : " Inicia Sesión"}
             </Button>
           </div>
         </Form>
