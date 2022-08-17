@@ -40,7 +40,10 @@ export default function ModalCalendar({info, professionalMedicalLicense,adId,nam
 
 
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    dispatch(putEditAppointment({status:'available', userEmail: userEmail},idApp))
+  };
   const handleonclick = () => {
     if(userEmail===null){
      return setValidate(true)
@@ -65,7 +68,9 @@ export default function ModalCalendar({info, professionalMedicalLicense,adId,nam
         Launch demo modal
       </Button> */}
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}
+        backdrop="static"
+        keyboard={false}>
         <Modal.Header closeButton>
           <Modal.Title>Su turno sería con:
             {professionalProfile.user?.name}
