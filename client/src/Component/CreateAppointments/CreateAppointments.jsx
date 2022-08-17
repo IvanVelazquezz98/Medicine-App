@@ -4,9 +4,9 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import TimeRange from 'react-time-range';
 import { useDispatch, useSelector } from "react-redux"
 import { getUsersById, createMorningHours, createAfternoonHours, postAppointments, getAdById} from '../../Redux-actions'
-//const auth = getAuth(firebaseApp);
-//import { getAuth, signOut } from "firebase/auth";
-//import './App.css';
+import Navbar from '../Navbar/Navbar'
+import Footer from '../Footer/Footer'
+import './CreateAppointments.css'
 import moment from 'moment';
 import { useNavigate, useParams } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
@@ -123,7 +123,10 @@ function CreateAppointments({user}) {
    
 
   return (
-    <div className="App">
+    <>
+    <Navbar/>
+    <div >
+      <div className="conteinerDate">
       <h1>Crea tus turnos</h1>
       <div style={{ textAlign: "center" }}>
       <p>cuanto dura su turno</p>
@@ -141,9 +144,10 @@ function CreateAppointments({user}) {
           plugins={[<DatePanel />]}
         />
       </div>
-      <ul>
+      <ul className="li">
         {date.map((date, index) => (
-          <li key={index}>{date.format()}</li>
+        <div className="li">
+          <li  key={index}>{date.format()}</li></div>
         ))}
       </ul>
       
@@ -155,10 +159,11 @@ function CreateAppointments({user}) {
         onEndTimeChange={handleEndTimeChange}
         />
         {/* <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p> */}    
-        <button onClick={submitTimeRange}>confirme rango horario</button>
-        {morningHours.length>0?morningHours.map((h,i)=><p key={i}>{h};</p>):null}
-
-        <button onClick={newTimeRange}>Seleccione otro rango horario para el mismo dia</button>
+        <button className="button" onClick={submitTimeRange}>Confirme rango horario</button>
+        <div className="hourContainer">
+        {morningHours.length>0?morningHours.map((h,i)=><div className="li"><p className="li"  key={i}>{h};</p></div>):null}
+        </div>
+        <button className="button" onClick={newTimeRange}>Seleccione otro rango horario para el mismo dia</button>
         
         
         {timeRanges?<><TimeRange
@@ -167,16 +172,18 @@ function CreateAppointments({user}) {
         onStartTimeChange={handleStartTimeChange}
         onEndTimeChange={handleEndTimeChange} />
         {/* <p>rango horario turno tarde: {afternoonStartTime} - {afternoonEndTime}</p> */}
-        <button onClick={submitTimeRange2}>confirme rango horario</button>
-        {afternoonHours.length>0?afternoonHours.map((h,i)=><p key={i}>{h};</p>):null}
+        <button className="button" onClick={submitTimeRange2}>Confirme rango horario</button>
+        {afternoonHours.length>0?afternoonHours.map((h,i)=><div className="li"><p  key={i}>{h};</p></div>):null}
         </>
         
         :null}
 
-        <button onClick={(e)=>submitAll(e)}>confirma tus turnos</button>
-
+        <button className="button" onClick={(e)=>submitAll(e)}>Confirma tus turnos</button>
+        
+        </div>
+          <Footer/>
     </div>
-    
+    </>
   );
 }
 
