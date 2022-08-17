@@ -10,18 +10,14 @@ const inicialState = {
   morningHours:[],
   afternoonHours:[],
   professionalAppointments:[],
-
-
   countries:[],
   states:[],
   cities:[],
-
-
   userRestore:{},
   eventClick:{},
   selected:false,
-  availablesApps:[]
-
+  availablesApps:[],
+  userAppointments:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -187,6 +183,11 @@ const rootReducer = (state = inicialState, action) => {
       return{
         ...state,
         professionalAppointments:action.payload
+      }
+    case 'GET_USER_APPOINTMENTS':
+      return{
+        ...state,
+        userAppointments:action.payload
       }
 
 
