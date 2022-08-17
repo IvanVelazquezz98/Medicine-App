@@ -29,10 +29,10 @@ const NavBarExample = ({user}) => {
                 <Nav.Link as={Link} to="/services" className="space">Servicios</Nav.Link> 
                 <Nav.Link as={Link} to="/home/validate" className="space"><img src={perfil} width="50px" height="50px" />  </Nav.Link>
                 {
-                    user?.email?
+                    
                 <div className="SignOut">
                  <button className="btn highlighted-btn" onClick={() => signOut(auth)}>Cerrar sesion</button> 
-                 </div>: null
+                 </div>
                 }
             </Nav>
             </Navbar.Collapse>

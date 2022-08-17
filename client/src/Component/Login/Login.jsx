@@ -270,6 +270,7 @@ function Login() {
         gps: post.gps,
         favorites: []
       };
+      console.log('post', post)
 
       //b
       let professional = {
