@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional,getStates, getCountries, getCities } from "../../Redux-actions/index";
+import { postUser, postProfessional,getStates, getCountries, getCities, getUsers } from "../../Redux-actions/index";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -24,7 +24,6 @@ import ModalsErrors from '../ModalsErrors/ErrorsRouta'
 import Select from "react-select";
 import Footer from "../Footer/Footer";
 import "./Login.css";
-
 import { FcCheckmark } from "react-icons/fc"
 
 
@@ -48,7 +47,11 @@ function Login() {
   const [image, setImage] = useState(null)
   const [imageId, setImageId] = useState(null)
   const [prolicenceImage, setProLicenceImage] = useState(null)
+  
 
+  
+
+ 
 
   const [errors, setErrors] = useState({
     name: "",
@@ -236,6 +239,8 @@ function Login() {
 
   //const [image, setImage] = useState(null);
   async function handleSubmit(e) {
+
+   
     e.preventDefault();
     validate(post);
     validateProfessional(postprofessional);
@@ -269,7 +274,7 @@ function Login() {
         gps: post.gps,
         favorites: []
       };
-      console.log('post', post)
+      
 
       //b
       let professional = {
@@ -277,8 +282,6 @@ function Login() {
         licenceImage: prolicenceImage,
         userEmail: postprofessional.userEmail,
       };
-
-      console.log("estoy entrando aca")
       let userCreate = await dispatch(postUser(user));
       if (post.rol === "professional") {
         await dispatch(postProfessional(professional));
