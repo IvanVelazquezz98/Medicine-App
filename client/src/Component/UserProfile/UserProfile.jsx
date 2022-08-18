@@ -12,13 +12,10 @@ import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
 import Ad from "../Card/Ad";
-import AppCalendario from "../AppCalendario/AppCalendario.jsx";
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
-import Navbar from "../Navbar/Navbar";
-import CreateAppointments from "../CreateAppointments/CreateAppointments";
+import Navbar from '../Navbar/Navbar'
 import Login from "../Login/Login";
-
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
@@ -91,17 +88,13 @@ const UserProfile = ({ user }) => {
             </div>
             <div className="misbotones">
               {/* boton crear anuncio momentaneamente esta aca */}
-              {User.rol === "professional" && (
+              {User.rol === "professional" && 
                 <div>
                   <ModalCreateAdd user={user} />
-
-                  {/* <CreateAppointments user={user} /> */}
-                  {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
-                </div>
-              )}
+                </div>}
 
               {/* <div className="SignOut">
-      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */}
+      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */} 
               <div className="botonUser">
                 <Link to={"/profile/" + User.email}>
                   editar informacion de perfil
@@ -111,8 +104,7 @@ const UserProfile = ({ user }) => {
               <div>
                 <ModalUnsubscribe user={User} />
               </div>
-              {User.rol === "professional" &&
-                User.professional?.ads &&
+              {User.rol === "professional" && User.professional?.ads &&
                 User.professional?.ads.map((e) => {
                   return (
                     <div>
@@ -121,15 +113,12 @@ const UserProfile = ({ user }) => {
                         adID={e.id}
                         name={User.name}
                         email={User.email}
-                        medicalLicense={
-                          User.professional.professionalMedicalLicense
-                        }
+                        medicalLicense={User.professional.professionalMedicalLicense}
                         especialidad={e.specialty}
                         serviceType={e.serviceType}
                         precio={User.price}
                         ranking={User.professional.ranking}
-                        isProfesional={true}
-                      />
+                        isProfesional={true}/>
                       <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
                     </div>
                   );
@@ -151,3 +140,4 @@ const UserProfile = ({ user }) => {
 };
 
 export default UserProfile;
+
