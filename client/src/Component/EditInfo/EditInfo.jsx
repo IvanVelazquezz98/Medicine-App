@@ -8,12 +8,15 @@ import Navbar from '../Navbar/Navbar'
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './EditInfo.css'
-
+import {getAuth, updatePassword} from "firebase/auth";
+import Alert from 'react-bootstrap/Alert';
 
 
 export default function EditInfo() {
 
 
+ const auth =getAuth();
+ const user = auth.currentUser;
  const navigate = useNavigate();
  let {userId} =useParams();
  let dispatch = useDispatch();
@@ -23,10 +26,18 @@ export default function EditInfo() {
     dispatch(getUsersById(userId));
  },[dispatch])
  
+ let [alert, setAlert] = useState(false)
+ let [alert2, setAlert2] = useState(false)
  
+ let [password , setPassword] = useState({
+    password: "",
+    password2: "",
+ }) 
+
  let [editUser , setEditUser] = useState({
     name: User.name,
     password: User.password,
+    password2: User.password,
     dateOfBirth: User.dateOfBirth,
     identification: User.identification,
     userimage: User.userimage,
@@ -69,6 +80,27 @@ export default function EditInfo() {
     })
   }
 
+  function handleChangePass1(e){
+    if (password.password < 7){setAlert(1)}
+    e.preventDefault();
+    setPassword({
+        ...password,
+    [e.target.name] : e.target.value
+    })
+    if (password.password.length < 7){setAlert(true)}
+    if (password.password.length >= 7){setAlert(false)}
+  }
+
+  function handleChangePass2(e){
+    e.preventDefault();
+    setPassword({
+        ...password,
+    [e.target.name] : e.target.value
+    })
+    if (password.password !== password.password2){setAlert2(true)}
+    if (password.password == password.password2){setAlert2(false)}
+  }
+
   function handleChangeProfessional(e){
     e.preventDefault();
     setEditProfessional({
@@ -80,11 +112,16 @@ export default function EditInfo() {
 
   function handleSubmit(e){
     e.preventDefault();
+    if (password.password.length < 7){setAlert(true)}
+    if (password.password !== password.password2){setAlert2(true)}
+    if (password.password == password.password2 && password.password.length > 6){
+      updatePassword(user, password.password)
+    }
     dispatch(putEditInfoProfessional(editProfessional, User.professional.medicalLicense));
     dispatch(putEditInfoUser(editUser , userId));
     setEditUser({
         name: "",
-        password: "",
+        password:"",
         dateOfBirth: "",
         identification: "",
         userimage: "",
@@ -101,12 +138,17 @@ export default function EditInfo() {
         aboutMe: "",
         college: "",
     })
+    setPassword({
+      password:"",
+      password2:"",
+    })
+    setAlert(0);
     let path = "/home/validate"
     navigate(path)
   }
   
-
-
+ console.log(alert)
+ console.log(alert2)
   return (
     <div>
     <Navbar/>
@@ -131,16 +173,33 @@ export default function EditInfo() {
              <Form.Group className="mb-3" >
              <Form.Label>Contraseña: </Form.Label>
              <Form.Control 
-               type="text"
+               type="password"
                id="password"
                name="password"
-               value={editUser.password}
-               placeholder={User.password}
-               onChange={(e) => handleChangeUser(e)}
+               value={password.password}
+               placeholder={password.password}
+               onChange={(e) => handleChangePass1(e)}
                />
            </Form.Group>
-               
+           { (alert && password.password.length < 7) && (<Alert variant='warning' className="error" >la contraseña debe tener al menos 7 caracteres</Alert>)}
    </div>
+
+   <div>
+      
+             <Form.Group className="mb-3" >
+             <Form.Label> Confirmar contraseña: </Form.Label>
+             <Form.Control 
+               type="password"
+               id="password2"
+               name="password2"
+               value={password.password2}
+               placeholder={password.password2}
+               onChange={(e) => handleChangePass2(e)}
+               />
+           </Form.Group>
+      { (alert2 && password.password !== password.password2) && (<Alert variant='warning' className="error" >las contraseñas no coinciden</Alert>)}   
+   </div>
+
    <div>
    
              <Form.Group className="mb-3" >
@@ -332,7 +391,7 @@ export default function EditInfo() {
 
 <Button>Cerrar la cuenta</Button>
 <div className='hola'></div>
-<Footer/>
+{/* <Footer/> */}
     </div>
   )
 }
