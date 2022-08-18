@@ -39,6 +39,8 @@ function Login() {
   const firestore = getFirestore(firebaseApp);
   const [isRegister, setIsRegister] = useState(false);
   const [file, setFile] = useState(null);
+  const [fileId , setFileId] = useState(null)
+  const [filelicence , setFilelicence] = useState(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null)
@@ -151,7 +153,7 @@ function Login() {
   const handleImageId = async (e) => {
     e.preventDefault();
     try {
-      let url = await uploadFile(file);
+      let url = await uploadFile(fileId);
       setImageId(url);
     } catch (err) {
       console.log(err);
@@ -161,7 +163,7 @@ function Login() {
   const handleLicenceImage = async (e) => {
     e.preventDefault();
     try {
-      let url = await uploadFile(file);
+      let url = await uploadFile(filelicence);
       setProLicenceImage(url);
     } catch (err) {
       console.log(err);
@@ -303,6 +305,9 @@ function Login() {
       navigate("/");
     }
   }
+  console.log('file' , file)
+  console.log('fileId' , fileId)
+  console.log('filelicence' , filelicence)
 
 
   return (
@@ -414,7 +419,7 @@ function Login() {
                 <Form.Control
                   type="file"
                   name="idImage"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  onChange={(e) => setFileId(e.target.files[0])}
                 />
                 <button onClick={(e) => handleImageId(e)}>Subir Imagen</button>
                 {!imageId && (<Alert variant='warning' className="error"  >la foto dni es necesaria</Alert>)}
@@ -488,7 +493,7 @@ function Login() {
                     <Form.Control
                       type="file"
                       name="licenceImage"
-                      onChange={(e) => setFile(e.target.files[0])}
+                      onChange={(e) => setFilelicence(e.target.files[0])}
                     />
                     <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button>
                     {!prolicenceImage && (<Alert variant='warning' className="error" >la foto de la licencia es necesaria</Alert>)}
