@@ -3,9 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('https://i.pinimg.com/originals/de/a5/55/dea5551a58c21c1c87c711f01520daac.jpg');
+    position: relative;
     
-
 }
 
 /* @media (min-width: 1000px) {
@@ -19,12 +18,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 3px solid #95a6e6;
+    border: 3px solid rgba(39,103,187,1);
     margin:1rem;
     width:70%;
-    background-color:rgb(255, 255, 255,0.6);
+    background-color: cadetblue;
     
-
 }
 .formContainer{
     width: 50%;
