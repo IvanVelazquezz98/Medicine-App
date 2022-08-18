@@ -8,7 +8,8 @@ import {
   signInWithEmailAndPassword,
   signInWithRedirect,
   GoogleAuthProvider,
-  signOut
+  signOut,
+  AuthErrorCodes
 } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
@@ -24,6 +25,7 @@ import Select from "react-select";
 import Footer from "../Footer/Footer";
 import "./Login.css";
 
+import { FcCheckmark } from "react-icons/fc"
 
 
 
@@ -51,18 +53,13 @@ function Login() {
   const [errors, setErrors] = useState({
     name: "",
     email: "",
+    password: "",
     dateOfBirth: "",
     identification: "",
-    userimage: "",
     idImage: "",
     country: "",
-    city: "",
     address: "",
-    province: "",
-    phone: "",
-    rol: "",
-    gps: "",
-    favorites: [],
+    rol: ""
   })
 
   const [post, setPost] = useState({
@@ -86,12 +83,12 @@ function Login() {
 
   const [professionalError, setprofessionalError] = useState({
     medicalLicense: "",
-    licenceImage: "",
+    licenseImage: "",
     userEmail: "",
   })
   const [postprofessional, setpostprofessional] = useState({
     medicalLicense: "",
-    licenceImage: "",
+    licenseImage: "",
     userEmail: ""
   })
 
@@ -125,7 +122,7 @@ function Login() {
         // ...
       });
   }
-
+  console.log(errors)
   // registrar usuario
   async function userRegister(email, password, rol) {
     const userInfo = await createUserWithEmailAndPassword(
@@ -235,7 +232,6 @@ function Login() {
 
 
   }
- 
 
 
   //const [image, setImage] = useState(null);
@@ -333,6 +329,7 @@ function Login() {
               onChange={(e) => handleChange(e)}
             />
             {errors.email && (<Alert variant='warning' className="error" >{errors.email}</Alert>)}
+            {!errors.email && (<FcCheckmark/>)}
           </Form.Group>
 
           {/* password */}
@@ -346,6 +343,7 @@ function Login() {
               onChange={(e) => handleChange(e)}
             />
             {errors.password && (<Alert variant='warning' className="error" >{errors.password}</Alert>)}
+            {!errors.password && (<FcCheckmark/>)}
           </Form.Group>
           {(isRegister || auth?.currentUser?.email) && (
             <>
@@ -361,6 +359,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.name && (<Alert variant='warning' className="error" >{errors.name}</Alert>)}
+                {!errors.name && (<FcCheckmark/>)}
               </Form.Group>
 
               {/* rol */}
@@ -377,6 +376,7 @@ function Login() {
 
                 </Form.Select>
                 {errors.rol && (<Alert variant='warning' className="error" >{errors.rol}</Alert>)}
+                {!errors.rol && (<FcCheckmark/>)}
               </Form.Group>
 
               {/* fecha de nacimiento */}
@@ -389,6 +389,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.dateOfBirth && (<Alert variant='warning' className="error" >{errors.dateOfBirth}</Alert>)}
+                {!errors.dateOfBirth && (<FcCheckmark/>)}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -400,6 +401,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.identification && (<Alert variant='warning' className="error" >{errors.identification}</Alert>)}
+                {!errors.identification && (<FcCheckmark/>)}
               </Form.Group>
 
               {/*  Imagen de usuario */}
@@ -422,13 +424,16 @@ function Login() {
                   onChange={(e) => setFileId(e.target.files[0])}
                 />
                 <button onClick={(e) => handleImageId(e)}>Subir Imagen</button>
-                {errors.idImage && (<p className="error">{errors.idImage}</p>)}
+                {!imageId && (<Alert variant='warning' className="error"  >la foto dni es necesaria</Alert>)}
+                {imageId && (<FcCheckmark/>)}
               </Form.Group>
 
                {/* Pais */}
                <Form.Group className="mb-3" >
               <Form.Label>Pais: </Form.Label>
                 <Select  onChange={handleCountries} name='countries' options= {countriesOptions} placeholder='Seleccione un Pais'/>
+                {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)}
+                {!errors.country && (<FcCheckmark/>)}
                 </Form.Group>
 
 
@@ -454,6 +459,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.address && (<Alert variant='warning' className="error" >{errors.address}</Alert>)}
+                {!errors.address && (<FcCheckmark/>)}
               </Form.Group>
 
               {/*  Telefono */}
@@ -465,7 +471,6 @@ function Login() {
                   name="phone"
                   onChange={(e) => handleChange(e)}
                 />
-                {errors.phone && (<Alert variant='warning' className="error" >{errors.phone}</Alert>)}
               </Form.Group>
 
               {/*  Ubicacion GPS */}
@@ -493,6 +498,8 @@ function Login() {
                       onChange={(e) => setFilelicence(e.target.files[0])}
                     />
                     <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button>
+                    {!prolicenceImage && (<Alert variant='warning' className="error" >la foto de la licencia es necesaria</Alert>)}
+                    {prolicenceImage && (<FcCheckmark/>)}
                   </Form.Group>
 
                   <Form.Group className="mb-3" >
@@ -504,6 +511,7 @@ function Login() {
                       onChange={(e) => handleChange(e)}
                     />
                     {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicensea}</Alert>)}
+                    {!professionalError.medicalLicense && (<FcCheckmark/>)}
                   </Form.Group>
 
 
@@ -514,12 +522,33 @@ function Login() {
             </>
           )}
 
+          {post.rol == "user" ?
+           (isRegister || auth?.currentUser?.email) &&(errors.email == "")&& (errors.name =="") && (errors.dateOfBirth =="")&& (errors.identification =="")&& (imageId)&& (errors.country =="")&& (errors.address =="")&& (errors.rol =="")&&
           <div className="formButtons">
             {/* Submit form button */}
             <Button variant="success" type="submit">
-              {isRegister || auth?.currentUser?.email ? "Registrarse" : " Inicia Sesión"}
+              Registrarse
+            </Button>
+          </div> :
+              (isRegister || auth?.currentUser?.email) &&(errors.email == "")&& (errors.name =="") && (errors.dateOfBirth =="")&& (errors.identification =="")&& (imageId)&& (errors.country =="")&& (errors.address =="")&& (errors.rol =="")&& (prolicenceImage) && (professionalError.medicalLicense == "") &&
+                  <div className="formButtons">
+                    {/* Submit form button */}
+                    <Button variant="success" type="submit">
+                               Registrarse
+                     </Button>
+                  </div> 
+              }
+
+{
+           (!isRegister && !auth?.currentUser?.email) && (errors.email =="") && (errors.password =="") &&
+          <div className="formButtons">
+            {/* Submit form button */}
+            <Button variant="success" type="submit">
+              iniciar sesion 
             </Button>
           </div>
+        }
+
         </Form>
 
         <div className="registerNforgottenButtons">
