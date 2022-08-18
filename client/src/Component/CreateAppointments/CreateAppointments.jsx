@@ -8,6 +8,7 @@ import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import './CreateAppointments.css'
 import moment from 'moment';
+import AppCalendario from "../AppCalendario/AppCalendario";
 import { useNavigate, useParams } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
 const format = "DD/MM/YYYY";
@@ -18,8 +19,8 @@ function CreateAppointments({user}) {
 
   const dispatch = useDispatch();
   // const User = useSelector((state) => state.userDetail)
-  const ad = useSelector((state) => state.adDetail)
-
+  const adDetail = useSelector((state) => state.adDetail)
+console.log('adDetail', adDetail);
   const morningHours = useSelector((state)=>state.morningHours)
   //console.log('estado', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
@@ -68,6 +69,7 @@ function CreateAppointments({user}) {
         duration:duration
     }
     dispatch(createMorningHours(morningHours))
+    setDuration(10)
    }
 
    
@@ -87,6 +89,7 @@ function CreateAppointments({user}) {
         duration:duration
     }
     dispatch(createAfternoonHours(afternoonHours))
+    setDuration(10)
    }
 
    function newTimeRange(){
@@ -108,7 +111,7 @@ function CreateAppointments({user}) {
       let appointments={
         dates:dateArray,
         hours: morningHours.concat(afternoonHours),
-        professionalMedicalLicense: ad.professionalMedicalLicense,
+        professionalMedicalLicense: adDetail.professionalMedicalLicense,
         ad:adId
       }
       console.log(appointments);
@@ -120,12 +123,19 @@ function CreateAppointments({user}) {
     }
    }
 
-   
+   let apps = adDetail.appointments?.length
+   console.log(apps);
 
   return (
     <>
     <Navbar/>
     <div >
+    { apps>0?
+      <div>
+        <h1>Edita tus turnos</h1>
+        <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={true}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
+      </div>
+   :null}
       <div className="conteinerDate">
       <h1>Crea tus turnos</h1>
       <div style={{ textAlign: "center" }}>
@@ -157,6 +167,7 @@ function CreateAppointments({user}) {
         endMoment={endTime}
         onStartTimeChange={handleStartTimeChange}
         onEndTimeChange={handleEndTimeChange}
+        
         />
         {/* <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p> */}    
         <button className="button" onClick={submitTimeRange}>Confirme rango horario</button>

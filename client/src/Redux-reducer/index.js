@@ -15,7 +15,7 @@ const inicialState = {
   cities:[],
   userRestore:{},
   eventClick:{},
-  selected:false,
+  selectedTime:false,
   availablesApps:[],
   userAppointments:[]
 
@@ -222,6 +222,11 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         availablesApps: action.payload,
       };
+    case 'EVENT_SELECTED':
+      return{
+        ...state,
+        selectedTime:action.payload
+      }
 
     default:
       return state;

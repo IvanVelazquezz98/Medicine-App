@@ -8,7 +8,7 @@ import AppCalendario from '../AppCalendario/AppCalendario'
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
 
-export default function AdDetail() {
+export default function AdDetail({isProfesional}) {
     const dispatch = useDispatch()
     const {adID} = useParams()
     const User = useSelector((state) => state.userDetail);
@@ -45,7 +45,7 @@ export default function AdDetail() {
         </div>
         <div>
           { !adDetail.professional?.medicalLicense ? <p>Loading ..</p>:
-            <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={false}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
+            <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={isProfesional}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
           }
         </div>
         <Footer/>

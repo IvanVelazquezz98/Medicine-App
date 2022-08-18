@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { putEditAppointment } from "../../Redux-actions";
+import { putEditAppointment, selectedTime } from "../../Redux-actions";
 // import './Payment.css'
 
 const CARD_OPTIONS = {
@@ -51,6 +51,7 @@ let idApp=info
   const handleClose = () =>{
     setShow(false)
     dispatch(putEditAppointment({status:'available', userEmail: userEmail},idApp))
+    dispatch(selectedTime(false))
   } ;
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
@@ -78,6 +79,7 @@ let idApp=info
           console.log("Successful payment");
           setSuccess(true);
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
+          dispatch(selectedTime(false))
           navigate('/home/validate')
         }
       } catch (error) {
