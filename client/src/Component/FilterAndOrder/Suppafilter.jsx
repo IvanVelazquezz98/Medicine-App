@@ -29,13 +29,15 @@ export default function Suppafilter() {
   });
 
   //--countries
-  let country = allAds.map((e) => {
-    return e.professional?.user?.country;
-  });
-  let setCountry = [...new Set(country)];
-  const countries = setCountry.map((e) => {
-    return { value: e, label: e };
-  });
+
+ 
+
+  let country= allAds.map(e=>{
+    return e.professional?.user?.country
+   });
+   let setCountry= [...new Set(country)];
+  const countries= setCountry.map(e=> {return{value:e, label:e}});
+
 
   //--provinces
   let prov = ads.map((e) => {
@@ -56,7 +58,7 @@ export default function Suppafilter() {
 
   const cities = setCity.map((e) => {
     return { value: e, label: e };
-  });
+ })
 
   //opciones de servicios
   const services = [

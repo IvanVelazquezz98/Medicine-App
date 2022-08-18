@@ -1,11 +1,11 @@
-.ValidateCOntainer{
+/* .ValidateCOntainer{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url('https://i.pinimg.com/originals/de/a5/55/dea5551a58c21c1c87c711f01520daac.jpg');
     
 
-}
+} */
 
 /* @media (min-width: 1000px) {
     .ValidateCOntainer {
@@ -13,7 +13,7 @@
         background-image: url('https://i.pinimg.com/originals/de/a5/55/dea5551a58c21c1c87c711f01520daac.jpg');
    }
 } */
-
+/* 
 .Validate{
     display: flex;
     flex-direction: column;
@@ -24,8 +24,8 @@
     background-color:rgb(255, 255, 255,0.6);
     
 
-}
-.formContainer{
+} */
+/* .formContainer{
     width: 50%;
 }
 .registerNforgottenButtons{
@@ -37,4 +37,4 @@
 }
 .registerNforgottenButtons button{
     margin: 5px 0px 5px 0px;
-}
+} */

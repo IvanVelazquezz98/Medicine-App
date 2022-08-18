@@ -127,3 +127,7 @@
     width: 120px;
 
 }
+
+.NavBarLoginFooterContainer{
+    display: flex;
+}

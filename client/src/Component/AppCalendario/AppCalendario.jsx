@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import es from 'date-fns/locale/es/'
 //import DatePicker, { DateObject } from "react-multi-date-picker";
 //import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import { getAppointmentsByAdAvailable, getProfessionalApps } from '../../Redux-actions';
+import { getAppointmentsByAdAvailable, getProfessionalApps, selectedTime } from '../../Redux-actions';
 import Modal from './Modal';
 import ModalCalendar from './Modal';
 
@@ -29,13 +29,14 @@ const localizer = dateFnsLocalizer({
 })
 
 
-function AppCalendario({professionalMedicalLicense,name, ad, isProfessional}) {
+function AppCalendario({professionalMedicalLicense,name, ad, isProfesional}) {
 const dispatch = useDispatch();
 const availablesApps =  useSelector((state)=>state.availablesApps)
 const professionalApps =  useSelector((state)=>state.professionalAppointments)
+const selected = useSelector((state)=>state.selectedTime)
 // console.log('licencia=>',professionalMedicalLicense,'adID=>',adId,'name=>',name,'ad=>',ad)
 
- const [selected, setSelected] = useState(false);
+
  const [eventSelected, setEventSelected]=useState({})
 //  console.log('lo se todo', selected)
 //  console.log('lo se todo2', professionalMedicalLicense)
@@ -45,7 +46,7 @@ const professionalApps =  useSelector((state)=>state.professionalAppointments)
 
 useEffect(() => {
   
-    if(isProfessional){
+    if(isProfesional){
       return dispatch(getProfessionalApps(professionalMedicalLicense))
     }
     dispatch(getAppointmentsByAdAvailable(ad.id));
@@ -60,10 +61,7 @@ useEffect(() => {
   
 const handleSelected = (e) => {
   setEventSelected(e)
-  if(selected == true){
-    setSelected(false)
-  }// console.log('soy SetEventSelected', e )
-  setSelected(true);
+  dispatch(selectedTime(true))
   
 }; 
 // console.log('soy eventSelected',eventSelected)
@@ -72,7 +70,7 @@ const handleSelected = (e) => {
 
 //   console.log('apps',professionalAppointments);
  let appsEvents
-if(isProfessional){
+if(isProfesional){
   appsEvents = professionalApps.map(app=>{
     return({
       id: app.id,
@@ -133,7 +131,7 @@ console.log('availablesApps=>', availablesApps)
       min={new Date(1, 1, 1, 8, 0, 0)}
       max={new Date(1, 1, 1, 21, 59, 0)}
       style = {{height: 400, width: 500, margin: '10px'}}/>
-       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense} name={name}ad={ad} />:null} 
+       {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense} name={name}ad={ad} isProfesional={isProfesional}/>:null} 
     </div>
     
   );

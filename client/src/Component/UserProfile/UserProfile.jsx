@@ -10,15 +10,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
-import './StyleProfile.css';
+import "./StyleProfile.css";
 import Ad from "../Card/Ad";
-import AppCalendario from '../AppCalendario/AppCalendario.jsx'
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
-import CreateAppointments from "../CreateAppointments/CreateAppointments";
 import Login from "../Login/Login";
-import Footer from '../Footer/Footer'
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
@@ -35,39 +32,28 @@ const UserProfile = ({ user }) => {
   useEffect(() => {
     dispatch(getUsersById(user?.email?.toLowerCase()));
     if (favML && user?.email) {
-      dispatch(addFavorite(favorites))
-
+      dispatch(addFavorite(favorites));
     }
   }, [dispatch]);
 
-
-
-
   let favML = JSON.parse(localStorage.getItem("ml"));
-
 
   let favorites = {
     userEmail: user?.email,
-    medicalLicense: favML
-  }
-
-
-
+    medicalLicense: favML,
+  };
 
   return (
     <div>
-      {User.email && !User.active &&
-        navigate("/recover")
-      }
+      {User.email && !User.active && navigate("/recover")}
 
-      {User.email ?
+      {User.email ? (
         <div>
           <Navbar user={user} />
           <div className="nuestracontainer">
             {/* Boton provisorio hasta que este la NAV BAR lleva a HOME */}
 
             <div className="primercont">
-
               <div className="micontainerImage">
                 <ImageUser image={User.userimage} />
                 <div >
@@ -100,10 +86,14 @@ const UserProfile = ({ user }) => {
 
 
             </div>
+<<<<<<< HEAD
            { User.rol === "usuario" &&
            <>
            <div className="seconcont">
 
+=======
+            <div className="seconcont">
+>>>>>>> 41a8a841e4ce21b2914d506dd0cb7e68b9e2485c
               <div className="medicalRecorder">
                 <MedicalRecordUser />
               </div>
@@ -118,6 +108,7 @@ const UserProfile = ({ user }) => {
           ))}
       </div> */}
             </div>
+<<<<<<< HEAD
             <div >
                 <Appointments user={User} />
               </div>
@@ -141,6 +132,30 @@ const UserProfile = ({ user }) => {
               <div className="adsprofile">
               {(User.rol === "professional") && (User.professional?.ads) &&
 
+=======
+            <div>
+              <Appointments user={User} />
+            </div>
+            <div className="misbotones">
+              {/* boton crear anuncio momentaneamente esta aca */}
+              {User.rol === "professional" && 
+                <div>
+                  <ModalCreateAdd user={user} />
+                </div>}
+
+              {/* <div className="SignOut">
+      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */} 
+              <div className="botonUser">
+                <Link to={"/profile/" + User.email}>
+                  editar informacion de perfil
+                </Link>
+              </div>
+              {/* </div> */}
+              <div>
+                <ModalUnsubscribe user={User} />
+              </div>
+              {User.rol === "professional" && User.professional?.ads &&
+>>>>>>> 41a8a841e4ce21b2914d506dd0cb7e68b9e2485c
                 User.professional?.ads.map((e) => {
                   return (
                     <div>
@@ -154,10 +169,10 @@ const UserProfile = ({ user }) => {
                         serviceType={e.serviceType}
                         precio={User.price}
                         ranking={User.professional.ranking}
-                        isProfesional={true} />
+                        isProfesional={true}/>
                       <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
-
                     </div>
+<<<<<<< HEAD
                     
 
                   )
@@ -168,13 +183,22 @@ const UserProfile = ({ user }) => {
             </div>
             <div>
               {/*  <Footer/> */}
+=======
+                  );
+                })}
+>>>>>>> 41a8a841e4ce21b2914d506dd0cb7e68b9e2485c
             </div>
+            <div>{/*  <Footer/> */}</div>
           </div>
         </div>
-
-        :
-
-        <div> <Navbar /> <div ><Login /> </div><div className='space'> <Footer /></div></div>}
+      ) : (
+        <div className="NavBarLoginFooterContainer">
+          <Navbar />
+          <div>
+            <Login />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
