@@ -13,7 +13,7 @@ function Services() {
       <Ads/>
       
      
-      <Footer/>
+      {/* <Footer/> */}
       
     </div>
   )

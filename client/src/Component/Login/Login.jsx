@@ -17,11 +17,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalForgotPsw from "./ModalForgotPsw";
-import "./Login.css";
 import { validate, validateProfessional } from './validate'
 import Alert from 'react-bootstrap/Alert';
 import ModalsErrors from '../ModalsErrors/ErrorsRouta'
 import Select from "react-select";
+import Footer from "../Footer/Footer";
+import "./Login.css";
 
 
 
@@ -552,6 +553,7 @@ function Login() {
           </Button> */}
         </div>
       </div>
+      {/* <Footer/> */}
     </div>
   );
 }
