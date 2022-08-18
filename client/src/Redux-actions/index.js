@@ -383,10 +383,10 @@ export function getCities (countryId, stateId){
 
 
 
-  export function infoCalendarEvent(e) {
+  export function selectedTime(payload) {
     return{
-        type:'INFO_CALENDAR_EVENT',
-        payload: e
+        type:'EVENT_SELECTED',
+       payload
     }
 }
 
@@ -403,6 +403,16 @@ export function getAppointmentsByAdAvailable(adId) {
   }
 
 };
+export function deleteAppointment(idApp) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.delete(`${BASE_URL}/delete/${idApp}`);
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 
 

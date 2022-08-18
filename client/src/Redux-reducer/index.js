@@ -15,7 +15,7 @@ const inicialState = {
   cities:[],
   userRestore:{},
   eventClick:{},
-  selected:false,
+  selectedTime:false,
   availablesApps:[],
   userAppointments:[]
 };
@@ -219,16 +219,10 @@ const rootReducer = (state = inicialState, action) => {
           userRestore:action.payload
         }
 
-
-
-
-
-    
-      case 'INFO_CALENDAR_EVENT':
+      case 'EVENT_SELECTED':
         return{
           ...state,
-          eventClick: action.payload,
-          selected:true
+          selectedTime:action.payload
         }
         case 'GET_AVAILABLE_APPS':
       console.log('reducer', action.payload)

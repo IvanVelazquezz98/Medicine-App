@@ -12,11 +12,9 @@ import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import './StyleProfile.css';
 import Ad from "../Card/Ad";
-import AppCalendario from '../AppCalendario/AppCalendario.jsx'
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
-import CreateAppointments from "../CreateAppointments/CreateAppointments";
 import Login from "../Login/Login";
 import Footer from '../Footer/Footer'
 import ModalCreateAdd from "../CreateAd/Modal";
@@ -109,14 +107,8 @@ const UserProfile = ({ user }) => {
                 <div>
                   <ModalCreateAdd user={user} />
 
-                  {/* <CreateAppointments user={user} /> */}
-                  {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
                 </div>}
 
-
-
-              {/* <div className="SignOut">
-      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */}
               <div className="botonUser">
                 <Link to={"/profile/" + User.email}>
                   editar informacion de perfil
