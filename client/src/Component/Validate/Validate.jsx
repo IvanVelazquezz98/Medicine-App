@@ -7,7 +7,6 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import UserProfile from "../UserProfile/UserProfile";
 import NavBar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
-import './Validate.css'
 import { getUsersById } from "../../Redux-actions";
 
 

@@ -3,31 +3,39 @@
   } */
   
   .Iam {
-    margin-left: -15%;
-    padding: 2em 5em;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20rem;
     font: normal 40px/50px Montserrat, sans-serif;
     color: rgb(0, 99, 160, 1);
+    margin-left: 2rem;
   }
-  .Iam p {
-    height: 50px;
-    float: left;
-    margin-right: 0.3em;
+
+  .infoCircuito,.titleAyDOc,.eresProfesional,.CItasCOntainer{
+    margin-top: 30px;
   }
+  
+  .CItasCOntainer{
+    display: flex;
+  }
+  
+  .buttonLinks{
+    background-color: #24a85b;
+  }
+  
   .Iam b {
-    float: left;
     overflow: hidden;
-    position: relative;
     height: 50px;
     top: 40px;
+    margin-left: 18px;
   }
+
+
   .Iam .innerIam {
-    display: inline-block;
     color: #24a85b;
     position: relative;
-    /* white-space: nowrap; */
-    top: 0;
-    left: 0;
-  
+   
+ 
   
   /*animation*/
   -webkit-animation:move 5s;
