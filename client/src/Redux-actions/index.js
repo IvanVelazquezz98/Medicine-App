@@ -94,7 +94,7 @@ export function getAdById (id) {
 export function filterAllAds({specialty,country,province, city, typeService}) {
  
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3001/filter?typeService=${typeService}&specialty=${specialty}&country=${country}&province=${province}&city=${city}`)
+    var json = await axios.get(`${BASE_URL}/filter?typeService=${typeService}&specialty=${specialty}&country=${country}&province=${province}&city=${city}`)
     return dispatch({ type: 'FILTER_ALL_ADS', payload: json.data})
   }
 

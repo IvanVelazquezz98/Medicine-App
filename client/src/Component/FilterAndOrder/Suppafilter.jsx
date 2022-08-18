@@ -34,7 +34,7 @@ export default function Suppafilter() {
 
   //--countries
   let country= allAds.map(e=>{
-    return e.professional.user.country
+    return e.professional?.user?.country
    });
    let setCountry= [...new Set(country)];
   const countries= setCountry.map(e=> {return{value:e, label:e}});
@@ -43,7 +43,7 @@ export default function Suppafilter() {
   
   //--provinces
   let prov = ads.map((e) => {
-    return e.professional.user.province;
+    return e.professional?.user?.province;
   });
   let setProvince = [...new Set(prov)];
   let provinces = setProvince.map((e) => {
@@ -53,7 +53,7 @@ export default function Suppafilter() {
   //--cities
   
   let city= ads.map(e=>{
-    return e.professional.user.city
+    return e.professional?.user?.city
   });
   
   let setCity= [...new Set(city)];
@@ -89,6 +89,9 @@ export default function Suppafilter() {
     searchParams.set([action.name], value.value);
     setSearchParams(searchParams)
     console.log(action)
+
+    
+
     
   };
  
@@ -104,6 +107,7 @@ export default function Suppafilter() {
     useEffect(() => {
       console.log(Object.fromEntries([...searchParams]));
       dispatch(filterAllAds(Object.fromEntries([...searchParams])))
+      
     }, [searchParams])
     
 
@@ -143,7 +147,7 @@ export default function Suppafilter() {
      
   </div>
   <div className="service">
-  <Select isClearable={true} name={'serviceType'} onChange={handleFilter} options={services} placeholder='filtra por tipo de servicio'/> 
+  <Select isClearable={true} name={'typeService'} onChange={handleFilter} options={services} placeholder='filtra por tipo de servicio'/> 
   
   </div>
   </>
