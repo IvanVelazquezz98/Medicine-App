@@ -95,7 +95,7 @@ if(isProfesional){
     )})
 }
 
-console.log('availablesApps=>', availablesApps)
+console.log('availablesAppsEvents=>', appsEvents)
 
 
 
