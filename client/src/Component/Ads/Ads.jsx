@@ -15,7 +15,7 @@ export default function Ads() {
  let ads = useSelector(state=>state.ads)
  let user = useSelector(state=>state.userDetail)
 
- 
+ console.log('soy el estado', ads);
 
  useEffect(()=>{
     dispatch(getAds())
@@ -55,10 +55,12 @@ function handleRemoveFavorites(e){
       <div className='sidebar'>
       <Suppafilter /> 
       </div>
+      <div className='ads'>
       {ads?ads.map(ad=>{
           if(ad.professional?.user?.rol==="professional" && ad.professional.user.active){
+            
         return(
-          <div className='ads'>
+          <div >
           
 
           <Ad adID={ad.id}
@@ -74,7 +76,8 @@ function handleRemoveFavorites(e){
           <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button> */}
           </div>
         )}
-        }):null}
+        }):null
+        }</div>
     </div>
   )
 }

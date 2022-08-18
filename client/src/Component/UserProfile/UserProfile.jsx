@@ -70,6 +70,11 @@ const UserProfile = ({ user }) => {
 
               <div className="micontainerImage">
                 <ImageUser image={User.userimage} />
+                <div >
+                <Link to={"/profile/" + User.email}>
+                  editar informacion de perfil
+                </Link>
+              </div>
               </div>
               <div className="micontainerInfo ">
                 <InfoUser
@@ -81,8 +86,23 @@ const UserProfile = ({ user }) => {
                   birthdate={User.dateOfBirth}
                 />
               </div>
+              <div>
+                <ModalUnsubscribe user={User} />
+              </div>
+              {/* boton crear anuncio momentaneamente esta aca */}
+              {User.rol === "professional" &&
+                <div>
+                  <ModalCreateAdd user={user} />
+
+                  {/* <CreateAppointments user={user} /> */}
+                  {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
+                </div>}
+
+
             </div>
-            <div className="seconcont">
+           { User.rol === "usuario" &&
+           <>
+           <div className="seconcont">
 
               <div className="medicalRecorder">
                 <MedicalRecordUser />
@@ -101,42 +121,35 @@ const UserProfile = ({ user }) => {
             <div >
                 <Appointments user={User} />
               </div>
+              </>
+              }
             <div className="misbotones">
               
 
-              {/* boton crear anuncio momentaneamente esta aca */}
-              {User.rol === "professional" &&
-                <div>
-                  <ModalCreateAdd user={user} />
-
-                  {/* <CreateAppointments user={user} /> */}
-                  {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
-                </div>}
-
+              
 
 
               {/* <div className="SignOut">
       <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */}
-              <div className="botonUser">
-                <Link to={"/profile/" + User.email}>
-                  editar informacion de perfil
-                </Link>
-              </div>
+              
               {/* </div> */}
-              <div>
-                <ModalUnsubscribe user={User} />
-              </div>
+              
+              <div className="conteinerads">
+
+              <h1>Tus Anuncios</h1>
+              
+              <div className="adsprofile">
               {(User.rol === "professional") && (User.professional?.ads) &&
 
                 User.professional?.ads.map((e) => {
                   return (
                     <div>
-                      <h1>Tus Anuncios</h1>
+                      
                       <Ad
                         adID={e.id}
                         name={User.name}
                         email={User.email}
-                        medicalLicense={User.professional.professionalMedicalLicense}
+                        medicalLicense={User.professional.medicalLicense}
                         especialidad={e.specialty}
                         serviceType={e.serviceType}
                         precio={User.price}
@@ -145,9 +158,12 @@ const UserProfile = ({ user }) => {
                       <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
 
                     </div>
+                    
 
                   )
                 })}
+              </div>
+              </div>
 
             </div>
             <div>
