@@ -22,9 +22,9 @@ function CreateAppointments({user}) {
   const adDetail = useSelector((state) => state.adDetail)
 console.log('adDetail', adDetail);
   const morningHours = useSelector((state)=>state.morningHours)
-  //console.log('estado', morningHours);
+  //console.log('estadomorning', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
-  console.log('estado', morningHours);
+  console.log('estado', afternoonHours);
 
 
 
@@ -43,7 +43,7 @@ console.log('adDetail', adDetail);
   const [afternoonStartTime, setAfternoonStartTime] = useState('');
   const [afternoonEndTime, setAfternoonEndTime] = useState('');
 
-  const [duration, setDuration]=useState(10)
+  const [duration, setDuration]=useState()
   const [timeRanges, setTimeRanges]=useState(false)
 
   function handleStartTimeChange(e){
@@ -69,7 +69,7 @@ console.log('adDetail', adDetail);
         duration:duration
     }
     dispatch(createMorningHours(morningHours))
-    setDuration(10)
+    setDuration()
    }
 
    
@@ -89,7 +89,7 @@ console.log('adDetail', adDetail);
         duration:duration
     }
     dispatch(createAfternoonHours(afternoonHours))
-    setDuration(10)
+    setDuration()
    }
 
    function newTimeRange(){
@@ -99,9 +99,12 @@ console.log('adDetail', adDetail);
    function handleChange(e){
     setDuration(e.target.value)
    }
-   let hours= morningHours
+   
+   let hours= morningHours.map(hr=>{return hr.start })
+   
    if(afternoonHours){
-    hours.concat(afternoonHours)
+    let aftHours = afternoonHours.map(hr=>{return hr.start})
+    hours.concat(aftHours)
    }
    const navigate=useNavigate()
    function submitAll(e){
@@ -125,6 +128,7 @@ console.log('adDetail', adDetail);
 
    let apps = adDetail.appointments?.length
    console.log(apps);
+   console.log('duracion',duration);
 
   return (
     <>
@@ -140,8 +144,17 @@ console.log('adDetail', adDetail);
       <h1>Crea tus turnos</h1>
       <div style={{ textAlign: "center" }}>
       <p>cuanto dura su turno</p>
-      <input placeholder='Cuanto dura su turno?'  type="range" min="10" max="60" name='duration' step='10' onChange={(e)=>handleChange(e)}></input>
-        <p>{duration} mins</p>
+      <select value={duration} onChange={(e)=>handleChange(e)} >
+      <option value='selected' hidden >Duracion del turno</option>
+            <option value ={10} >10 mins</option>
+            <option value ={20}>20 mins</option>
+            <option value ={30}>30 mins</option>
+            <option value ={40}>40 mins</option>
+            <option value ={50}>50 mins</option>
+            <option value ={60}>60 mins</option>
+        </select>
+        {duration===null?null:<p>{duration} mins</p>}
+        <p></p>
         <p>elegi tus dias de trabajo</p>
         <DatePicker
             placeholder="elige tus fechas"
@@ -172,7 +185,7 @@ console.log('adDetail', adDetail);
         {/* <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p> */}    
         <button className="button" onClick={submitTimeRange}>Confirme rango horario</button>
         <div className="hourContainer">
-        {morningHours.length>0?morningHours.map((h,i)=><div className="li"><p className="li"  key={i}>{h};</p></div>):null}
+        {morningHours.length>0?morningHours.map((h,i)=><div className="li"><p className="li"  key={i}>{h.start};</p></div>):null}
         </div>
         <button className="button" onClick={newTimeRange}>Seleccione otro rango horario para el mismo dia</button>
         
@@ -184,7 +197,7 @@ console.log('adDetail', adDetail);
         onEndTimeChange={handleEndTimeChange} />
         {/* <p>rango horario turno tarde: {afternoonStartTime} - {afternoonEndTime}</p> */}
         <button className="button" onClick={submitTimeRange2}>Confirme rango horario</button>
-        {afternoonHours.length>0?afternoonHours.map((h,i)=><div className="li"><p  key={i}>{h};</p></div>):null}
+        {afternoonHours.length>0?afternoonHours.map((h,i)=><div className="li"><p  key={i}>{h.start};</p></div>):null}
         </>
         
         :null}
@@ -192,7 +205,7 @@ console.log('adDetail', adDetail);
         <button className="button" onClick={(e)=>submitAll(e)}>Confirma tus turnos</button>
         
         </div>
-          <Footer/>
+          {/* <Footer/> */}
     </div>
     </>
   );
