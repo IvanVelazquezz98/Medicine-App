@@ -34,7 +34,7 @@ export default function Suppafilter() {
 
   //--countries
   let country= allAds.map(e=>{
-    return e.professional.user.country
+    return e.professional?.user?.country
    });
    let setCountry= [...new Set(country)];
   const countries= setCountry.map(e=> {return{value:e, label:e}});
@@ -43,7 +43,7 @@ export default function Suppafilter() {
   
   //--provinces
   let prov = ads.map((e) => {
-    return e.professional.user.province;
+    return e.professional?.user?.province;
   });
   let setProvince = [...new Set(prov)];
   let provinces = setProvince.map((e) => {
@@ -53,7 +53,7 @@ export default function Suppafilter() {
   //--cities
   
   let city= ads.map(e=>{
-    return e.professional.user.city
+    return e.professional?.user?.city
   });
   
   let setCity= [...new Set(city)];
