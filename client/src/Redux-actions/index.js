@@ -172,17 +172,33 @@ export function addFavorite(payload) {
   }
 
   export function createMorningHours (payload) {
-      return{
-        type:'CREATE_MORNING_HOURS',
-        payload
-    }
+    console.log('actions', payload)
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`${BASE_URL}/appointment/hours`, payload);
+        console.log('recibo en action=>', json.data)
+        return dispatch({
+          type:'CREATE_MORNING_HOURS',
+          payload: json.data
+        })
+      } catch (error) {
+        console.log('no recibo en action por este error==>',error);
+      }
+    };
   }
 
   export function createAfternoonHours (payload) {
-    return{
-      type:'CREATE_AFTERNOON_HOURS',
-      payload
-  }
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`${BASE_URL}/appointment/hours`, payload);
+        return dispatch({
+          type:'CREATE_AFTERNOON_HOURS',
+          payload: json.data
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    };
 }
 
 
@@ -249,7 +265,7 @@ export function deleteUserByID(userId){
 
   export function putEditInfoAd(payload, idAd) {
     return async function (dispatch) {
-      console.log(payload , idAd)
+      // console.log(payload , idAd)
       try {
         await axios.put(`${BASE_URL}/Ad/${idAd}`, payload);
       } catch (error) {
@@ -261,7 +277,7 @@ export function deleteUserByID(userId){
 
   export function putEditInfoUser(payload , idUser) {
     return async function (dispatch) {
-      console.log(payload , idUser)
+      // console.log(payload , idUser)
       try {
          await axios.put(`${BASE_URL}/user/${idUser}`, payload);
       } catch (error) {
@@ -273,8 +289,8 @@ export function deleteUserByID(userId){
   
   export function putEditInfoProfessional(payload , idUser) {
     return async function (dispatch) {
-      console.log(payload , idUser)
-      console.log("llegue aca")
+      // console.log(payload , idUser)
+      // console.log("llegue aca")
       try {
          await axios.put(`${BASE_URL}/professional/${idUser}`, payload);
       } catch (error) {
@@ -286,7 +302,7 @@ export function deleteUserByID(userId){
 
   export function putEditAppointment(payload , idApp) {
     return async function (dispatch) {
-      console.log('modifico de App=>',payload , 'Soy appID=>',idApp)
+      // console.log('modifico de App=>',payload , 'Soy appID=>',idApp)
       try {
          await axios.put(`${BASE_URL}/appointments/edit/${idApp}`, payload);
       } catch (error) {
@@ -348,11 +364,13 @@ export function deleteUserByID(userId){
 
 //get  countries, states and citys for input login
 export function getCountries (){
+ 
   return async (dispatch) =>{
     
     try {
         var json= await axios.get(`http://localhost:3001/countries`);
-    return dispatch({type:'GET_COUNTRIES', payload: json.data})
+      
+      return dispatch({type:'GET_COUNTRIES', payload: json.data})
     } catch (error) {
      console.log(error)
     }
