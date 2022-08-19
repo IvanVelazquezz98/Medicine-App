@@ -1,6 +1,6 @@
 import React from "react";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { Link, useNavigate } from "react-router-dom";
 import "./Ad.css";
 
@@ -14,48 +14,53 @@ export default function Ad({
   adID,
   userimage,
   isProfesional,
-  email
+  email,
 }) {
-
-  const navigate = useNavigate()
-  function handleNavigate(){
-    navigate('/calendar')
+  const navigate = useNavigate();
+  function handleNavigate() {
+    navigate("/calendar");
   }
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={userimage} />
-      <Card.Body>
-        <Card.Title style={{ background: 'white' }}><Link
-              to={`/professional/` + medicalLicense}
-            >{name} - ML {medicalLicense}
-        </Link></Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{especialidad}</Card.Subtitle>
-        <Card.Subtitle className="mb-2 text-muted">{serviceType}</Card.Subtitle>
-        <Card.Subtitle className="mb-2 text-muted">Precio:${precio}</Card.Subtitle>
-        {isProfesional?
-             <Link
-             to={`/calendar/` + adID}
-             
-           >
-                  <Button variant='primary'>Crea/Edita Turnos</Button>
-                  </Link>:
-              <Link
-                to={`/home/` + adID}
-                
-              >
-                 <Button variant="primary">Turnos</Button>
+    <div className="cardDiv">
+      {/* card image */}
+      <div className="CardImage">
+        <img src={userimage} alt="User Image" />
+      </div>
 
-              </Link>
-              }
-        <Link
-                to={`/home/` + adID}
-                
-              >
-     
+      {/* Body */}
+      <div className="CardBody">
+        {/* card title */}
+        <div className="CardTitle">
+          <Link to={`/professional/` + medicalLicense}>
+            <div>{name}-MN</div>
+            <div>{medicalLicense}</div>
+          </Link>
+        </div>
 
-              </Link>
-      </Card.Body>
-    </Card>
+        {/* speciality */}
+        <div className="specialityDiv">{especialidad}</div>
+
+        {/* services */}
+        <div className="serviceDiv">{serviceType}</div>
+
+        {/* fee */}
+        <div className="fee">Precio:${precio}</div>
+
+        {/* if he/she 's a professional */}
+        <div className="ifPro">
+          {isProfesional ? (
+            <Link to={`/calendar/` + adID}>
+              <Button variant="primary">Crea/Edita Turnos</Button>
+            </Link>
+          ) : (
+            <Link to={`/home/` + adID}>
+              <Button variant="primary">Turnos</Button>
+            </Link>
+          )}
+          {/* <Link to={`/home/` + adID}></Link> */}
+        </div>
+      </div>
+    </div>
   );
 }

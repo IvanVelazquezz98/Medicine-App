@@ -22,7 +22,7 @@ function CreateAppointments({user}) {
   const adDetail = useSelector((state) => state.adDetail)
 console.log('adDetail', adDetail);
   const morningHours = useSelector((state)=>state.morningHours)
-  //console.log('estadomorning', morningHours);
+  console.log('estadomorning', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
   console.log('estado', afternoonHours);
 
@@ -143,7 +143,7 @@ console.log('adDetail', adDetail);
       let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
       let appointments={
         dates:dateArray,
-        hours: morningHours.concat(afternoonHours),
+        hours: hours,
         professionalMedicalLicense: adDetail.professionalMedicalLicense,
         ad:adId
       }
