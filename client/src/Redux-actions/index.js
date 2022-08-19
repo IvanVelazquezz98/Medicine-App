@@ -7,7 +7,7 @@ const BASE_URL = 'http://localhost:3001';
     export function getAds () {
     return async function (dispatch){
 
-        var json = await axios.get(`${BASE_URL}/ads`);
+        var json = await axios.get(`${BASE_URL}/anuncios`);
 
      
         return dispatch({type: 'GET_ADS', payload: json.data});
@@ -406,7 +406,18 @@ export function getAppointmentsByAdAvailable(adId) {
 export function deleteAppointment(idApp) {
   return async function (dispatch) {
     try {
-      var json = await axios.delete(`${BASE_URL}/delete/${idApp}`);
+      var json = await axios.delete(`${BASE_URL}/delete/appointment/${idApp}`);
+      return dispatch({type:'DELETED_APPOINTMENT', payload: json.data})
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function createCancellAppointmentsByUser(idApp) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.post(`${BASE_URL}/appointment/cancelled/${idApp}`);
       return json;
     } catch (error) {
       console.log(error);
@@ -414,40 +425,36 @@ export function deleteAppointment(idApp) {
   };
 }
 
+export function clearUserAppointments() {
+  return{
+      type:'CLEAR_USER_APPOINTMENTS',
+  }
+}
+
+export function traemeTodo (medicalLicense){
+  return async (dispatch) =>{
+    
+    try {
+        var json= await axios.get(`${BASE_URL}/appointments/all/${medicalLicense}`);
+    return dispatch({type:'TRAEME_TODO', payload: json.data})
+    } catch (error) {
+     console.log(error)
+    }
+}
+}
+
+export function clearAdDetails() {
+  return{
+      type:'CLEAR_AD_DETAILS',
+  }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export function clearTodo() {
+  return{
+      type:'CLEAR_TODO',
+  }
+}
 
 export function getUsersByAdminById(id) {
     return async function (dispatch) {
@@ -455,6 +462,7 @@ export function getUsersByAdminById(id) {
       return dispatch({ type: "GET_USERS_BY_ADMIN", payload: json.data });
     };
   };
+
 
   export function deleteByAdmin(userId){
     return async function (dispatch){

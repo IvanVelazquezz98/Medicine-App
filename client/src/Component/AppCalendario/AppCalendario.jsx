@@ -27,14 +27,18 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales
 })
-
+//App calendario es llamado desde adDetail, entrando desde services, 
+//o desde userProfile, cuando el profesional edita sus turnos.
 
 function AppCalendario({professionalMedicalLicense,name, ad, isProfesional}) {
 const dispatch = useDispatch();
+//estado que trae turnos disponibles
 const availablesApps =  useSelector((state)=>state.availablesApps)
+//se va a llamar este estado solo cuando estamos entrando al AppCalendario desde el perfil del usuario, en caso de que quiera editar turnos
 const professionalApps =  useSelector((state)=>state.professionalAppointments)
+//estado global que me dice si selecciono un horario, para renderizar el modal
 const selected = useSelector((state)=>state.selectedTime)
-// console.log('licencia=>',professionalMedicalLicense,'adID=>',adId,'name=>',name,'ad=>',ad)
+
 
 
  const [eventSelected, setEventSelected]=useState({})
@@ -57,6 +61,10 @@ useEffect(() => {
   // }, [dispatch]);
 
 
+let es={
+  week: 'semana'
+}
+
 
   
 const handleSelected = (e) => {
@@ -68,7 +76,7 @@ const handleSelected = (e) => {
 
  
 
-//   console.log('apps',professionalAppointments);
+   console.log('apps',professionalApps);
  let appsEvents
 if(isProfesional){
   appsEvents = professionalApps.map(app=>{
@@ -95,7 +103,7 @@ if(isProfesional){
     )})
 }
 
-console.log('availablesApps=>', availablesApps)
+console.log('availablesAppsEvents=>', appsEvents)
 
 
 
@@ -121,16 +129,17 @@ console.log('availablesApps=>', availablesApps)
       }} */
 
       step={30}
+      culture={es}
       timeslots={1}
       views={{month:true, week:true, day:true}}
-      defaultView="week"
+      defaultView="month"
       localizer={localizer} 
       events ={appsEvents} 
       onSelectEvent={handleSelected}
       startAccessor='start' endAccessor='end' 
       min={new Date(1, 1, 1, 8, 0, 0)}
       max={new Date(1, 1, 1, 21, 59, 0)}
-      style = {{height: 400, width: 500, margin: '10px'}}/>
+      style = {{height: 500, width: 600, margin: '10px'}}/>
        {selected?<ModalCalendar info={eventSelected} professionalMedicalLicense={professionalMedicalLicense} name={name}ad={ad} isProfesional={isProfesional}/>:null} 
     </div>
     

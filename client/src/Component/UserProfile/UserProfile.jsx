@@ -8,7 +8,7 @@ import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
+import { addFavorite, clearUserDetail, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
 import Ad from "../Card/Ad";
@@ -20,6 +20,8 @@ import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
+import ProfessionalAppointments from "./ProfessionalAppointments";
+
 
 
 const UserProfile = ({ user }) => {
@@ -29,16 +31,23 @@ const UserProfile = ({ user }) => {
   const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
+  const [show, setShow]=useState(false)
+
+  let favML = JSON.parse(localStorage.getItem("ml"));
 
   useEffect(() => {
     dispatch(getUsersById(user?.email?.toLowerCase()));
     if (favML && user?.email) {
       dispatch(addFavorite(favorites));
     }
+    return() =>{
+      dispatch(clearUserDetail())
+   }
   }, [dispatch]);
 
-  let favML = JSON.parse(localStorage.getItem("ml"));
-
+  function handleClick(){ 
+    setShow(true)
+    }
   let favorites = {
     userEmail: user?.email,
     medicalLicense: favML,
@@ -57,7 +66,7 @@ const UserProfile = ({ user }) => {
 
             <div className="primercont">
               <div className="micontainerImage">
-                <ImageUser image={User.userimage} />
+              <ImageUser image={User.userimage} />
               </div>
               <div className="micontainerInfo ">
                 <InfoUser
@@ -70,6 +79,8 @@ const UserProfile = ({ user }) => {
                 />
               </div>
             </div>
+            
+            {User.rol==='user'?
             <div className="seconcont">
               <div className="medicalRecorder">
                 <MedicalRecordUser />
@@ -84,10 +95,12 @@ const UserProfile = ({ user }) => {
           <Favorites image={pro.user.userimage} />
           ))}
       </div> */}
-            </div>
-            <div>
-              <Appointments user={User} />
-            </div>
+            </div>:null}
+            <button onClick={handleClick}>ver tus turnos</button>
+            {User.rol==='user'?<div>
+            
+              <Appointments userEmail={user.email} show={show} />
+            </div>:<ProfessionalAppointments medicalLicense = {User.professional?.medicalLicense} show={show}/>}
             <div className="misbotones">
               {/* boton crear anuncio momentaneamente esta aca */}
               {User.rol === "professional" && 

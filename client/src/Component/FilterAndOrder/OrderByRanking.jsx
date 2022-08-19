@@ -5,12 +5,12 @@ import Select from 'react-select'
 
 function OrderByRanking() {
     let dispatch = useDispatch()
-    let handleSelect=(e)=>{
-      dispatch(orderByRanking(e.target.value))
+    let handleSelect=(action, value)=>{
+      dispatch(orderByRanking(value.value))
     }
     const options=[
-      {value: 'ascendente', label:'mayor ranking'},
-      {value: 'descendente', label:'menor ranking'}
+      {value: 'minior', label:'mayor ranking'},
+      {value: 'mayor', label:'menor ranking'}
     
     ]
     return (
