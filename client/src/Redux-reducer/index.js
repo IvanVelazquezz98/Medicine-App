@@ -53,15 +53,46 @@ const rootReducer = (state = inicialState, action) => {
         adDetail: action.payload,
       };
 
-    // case 'FILTER_RANKING':
-    //   let allAds5 = state.ads;
-    //   const filterRanking = allAds5.filter(
-    //     (a) => a.professional.ranking === action.payload
-    //   );
-    //   return {
-    //     ...state,
-    //     ads: filterRanking,
-    //   };
+    case 'ORDER_RANKING':
+     
+      let orderRanking= [...state.ads]
+      orderRanking= action.payload==="minor"?
+      orderRanking.sort((a,b)=>{
+        if(a.professional.ranking>b.professional.ranking) return-1;
+        if(a.professional.ranking<b.professional.ranking) return 1;
+        return 0
+      }):
+      orderRanking.sort((a,b)=>{
+        if(a.professional.ranking<b.professional.ranking) return-1;
+        if(a.professional.ranking>b.professional.ranking) return 1;
+        return 0
+      })
+      
+      return {
+        ...state,
+        ads: orderRanking,
+      };
+      case 'ORDER_PRICE':
+        console.log('soy el payload',action.payload)
+      let orderPrice= [...state.ads];
+       orderPrice= action.payload=== 'minior'?orderPrice.sort((a,b)=>{
+
+        if(parseInt(a.price) < parseInt(b.price)) return-1;
+        if(parseInt(a.price) > parseInt(b.price)) return 1;
+        return 0
+      }):
+      orderPrice.sort((a,b)=>{
+        if(parseInt(a.price) > parseInt(b.price)) return-1;
+        if(parseInt(a.price) < parseInt(b.price)) return 1;
+        return 0
+      })
+      //console.log('soy el reducer',orderPrice);
+      
+      return {
+        ...state,
+        ads: orderPrice,
+      };
+
     case "GET_NAME":
       return {
         ...state,

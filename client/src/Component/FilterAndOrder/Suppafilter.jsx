@@ -5,11 +5,20 @@ import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import { filterAllAds } from "../../Redux-actions";
 import "./styleFilter.css";
+import SearchBar1 from "./SearchBar";
+import OrderByPrice from "./OrderByPrice";
+import OrderByRanking from "./OrderByRanking";
 
 export default function Suppafilter() {
   let dispatch = useDispatch();
   const ads = useSelector((s) => s.ads);
   const allAds = useSelector((state) => state.allAds);
+
+  //filter all atributes from ads global state
+  //filtrar todos los atributos y los guardamos en variables
+
+  //crear la lista de select todos los sin repetir, luego armar el objeto en el formato en el que react Select recibe el label y el value
+  //create the list of select all without repeating, then build the object in the format in which react Select receives the label and the value
 
   //---specialties
   let specialtyAds = allAds.map((e) => e.specialty);
@@ -20,6 +29,7 @@ export default function Suppafilter() {
   });
 
   //--countries
+
   let country = allAds.map((e) => {
     return e.professional?.user?.country;
   });
@@ -89,53 +99,65 @@ export default function Suppafilter() {
 
   return (
     <>
-    <div className="sidebar">
-      <div className="specialty">
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"specialty"}
-          options={specialty1}
-          placeholder="Especialidad"
-        />
-      </div>
-      <div className="country">
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"country"}
-          options={countries}
-          placeholder="País"
-        />
-      </div>
+      <div className="sidebar">
+        <div className="specialty">
+          {/* ver cambios de Esme!!! */}
+          <div>
+            <SearchBar1 />
+          </div>
+          <div>
+            <OrderByPrice />
+          </div>
+          <div>
+            <OrderByRanking />
+          </div>
+          <div>
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"specialty"}
+              options={specialty1}
+              placeholder="Especialidad"
+            />
+          </div>
+          <div className="country">
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"country"}
+              options={countries}
+              placeholder="País"
+            />
+          </div>
 
-      <div className="province">
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"province"}
-          options={provinces}
-          placeholder="Provincia"
-        />
-      </div>
-      <div className="city">
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"city"}
-          options={cities}
-          placeholder="Ciudad"
-        />
-      </div>
-      <div className="service">
-        <Select
-          isClearable={true}
-          name={"typeService"}
-          onChange={handleFilter}
-          options={services}
-          placeholder="Servicio"
-        />
-      </div>
+          <div className="province">
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"province"}
+              options={provinces}
+              placeholder="Provincia"
+            />
+          </div>
+          <div className="city">
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"city"}
+              options={cities}
+              placeholder="Ciudad"
+            />
+          </div>
+          <div className="service">
+            <Select
+              isClearable={true}
+              name={"typeService"}
+              onChange={handleFilter}
+              options={services}
+              placeholder="Servicio"
+            />
+          </div>
+        </div>
       </div>
     </>
   );

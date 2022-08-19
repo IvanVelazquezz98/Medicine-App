@@ -6,7 +6,7 @@ import Ad from "../Card/Ad";
 import "./Ads.css";
 
 import Suppafilter from "../FilterAndOrder/Suppafilter";
-import SearchBar from "../FilterAndOrder/SearchBar";
+
 
 export default function Ads() {
   const dispatch = useDispatch();

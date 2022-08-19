@@ -33,7 +33,7 @@ export default function Ad({
         {/* card title */}
         <div className="CardTitle">
           <Link to={`/professional/` + medicalLicense}>
-            <div>{name}-ML</div>
+            <div>{name}-MN</div>
             <div>{medicalLicense}</div>
           </Link>
         </div>
