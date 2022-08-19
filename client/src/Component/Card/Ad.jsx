@@ -28,7 +28,7 @@ export default function Ad({
       <Card.Body>
         <Card.Title style={{ background: 'white' }}><Link
               to={`/professional/` + medicalLicense}
-            >{name} - ML {medicalLicense}
+            >{name} - MN {medicalLicense}
         </Link></Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{especialidad}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">{serviceType}</Card.Subtitle>

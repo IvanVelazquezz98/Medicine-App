@@ -20,6 +20,8 @@ import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
+import ProfessionalAppointments from "./ProfessionalAppointments";
+
 
 
 const UserProfile = ({ user }) => {
@@ -30,6 +32,8 @@ const UserProfile = ({ user }) => {
 
   const [button, setButton] = useState(false);
 
+  let favML = JSON.parse(localStorage.getItem("ml"));
+
   useEffect(() => {
     dispatch(getUsersById(user?.email?.toLowerCase()));
     if (favML && user?.email) {
@@ -37,7 +41,6 @@ const UserProfile = ({ user }) => {
     }
   }, [dispatch]);
 
-  let favML = JSON.parse(localStorage.getItem("ml"));
 
   let favorites = {
     userEmail: user?.email,
@@ -56,7 +59,7 @@ const UserProfile = ({ user }) => {
 
             <div className="primercont">
               <div className="micontainerImage">
-                <ImageUser image={User.userimage} />
+              <ImageUser image={User.userimage} />
               </div>
               <div className="micontainerInfo ">
                 <InfoUser
@@ -69,6 +72,8 @@ const UserProfile = ({ user }) => {
                 />
               </div>
             </div>
+            
+            {User.rol==='user'?
             <div className="seconcont">
               <div className="medicalRecorder">
                 <MedicalRecordUser />
@@ -83,10 +88,10 @@ const UserProfile = ({ user }) => {
           <Favorites image={pro.user.userimage} />
           ))}
       </div> */}
-            </div>
-            <div>
-              <Appointments user={User} />
-            </div>
+            </div>:null}
+            {User.rol==='user'?<div>
+              <Appointments userEmail={user.email} />
+            </div>:<ProfessionalAppointments medicalLicense = {User.professional?.medicalLicense} />}
             <div className="misbotones">
               {/* boton crear anuncio momentaneamente esta aca */}
               {User.rol === "professional" && 

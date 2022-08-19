@@ -13,7 +13,11 @@
   flex-direction: row;
 }
 .ads{
-  display: flex;
-
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 10px 20px;
 }
 

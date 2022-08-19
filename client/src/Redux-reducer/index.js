@@ -53,122 +53,262 @@ const rootReducer = (state = inicialState, action) => {
         adDetail: action.payload,
       };
 
-    // case 'FILTER_RANKING':
-    //   let allAds5 = state.ads;
-    //   const filterRanking = allAds5.filter(
-    //     (a) => a.professional.ranking === action.payload
-    //   );
-    //   return {
-    //     ...state,
-    //     ads: filterRanking,
-    //   };
+    case 'ORDER_RANKING':
+     
+      let orderRanking= [...state.ads]
+      orderRanking= action.payload==="minor"?
+      orderRanking.sort((a,b)=>{
+        if(a.professional.ranking>b.professional.ranking) return-1;
+        if(a.professional.ranking<b.professional.ranking) return 1;
+        return 0
+      }):
+      orderRanking.sort((a,b)=>{
+        if(a.professional.ranking<b.professional.ranking) return-1;
+        if(a.professional.ranking>b.professional.ranking) return 1;
+        return 0
+      })
+      
+      return {
+        ...state,
+        ads: orderRanking,
+      };
+      case 'ORDER_PRICE':
+        console.log('soy el payload',action.payload)
+      let orderPrice= [...state.ads];
+       orderPrice= action.payload=== 'minior'?orderPrice.sort((a,b)=>{
+
+        if(parseInt(a.price) < parseInt(b.price)) return-1;
+        if(parseInt(a.price) > parseInt(b.price)) return 1;
+        return 0
+      }):
+      orderPrice.sort((a,b)=>{
+        if(parseInt(a.price) > parseInt(b.price)) return-1;
+        if(parseInt(a.price) < parseInt(b.price)) return 1;
+        return 0
+      })
+      //console.log('soy el reducer',orderPrice);
+      
+      return {
+        ...state,
+        ads: orderPrice,
+      };
+
     case "GET_NAME":
       return {
         ...state,
         ads: action.payload,
       };
 
-    case "CREATE_MORNING_HOURS":
-      let timeEnd = action.payload.morningEndTime.split(":");
+      case 'CREATE_MORNING_HOURS':
+       
+        let timeEnd=action.payload.morningEndTime.split(':')
+        
+        let timeM=action.payload.morningStartTime.split(':')
 
-      let timeM = action.payload.morningStartTime.split(":");
-
-      let x = Number(timeM[0]) + Number(timeM[1]) / 60;
-
-      let y = Number(timeEnd[0]) + Number(timeEnd[1]) / 60;
-
-
-      let actual = x;
-
-
-      let siguiente = actual;
-      let horarioEntero = [];
-      let durationtime = parseFloat((action.payload.duration / 60).toFixed(2));
-      do {
-        actual = siguiente + durationtime;
-        horarioEntero.push(siguiente);
-        siguiente = actual;
-      } while (siguiente < y);
-      let hours = horarioEntero.map((el) => {
-        let hour = el.toString().split(".")[0];
-        hour = hour < 10 ? "0" + hour : hour;
-        var min = Math.round((el - Number(hour)) * 60);
-        let r = min.toString().split("");
-        if (r[1] !== "0" || r[1] !== "5") {
-          if (r.length === 1 && Number(r[0]) < 10) {
-            r[0] = "0";
-            r = [r[0]];
-            min = "0";
+        let x=Number(timeM[0])+Number(timeM[1])/60
+        
+        let y= Number(timeEnd[0])+ Number(timeEnd[1])/60
+        
+        let current = x
+        
+        let next= current
+        let numHour=[]
+        let durationtime=parseFloat((action.payload.duration/60).toFixed(2))
+        do {
+            current =next + durationtime
+            numHour.push(next)
+            next=current
+        } 
+        while (next < y);
+      
+      
+        let objHours = numHour.map(e => {
+          return{ start: e, end:e + durationtime}   
+      });
+      
+      
+      
+      let hours= objHours.map(el=>{
+          let hrStart=el.start.toString().split('.')[0]
+          var hourStart = hrStart;
+          hourStart = (hourStart < 10)? '0' + hourStart : hourStart;
+          var minStart = Math.round((el.start-Number(hrStart))*60)
+          
+          
+          let rStart= minStart.toString().split('')
+          
+      
+            if(rStart[1]!=='0' || rStart[1]!== '5'){
+              
+                if(rStart.length===1 && Number(rStart[0]) < 10){
+                 
+                 rStart[0]= '0'
+                 rStart=[rStart[0]]
+                 
+      
+                    minStart='0'
+                }
+                rStart[1]= '0'
+                rStart=[rStart[0], rStart[1]]
+              
+              minStart= rStart.join('')   
           }
-          r[1] = "0";
-          r = [r[0], r[1]];
-
-          min = r.join("");
-        }
-
-        let minute = min;
-        // minute = (minute < 10)? '0' + minute : minute;
-        if (minute === 0) {
-          return hour + ": 00";
-        }
-        return hour + ":" + minute;
-      });
-      return {
-        ...state,
-        morningHours: hours,
-      };
-
-    case "CREATE_AFTERNOON_HOURS":
-      let afternoonTimeEnd = action.payload.afternoonEndTime.split(":");
-      let afternoonTimeM = action.payload.afternoonStartTime.split(":");
-      let aftX = Number(afternoonTimeM[0]) + Number(afternoonTimeM[1]) / 60;
-      let aftY = Number(afternoonTimeEnd[0]) + Number(afternoonTimeEnd[1]) / 60;
-      let aftActual = aftX;
-      let aftSiguiente = aftActual;
-      let aftHorarioEntero = [];
-      let aftDurationtime = parseFloat(
-        (action.payload.duration / 60).toFixed(2)
-      );
-      do {
-        aftActual = aftSiguiente + aftDurationtime;
-        aftHorarioEntero.push(aftSiguiente);
-        aftSiguiente = aftActual;
-      } while (aftSiguiente < aftY);
-      let aftHours = aftHorarioEntero.map((el) => {
-        let hour = el.toString().split(".")[0];
-        hour = hour < 10 ? "0" + hour : hour;
-        var min = Math.round((el - Number(hour)) * 60);
-        let r = min.toString().split("");
-        if (r[1] !== "0" || r[1] !== "5") {
-          if (r.length === 1 && Number(r[0]) < 10) {
-            r[0] = "0";
-            r = [r[0]];
-            min = "0";
+      
+          let minuteStart = minStart
+          // minute = (minute < 10)? '0' + minute : minute;
+          
+      
+          let hrEnd=el.end.toString().split('.')[0]
+          var hourEnd = hrEnd;
+          hourEnd = (hourEnd < 10)? '0' + hourEnd : hourEnd;
+          var minEnd = Math.round((el.end-Number(hrEnd))*60)
+          
+          
+          let rEnd= minEnd.toString().split('')
+          
+      
+            if(rEnd[1]!=='0' || rEnd[1]!== '5'){
+              
+                if(rEnd.length===1 && Number(rEnd[0]) < 10){
+                 console.log(rEnd)
+                 rEnd[0]= '0'
+                 rEnd=[rEnd[0]]
+          
+      
+                    minEnd='0'
+                }
+                rEnd[1]= '0'
+                rEnd=[rEnd[0], rEnd[1]]
+              
+              minEnd= rEnd.join('')   
           }
-          r[1] = "0";
-          r = [r[0], r[1]];
+      
+          let minuteEnd = minEnd
+          // minute = (minute < 10)? '0' + minute : minute;
+          
+          
+             return{
+              start:hourStart + ':' + minuteStart,
+              end:hourEnd + ':' + minuteEnd
+             } 
+        })
+        return {
+          ...state,
+          morningHours:hours
 
-          min = r.join("");
         }
+      
+      case 'CREATE_AFTERNOON_HOURS':
+        let afternoonTimeEnd=action.payload.afternoonEndTime.split(':') 
+        let afternoonTimeM=action.payload.afternoonStartTime.split(':')
+        let aftX=Number(afternoonTimeM[0])+Number(afternoonTimeM[1])/60
+        let aftY= Number(afternoonTimeEnd[0])+ Number(afternoonTimeEnd[1])/60
+        let aftCurrent = aftX
+        
+        let aftNext= aftCurrent
+        let aftNumHour=[]
+        let aftDurationtime=parseFloat((action.payload.duration/60).toFixed(2))
+        do {
+            aftCurrent =aftNext + aftDurationtime
+            aftNumHour.push(aftNext)
+            aftNext=aftCurrent
+        } 
+        while (aftNext < aftY);
+      
+      
+        let aftObjHours = aftNumHour.map(e => {
+          return{ start: e, end:e + aftDurationtime}   
+      });
+      
+      
+      
+      let aftHours= aftObjHours.map(el=>{
+          let hrStart=el.start.toString().split('.')[0]
+          var hourStart = hrStart;
+          hourStart = (hourStart < 10)? '0' + hourStart : hourStart;
+          var minStart = Math.round((el.start-Number(hrStart))*60)
+          
+          
+          let rStart= minStart.toString().split('')
+          
+      
+            if(rStart[1]!=='0' || rStart[1]!== '5'){
+              
+                if(rStart.length===1 && Number(rStart[0]) < 10){
+                 
+                 rStart[0]= '0'
+                 rStart=[rStart[0]]
+                 
+      
+                    minStart='0'
+                }
+                rStart[1]= '0'
+                rStart=[rStart[0], rStart[1]]
+              
+              minStart= rStart.join('')   
+          }
+      
+          let minuteStart = minStart
+          // minute = (minute < 10)? '0' + minute : minute;
+          
+      
+          let hrEnd=el.end.toString().split('.')[0]
+          var hourEnd = hrEnd;
+          hourEnd = (hourEnd < 10)? '0' + hourEnd : hourEnd;
+          var minEnd = Math.round((el.end-Number(hrEnd))*60)
+          
+          
+          let rEnd= minEnd.toString().split('')
+          
+      
+            if(rEnd[1]!=='0' || rEnd[1]!== '5'){
+              
+                if(rEnd.length===1 && Number(rEnd[0]) < 10){
+                 console.log(rEnd)
+                 rEnd[0]= '0'
+                 rEnd=[rEnd[0]]
+              
+      
+                    minEnd='0'
+                }
+                rEnd[1]= '0'
+                rEnd=[rEnd[0], rEnd[1]]
+              
+              minEnd= rEnd.join('')   
+          }
+      
+          let minuteEnd = minEnd
+          // minute = (minute < 10)? '0' + minute : minute;
+          
+          
+             return{
+              start:hourStart + ':' + minuteStart,
+              end:hourEnd + ':' + minuteEnd
+             } 
+        })
 
-        let minute = min;
-        // minute = (minute < 10)? '0' + minute : minute;
-        if (minute === 0) {
-          return hour + ": 00";
+        const morning=[...state.morningHours]
+        console.log(morning)
+        console.log('aftHours',aftHours)
+        let aftHoursFilter =[]
+         for (let i = 0; i < aftHours.length; i++) {
+          for (let j = 0; j <morning.length; j++) {
+            let Ah= Number(aftHours[i].start.split(':')[0])+ Number(aftHours[i].start.split(':')[1])/60
+            console.log(Ah)
+            let Ms= Number(morning[j].start.split(':')[0])+ Number(morning[j].start.split(':')[1])/60
+            console.log(Ms)
+            let Me= Number(morning[j].end.split(':')[0])+ Number(morning[j].end.split(':')[1])/60
+            console.log(Me)
+            if(! (Ah >= Ms && Ah < Me)){
+              aftHoursFilter.push(aftHours[i])
+            }
+          }
+        } 
+        console.log('filtrado', aftHoursFilter)
+        return {
+          ...state,
+          afternoonHours:aftHoursFilter
         }
-        return hour + ":" + minute;
-      });
-      console.log("aftHours", aftHours);
-      const aftHoursFilter = [];
-      aftHours.map((el) => {
-        if (!state.morningHours.includes(el)) {
-          aftHoursFilter.push(el);
-        }
-      });
-      return {
-        ...state,
-        afternoonHours: aftHoursFilter,
-      };
 
     case "CLEAR_USER_DETAIL":
       return {
@@ -222,11 +362,27 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         availablesApps: action.payload,
       };
+      case 'GET_USER_APPOINTMENTS':
+        return{
+          ...state,
+          userAppointments:action.payload
+        }
     case 'EVENT_SELECTED':
       return{
         ...state,
         selectedTime:action.payload
       }
+    case 'DELETED_APPOINTMENT':
+      return {
+        ...state,
+        deletedAppointment:action.payload
+      }
+    case "CLEAR_USER_APPOINTMENTS":
+      return {
+        ...state,
+        userAppointments: [],
+      };
+  
 
   
 

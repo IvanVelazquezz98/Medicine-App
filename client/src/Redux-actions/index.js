@@ -7,7 +7,7 @@ const BASE_URL = 'http://localhost:3001';
     export function getAds () {
     return async function (dispatch){
 
-        var json = await axios.get(`${BASE_URL}/ads`);
+        var json = await axios.get(`${BASE_URL}/anuncios`);
 
      
         return dispatch({type: 'GET_ADS', payload: json.data});
@@ -406,7 +406,18 @@ export function getAppointmentsByAdAvailable(adId) {
 export function deleteAppointment(idApp) {
   return async function (dispatch) {
     try {
-      var json = await axios.delete(`${BASE_URL}/delete/${idApp}`);
+      var json = await axios.delete(`${BASE_URL}/delete/appointment/${idApp}`);
+      return dispatch({type:'DELETED_APPOINTMENT', payload: json.data})
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function createCancellAppointmentsByUser(idApp) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.post(`${BASE_URL}/appointment/cancelled/${idApp}`);
       return json;
     } catch (error) {
       console.log(error);
@@ -414,7 +425,11 @@ export function deleteAppointment(idApp) {
   };
 }
 
-
+export function clearUserAppointments() {
+  return{
+      type:'CLEAR_USER_APPOINTMENTS',
+  }
+}
 
 
 
