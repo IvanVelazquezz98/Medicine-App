@@ -24,7 +24,7 @@ export default function SearchBar(){
           dispatch(getUsersByAdminById(name));
           setName('')
         };
-
+            
           return (
             <div key="search1" >
                <InputGroup className="mb-3">

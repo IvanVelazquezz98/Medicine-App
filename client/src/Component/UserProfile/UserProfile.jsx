@@ -47,6 +47,7 @@ const UserProfile = ({ user }) => {
   return (
     <div>
       {User.email && !User.active && navigate("/recover")}
+      {User.email && User.deletedByAdmin && navigate("/deletedUser")}
       {User.rol === "admin" ? <Dashboard user={user} /> :
       User.email ? (
         <div>

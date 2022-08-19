@@ -9,6 +9,7 @@ import EditInfo from "./Component/EditInfo/EditInfo"
 import EditAd from "./Component/EditAd/EditAd";
 import CreateAppointments from "./Component/CreateAppointments/CreateAppointments";
 import Recover from "./Component/Recover/Recover"
+import DeletedUser from "./Component/DeletedUser/DeletedUser"
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/ProfileAd/:AdId" element= {<EditAd/>}/>
           <Route path="/calendar/:adId" element= {<CreateAppointments/>}/>
           <Route path="/recover" element= {<Recover/>}/>
+          <Route path="/deletedUser" element= {<DeletedUser/>}/>
         </Routes>
       </div>
 

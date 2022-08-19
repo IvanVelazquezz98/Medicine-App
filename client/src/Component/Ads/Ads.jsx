@@ -56,7 +56,7 @@ function handleRemoveFavorites(e){
       <Suppafilter /> 
       </div>
       {ads?ads.map(ad=>{
-          if(ad.professional?.user?.rol==="professional" && ad.professional.user.active){
+          if(ad.professional?.user?.rol==="professional" && ad.professional.user.active && !ad.professional.user.deletedByAdmin){
         return(
           <div className='ads'>
           

@@ -18,7 +18,6 @@ const inicialState = {
   selectedTime:false,
   availablesApps:[],
   userAppointments:[],
-  userAdmin: {},
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -239,7 +238,7 @@ const rootReducer = (state = inicialState, action) => {
 case "GET_USERS_BY_ADMIN":
   return {
     ...state,
-    userAdmin: action.payload,
+    users: [action.payload],
   };
 
 
