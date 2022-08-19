@@ -1,0 +1,6 @@
+
+/* main container, it contains sideBar and cards */
+.all{
+    display: flex;
+    border: 3px solid blue;
+  }

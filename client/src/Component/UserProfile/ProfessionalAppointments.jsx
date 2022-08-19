@@ -49,6 +49,6 @@ export default function ProfessionalAppointments({ medicalLicense, show}) {
             />:null
     }
     </>
-    
+  
   )
 }

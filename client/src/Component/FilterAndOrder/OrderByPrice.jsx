@@ -6,12 +6,13 @@ import Select from 'react-select'
 
 function OrderByPrice() {
     let dispatch = useDispatch()
-    let handleSelect=(e)=>{
-      dispatch(orderByPrice(e.target.value))
+    let handleSelect=(value)=>{
+      
+      dispatch(orderByPrice(value.value))
     }
     const options=[
-      {value: 'ascendente', label:'menor precio'},
-      {value: 'descendente', label:'mayor precio'}
+      {value:'minior', label:'menor precio'},
+      {value:'mayor', label:'mayor precio'}
     ]
     return (
       <Select name='select' onChange={handleSelect} options={options} placeholder='ordenar por precio'/> 

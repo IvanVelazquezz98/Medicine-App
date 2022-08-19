@@ -9,14 +9,14 @@ function circuito() {
 
   return (
     <>
-      <div class="Iam">
+      <div className="Iam">
         <div className="infoCircuito">
           <span className="titleAyDOc">Ay Doc</span>
         </div>
         <div className="CItasCOntainer">
           <p>Citas</p>
           <b>
-            <div class="innerIam">
+            <div className="innerIam">
               Virtuales
               <br />
               Presenciales
