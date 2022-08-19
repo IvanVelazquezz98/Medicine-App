@@ -432,3 +432,42 @@ export function clearUserAppointments() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function getUsersByAdminById(id) {
+  console.log('soy id',id)
+    return async function (dispatch) {
+      var json = await axios.get(`${BASE_URL}/user/${id}`);
+      return dispatch({ type: "GET_USERS_BY_ADMIN", payload: json.data });
+    };
+  };

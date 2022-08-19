@@ -8,6 +8,7 @@ import UserProfile from "../UserProfile/UserProfile";
 import NavBar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { getUsersById } from "../../Redux-actions";
+import Dashboard from "../Admin/Dashboard";
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
@@ -44,9 +45,9 @@ function Validate() {
   });
   return (
     <div>
-      {user ? (
-        <UserProfile user={user} />
-      ) : (
+      {user ?   <UserProfile user={user} />
+      : 
+       (
         <div>
           {" "}
           <NavBar />{" "}

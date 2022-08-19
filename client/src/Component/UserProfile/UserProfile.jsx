@@ -13,13 +13,15 @@ import { Link } from "react-router-dom";
 import "./StyleProfile.css";
 import Ad from "../Card/Ad";
 import firebaseApp from "../../Credential/index";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth} from "firebase/auth";
 import Navbar from '../Navbar/Navbar'
 import Login from "../Login/Login";
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
+import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
+
 
 
 const UserProfile = ({ user }) => {
@@ -48,8 +50,8 @@ const UserProfile = ({ user }) => {
   return (
     <div>
       {User.email && !User.active && navigate("/recover")}
-
-      {User.email ? (
+      {User.rol === "admin" ? <Dashboard user={user} /> :
+      User.email ? (
         <div>
           <Navbar user={user} />
           <div className="nuestracontainer">
@@ -131,7 +133,8 @@ const UserProfile = ({ user }) => {
             <div>{/*  <Footer/> */}</div>
           </div>
         </div>
-      ) : (
+      ) : 
+      (
         <div className="NavBarLoginFooterContainer">
           <Navbar />
           <div>
