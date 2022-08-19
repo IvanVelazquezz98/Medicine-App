@@ -19,6 +19,7 @@ import Login from "../Login/Login";
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
+import ProfessionalAppointments from "./ProfessionalAppointments";
 
 
 const UserProfile = ({ user }) => {
@@ -29,6 +30,8 @@ const UserProfile = ({ user }) => {
 
   const [button, setButton] = useState(false);
 
+  let favML = JSON.parse(localStorage.getItem("ml"));
+
   useEffect(() => {
     dispatch(getUsersById(user?.email?.toLowerCase()));
     if (favML && user?.email) {
@@ -36,7 +39,6 @@ const UserProfile = ({ user }) => {
     }
   }, [dispatch]);
 
-  let favML = JSON.parse(localStorage.getItem("ml"));
 
   let favorites = {
     userEmail: user?.email,
@@ -55,12 +57,7 @@ const UserProfile = ({ user }) => {
 
             <div className="primercont">
               <div className="micontainerImage">
-                <ImageUser image={User.userimage} />
-                <div >
-                <Link to={"/profile/" + User.email}>
-                  editar informacion de perfil
-                </Link>
-              </div>
+              <ImageUser image={User.userimage} />
               </div>
               <div className="micontainerInfo ">
                 <InfoUser
@@ -72,28 +69,10 @@ const UserProfile = ({ user }) => {
                   birthdate={User.dateOfBirth}
                 />
               </div>
-              <div>
-                <ModalUnsubscribe user={User} />
-              </div>
-              {/* boton crear anuncio momentaneamente esta aca */}
-              {User.rol === "professional" &&
-                <div>
-                  <ModalCreateAdd user={user} />
-
-                  {/* <CreateAppointments user={user} /> */}
-                  {/* <AppCalendario professionalMedicalLicense={User.professional.medicalLicense}/> */}
-                </div>}
-
-
             </div>
-<<<<<<< HEAD
-           { User.rol === "usuario" &&
-           <>
-           <div className="seconcont">
-
-=======
+            
+            {User.rol==='user'?
             <div className="seconcont">
->>>>>>> 41a8a841e4ce21b2914d506dd0cb7e68b9e2485c
               <div className="medicalRecorder">
                 <MedicalRecordUser />
               </div>
@@ -107,35 +86,10 @@ const UserProfile = ({ user }) => {
           <Favorites image={pro.user.userimage} />
           ))}
       </div> */}
-            </div>
-<<<<<<< HEAD
-            <div >
-                <Appointments user={User} />
-              </div>
-              </>
-              }
-            <div className="misbotones">
-              
-
-              
-
-
-              {/* <div className="SignOut">
-      <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */}
-              
-              {/* </div> */}
-              
-              <div className="conteinerads">
-
-              <h1>Tus Anuncios</h1>
-              
-              <div className="adsprofile">
-              {(User.rol === "professional") && (User.professional?.ads) &&
-
-=======
-            <div>
-              <Appointments user={User} />
-            </div>
+            </div>:null}
+            {User.rol==='user'?<div>
+              <Appointments userEmail={user.email} />
+            </div>:<ProfessionalAppointments medicalLicense = {User.professional?.medicalLicense} />}
             <div className="misbotones">
               {/* boton crear anuncio momentaneamente esta aca */}
               {User.rol === "professional" && 
@@ -155,16 +109,15 @@ const UserProfile = ({ user }) => {
                 <ModalUnsubscribe user={User} />
               </div>
               {User.rol === "professional" && User.professional?.ads &&
->>>>>>> 41a8a841e4ce21b2914d506dd0cb7e68b9e2485c
                 User.professional?.ads.map((e) => {
                   return (
                     <div>
-                      
+                      <h1>Tus Anuncios</h1>
                       <Ad
                         adID={e.id}
                         name={User.name}
                         email={User.email}
-                        medicalLicense={User.professional.medicalLicense}
+                        medicalLicense={User.professional.professionalMedicalLicense}
                         especialidad={e.specialty}
                         serviceType={e.serviceType}
                         precio={User.price}
@@ -172,21 +125,8 @@ const UserProfile = ({ user }) => {
                         isProfesional={true}/>
                       <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
                     </div>
-<<<<<<< HEAD
-                    
-
-                  )
-                })}
-              </div>
-              </div>
-
-            </div>
-            <div>
-              {/*  <Footer/> */}
-=======
                   );
                 })}
->>>>>>> 41a8a841e4ce21b2914d506dd0cb7e68b9e2485c
             </div>
             <div>{/*  <Footer/> */}</div>
           </div>
