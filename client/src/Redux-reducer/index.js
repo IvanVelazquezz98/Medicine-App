@@ -17,8 +17,8 @@ const inicialState = {
   eventClick:{},
   selectedTime:false,
   availablesApps:[],
-  userAppointments:[]
-
+  userAppointments:[],
+  userAdmin: {},
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -228,9 +228,25 @@ const rootReducer = (state = inicialState, action) => {
         selectedTime:action.payload
       }
 
-    default:
-      return state;
-  }
+  
+
+
+
+
+
+
+
+case "GET_USERS_BY_ADMIN":
+  return {
+    ...state,
+    userAdmin: action.payload,
+  };
+
+
+  default:
+    return state;
+}
 };
+
 
 export default rootReducer;
