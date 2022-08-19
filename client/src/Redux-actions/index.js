@@ -431,38 +431,30 @@ export function clearUserAppointments() {
   }
 }
 
+export function traemeTodo (medicalLicense){
+  return async (dispatch) =>{
+    
+    try {
+        var json= await axios.get(`${BASE_URL}/appointments/all/${medicalLicense}`);
+    return dispatch({type:'TRAEME_TODO', payload: json.data})
+    } catch (error) {
+     console.log(error)
+    }
+}
+}
+
+export function clearAdDetails() {
+  return{
+      type:'CLEAR_AD_DETAILS',
+  }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export function clearTodo() {
+  return{
+      type:'CLEAR_TODO',
+  }
+}
 
 export function getUsersByAdminById(id) {
   console.log('soy id',id)
@@ -471,3 +463,4 @@ export function getUsersByAdminById(id) {
       return dispatch({ type: "GET_USERS_BY_ADMIN", payload: json.data });
     };
   };
+

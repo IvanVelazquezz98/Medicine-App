@@ -18,7 +18,9 @@ const inicialState = {
   selectedTime:false,
   availablesApps:[],
   userAppointments:[],
+  todo:[],
   userAdmin: {},
+
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -382,23 +384,27 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         userAppointments: [],
       };
-  
-
-  
-
-
-
-
-
-
+    case 'TRAEME_TODO':
+      return{
+        ...state,
+        todo: action.payload
+      }
+    case "CLEAR_AD_DETAILS":
+      return {
+        ...state,
+        adDetail: {},
+      }
+    case "CLEAR_TODO":
+      return {
+        ...state,
+        todo: [],
+      }
 
 case "GET_USERS_BY_ADMIN":
   return {
     ...state,
     userAdmin: action.payload,
   };
-
-
   default:
     return state;
 }

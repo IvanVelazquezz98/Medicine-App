@@ -3,7 +3,7 @@ import {useEffect} from 'react'
 // import { Navbar } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import {useParams} from 'react-router-dom'
-import {getAdById, getUsersById} from '../../Redux-actions'
+import {clearAdDetails, getAdById, getUsersById} from '../../Redux-actions'
 import AppCalendario from '../AppCalendario/AppCalendario'
 import Footer from "../Footer/Footer.jsx"
 import Navbar from '../Navbar/Navbar'
@@ -11,14 +11,17 @@ import Navbar from '../Navbar/Navbar'
 export default function AdDetail({isProfesional}) {
     const dispatch = useDispatch()
     const {adID} = useParams()
-    const User = useSelector((state) => state.userDetail);
+    //const User = useSelector((state) => state.userDetail);
     let adDetail = useSelector(state=>state.adDetail)
     
 
 
     useEffect(()=>{
         dispatch(getAdById(adID))
-    },[dispatch, adID])
+        return() =>{
+          dispatch(clearAdDetails())
+       }
+    },[dispatch])
 
     // useEffect(() => {
     //     dispatch(getUsersById(adDetail.professional?.userEmail));
