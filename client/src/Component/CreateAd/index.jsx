@@ -11,6 +11,7 @@ import "./CreateAd.css";
 import { useNavigate } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
 import CreateAppointments from "../CreateAppointments/CreateAppointments";
+import { specialty, typeService } from './Specialty'
 const auth = getAuth(firebaseApp);
 
 export default function CreateAd({ user }) {
@@ -29,6 +30,22 @@ export default function CreateAd({ user }) {
       professionalMedicalLicense: User.professional?.medicalLicense,
     });
   }
+  function handleSelectSpecialty(e) {
+    e.preventDefault();
+    setPost({
+      ...post,
+      specialty: e.target.value
+    });
+  }
+
+  function handleSelectServiceType(e) {
+    e.preventDefault();
+    setPost({
+      ...post,
+      serviceType: e.target.value
+    });
+  }
+
 
   const [post, setPost] = useState({
     specialty: "",
@@ -36,6 +53,8 @@ export default function CreateAd({ user }) {
     timeAvailability: "",
     serviceType: "",
   });
+
+  console.log('soy ad', post)
 
   function handleSubmit(e) {
     //e.preventDefault();
@@ -50,7 +69,7 @@ export default function CreateAd({ user }) {
       });
 
     } catch (error) {
-      <ModalErrors error={'No se pudo crear el Anuncio'}/>
+      <ModalErrors error={'No se pudo crear el Anuncio'} />
     }
   }
 
@@ -61,51 +80,42 @@ export default function CreateAd({ user }) {
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           <Form.Group className="mb-3">
             <Form.Label>Especialidad: </Form.Label>
-            <Form.Control
-              type="text"
-              id="specialty"
-              name="specialty"
-              value={post.specialty}
-              onChange={(e) => handleChange(e)}
-            />
+            <select onChange={(e) => handleSelectSpecialty(e)}>
+              {specialty && specialty?.map((s) => {
+                return (<option value={s.name} key={s.name}>{s.name}</option>)
+              })
+              }
+            </select>
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Precio: </Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               id="price"
               name="price"
+              step={10}
+              min={0}
+              max={100000}
               value={post.price}
               onChange={(e) => handleChange(e)}
             />
           </Form.Group>
 
-          {/* <Form.Group className="mb-3">
-            <Form.Label>Turnos disponibles: </Form.Label>
-            <Form.Control
-              type="text"
-              id="timeAvailability"
-              name="timeAvailability"
-              value={post.timeAvailability}
-              onChange={(e) => handleChange(e)}
-            />
-          </Form.Group> */}
 
           <Form.Group className="mb-3">
             <Form.Label>Tipo de servicio: </Form.Label>
-            <Form.Control
-              type="text"
-              id="serviceType"
-              name="serviceType"
-              value={post.serviceType}
-              onChange={(e) => handleChange(e)}
-            />
+            <select onChange={(e) => handleSelectServiceType(e)}>
+              {typeService && typeService?.map((p) => {
+                return (<option value={p.name} key={p.name}>{p.name}</option>)
+              })
+              }
+            </select>
           </Form.Group>
 
           <div className="registerNforgottenButtons">
 
-            
+
             <Button
               variant="info"
               size="sm"
@@ -114,7 +124,7 @@ export default function CreateAd({ user }) {
             >
               CREAR ANUNCIO
             </Button>
-      
+
           </div>
         </Form>
       </div>
