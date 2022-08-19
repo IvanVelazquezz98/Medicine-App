@@ -48,7 +48,7 @@ export default function AdDetail({isProfesional}) {
             <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={isProfesional}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
           }
         </div>
-        <Footer/>
+        {/* <Footer/> */}
     </div>
     
   )
