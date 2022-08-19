@@ -213,7 +213,7 @@ function Login() {
         ...post,
         country: value.label
       })
-      console.log(value.value);
+      // console.log(value.value);
     }
     if(action.name==="states"){
       setCountryId({
