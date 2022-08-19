@@ -1,44 +1,13 @@
 .sidebar{
     display: flex;
-    flex-direction: column;
-    background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );
+    border:3px solid yellowgreen;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     
-    
+    /* background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% ); */
+
   }
-/* .specialty{
-    display: flex;
-    margin: 8%;
-}
-.country{
-    display: flex;
-    margin: 8%;
-   
-}
-.province{
-    display: flex;
-   margin: 8%;
-}
-.city{
-    display: flex;
-    margin: 8%;
-}
-.service{
-    display: flex;
-    margin: 8%;
-}
-.price{
-    display: flex;
-    margin: 8%;
-}
-.ranking{
-    display: flex;
-    
-}
-.search{
-    display: flex;
-    
-    
-} */
+
 .buttonFilter{
     margin:2%;
     border-radius: 25px;

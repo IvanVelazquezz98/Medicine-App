@@ -8,7 +8,6 @@ import "./Ads.css";
 import Suppafilter from "../FilterAndOrder/Suppafilter";
 import SearchBar from "../FilterAndOrder/SearchBar";
 
-
 export default function Ads() {
   const dispatch = useDispatch();
 
@@ -49,36 +48,36 @@ export default function Ads() {
   }
 
   return (
-    <div className="all">
-      
-        <Suppafilter />
-    
-      {ads
-        ? ads.map((ad) => {
-            if (
-              ad.professional?.user?.rol === "professional" &&
-              ad.professional.user.active
-            ) {
-              return (
-                <div className="ads">
-                  <Ad
-                    key = {ad.id}
-                    adID={ad.id}
-                    name={ad.professional.user.name}
-                    medicalLicense={ad.professionalMedicalLicense}
-                    especialidad={ad.specialty}
-                    serviceType={ad.serviceType}
-                    precio={ad.price}
-                    ranking={ad.professional.ranking}
-                    userimage={ad.professional.user.userimage}
-                  />
-                  {/* <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
+    <>
+      <Suppafilter />
+      <div className="all">
+        {ads
+          ? ads.map((ad) => {
+              if (
+                ad.professional?.user?.rol === "professional" &&
+                ad.professional.user.active
+              ) {
+                return (
+                  <>
+                    <Ad
+                      key={ad.id}
+                      adID={ad.id}
+                      name={ad.professional.user.name}
+                      medicalLicense={ad.professionalMedicalLicense}
+                      especialidad={ad.specialty}
+                      serviceType={ad.serviceType}
+                      precio={ad.price}
+                      ranking={ad.professional.ranking}
+                      userimage={ad.professional.user.userimage}
+                    />
+                    {/* <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
           <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button> */}
-                </div>
-              );
-            }
-          })
-        : null}
-    </div>
+                  </>
+                );
+              }
+            })
+          : null}
+      </div>
+    </>
   );
 }

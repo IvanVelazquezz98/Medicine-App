@@ -48,7 +48,7 @@ console.log('turnos', professionalApps);
           
         )
       }) : <p>Loading..</p>}
-      {/* {show?<ModalCancel input={input} userEmail={userEmail} /* name={user.name} *//>:null} */}
+      {/* {show?<ModalCancel input={input} userEmail={userEmail} /* name={user.name} *>:null} */}
       
     </div>
     
