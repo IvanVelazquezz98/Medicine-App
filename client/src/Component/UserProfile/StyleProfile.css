@@ -45,6 +45,18 @@
     height: 350px;
 
 }
+.conteinerads{
+    padding: 4%;
+}
+.adsprofile{
+    display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: 10px 20px;
+  padding: 4%;
+}
 .medicalRecorder{
     
     display: flex;
