@@ -1,7 +1,12 @@
-
-.specialty{
+.sidebar{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );
+    
+    
+  }
+/* .specialty{
+    display: flex;
     margin: 8%;
 }
 .country{
@@ -33,7 +38,7 @@
     display: flex;
     
     
-}
+} */
 .buttonFilter{
     margin:2%;
     border-radius: 25px;
