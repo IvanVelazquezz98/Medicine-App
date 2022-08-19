@@ -1,23 +1,42 @@
-.sidebar{
+
+.cardDiv{
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient( 96.5deg,  rgba(39,103,187,1) 10.4%, rgba(16,72,144,1) 87.7% );
-  width: 20%;
-  justify-content: space-between;
-  align-items: flex-start;
-  align-content: space-around;
+  align-items: center;
+  width: 220px;
+    height: 340px;
+  margin: 20px;
+  box-shadow: 4px 1px 7px 0px rgb(116 105 105);
+  border-radius: 25px;
+  background-color: whitesmoke;
   
 }
-.all{
-  display: flex;
-  flex-direction: row;
-}
-.ads{
-  display: flex !important;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: space-around;
-  gap: 10px 20px;
-}
+.CardImage{
+  border: 2px solid rgb(36 54 126);
+    width: 140px;
 
+  margin-top: 16px;
+  /* border: 0.5px solid #0c0c0c;  */
+  border-radius: 25px;
+  overflow: hidden;
+}
+.CardImage img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.CardBody{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    margin-bottom: 10px;
+}
+.CardTitle{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.specialityDiv,.serviceDiv,.fee,.ifPro{
+  margin-top: 3px;
+}

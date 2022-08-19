@@ -30,14 +30,13 @@ export default function Suppafilter() {
 
   //--countries
 
- 
-
-  let country= allAds.map(e=>{
-    return e.professional?.user?.country
-   });
-   let setCountry= [...new Set(country)];
-  const countries= setCountry.map(e=> {return{value:e, label:e}});
-
+  let country = allAds.map((e) => {
+    return e.professional?.user?.country;
+  });
+  let setCountry = [...new Set(country)];
+  const countries = setCountry.map((e) => {
+    return { value: e, label: e };
+  });
 
   //--provinces
   let prov = ads.map((e) => {
@@ -58,7 +57,7 @@ export default function Suppafilter() {
 
   const cities = setCity.map((e) => {
     return { value: e, label: e };
- })
+  });
 
   //opciones de servicios
   const services = [
@@ -100,60 +99,65 @@ export default function Suppafilter() {
 
   return (
     <>
-      <div>
-        <SearchBar1 />
-      </div>
-      <div>
-        <OrderByPrice />
-      </div>
-      <div>
-        <OrderByRanking />
-      </div>
-      <div>
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"specialty"}
-          options={specialty1}
-          placeholder="filtrar por especialidad"
-        />
-      </div>
-      <div>
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"country"}
-          options={countries}
-          placeholder="filtra por pais"
-        />
-      </div>
+      <div className="sidebar">
+        <div className="specialty">
+          {/* ver cambios de Esme!!! */}
+          <div>
+            <SearchBar1 />
+          </div>
+          <div>
+            <OrderByPrice />
+          </div>
+          <div>
+            <OrderByRanking />
+          </div>
+          <div>
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"specialty"}
+              options={specialty1}
+              placeholder="Especialidad"
+            />
+          </div>
+          <div className="country">
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"country"}
+              options={countries}
+              placeholder="País"
+            />
+          </div>
 
-      <div>
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"province"}
-          options={provinces}
-          placeholder="filtra por provincia"
-        />
-      </div>
-      <div>
-        <Select
-          isClearable={true}
-          onChange={handleFilter}
-          name={"city"}
-          options={cities}
-          placeholder="filtra por cuidad"
-        />
-      </div>
-      <div>
-        <Select
-          isClearable={true}
-          name={"typeService"}
-          onChange={handleFilter}
-          options={services}
-          placeholder="filtra por tipo de servicio"
-        />
+          <div className="province">
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"province"}
+              options={provinces}
+              placeholder="Provincia"
+            />
+          </div>
+          <div className="city">
+            <Select
+              isClearable={true}
+              onChange={handleFilter}
+              name={"city"}
+              options={cities}
+              placeholder="Ciudad"
+            />
+          </div>
+          <div className="service">
+            <Select
+              isClearable={true}
+              name={"typeService"}
+              onChange={handleFilter}
+              options={services}
+              placeholder="Servicio"
+            />
+          </div>
+        </div>
       </div>
     </>
   );
