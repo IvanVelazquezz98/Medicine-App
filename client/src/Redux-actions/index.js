@@ -430,5 +430,26 @@ export function clearUserAppointments() {
       type:'CLEAR_USER_APPOINTMENTS',
   }
 }
+export function traemeTodo (medicalLicense){
+  return async (dispatch) =>{
+    
+    try {
+        var json= await axios.get(`${BASE_URL}/appointments/all/${medicalLicense}`);
+    return dispatch({type:'TRAEME_TODO', payload: json.data})
+    } catch (error) {
+     console.log(error)
+    }
+}
+}
 
+export function clearAdDetails() {
+  return{
+      type:'CLEAR_AD_DETAILS',
+  }
+}
 
+export function clearTodo() {
+  return{
+      type:'CLEAR_TODO',
+  }
+}

@@ -17,7 +17,8 @@ const inicialState = {
   eventClick:{},
   selectedTime:false,
   availablesApps:[],
-  userAppointments:[]
+  userAppointments:[],
+  todo:[]
 
 };
 
@@ -351,7 +352,21 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         userAppointments: [],
       };
-  
+    case 'TRAEME_TODO':
+      return{
+        ...state,
+        todo: action.payload
+      }
+    case "CLEAR_AD_DETAILS":
+      return {
+        ...state,
+        adDetail: {},
+      }
+    case "CLEAR_TODO":
+      return {
+        ...state,
+        todo: [],
+      }
 
     default:
       return state;

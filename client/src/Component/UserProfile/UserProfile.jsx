@@ -8,7 +8,7 @@ import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
 import CreateAd from "../CreateAd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { addFavorite, getUsersById } from "../../Redux-actions/index.js";
+import { addFavorite, clearUserDetail, getUsersById } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
 import Ad from "../Card/Ad";
@@ -29,6 +29,7 @@ const UserProfile = ({ user }) => {
   const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
+  const [show, setShow]=useState(false)
 
   let favML = JSON.parse(localStorage.getItem("ml"));
 
@@ -37,9 +38,14 @@ const UserProfile = ({ user }) => {
     if (favML && user?.email) {
       dispatch(addFavorite(favorites));
     }
+    return() =>{
+      dispatch(clearUserDetail())
+   }
   }, [dispatch]);
 
-
+  function handleClick(){ 
+    setShow(true)
+    }
   let favorites = {
     userEmail: user?.email,
     medicalLicense: favML,
@@ -87,9 +93,11 @@ const UserProfile = ({ user }) => {
           ))}
       </div> */}
             </div>:null}
+            <button onClick={handleClick}>ver tus turnos</button>
             {User.rol==='user'?<div>
-              <Appointments userEmail={user.email} />
-            </div>:<ProfessionalAppointments medicalLicense = {User.professional?.medicalLicense} />}
+            
+              <Appointments userEmail={user.email} show={show} />
+            </div>:<ProfessionalAppointments medicalLicense = {User.professional?.medicalLicense} show={show}/>}
             <div className="misbotones">
               {/* boton crear anuncio momentaneamente esta aca */}
               {User.rol === "professional" && 
