@@ -16,8 +16,8 @@ const SearchBar1 = () => {
     
   };
   const onClickHandler = (e) => {
-    console.log('soy el target del search=>', name)
-    if(name.length===0) return alert('ingresa un nombre');
+    //console.log('soy el target del search=>', name)
+    if(name.length===0) return alert('POner nombre --sacar este alert--');
   
     dispatch(getName(name));
     setName('')
@@ -29,13 +29,13 @@ const SearchBar1 = () => {
     <div key="search1" >
        <InputGroup className="mb-3">
         <Form.Control
-          placeholder="buscar por nombre"
+          placeholder="Nombre Profesional"
           aria-label="buscar por nombre"
           aria-describedby="basic-addon2"
           value={name}
         onChange={(e) => inputHandler(e)}
         />
-        <Button variant="outline-secondary" id="button-addon2" onClick={(e) => onClickHandler(e)}>
+        <Button variant="primary" id="button-addon2" onClick={(e) => onClickHandler(e)}>
           Buscar
         </Button>
       </InputGroup>
