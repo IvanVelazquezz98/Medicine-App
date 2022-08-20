@@ -191,6 +191,7 @@ export function addFavorite(payload) {
     return async function (dispatch) {
       try {
         var json = await axios.post(`${BASE_URL}/appointment/hours`, payload);
+        console.log('recibo en action=>', json.data)
         return dispatch({
           type:'CREATE_AFTERNOON_HOURS',
           payload: json.data
