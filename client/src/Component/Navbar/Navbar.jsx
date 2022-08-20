@@ -1,7 +1,7 @@
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import "./Navbar.css";
 /* import "../Home/Text.css"; */
-import { Outlet, Link,useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import navlog from "../../assets/logo23.jpeg";
 import perfil from "../../assets/perfil.png";
 import firebaseApp from "../../Credential/index";
@@ -14,6 +14,7 @@ const NavBarExample = ({ user }) => {
 
   function closeSession() {
     signOut(auth);
+    localStorage.removeItem('Email')
     let path = '/';
     navigate(path);
   }
@@ -35,11 +36,11 @@ const NavBarExample = ({ user }) => {
                 Servicios
               </Nav.Link>
               <Nav.Link as={Link} to="/home/validate" className="spaceX">
-                <img className="imagenPerfil" src={perfil}/>{" "}
+                <img className="imagenPerfil" src={perfil} />{" "}
               </Nav.Link>
               <Nav.Link>
                 <div className="buttonNav" onClick={closeSession}>
-                    Cerrar sesion
+                  Cerrar sesion
                 </div>
               </Nav.Link>
             </Nav>
