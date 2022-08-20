@@ -22,7 +22,7 @@ function CreateAppointments({user}) {
   const adDetail = useSelector((state) => state.adDetail)
 console.log('adDetail', adDetail);
   const morningHours = useSelector((state)=>state.morningHours)
-  //console.log('estadomorning', morningHours);
+  console.log('estadomorning', morningHours);
   const afternoonHours = useSelector((state)=>state.afternoonHours)
   console.log('estado', afternoonHours);
 
@@ -64,9 +64,9 @@ console.log('adDetail', adDetail);
     setMorningEndTime(`${end.hour()}:${end.minute()}`)
    
     let morningHours={
-        morningStartTime:`${start.hour()}:${start.minute()}`,
-        morningEndTime:`${end.hour()}:${end.minute()}`,
-        duration:duration
+      startTime:`${start.hour()}:${start.minute()}`,
+      endTime:`${end.hour()}:${end.minute()}`,
+      duration:duration
     }
     dispatch(createMorningHours(morningHours))
     setDuration()
@@ -84,10 +84,11 @@ console.log('adDetail', adDetail);
     setEndTime(moment())
  */
     let afternoonHours={
-        afternoonStartTime:`${start.hour()}:${start.minute()}`,
-        afternoonEndTime:`${end.hour()}:${end.minute()}`,
-        duration:duration
+      startTime:`${start.hour()}:${start.minute()}`,
+      endTime:`${end.hour()}:${end.minute()}`,
+      duration:duration,
     }
+    console.log('duration aft',afternoonHours.duration)
     dispatch(createAfternoonHours(afternoonHours))
     setDuration()
    }
@@ -99,13 +100,42 @@ console.log('adDetail', adDetail);
    function handleChange(e){
     setDuration(e.target.value)
    }
+
+   console.log('morningHous',morningHours)
+   console.log('afternoonHours',afternoonHours)
    
-   let hours= morningHours.map(hr=>{return hr.start })
-   
-   if(afternoonHours){
-    let aftHours = afternoonHours.map(hr=>{return hr.start})
-    hours.concat(aftHours)
+
+   if(Array.isArray(morningHours)){
+     let hours= morningHours.map(hr=>{return hr.start })
+     if(Array.isArray(afternoonHours)){
+      let aftHours = afternoonHours.map(hr=>{return hr.start})
+      hours.concat(aftHours)
+     }
+     else{
+      let aftHours =[]
+      aftHours.push(afternoonHours.start)
+      hours.concat(aftHours)
+
+     }
    }
+
+   
+   if(!Array.isArray(morningHours)){
+    let hours=[]
+         hours.push(morningHours.start)
+    console.log('hours morning no es array', hours)
+    if(Array.isArray(afternoonHours)){
+      let aftHours = afternoonHours.map(hr=>{return hr.start})
+      hours.concat(aftHours)
+     }
+    else{
+      let aftHours =[]
+      aftHours.push(afternoonHours.start)
+      hours.concat(aftHours)
+    }
+
+   }
+
    const navigate=useNavigate()
    function submitAll(e){
     try {
@@ -113,7 +143,7 @@ console.log('adDetail', adDetail);
       let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
       let appointments={
         dates:dateArray,
-        hours: morningHours.concat(afternoonHours),
+        hours: hours,
         professionalMedicalLicense: adDetail.professionalMedicalLicense,
         ad:adId
       }
@@ -127,7 +157,7 @@ console.log('adDetail', adDetail);
    }
 
    let apps = adDetail.appointments?.length
-   console.log(apps);
+   //console.log(apps);
    console.log('duracion',duration);
 
   return (
@@ -185,7 +215,7 @@ console.log('adDetail', adDetail);
         {/* <p>rango horario {!timeRanges?'seleccionado':'turno manana'}: {morningStartTime} - {morningEndTime}</p> */}    
         <button className="button" onClick={submitTimeRange}>Confirme rango horario</button>
         <div className="hourContainer">
-        {morningHours.length>0?morningHours.map((h,i)=><div className="li"><p className="li"  key={i}>{h.start};</p></div>):null}
+        {morningHours.length>0?morningHours.map((h,i)=><div className="li"><p className="li" key={i}> {h.start}; </p></div>):null}
         </div>
         <button className="button" onClick={newTimeRange}>Seleccione otro rango horario para el mismo dia</button>
         
@@ -197,7 +227,7 @@ console.log('adDetail', adDetail);
         onEndTimeChange={handleEndTimeChange} />
         {/* <p>rango horario turno tarde: {afternoonStartTime} - {afternoonEndTime}</p> */}
         <button className="button" onClick={submitTimeRange2}>Confirme rango horario</button>
-        {afternoonHours.length>0?afternoonHours.map((h,i)=><div className="li"><p  key={i}>{h.start};</p></div>):null}
+        {Array.isArray(afternoonHours)?afternoonHours.map((h,i)=><div className="li"><p  key={i}>{h.start};</p></div>):<div className="li"><p className="li" >{afternoonHours.start};</p></div>}
         </>
         
         :null}

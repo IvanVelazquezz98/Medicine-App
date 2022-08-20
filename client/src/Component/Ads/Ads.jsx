@@ -55,7 +55,8 @@ export default function Ads() {
           ? ads.map((ad) => {
               if (
                 ad.professional?.user?.rol === "professional" &&
-                ad.professional.user.active
+                ad.professional.user.active &&
+                !ad.professional.user.deletedByAdmin
               ) {
                 return (
                   <>
