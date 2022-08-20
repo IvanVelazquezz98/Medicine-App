@@ -9,6 +9,9 @@ import SearchBar1 from "./SearchBar";
 import OrderByPrice from "./OrderByPrice";
 import OrderByRanking from "./OrderByRanking";
 
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+
 export default function Suppafilter() {
   let dispatch = useDispatch();
   const ads = useSelector((s) => s.ads);
@@ -97,21 +100,21 @@ export default function Suppafilter() {
     dispatch(filterAllAds(Object.fromEntries([...searchParams])));
   }, [searchParams]);
 
-  return (
-    <>
-      <div className="sidebar">
-        <div className="specialty">
-          {/* ver cambios de Esme!!! */}
-          <div>
-            <SearchBar1 />
-          </div>
-          <div>
+  /* return (
+    <> */
+
+  {
+    /* first DIV */
+  }
+  {
+    /* <div className="firstDiv">
+          <div className="orderPrice">
             <OrderByPrice />
           </div>
-          <div>
+          <div className="orderRanking">
             <OrderByRanking />
           </div>
-          <div>
+          <div className="speciality">
             <Select
               isClearable={true}
               onChange={handleFilter}
@@ -129,8 +132,14 @@ export default function Suppafilter() {
               placeholder="País"
             />
           </div>
+        </div> */
+  }
 
-          <div className="province">
+  {
+    /* second DIV */
+  }
+  {
+    /*  <div className="province">
             <Select
               isClearable={true}
               onChange={handleFilter}
@@ -157,8 +166,38 @@ export default function Suppafilter() {
               placeholder="Servicio"
             />
           </div>
+        <div className="secondDIV">
+          <div className="searchByName">
+            <SearchBar1 />
+          </div>
         </div>
-      </div>
+      </div> */
+  }
+  /* </>
+  ); */
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Filtra tu busqueda
+      </Button>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Busca Profesional</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div className="sidebar">
+            <div className="orderPrice">
+              <OrderByPrice />
+            </div>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 }

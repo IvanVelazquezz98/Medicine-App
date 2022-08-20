@@ -1,6 +1,7 @@
 .sidebar{
     display: flex;
-    border:3px solid yellowgreen;
+    flex-direction: column;
+    border:3px solid rgb(247, 0, 165);
     justify-content: space-evenly;
     flex-wrap: wrap;
     
@@ -8,6 +9,11 @@
 
   }
 
+.firstDiv,.secondDIV{
+  display: flex;
+  justify-content: space-around;
+    
+}
 .buttonFilter{
     margin:2%;
     border-radius: 25px;

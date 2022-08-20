@@ -16,8 +16,8 @@ const SearchBar1 = () => {
     
   };
   const onClickHandler = (e) => {
-    console.log('soy el target del search=>', name)
-    if(name.length===0) return alert('ingresa un nombre');
+    //console.log('soy el target del search=>', name)
+    if(name.length===0) return alert('POner nombre --sacar este alert--');
   
     dispatch(getName(name));
     setName('')
