@@ -368,9 +368,8 @@ export function getCountries (){
   return async (dispatch) =>{
     
     try {
-        var json= await axios.get(`http://localhost:3001/countries`);
-      
-      return dispatch({type:'GET_COUNTRIES', payload: json.data})
+        var json= await axios.get(`${BASE_URL}/countries`);
+    return dispatch({type:'GET_COUNTRIES', payload: json.data})
     } catch (error) {
      console.log(error)
     }
@@ -380,7 +379,7 @@ export function getStates (countryId){
   return async (dispatch) =>{
     
     try {
-        var json= await axios.get(`http://localhost:3001/states/${countryId}`);
+        var json= await axios.get(`${BASE_URL}/states/${countryId}`);
     return dispatch({type:'GET_STATES', payload: json.data})
     } catch (error) {
      console.log(error)
@@ -391,7 +390,7 @@ export function getCities (countryId, stateId){
   return async (dispatch) =>{
     
     try {
-        var json= await axios.get(`http://localhost:3001/cities/${countryId}/${stateId}`);
+        var json= await axios.get(`${BASE_URL}/cities/${countryId}/${stateId}`);
     return dispatch({type:'GET_CITIES', payload: json.data})
     } catch (error) {
      console.log(error)

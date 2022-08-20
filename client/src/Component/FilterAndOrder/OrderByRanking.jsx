@@ -15,7 +15,7 @@ function OrderByRanking() {
     ]
     return (
       <Select name='select' onChange={handleSelect}
-      options={options} placeholder='ordenar por ranking'/> 
+      options={options} placeholder='Ranking'/> 
         
   )
 }
