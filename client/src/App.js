@@ -9,7 +9,8 @@ import EditInfo from "./Component/EditInfo/EditInfo"
 import EditAd from "./Component/EditAd/EditAd";
 import CreateAppointments from "./Component/CreateAppointments/CreateAppointments";
 import Recover from "./Component/Recover/Recover"
-import Dashboard from "./Component/Admin/Dashboard";
+import DeletedUser from "./Component/DeletedUser/DeletedUser"
+
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="/ProfileAd/:AdId" element= {<EditAd/>}/>
           <Route path="/calendar/:adId" element= {<CreateAppointments/>}/>
           <Route path="/recover" element= {<Recover/>}/>
-          <Route path="/admin" element= {<Dashboard/>}/>
+          <Route path="/deletedUser" element= {<DeletedUser/>}/>
         </Routes>
       </div>
 

@@ -476,10 +476,28 @@ export function clearTodo() {
 }
 
 export function getUsersByAdminById(id) {
-  console.log('soy id',id)
     return async function (dispatch) {
       var json = await axios.get(`${BASE_URL}/user/${id}`);
       return dispatch({ type: "GET_USERS_BY_ADMIN", payload: json.data });
     };
   };
 
+
+  export function deleteByAdmin(userId){
+    return async function (dispatch){
+        await axios.put(`${BASE_URL}/Admindelete/${userId}`)
+        return dispatch({
+          type:'USER_DELETED_BY_ADMIN',
+        })
+      } 
+    }
+
+  export function forgivenByAdmin(email){ 
+    return async function (dispatch){
+         await axios.put(`${BASE_URL}/Adminforgive/${email}`)
+          return dispatch({
+              type:'USER_FORGIVEN',
+            })
+        }
+      } 
+    
