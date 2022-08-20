@@ -1,7 +1,6 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    border:3px solid rgb(247, 0, 165);
     justify-content: space-evenly;
     flex-wrap: wrap;
     
@@ -9,12 +8,37 @@
 
   }
 
-.firstDiv,.secondDIV{
-  display: flex;
-  justify-content: space-around;
-    
+  
+.buttonContainer{
+  display:flex;
+  flex-direction: column;
+    align-items: center;
+  width: 100%;
+  margin-bottom: 3px;
+  margin-top: 15px;
 }
-.buttonFilter{
-    margin:2%;
-    border-radius: 25px;
+.FilterButton{
+  width: 10rem;
+  background-color:rgba(16,72,144,1);
+}
+
+
+.OffMainContainer{
+  background-color:rgba(16,72,144,1);
+}
+
+.offTitle{
+  color: whitesmoke ;
+}
+
+.orderPrice,.speciality,.country,.province,.city,.service{
+  margin-bottom: 1rem;
+}
+
+
+.css-1s2u09g-control{
+  background-color: unset !important;
+}
+.css-14el2xx-placeholder{
+  color:white!important;
 }
