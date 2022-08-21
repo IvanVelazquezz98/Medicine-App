@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { putEditAppointment } from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
 
-export default function ModalAbsent({ idApp }) {
+export default function ModalCancelPro({ idApp }) {
     const [show, setShow] = useState(true);
 
     const dispatch = useDispatch()
@@ -14,7 +14,7 @@ export default function ModalAbsent({ idApp }) {
     };
 
     const handleCancel = () => {
-        dispatch(putEditAppointment({ status: 'absent' }, idApp))
+        dispatch(putEditAppointment({ status: 'cancelled' }, idApp))
         setShow(false)
     }
 
@@ -25,7 +25,7 @@ export default function ModalAbsent({ idApp }) {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Dar por ausente al paciente
+                        Dar por cancelado este turno
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Footer>
@@ -33,10 +33,12 @@ export default function ModalAbsent({ idApp }) {
                         Cerrar
                     </Button>
                     <Button variant="primary" onClick={handleCancel}>
-                        Ausente
+                        Cancelar este turno
                     </Button>
                 </Modal.Footer>
+
             </Modal>
+
         </>
     );
 }

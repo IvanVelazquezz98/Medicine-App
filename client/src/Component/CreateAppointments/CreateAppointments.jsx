@@ -143,7 +143,7 @@ console.log('adDetail', adDetail);
       let dateArray = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
       let appointments={
         dates:dateArray,
-        hours: hours,
+        // hours: hours,
         professionalMedicalLicense: adDetail.professionalMedicalLicense,
         ad:adId
       }

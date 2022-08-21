@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { createCancellAppointmentsByUser, putEditAppointment } from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
 import ModalAbsent from './ModalAbsent'
-import ModalCancel from './ModalCancel';
+import ModalCancelPro from './ModalCancelPro';
 
 export default function ModalOptions({ appointment }) {
     const [show, setShow] = useState(true);
@@ -23,18 +22,18 @@ export default function ModalOptions({ appointment }) {
     }
 
     const hanldeReadytowork = () => {
-        setAbsent(true)
+        
     }
 
     const handleAbsentPatient = () => {
-
+        setAbsent(true)
     }
 
 
     return (
         <>
-            {absent ? <ModalAbsent paciente={appointment.row?.paciente} idApp={appointment.row?.id} /> : null}
-            {cancel ? <ModalCancel /> : null }
+            {absent ? <ModalAbsent idApp={appointment.row?.id} /> : null}
+            {cancel ? <ModalCancelPro idApp={appointment.row?.id}/> : null }
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -42,7 +41,9 @@ export default function ModalOptions({ appointment }) {
                     </Modal.Title>
                 </Modal.Header>
                 -Con el paciente : {appointment.row?.paciente}
-                {/* -El dia : {appointment.row?.fecha} */}
+                <br></br>
+                -El dia : {appointment.row?.fecha}
+                <br></br> 
                 -A la hora : {appointment.row?.hora}
                 <Modal.Footer>
                     <Button variant="secondary" onClick={hanldeReadytowork}>
