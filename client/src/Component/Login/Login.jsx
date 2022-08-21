@@ -315,7 +315,7 @@ function Login() {
   return (
     <div className="ValidateCOntainer">
       <div className="Validate">
-        <h2> {isRegister ? "Registrate" : auth?.currentUser?.email ? "termina de completar tus datos" : "Inicia Sesion"} </h2>
+        <h2 className="ValidateTitle"> {isRegister ? "Registrate" : auth?.currentUser?.email ? "Termina de completar tus datos" : "Inicia Sesion"} </h2>
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
           <Form.Group className="mb-3">
