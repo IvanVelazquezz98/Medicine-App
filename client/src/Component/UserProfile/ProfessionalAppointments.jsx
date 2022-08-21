@@ -18,6 +18,9 @@ export default function ProfessionalAppointments({ medicalLicense, show}) {
   const [input, setInput]=useState()
   //const [show,setShow]= useState(false)
 
+  function handleClick(e){
+    alert('hola' )
+  }
   
   useEffect(() => {
       dispatch(traemeTodo(medicalLicense));
@@ -29,21 +32,26 @@ export default function ProfessionalAppointments({ medicalLicense, show}) {
     
     console.log('turnos', professionalApps);
  
-  let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' }, { field: 'modalidad' }, { field: 'estado' }]
+  let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' }, { field: 'modalidad' }, { field: 'estado' },{ field: 'cancela el turno' },{ field: 'Empezar turno' }]
   
   let rows = professionalApps.appointments?.length>0?professionalApps?.appointments?.map((app)=>{return{
     id:app?.id,
-    fecha: app?.date,
+    fecha: new Date (app?.date),
     hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
     paciente: app?.user?.name,
     modalidad: app?.ad?.serviceType,
-    estado: app?.status
-  }}):[{id:'1', fecha:'a', hora:'a', paciente:'a', modalidad:'a', estado:'a'}]
+    estado: app?.status,
+    cancel: 'x',
+    startAppointment: app?.status === 'pending'?'startAppointment':null
+  }}):[{id:'1', fecha:'a', hora:'a', paciente:'a', modalidad:'a', estado:'a', cancel:{value:8}, startAppointment:'start'}]
+
+ 
   return (
     <>
     {show?
 
     <DataGrid
+            onCellClick={(e)=>handleClick(e)}
             columns={columns}
             rows={rows}
             />:null
