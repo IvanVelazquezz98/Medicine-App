@@ -9,10 +9,18 @@ import SearchBar1 from "./SearchBar";
 import OrderByPrice from "./OrderByPrice";
 import OrderByRanking from "./OrderByRanking";
 
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+
 export default function Suppafilter() {
   let dispatch = useDispatch();
   const ads = useSelector((s) => s.ads);
   const allAds = useSelector((state) => state.allAds);
+
+  //offCanvas window
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   //filter all atributes from ads global state
   //filtrar todos los atributos y los guardamos en variables
@@ -99,66 +107,88 @@ export default function Suppafilter() {
 
   return (
     <>
-      <div className="sidebar">
-        <div className="specialty">
-          {/* ver cambios de Esme!!! */}
-          <div>
-            <SearchBar1 />
-          </div>
-          <div>
-            <OrderByPrice />
-          </div>
-          <div>
-            <OrderByRanking />
-          </div>
-          <div>
-            <Select
-              isClearable={true}
-              onChange={handleFilter}
-              name={"specialty"}
-              options={specialty1}
-              placeholder="Especialidad"
-            />
-          </div>
-          <div className="country">
-            <Select
-              isClearable={true}
-              onChange={handleFilter}
-              name={"country"}
-              options={countries}
-              placeholder="País"
-            />
-          </div>
 
-          <div className="province">
-            <Select
-              isClearable={true}
-              onChange={handleFilter}
-              name={"province"}
-              options={provinces}
-              placeholder="Provincia"
-            />
-          </div>
-          <div className="city">
-            <Select
-              isClearable={true}
-              onChange={handleFilter}
-              name={"city"}
-              options={cities}
-              placeholder="Ciudad"
-            />
-          </div>
-          <div className="service">
-            <Select
-              isClearable={true}
-              name={"typeService"}
-              onChange={handleFilter}
-              options={services}
-              placeholder="Servicio"
-            />
-          </div>
-        </div>
+      
+
+
+
+      <div className="buttonContainer">
+      <Button  className="FilterButton" onClick={handleShow}>
+        Filtra tu búsqueda
+      </Button>
+
       </div>
+
+      <Offcanvas className="OffMainContainer" show={show} onHide={handleClose}>
+        <Offcanvas.Header  closeButton>
+          <Offcanvas.Title className="offTitle">Busca Profesional</Offcanvas.Title>
+        </Offcanvas.Header>
+
+        <Offcanvas.Body>
+          <div className="sidebar">
+            <div className="orderPrice">
+              <OrderByPrice />
+            </div>
+
+            <div className="speciality">
+              <Select
+                isClearable={true}
+                onChange={handleFilter}
+                name={"specialty"}
+                options={specialty1}
+                placeholder="Especialidad"
+              />
+            </div>
+
+            <div className="country">
+              <Select
+                isClearable={true}
+                onChange={handleFilter}
+                name={"country"}
+                options={countries}
+                placeholder="País"
+                
+              />
+            </div>
+
+            <div className="province">
+              <Select
+              className="province"
+                isClearable={true}
+                onChange={handleFilter}
+                name={"province"}
+                options={provinces}
+                placeholder="Provincia"
+              />
+            </div>
+
+            <div className="city">
+              <Select
+                isClearable={true}
+                onChange={handleFilter}
+                name={"city"}
+                options={cities}
+                placeholder="Ciudad"
+              />
+            </div>
+
+            <div className="service">
+              <Select
+                isClearable={true}
+                name={"typeService"}
+                onChange={handleFilter}
+                options={services}
+                placeholder="Servicio"
+                
+              />
+            </div>
+
+            <div className="searchByName">
+              <SearchBar1 />
+            </div>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 }

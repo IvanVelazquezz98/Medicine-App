@@ -11,7 +11,6 @@ import './EditInfo.css'
 import {getAuth, updatePassword} from "firebase/auth";
 import Alert from 'react-bootstrap/Alert';
 
-
 export default function EditInfo() {
 
 

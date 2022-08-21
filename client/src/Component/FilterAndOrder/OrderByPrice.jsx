@@ -15,7 +15,7 @@ function OrderByPrice() {
       {value:'mayor', label:'mayor precio'}
     ]
     return (
-      <Select name='select' onChange={handleSelect} options={options} placeholder='ordenar por precio'/> 
+      <Select name='select' onChange={handleSelect} options={options} placeholder='Precio'/> 
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import firebaseApp from "../../Credential/index";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional,getStates, getCountries, getCities, getUsers } from "../../Redux-actions/index";
+import { postUser, postProfessional, getStates, getCountries, getCities, getUsers } from "../../Redux-actions/index";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -40,18 +40,18 @@ function Login() {
   const firestore = getFirestore(firebaseApp);
   const [isRegister, setIsRegister] = useState(false);
   const [file, setFile] = useState(null);
-  const [fileId , setFileId] = useState(null)
-  const [filelicence , setFilelicence] = useState(null)
+  const [fileId, setFileId] = useState(null)
+  const [filelicence, setFilelicence] = useState(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null)
   const [imageId, setImageId] = useState(null)
   const [prolicenceImage, setProLicenceImage] = useState(null)
-  
 
-  
 
- 
+
+
+
 
   const [errors, setErrors] = useState({
     name: "",
@@ -176,57 +176,57 @@ function Login() {
 
   };
   //---select ----input de paises--
-  const [countryId,setCountryId]= useState({
-    cid:"",
-    sid:""
-   })
-   
- 
-   useEffect(() => {
-     dispatch(getCountries())
-     dispatch(getStates(countryId.cid))
-     if(countryId.sid.length)dispatch(getCities(countryId.cid, countryId.sid))
-     
-     
-     
-   }, [dispatch, countryId])
-   //estados globales de paises, estados y ciudades
-   const countries=useSelector(state=>state.countries)
-   const states=useSelector(state=>state.states)
-   const cities=useSelector(state=>state.cities)
-   //--opciones del select
-   const countriesOptions= countries.map(e=> {return{value:e.countryId, label:e.name}});
-   const statesOptions= states.map(e=> {return{value:e.provinceId, label:e.name}});
-   const citiesOptions= cities.map(e=> {return{value:e.name, label:e.name}});
-   
-   //handle de esos input
-   function handleCountries(value, action){
-    
-    
-    if(action.name==="countries"){
-       
+  const [countryId, setCountryId] = useState({
+    cid: "",
+    sid: ""
+  })
+
+
+  useEffect(() => {
+    dispatch(getCountries())
+    dispatch(getStates(countryId.cid))
+    if (countryId.sid.length) dispatch(getCities(countryId.cid, countryId.sid))
+
+
+
+  }, [dispatch, countryId])
+  //estados globales de paises, estados y ciudades
+  const countries = useSelector(state => state.countries)
+  const states = useSelector(state => state.states)
+  const cities = useSelector(state => state.cities)
+  //--opciones del select
+  const countriesOptions = countries.map(e => { return { value: e.countryId, label: e.name } });
+  const statesOptions = states.map(e => { return { value: e.provinceId, label: e.name } });
+  const citiesOptions = cities.map(e => { return { value: e.name, label: e.name } });
+
+  //handle de esos input
+  function handleCountries(value, action) {
+
+
+    if (action.name === "countries") {
+
       setCountryId({
         ...countryId,
-        cid:value.value
+        cid: value.value
       })
       setPost({
         ...post,
         country: value.label
       })
-      console.log(value.value);
+      // console.log(value.value);
     }
-    if(action.name==="states"){
+    if (action.name === "states") {
       setCountryId({
         ...countryId,
-        sid:value.value
+        sid: value.value
       })
-     
+
       setPost({
         ...post,
-        province:value.label
+        province: value.label
       })
     }
-    if(action.name==="cities"){
+    if (action.name === "cities") {
       setPost({
         ...post,
         city: value.value
@@ -239,8 +239,8 @@ function Login() {
 
   //const [image, setImage] = useState(null);
   async function handleSubmit(e) {
+    localStorage.setItem("Email", post.email);
 
-   
     e.preventDefault();
     validate(post);
     validateProfessional(postprofessional);
@@ -252,9 +252,6 @@ function Login() {
     if (isRegister || auth?.currentUser?.email) {
       userRegister(email, password);
       console.log("entre aca")
-      localStorage.setItem("Email", post.email);
-
-
 
 
       let user = {
@@ -274,7 +271,7 @@ function Login() {
         gps: post.gps,
         favorites: []
       };
-      
+
 
       //b
       let professional = {
@@ -310,15 +307,15 @@ function Login() {
       navigate("/");
     }
   }
-  console.log('file' , file)
-  console.log('fileId' , fileId)
-  console.log('filelicence' , filelicence)
+  console.log('file', file)
+  console.log('fileId', fileId)
+  console.log('filelicence', filelicence)
 
 
   return (
     <div className="ValidateCOntainer">
       <div className="Validate">
-        <h2> {isRegister ? "Registrate" : auth?.currentUser?.email ? "termina de completar tus datos" : "Inicia Sesion"} </h2>
+        <h2 className="ValidateTitle"> {isRegister ? "Registrate" : auth?.currentUser?.email ? "Termina de completar tus datos" : "Inicia Sesion"} </h2>
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
           <Form.Group className="mb-3">
@@ -332,7 +329,7 @@ function Login() {
               onChange={(e) => handleChange(e)}
             />
             {errors.email && (<Alert variant='warning' className="error" >{errors.email}</Alert>)}
-            {!errors.email && (<FcCheckmark/>)}
+            {!errors.email && (<FcCheckmark />)}
           </Form.Group>
 
           {/* password */}
@@ -346,7 +343,7 @@ function Login() {
               onChange={(e) => handleChange(e)}
             />
             {errors.password && (<Alert variant='warning' className="error" >{errors.password}</Alert>)}
-            {!errors.password && (<FcCheckmark/>)}
+            {!errors.password && (<FcCheckmark />)}
           </Form.Group>
           {(isRegister || auth?.currentUser?.email) && (
             <>
@@ -362,7 +359,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.name && (<Alert variant='warning' className="error" >{errors.name}</Alert>)}
-                {!errors.name && (<FcCheckmark/>)}
+                {!errors.name && (<FcCheckmark />)}
               </Form.Group>
 
               {/* rol */}
@@ -379,7 +376,7 @@ function Login() {
 
                 </Form.Select>
                 {errors.rol && (<Alert variant='warning' className="error" >{errors.rol}</Alert>)}
-                {!errors.rol && (<FcCheckmark/>)}
+                {!errors.rol && (<FcCheckmark />)}
               </Form.Group>
 
               {/* fecha de nacimiento */}
@@ -392,7 +389,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.dateOfBirth && (<Alert variant='warning' className="error" >{errors.dateOfBirth}</Alert>)}
-                {!errors.dateOfBirth && (<FcCheckmark/>)}
+                {!errors.dateOfBirth && (<FcCheckmark />)}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -404,7 +401,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.identification && (<Alert variant='warning' className="error" >{errors.identification}</Alert>)}
-                {!errors.identification && (<FcCheckmark/>)}
+                {!errors.identification && (<FcCheckmark />)}
               </Form.Group>
 
               {/*  Imagen de usuario */}
@@ -428,28 +425,28 @@ function Login() {
                 />
                 <button onClick={(e) => handleImageId(e)}>Subir Imagen</button>
                 {!imageId && (<Alert variant='warning' className="error"  >la foto dni es necesaria</Alert>)}
-                {imageId && (<FcCheckmark/>)}
+                {imageId && (<FcCheckmark />)}
               </Form.Group>
 
-               {/* Pais */}
-               <Form.Group className="mb-3" >
-              <Form.Label>Pais: </Form.Label>
-                <Select  onChange={handleCountries} name='countries' options= {countriesOptions} placeholder='Seleccione un Pais'/>
+              {/* Pais */}
+              <Form.Group className="mb-3" >
+                <Form.Label>Pais: </Form.Label>
+                <Select onChange={handleCountries} name='countries' options={countriesOptions} placeholder='Seleccione un Pais' />
                 {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)}
-                {!errors.country && (<FcCheckmark/>)}
-                </Form.Group>
+                {!errors.country && (<FcCheckmark />)}
+              </Form.Group>
 
 
               {/*  Provincia */}
               <Form.Group className="mb-3" >
                 <Form.Label>Provincia: </Form.Label>
-                <Select  onChange={handleCountries} name={'states'} options= {statesOptions} placeholder='Seleccione una Provincia'/>
+                <Select onChange={handleCountries} name={'states'} options={statesOptions} placeholder='Seleccione una Provincia' />
               </Form.Group>
 
               {/* Ciudad  */}
               <Form.Group className="mb-3" >
                 <Form.Label>Ciudad: </Form.Label>
-                <Select  onChange={handleCountries} name={'cities'} options= {citiesOptions} placeholder='Seleccione una Ciudad'/>
+                <Select onChange={handleCountries} name={'cities'} options={citiesOptions} placeholder='Seleccione una Ciudad' />
               </Form.Group>
 
               {/*  Address */}
@@ -462,7 +459,7 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
                 {errors.address && (<Alert variant='warning' className="error" >{errors.address}</Alert>)}
-                {!errors.address && (<FcCheckmark/>)}
+                {!errors.address && (<FcCheckmark />)}
               </Form.Group>
 
               {/*  Telefono */}
@@ -502,7 +499,7 @@ function Login() {
                     />
                     <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button>
                     {!prolicenceImage && (<Alert variant='warning' className="error" >la foto de la licencia es necesaria</Alert>)}
-                    {prolicenceImage && (<FcCheckmark/>)}
+                    {prolicenceImage && (<FcCheckmark />)}
                   </Form.Group>
 
                   <Form.Group className="mb-3" >
@@ -514,7 +511,7 @@ function Login() {
                       onChange={(e) => handleChange(e)}
                     />
                     {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicensea}</Alert>)}
-                    {!professionalError.medicalLicense && (<FcCheckmark/>)}
+                    {!professionalError.medicalLicense && (<FcCheckmark />)}
                   </Form.Group>
 
 
@@ -526,31 +523,31 @@ function Login() {
           )}
 
           {post.rol == "user" ?
-           (isRegister || auth?.currentUser?.email) &&(errors.email == "")&& (errors.name =="") && (errors.dateOfBirth =="")&& (errors.identification =="")&& (imageId)&& (errors.country =="")&& (errors.address =="")&& (errors.rol =="")&&
-          <div className="formButtons">
-            {/* Submit form button */}
-            <Button variant="success" type="submit">
-              Registrarse
-            </Button>
-          </div> :
-              (isRegister || auth?.currentUser?.email) &&(errors.email == "")&& (errors.name =="") && (errors.dateOfBirth =="")&& (errors.identification =="")&& (imageId)&& (errors.country =="")&& (errors.address =="")&& (errors.rol =="")&& (prolicenceImage) && (professionalError.medicalLicense == "") &&
-                  <div className="formButtons">
-                    {/* Submit form button */}
-                    <Button variant="success" type="submit">
-                               Registrarse
-                     </Button>
-                  </div> 
-              }
+            (isRegister || auth?.currentUser?.email) && (errors.email == "") && (errors.name == "") && (errors.dateOfBirth == "") && (errors.identification == "") && (imageId) && (errors.country == "") && (errors.address == "") && (errors.rol == "") &&
+            <div className="formButtons">
+              {/* Submit form button */}
+              <Button variant="success" type="submit">
+                Registrarse
+              </Button>
+            </div> :
+            (isRegister || auth?.currentUser?.email) && (errors.email == "") && (errors.name == "") && (errors.dateOfBirth == "") && (errors.identification == "") && (imageId) && (errors.country == "") && (errors.address == "") && (errors.rol == "") && (prolicenceImage) && (professionalError.medicalLicense == "") &&
+            <div className="formButtons">
+              {/* Submit form button */}
+              <Button variant="success" type="submit">
+                Registrarse
+              </Button>
+            </div>
+          }
 
-{
-           (!isRegister && !auth?.currentUser?.email) && (errors.email =="") && (errors.password =="") &&
-          <div className="formButtons">
-            {/* Submit form button */}
-            <Button variant="success" type="submit">
-              iniciar sesion 
-            </Button>
-          </div>
-        }
+          {
+            (!isRegister && !auth?.currentUser?.email) && (errors.email == "") && (errors.password == "") &&
+            <div className="formButtons">
+              {/* Submit form button */}
+              <Button variant="success" type="submit">
+                iniciar sesion
+              </Button>
+            </div>
+          }
 
         </Form>
 
