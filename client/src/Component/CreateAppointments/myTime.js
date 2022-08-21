@@ -3,7 +3,7 @@ export default function myTime(sT, eT){
     let startTime= sT
     let endTime= eT
     let timeEnd= endTime.split(':')
-   
+
     let timeM=startTime.split(':')
     
     let x=Number(timeM[0])+Number(timeM[1])/60
@@ -72,6 +72,10 @@ export default function myTime(sT, eT){
         
        
         let finallyhour= hourStart + ':' + minuteStart
+       
         return finallyhour
     })
+
+    return hours
 }
+
