@@ -120,24 +120,10 @@
     display: flex;
     flex-direction: row;
 }
-.botonUser{
-    background-color:#0dcaf0 ;
-    border-radius: 5px;
-    border-color: #0dcaf0;
-    width: 120px;
 
-}
 
 .NavBarLoginFooterContainer{
     display: flex;
     flex-direction: column;
 }
 
-@media only screen and (max-width: 620px) {
-   /*  .NavBarLoginFooterContainer{
-        
-    } */
-    .validate {
-        width: 100%;
-    }
-  }
