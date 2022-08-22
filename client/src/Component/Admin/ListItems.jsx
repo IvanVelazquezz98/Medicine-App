@@ -9,43 +9,61 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { useDispatch } from 'react-redux';
+import { filterByAdmin } from "../../Redux-actions/index.js";
 
-export const mainListItems = (
-  <React.Fragment>
+
+export default function ListItems(){
+
+ const dispatch = useDispatch()
+ 
+ function handleClick(value){
+  console.log(value)
+  dispatch(filterByAdmin(value))
+ }
+
+
+  return(
+    <React.Fragment>
+  
+
+
+
+ <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="mejores profesionales" />
+      <ListItemText  onClick={handleClick("topProfessionals")} primary="mejores profesionales" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
          <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="peores profesionales" />
+      <ListItemText onClick={handleClick('worstProfessionals')} primary="peores profesionales" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="usuarios Top" />
+      <ListItemText onClick={e=>handleClick('topUsers')} primary="usuarios Top" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Ultimos Socios" />
+      <ListItemText onClick={e=>handleClick('latestClients')} primary="Ultimos Socios" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="usuarios inactivos" />
+      <ListItemText onClick={e=>handleClick('inactiveClients')} primary="usuarios inactivos" />
     </ListItemButton>
   </React.Fragment>
-);
 
-export const secondaryListItems = (
+
+ 
   <React.Fragment>
     <ListSubheader component="div" inset>
       Reporte de consumos
@@ -69,4 +87,7 @@ export const secondaryListItems = (
       <ListItemText primary="Ultimo Año" />
     </ListItemButton>
   </React.Fragment>
+  </React.Fragment>
+ 
 );
+}

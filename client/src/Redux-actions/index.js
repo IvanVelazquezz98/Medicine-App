@@ -499,4 +499,39 @@ export function getUsersByAdminById(id) {
             })
         }
       } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      export function filterByAdmin({topProfessionals, worstProfessionals, topUsers, latestClients, inactiveClients}) {
+        console.log({topProfessionals, worstProfessionals, topUsers, latestClients, inactiveClients})
+ 
+        return async function (dispatch) {
+          var json = await axios.get(`${BASE_URL}/filterByAdmin?typeService=${topProfessionals}&specialty=${worstProfessionals}&country=${topUsers}&province=${latestClients}&city=${inactiveClients}`)
+          return dispatch({ type: 'FILTER_ALL_ADS', payload: json.data})
+        }
+      
+      
+      }
     
