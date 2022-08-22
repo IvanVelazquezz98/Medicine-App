@@ -75,7 +75,6 @@ function Login() {
     province: "",
     phone: "",
     rol: "",
-    gps: "",
     favorites: []
   });
 
@@ -262,7 +261,6 @@ function Login() {
         province: post.province,
         phone: post.phone,
         rol: post.rol,
-        gps: post.gps,
         favorites: []
       };
 
@@ -292,7 +290,6 @@ function Login() {
         province: "",
         phone: "",
         rol: "",
-        gps: "",
         favorites: []
       });
       navigate("/")
@@ -464,18 +461,6 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
               </Form.Group>
-
-              {/*  Ubicacion GPS */}
-              <Form.Group className="mb-3">
-                <Form.Label>Ubicacion GPS: </Form.Label>
-                <Form.Control
-                  type="text"
-                  value={post.gps}
-                  name="gps"
-                  onChange={(e) => handleChange(e)}
-                />
-              </Form.Group>
-
               {
 
                 //we check whether or not he/she is a professional 

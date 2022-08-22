@@ -493,3 +493,22 @@ export function getUsersByAdminById(id) {
           return dispatch({ type: 'FILTER_BY_ADMIN', payload: json.data})
         }
       }
+
+
+      export function designeAdmin(userId){
+        return async function (dispatch){
+            await axios.put(`${BASE_URL}/adminDesigne/${userId}`)
+            return dispatch({
+              type:'DESIGNE_ADMIN',
+            })
+          } 
+        }
+
+        export function degredeAdmin(userId){
+          return async function (dispatch){
+              await axios.put(`${BASE_URL}/adminDegrede/${userId}`)
+              return dispatch({
+                type:'DEGREDE_ADMIN',
+              })
+            } 
+          }
