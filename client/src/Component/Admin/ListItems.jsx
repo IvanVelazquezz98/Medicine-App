@@ -18,8 +18,11 @@ export default function ListItems(){
  const dispatch = useDispatch()
  
  function handleClick(value){
-  console.log(value)
-  dispatch(filterByAdmin(value))
+ let filterAdmin = {
+    [value] : value
+ }
+ console.log(filterAdmin)
+  dispatch(filterByAdmin(filterAdmin))
  }
 
 
@@ -34,31 +37,37 @@ export default function ListItems(){
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText  onClick={handleClick("topProfessionals")} primary="mejores profesionales" />
+      <ListItemText  onClick={(e)=>handleClick("rankingAlto")} primary="mejores profesionales" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+          <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText  onClick={(e)=>handleClick("rankingBajo")} primary="peores profesionales" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
          <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={handleClick('worstProfessionals')} primary="peores profesionales" />
+      <ListItemText onClick={(e)=>handleClick('appointment')} primary="usuarios Top" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={e=>handleClick('topUsers')} primary="usuarios Top" />
+      <ListItemText onClick={(e)=>handleClick('createdUser')} primary="Ultimos Socios" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={e=>handleClick('latestClients')} primary="Ultimos Socios" />
+      <ListItemText onClick={(e)=>handleClick('active')} primary="Usuarios Activos" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={e=>handleClick('inactiveClients')} primary="usuarios inactivos" />
+      <ListItemText onClick={(e)=>handleClick('noActive')} primary="usuarios inactivos" />
     </ListItemButton>
   </React.Fragment>
 

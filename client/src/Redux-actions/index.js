@@ -524,12 +524,13 @@ export function getUsersByAdminById(id) {
 
 
 
-      export function filterByAdmin({topProfessionals, worstProfessionals, topUsers, latestClients, inactiveClients}) {
-        console.log({topProfessionals, worstProfessionals, topUsers, latestClients, inactiveClients})
+      export function filterByAdmin({ranking, appointment, latestClients, active, noActive}) {
+        console.log({ranking, appointment, latestClients, active, noActive})
  
         return async function (dispatch) {
-          var json = await axios.get(`${BASE_URL}/filterByAdmin?typeService=${topProfessionals}&specialty=${worstProfessionals}&country=${topUsers}&province=${latestClients}&city=${inactiveClients}`)
-          return dispatch({ type: 'FILTER_ALL_ADS', payload: json.data})
+          var json = await axios.get(`${BASE_URL}/filterAdmin?ranking=${ranking}&appointment=${appointment}&latestClients=${latestClients}&active=${active}&noActive=${noActive}`)
+          console.log(json.data)
+          return dispatch({ type: 'FILTER_BY_ADMIN', payload: json.data})
         }
       
       
