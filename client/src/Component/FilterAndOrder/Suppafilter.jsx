@@ -86,22 +86,22 @@ export default function Suppafilter() {
 
   function handleFilter(value, action) {
     if (action.action === "clear") {
-      console.log(action);
+   
       searchParams.delete([action.name]);
       setSearchParams(searchParams);
     }
     searchParams.set([action.name], value.value);
     setSearchParams(searchParams);
-    console.log(action);
+
   }
 
   function handleRemoveFilter(value, action) {
-    console.log(action.name);
+  
     searchParams.delete([action.name]);
     setSearchParams(searchParams);
   }
   useEffect(() => {
-    console.log(Object.fromEntries([...searchParams]));
+    
     dispatch(filterAllAds(Object.fromEntries([...searchParams])));
   }, [searchParams]);
 

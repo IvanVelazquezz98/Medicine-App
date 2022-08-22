@@ -8,21 +8,17 @@ import {
   signInWithEmailAndPassword,
   signInWithRedirect,
   GoogleAuthProvider,
-  signOut,
-  AuthErrorCodes
 } from "firebase/auth";
-import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional, getStates, getCountries, getCities, getUsers } from "../../Redux-actions/index";
+import { postUser, postProfessional, getStates, getCountries, getCities} from "../../Redux-actions/index";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalForgotPsw from "./ModalForgotPsw";
 import { validate, validateProfessional } from './validate'
 import Alert from 'react-bootstrap/Alert';
-import ModalsErrors from '../ModalsErrors/ErrorsRouta'
 import Select from "react-select";
-import Footer from "../Footer/Footer";
 import "./Login.css";
 import { FcCheckmark } from "react-icons/fc"
 
@@ -125,7 +121,7 @@ function Login() {
         // ...
       });
   }
-  console.log(errors)
+ 
   // registrar usuario
   async function userRegister(email, password, rol) {
     const userInfo = await createUserWithEmailAndPassword(
@@ -141,9 +137,7 @@ function Login() {
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
-  console.log('image', image)
-  console.log('imageid', imageId)
-  console.log('licence', prolicenceImage)
+
 
   const handlefile = async (e) => {
     e.preventDefault();
@@ -213,7 +207,7 @@ function Login() {
         ...post,
         country: value.label
       })
-      // console.log(value.value);
+     
     }
     if (action.name === "states") {
       setCountryId({
@@ -251,7 +245,7 @@ function Login() {
 
     if (isRegister || auth?.currentUser?.email) {
       userRegister(email, password);
-      console.log("entre aca")
+      
 
 
       let user = {
@@ -307,9 +301,7 @@ function Login() {
       navigate("/");
     }
   }
-  console.log('file', file)
-  console.log('fileId', fileId)
-  console.log('filelicence', filelicence)
+ 
 
 
   return (
@@ -522,15 +514,15 @@ function Login() {
             </>
           )}
 
-          {post.rol == "user" ?
-            (isRegister || auth?.currentUser?.email) && (errors.email == "") && (errors.name == "") && (errors.dateOfBirth == "") && (errors.identification == "") && (imageId) && (errors.country == "") && (errors.address == "") && (errors.rol == "") &&
+          {post.rol === "user" ?
+            (isRegister || auth?.currentUser?.email) && (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") &&
             <div className="formButtons">
               {/* Submit form button */}
               <Button variant="success" type="submit">
                 Registrarse
               </Button>
             </div> :
-            (isRegister || auth?.currentUser?.email) && (errors.email == "") && (errors.name == "") && (errors.dateOfBirth == "") && (errors.identification == "") && (imageId) && (errors.country == "") && (errors.address == "") && (errors.rol == "") && (prolicenceImage) && (professionalError.medicalLicense == "") &&
+            (isRegister || auth?.currentUser?.email) && (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") && (prolicenceImage) && (professionalError.medicalLicense === "") &&
             <div className="formButtons">
               {/* Submit form button */}
               <Button variant="success" type="submit">
@@ -540,7 +532,7 @@ function Login() {
           }
 
           {
-            (!isRegister && !auth?.currentUser?.email) && (errors.email == "") && (errors.password == "") &&
+            (!isRegister && !auth?.currentUser?.email) && (errors.email === "") && (errors.password === "") &&
             <div className="formButtons">
               {/* Submit form button */}
               <Button variant="success" type="submit">
