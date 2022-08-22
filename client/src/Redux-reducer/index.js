@@ -208,10 +208,21 @@ case "GET_USERS_BY_ADMIN":
     ...state,
     users: [action.payload],
   };
+
+
+  case "FILTER_BY_ADMIN":
+    return {
+      ...state,
+      users: action.payload,
+    };
+
+
   default:
     return state;
 }
 };
+
+
 
 
 export default rootReducer;

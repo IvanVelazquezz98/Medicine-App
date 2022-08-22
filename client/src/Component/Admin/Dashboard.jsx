@@ -17,7 +17,6 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './ListItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
@@ -28,6 +27,7 @@ import { getUsersById, getUsers } from "../../Redux-actions/index.js";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import SearchBar from './SearchBar';
+import  ListItems  from './ListItems';
 
 function DashboardContent({user}) {
 
@@ -103,11 +103,12 @@ const mdTheme = createTheme();
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
+          <ListItems/>
+          {/* <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
-          </List>
+          </List> */}
         </Drawer>
         <Box
           component="main"
