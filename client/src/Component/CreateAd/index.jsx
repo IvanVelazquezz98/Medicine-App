@@ -54,7 +54,7 @@ export default function CreateAd({ user }) {
     serviceType: "",
   });
 
-  console.log('soy ad', post)
+
 
   function handleSubmit(e) {
     //e.preventDefault();

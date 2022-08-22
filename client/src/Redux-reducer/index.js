@@ -107,28 +107,11 @@ const rootReducer = (state = inicialState, action) => {
        }
        
       case 'CREATE_AFTERNOON_HOURS':
-        const aftHours = action.payload
-        const morning=[...state.morningHours]
         
-          let aftHoursFilter = []
-          for (let i = 0; i < aftHours.length; i++) {
-            for (let j = 0; j <morning.length; j++) {
-              let As= Number(aftHours[i].start.split(':')[0])+ Number(aftHours[i].start.split(':')[1])/60
-                     // console.log(Ah)
-              let Aend= Number(aftHours[i].end.split(':')[0])+ Number(aftHours[i].end.split(':')[1])/60  
-              let Ms= Number(morning[j].start.split(':')[0])+ Number(morning[j].start.split(':')[1])/60
-                     // console.log(Ms)
-              let Me= Number(morning[j].end.split(':')[0])+ Number(morning[j].end.split(':')[1])/60
-                     // console.log(Me)
-              if(! (As >= Ms && As < Me) || !(Ms >=As && Ms < Aend )){
-                aftHoursFilter.push(aftHours[i])
-              }
-            }
-           }
        // console.log('filtrado', aftHoursFilter)
         return {
           ...state,
-          afternoonHours:aftHoursFilter
+          afternoonHours: action.payload
         }
 
     case "CLEAR_USER_DETAIL":

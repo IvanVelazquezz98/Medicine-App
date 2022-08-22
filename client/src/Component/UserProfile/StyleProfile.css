@@ -130,4 +130,14 @@
 
 .NavBarLoginFooterContainer{
     display: flex;
+    flex-direction: column;
 }
+
+@media only screen and (max-width: 620px) {
+   /*  .NavBarLoginFooterContainer{
+        
+    } */
+    .validate {
+        width: 100%;
+    }
+  }
