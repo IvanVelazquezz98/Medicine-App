@@ -9,7 +9,7 @@ import {useParams} from 'react-router-dom'
 import ModalConfirma from './ModalConfirma'
 import { getAppointmentsById} from "../../Redux-actions";
 
-function MRDocLog({}) {
+function MedicalRecordLog({}) {
   const [show, setShow]= useState(false)
   const [log, setLog]= useState('')
   navigate = useNavigate()
@@ -61,5 +61,5 @@ function MRDocLog({}) {
   );
 }
 
-export default MRDocLog;
+export default MedicalRecordLog;
 
