@@ -11,10 +11,6 @@ import { DataGrid } from '@mui/x-data-grid';
 export default function ProfessionalAppointments({ medicalLicense }) {
   const dispatch = useDispatch();
   const professionalApps = useSelector((state) => state.todo)
-  const [pending, setPending] = useState(false)
-  const [completed, setCompleted] = useState(false)
-  const [cancelled, setCancelled] = useState(false)
-  const [input, setInput] = useState()
   const [show, setShow] = useState(false)
   const [checkboxSelection, setCheckboxSelection] = useState(null)
   const [box, setBox] = useState(false)
@@ -56,7 +52,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
   let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' },
   { field: 'modalidad' }, { field: 'estado' },
   {
-    field: 'Cancelar', renderCell: renderDetailsButton, width: 200,
+    field: 'Opciones', renderCell: renderDetailsButton, width: 200,
     disableClickEventBubbling: true
   }]
 
@@ -82,13 +78,13 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
   return (
 
-    <div style={{ display: 'flex', height: '15%' , width: '70%' }}>
+    <div style={{ display: 'flex', height: '15%', width: '70%' }}>
       <div style={{ flexGrow: 1 }}>
-      <DataGrid
-        columns={columns}
-        rows={rows}
-        renderCell={(e) => renderDetailsButton(e)}
-      />
+        <DataGrid
+          columns={columns}
+          rows={rows}
+          renderCell={(e) => renderDetailsButton(e)}
+        />
       </div>
 
       {show ? <ModalOptions appointment={checkboxSelection} /> : null}

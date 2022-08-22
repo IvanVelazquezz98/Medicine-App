@@ -1,28 +1,18 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, } from "react";
-import { clearUserAppointments, getUserApps} from "../../Redux-actions/index.js";
-import './Apointments.css'
-import { BsCloudFog } from 'react-icons/bs';
-import ModalCancel from './ModalCancel.jsx';
+import React, { useEffect, useState } from 'react'
+import { DataGrid } from '@mui/x-data-grid';
+import ModalMedicalRecord from './ModalMedicalRecord';
+import { useSelector , useDispatch } from 'react-redux';
+import { getUserApps ,clearUserAppointments } from '../../Redux-actions';
+import ModalCancel from './ModalCancel'
 
+export default function MedicalRecordUser({userEmail , name}) {
 
-
-
-
-
-
-
-export default function Appointments({ userEmail }) {
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
-  const [pending , setPending] = useState(false)
-  const [completed , setCompleted] = useState(false)
-  const [cancelled , setCancelled] = useState(false)
-  const [input, setInput]=useState()
   const [show,setShow]= useState(false)
+  const [medicalRecord , setMedicalRecord] = useState()
+  const [checkboxSelection , setCheckboxSelection] = useState()
 
-console.log('turnos', userApps);
 
   useEffect(() => {
     dispatch(getUserApps(userEmail));
@@ -31,33 +21,57 @@ console.log('turnos', userApps);
    }
   }, [dispatch]);
 
- function handleClick(e){
-  setInput(e.target.value)  
-  setShow(true)
-  }
 
-
-console.log(userApps);
-  return (
-
-    <div className='conteinerApp'>
-      
-      <div><h3 >Historial de turnos</h3></div>
-      {userEmail ? userApps.map((app) => {
+    const renderDetailsButton = (params) => {
         return (
-            <div className='onecont'>
-              <p className='text'> - {app.startTime[0] + ':' + app.startTime[1] + 'Hs'}</p>
-              <p className='text'>{app.date[2] +  '/' + app.date[1] + '/' + app.date[0] }</p>
-              {app.status === 'pending'? <div><p className='pending'>{app.status}</p><button value={app.id}onClick={handleClick}>cancelar tu turno</button></div>:app.status === 'completed'?<p className='completed'>{app.status}</p>:<p className = 'cancelled'>{app.status}</p>}
-
-            </div>
-            
-          
-        )
-      }) : <p>Loading..</p>}
-      {show?<ModalCancel input={input} userEmail={userEmail} /* name={user.name} *//>:null}
-      
-    </div>
     
+    
+          <strong>
+            <button
+              variant="contained"
+              color="primary"
+              size="small"
+              width='40px'
+              style={{ marginLeft: 16 }}
+              onClick={(e) => handleOnCellClick(params)}
+            >
+              Opciones
+            </button>
+          </strong>
+        )
+      }
+    
+      function handleOnCellClick(params) {
+        setCheckboxSelection(params)
+        setShow(true)
+      }
+  
+    let columns =[{ field: 'fecha' }, { field: 'hora' },
+    { field: 'modalidad' }, { field: 'estado' },
+    {
+      field: 'Opciones', renderCell: renderDetailsButton, width: 200,
+      disableClickEventBubbling: true
+    }]
+
+  let userAppointment = userApps.appointments?.map((e) => e)
+      
+    let rows = userAppointment  ?  userAppointment.map((app)=>{return{
+      id: app?.id,
+      fecha: app?.date,
+      hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      modalidad: app?.ad?.serviceType,
+      estado: app?.status,
+    }}):[{id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
+  
+    return (
+    <>
+        <div>Historial de turnos</div>
+        {show ? <ModalCancel userEmail={userEmail} name={name}/> : null}
+        <DataGrid
+            columns={columns}
+            rows={rows}
+        />
+    
+    </>
   )
 }

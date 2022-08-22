@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { putEditAppointment } from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
 
-export default function ModalAbsent({ idApp }) {
+export default function ModalMedicalRecord({ info }) {
     const [show, setShow] = useState(true);
 
     const dispatch = useDispatch()
@@ -14,8 +13,7 @@ export default function ModalAbsent({ idApp }) {
     };
 
     const handleCancel = () => {
-        dispatch(putEditAppointment({ status: 'absent' }, idApp))
-        setShow(false)
+        
     }
 
 
@@ -25,18 +23,17 @@ export default function ModalAbsent({ idApp }) {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Dar por ausente al paciente
+                        Historia Clinica
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleClose}>
                         Cerrar
                     </Button>
-                    <Button variant="primary" onClick={handleCancel}>
-                        Ausente
-                    </Button>
                 </Modal.Footer>
+
             </Modal>
+
         </>
     );
 }
