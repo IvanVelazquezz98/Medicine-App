@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
+import {Button} from 'react-bootstrap'
 
 
 
@@ -110,11 +111,11 @@ const UserProfile = ({ user }) => {
 
               {/* <div className="SignOut">
       <button className="botonUser" onClick={() => signOut(auth)}>Cerrar sesion</button>  */} 
-              <div className="botonUser">
+              
                 <Link to={"/profile/" + User.email}>
-                  editar informacion de perfil
+                  <Button variant="success" size = "sm"> Editar Perfil </Button>
                 </Link>
-              </div>
+              
               {/* </div> */}
               <div>
                 <ModalUnsubscribe user={User} />

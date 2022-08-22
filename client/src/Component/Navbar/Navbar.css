@@ -28,6 +28,7 @@
     
     margin-left: 2rem;
   }
+
   .buttonNav{
     border: 1px solid rgb(0, 0, 0);
     border-radius: 6%;
@@ -40,6 +41,12 @@
     color: black;
     align-items: center;
   }
+  .buttonNav:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #037405;
+    transition: 500ms;
+  }
   .imagenPerfil{
     width:50px;
     height:50px;
@@ -49,9 +56,4 @@
     border-radius: 25%;
     transition: background-color 600ms;
   }
-  .buttonNav:hover{
-    cursor: pointer;
-    color: rgb(255, 255, 255);
-    background-color: #037405;
-    transition: 500ms;
-  }
+  

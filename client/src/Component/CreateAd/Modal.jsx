@@ -14,7 +14,7 @@ export default function ModalCreateAdd({user}) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" size = "sm" onClick={handleShow}>
         Crear Anuncio
       </Button>
 
