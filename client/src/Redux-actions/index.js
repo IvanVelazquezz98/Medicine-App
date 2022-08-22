@@ -500,3 +500,16 @@ export function getUsersByAdminById(id) {
         }
       } 
     
+      export function getAppointmentsById(appId){
+        console.log('llegue')
+        
+        return async (dispatch) =>{
+            try {
+                var json= await axios.get(`${BASE_URL}/appointments/id/${appId}`);
+            return dispatch({type:'GET_APP_INFO', payload: json.data})
+            } catch (error) {
+                console.log(error, 'error en action apps by ID')
+            }
+        }
+      
+      };

@@ -19,6 +19,7 @@ const inicialState = {
   availablesApps:[],
   userAppointments:[],
   todo:[],
+  appointmentInfo:[]
 
 };
 
@@ -208,6 +209,11 @@ case "GET_USERS_BY_ADMIN":
     ...state,
     users: [action.payload],
   };
+  case 'GET_APP_INFO':
+    return{
+      ...state,
+      appointmentInfo:[action.payload]
+    }
   default:
     return state;
 }

@@ -29,6 +29,8 @@ export default function ProfessionalAppointments({ medicalLicense, show}) {
      }
       
     }, [dispatch]);
+
+    
     
     console.log('turnos', professionalApps);
  
