@@ -1,7 +1,7 @@
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Navbar, Nav, Container} from "react-bootstrap";
 import "./Navbar.css";
 /* import "../Home/Text.css"; */
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import navlog from "../../assets/logo23.jpeg";
 import perfil from "../../assets/perfil.png";
 import firebaseApp from "../../Credential/index";
@@ -9,7 +9,6 @@ import { getAuth, signOut } from "firebase/auth";
 
 const NavBarExample = ({ user }) => {
   const auth = getAuth(firebaseApp);
-  //console.log("auth", auth);
   const navigate = useNavigate();
 
   function closeSession() {

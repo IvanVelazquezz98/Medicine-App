@@ -97,7 +97,7 @@ export default function EditInfo() {
     [e.target.name] : e.target.value
     })
     if (password.password !== password.password2){setAlert2(true)}
-    if (password.password == password.password2){setAlert2(false)}
+    if (password.password === password.password2){setAlert2(false)}
   }
 
   function handleChangeProfessional(e){
@@ -113,7 +113,7 @@ export default function EditInfo() {
     e.preventDefault();
     if (password.password.length < 7){setAlert(true)}
     if (password.password !== password.password2){setAlert2(true)}
-    if (password.password == password.password2 && password.password.length > 6){
+    if (password.password === password.password2 && password.password.length > 6){
       updatePassword(user, password.password)
     }
     dispatch(putEditInfoProfessional(editProfessional, User.professional.medicalLicense));
@@ -146,8 +146,7 @@ export default function EditInfo() {
     navigate(path)
   }
   
- console.log(alert)
- console.log(alert2)
+
   return (
     <div>
     <Navbar/>
@@ -334,7 +333,7 @@ export default function EditInfo() {
            </Form.Group>
                
    </div>
-   {(User.rol == "professional") &&
+   {(User.rol === "professional") &&
    <div >
    <Button onClick={e=>handleDisingageProfessional(e)}>Dejar de brindar mis servicios de Profesional</Button>
    </div>
@@ -345,7 +344,7 @@ export default function EditInfo() {
    <Button onClick={e=>handleRegisterProfessional(e) }>registrarme como profesional de la salud</Button>
    </div>
    }
-    {(User.rol == "professional") &&
+    {(User.rol === "professional") &&
     
 
     <div>

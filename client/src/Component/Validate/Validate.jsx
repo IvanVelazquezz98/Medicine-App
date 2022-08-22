@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
 import Login from "../Login/Login";
 import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import UserProfile from "../UserProfile/UserProfile";
 import NavBar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
-import { getUsersById } from "../../Redux-actions";
-import Dashboard from "../Admin/Dashboard";
+
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);

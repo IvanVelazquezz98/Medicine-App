@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
-import MedicalRecordUser from "./MedicalRecordUser";
+import MedicalRecordUser from "./medicalRecordUser";
 
 
 
