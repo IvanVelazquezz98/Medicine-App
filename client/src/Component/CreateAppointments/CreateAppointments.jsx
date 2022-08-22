@@ -15,7 +15,7 @@ import Footer from "../Footer/Footer";
 import "./CreateAppointments.css";
 import moment from "moment";
 import AppCalendario from "../AppCalendario/AppCalendario";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
 import myTime from "./myTime";
 
@@ -240,7 +240,7 @@ function CreateAppointments({user}) {
       // console.log('afternoonHours', afternoonHours);
   return (
     <>
-      <Navbar/>
+     
       <div >
           { apps>0?
             <div>
@@ -363,8 +363,9 @@ function CreateAppointments({user}) {
               }
 
           </div>
-            {/* <Footer/> */}
+       
       </div>
+      <Outlet/>
     </>
   );
 }
