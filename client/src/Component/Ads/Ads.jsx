@@ -70,6 +70,7 @@ export default function Ads() {
                       precio={ad.price}
                       ranking={ad.professional.ranking}
                       userimage={ad.professional.user.userimage}
+                      email={ad.professional.user.email}
                     />
                     {/* <button onClick={e=>handleAddFavorites(e)} value ={ad.professionalMedicalLicense}>agregar profesional a favoritos</button>
           <button onClick={e=>handleRemoveFavorites(e)} value={ad.professionalMedicalLicense}>remover profesionalde favoritos</button> */}

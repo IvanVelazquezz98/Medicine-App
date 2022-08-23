@@ -81,7 +81,7 @@ function handleDegredeAdmin(e){
                                          <button value={User.email} onClick={(e)=>handleForgive(e)}><FaTrashRestore /></button>}
                <TableCell> </TableCell>
               {(User?.rol !== "admin") ? <button value={User.id} onClick={(e)=>handleDesigneAdmin(e)}>poner</button>:
-                                         <button value={User.email} onClick={(e)=>handleDegredeAdmin(e)}>sacar</button>}
+                                         <button value={User.id} onClick={(e)=>handleDegredeAdmin(e)}>sacar</button>}
             </TableRow>
           ))}
         </TableBody>
