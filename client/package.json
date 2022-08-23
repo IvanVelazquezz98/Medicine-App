@@ -35,6 +35,9 @@
     "react-scroll": "^1.8.7",
     "react-select": "^5.4.0",
     "react-time-range": "^1.0.4",
+
+    "rechart": "^0.0.1",
+
     "recharts": "^2.1.13",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
