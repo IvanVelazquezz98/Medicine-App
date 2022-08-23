@@ -9,43 +9,69 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { useDispatch } from 'react-redux';
+import { filterByAdmin } from "../../Redux-actions/index.js";
 
-export const mainListItems = (
-  <React.Fragment>
+
+export default function ListItems(){
+
+ const dispatch = useDispatch()
+ 
+ function handleClick(value){
+ let filterAdmin = {
+    [value] : value
+ }
+  dispatch(filterByAdmin(filterAdmin))
+ }
+
+
+  return(
+    <React.Fragment>
+  
+
+
+
+ <React.Fragment>
+    <ListItemButton >
+      <ListItemIcon>
+          <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText  onClick={(e)=>handleClick("rankingAlto")} primary="mejores profesionales" />
+    </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="mejores profesionales" />
+      <ListItemText  onClick={(e)=>handleClick("rankingBajo")} primary="peores profesionales" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
          <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="peores profesionales" />
+      <ListItemText onClick={(e)=>handleClick('appointment')} primary="usuarios Top" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="usuarios Top" />
+      <ListItemText onClick={(e)=>handleClick('createdUser')} primary="Ultimos Socios" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Ultimos Socios" />
+      <ListItemText onClick={(e)=>handleClick('active')} primary="Usuarios Activos" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="usuarios inactivos" />
+      <ListItemText onClick={(e)=>handleClick('noActive')} primary="usuarios inactivos" />
     </ListItemButton>
   </React.Fragment>
-);
 
-export const secondaryListItems = (
+
+ 
   <React.Fragment>
     <ListSubheader component="div" inset>
       Reporte de consumos
@@ -69,4 +95,7 @@ export const secondaryListItems = (
       <ListItemText primary="Ultimo Año" />
     </ListItemButton>
   </React.Fragment>
+  </React.Fragment>
+ 
 );
+}

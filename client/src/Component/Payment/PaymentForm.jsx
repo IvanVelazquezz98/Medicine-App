@@ -31,11 +31,7 @@ const CARD_OPTIONS = {
 export default function PaymentForm({ adId, name, ad,info}) {
   
 
-console.log('soy adId', adId)
-console.log('soy name', ad.professional.user.name)
-console.log('soy ad', ad)
-console.log('soy info', info)
-console.log('soy professionalMedicalLicense',ad.professional.medicalLicense)
+
 
 let idApp=info
   const [success, setSuccess] = useState(false);
@@ -76,11 +72,10 @@ let idApp=info
         });
 
         if (response.data.success) {
-          console.log("Successful payment");
           setSuccess(true);
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
           dispatch(selectedTime(false))
-          navigate('/home/validate')
+         /*  navigate('/home/validate') */
         }
       } catch (error) {
         console.log("Error", error);

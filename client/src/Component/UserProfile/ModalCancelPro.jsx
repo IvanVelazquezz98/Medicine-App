@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { putEditAppointment } from '../../Redux-actions';
+import { putEditAppointment, modalProfessionalApps } from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
 
 export default function ModalCancelPro({ idApp }) {
@@ -11,11 +11,14 @@ export default function ModalCancelPro({ idApp }) {
 
     const handleClose = () => {
         setShow(false)
+        dispatch(modalProfessionalApps(false))
     };
 
     const handleCancel = () => {
         dispatch(putEditAppointment({ status: 'cancelled' }, idApp))
         setShow(false)
+        dispatch(modalProfessionalApps(false))
+        window.location.reload()
     }
 
 

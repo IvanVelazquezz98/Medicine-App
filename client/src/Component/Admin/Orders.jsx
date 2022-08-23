@@ -7,9 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, deleteByAdmin, forgivenByAdmin } from "../../Redux-actions/index.js";
+import { getUsers, deleteByAdmin, forgivenByAdmin, designeAdmin, degredeAdmin } from "../../Redux-actions/index.js";
 import SearchBar from './SearchBar';
-
+import { AiOutlineDelete} from "react-icons/ai"
+import { FaTrashRestore } from "react-icons/fa"
 
 
 function preventDefault(event) {
@@ -36,6 +37,15 @@ function handleForgive(e){
   dispatch(forgivenByAdmin(e.target.value))
 }
 
+function handleDesigneAdmin(e){
+  e.preventDefault();
+  dispatch(designeAdmin(e.target.value))
+}
+function handleDegredeAdmin(e){
+  e.preventDefault();
+  dispatch(degredeAdmin(e.target.value))
+}
+
 
 
 
@@ -45,32 +55,33 @@ function handleForgive(e){
       <SearchBar />
       <Table size="small">
         <TableHead>
-          <TableRow>
+          {/* <TableRow> */}
             <TableCell>Mail</TableCell>
             <TableCell>Nombre</TableCell>
-            <TableCell>Pais</TableCell>
             <TableCell>rol</TableCell>
             <TableCell>ranking</TableCell>
             <TableCell>activo?</TableCell>
             <TableCell>borrado?</TableCell>
             <TableCell align="right">telefono</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
+            <TableCell>echar</TableCell>
+            <TableCell>hacer admin</TableCell>
+          {/* </TableRow> */}
         </TableHead>
         <TableBody>
           {Users.map((User) => (
             <TableRow key={User.id}>
               <TableCell>{User?.email}</TableCell>
               <TableCell>{User?.name}</TableCell>
-              <TableCell>{User?.country}</TableCell>
               <TableCell>{User?.rol}</TableCell>
               <TableCell>{User?.professional?.ranking}</TableCell>
               <TableCell>{(User?.active) ? "activo" : "inactivo"}</TableCell>
               <TableCell>{(User?.deletedByAdmin) ? "eliminado" : "no eliminado"}</TableCell>
               <TableCell align="right">{`$${User?.phone}`}</TableCell>
-              {(!User?.deletedByAdmin) ? <button value={User.id} onClick={(e)=>handleDelete(e)}>x</button>:
-                                         <button value={User.email} onClick={(e)=>handleForgive(e)}>o</button>}
-              
+              {(!User?.deletedByAdmin) ? <button value={User.id} onClick={(e)=>handleDelete(e)}><AiOutlineDelete /></button>:
+                                         <button value={User.email} onClick={(e)=>handleForgive(e)}><FaTrashRestore /></button>}
+               <TableCell> </TableCell>
+              {(User?.rol !== "admin") ? <button value={User.id} onClick={(e)=>handleDesigneAdmin(e)}>poner</button>:
+                                         <button value={User.id} onClick={(e)=>handleDegredeAdmin(e)}>sacar</button>}
             </TableRow>
           ))}
         </TableBody>

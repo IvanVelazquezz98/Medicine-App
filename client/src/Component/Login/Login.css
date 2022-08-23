@@ -24,6 +24,17 @@
     background-color: cadetblue;
     
 }
+@media only screen and (max-width: 720px) {
+     .Validate {
+         width: 90%;
+
+     }
+     .ValidateTitle{
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+     }
+   }
 .formContainer{
     width: 50%;
 }
