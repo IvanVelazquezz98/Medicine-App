@@ -17,9 +17,10 @@ export default function ListItems(){
 
  const dispatch = useDispatch()
  
- function handleClick(value){
+ function handleClick(e){
+  console.log(e.target.value , e.target.name)
  let filterAdmin = {
-    [value] : value
+    [e.target.name] : e.target.value
  }
   dispatch(filterByAdmin(filterAdmin))
  }
@@ -30,43 +31,48 @@ export default function ListItems(){
   
 
 
-
  <React.Fragment>
     <ListItemButton >
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText  onClick={(e)=>handleClick("rankingAlto")} primary="mejores profesionales" />
+      <ListItemText  name="ranking" value="mejores" onClick={(e)=>handleClick(e)} primary="mejores profesionales" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText  onClick={(e)=>handleClick("rankingBajo")} primary="peores profesionales" />
+      <ListItemText  name="ranking" value="peores" onClick={(e)=>handleClick(e)} primary="peores profesionales" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
          <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={(e)=>handleClick('appointment')} primary="usuarios Top" />
+      <ListItemText  name="apointemnt" value="users" onClick={(e)=>handleClick(e)} primary="usuarios Top" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={(e)=>handleClick('createdUser')} primary="Ultimos Socios" />
+      <ListItemText name="created" value="professionals" onClick={(e)=>handleClick(e)} primary="Ultimos professionales" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText name="created" value="users" onClick={(e)=>handleClick(e)} primary="Ultimos usuarios" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={(e)=>handleClick('active')} primary="Usuarios Activos" />
+      <ListItemText name="active" value="yes"  onClick={(e)=>handleClick(e)} primary="Usuarios Activos" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
-      <ListItemText onClick={(e)=>handleClick('noActive')} primary="usuarios inactivos" />
+      <ListItemText  name="active" value="no" onClick={(e)=>handleClick(e)} primary="usuarios inactivos" />
     </ListItemButton>
   </React.Fragment>
 
