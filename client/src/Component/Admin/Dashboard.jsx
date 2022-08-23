@@ -72,7 +72,7 @@ const mdTheme = createTheme();
   };
 
   return (
-   <ThemeProvider theme={mdTheme}>
+   <ThemeProvider theme={mdTheme} >
     <Navbar/>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -170,6 +170,7 @@ const mdTheme = createTheme();
       </Box>
       {/* <Footer/> */}
     </ThemeProvider>
+  
   );
 }
 

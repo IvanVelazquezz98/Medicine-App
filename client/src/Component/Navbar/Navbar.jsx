@@ -1,6 +1,7 @@
 
-import React, { useEffect } from "react";
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
+
+import { Navbar, Nav, Container } from "react-bootstrap";
+import React from "react";
 import "./Navbar.css";
 /* import "../Home/Text.css"; */
 import { Link, useNavigate } from "react-router-dom";

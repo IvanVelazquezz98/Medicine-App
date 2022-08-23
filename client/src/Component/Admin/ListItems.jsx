@@ -21,7 +21,6 @@ export default function ListItems(){
  let filterAdmin = {
     [value] : value
  }
- console.log(filterAdmin)
   dispatch(filterByAdmin(filterAdmin))
  }
 
@@ -33,7 +32,7 @@ export default function ListItems(){
 
 
  <React.Fragment>
-    <ListItemButton>
+    <ListItemButton >
       <ListItemIcon>
           <PeopleIcon />
       </ListItemIcon>
