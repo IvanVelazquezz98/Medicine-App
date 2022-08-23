@@ -72,7 +72,6 @@ export function getUsers() {
  
  //get user by id
  export function getUsersById(id) {
-  console.log('soy id',id)
     return async function (dispatch) {
       var json = await axios.get(`${BASE_URL}/user/${id}`);
       return dispatch({ type: "GET_USER_DETAIL", payload: json.data });
@@ -149,7 +148,6 @@ export function getName(name) {
 //ad professional to favourites
 export function addFavorite(payload) {
     return async function (dispatch) {
-        console.log(payload)
       try {
         var json = await axios.put(`${BASE_URL}/addFavorites`, payload);
         return json;
@@ -172,11 +170,9 @@ export function addFavorite(payload) {
   }
 
   export function createMorningHours (payload) {
-    console.log('actions', payload)
     return async function (dispatch) {
       try {
         var json = await axios.post(`${BASE_URL}/appointment/hours`, payload);
-        console.log('recibo en action=>', json.data)
         return dispatch({
           type:'CREATE_MORNING_HOURS',
           payload: json.data
@@ -191,7 +187,6 @@ export function addFavorite(payload) {
     return async function (dispatch) {
       try {
         var json = await axios.post(`${BASE_URL}/appointment/hours`, payload);
-        console.log('recibo en action=>', json.data)
         return dispatch({
           type:'CREATE_AFTERNOON_HOURS',
           payload: json.data
@@ -208,7 +203,6 @@ export function addFavorite(payload) {
 export function restoreUser(userRestore){ 
  
   return async function (dispatch){
-    console.log('entra en la action',userRestore)
     try {
       const dbResponse =  await axios.put(`${BASE_URL}/restore`,userRestore)
       if(dbResponse){
@@ -232,7 +226,6 @@ export function restoreUser(userRestore){
 
 // soft delete user from Data Base. 
 export function deleteUserByID(userId){
-  console.log(userId)
   return async function (dispatch){
     try {
       const dbResponse = await axios.put(`${BASE_URL}/delete/${userId}`)
@@ -242,7 +235,6 @@ export function deleteUserByID(userId){
         payload:dbResponse.data
       })
     } catch (e) {
-      //console.log('este es el error de la action',e)
       if(e.response.data.message){
         return dispatch({
           type:'ERROR',
@@ -266,7 +258,6 @@ export function deleteUserByID(userId){
 
   export function putEditInfoAd(payload, idAd) {
     return async function (dispatch) {
-      // console.log(payload , idAd)
       try {
         await axios.put(`${BASE_URL}/Ad/${idAd}`, payload);
       } catch (error) {
@@ -278,7 +269,6 @@ export function deleteUserByID(userId){
 
   export function putEditInfoUser(payload , idUser) {
     return async function (dispatch) {
-      // console.log(payload , idUser)
       try {
          await axios.put(`${BASE_URL}/user/${idUser}`, payload);
       } catch (error) {
@@ -290,8 +280,6 @@ export function deleteUserByID(userId){
   
   export function putEditInfoProfessional(payload , idUser) {
     return async function (dispatch) {
-      // console.log(payload , idUser)
-      // console.log("llegue aca")
       try {
          await axios.put(`${BASE_URL}/professional/${idUser}`, payload);
       } catch (error) {
@@ -303,7 +291,6 @@ export function deleteUserByID(userId){
 
   export function putEditAppointment(payload , idApp) {
     return async function (dispatch) {
-      // console.log('modifico de App=>',payload , 'Soy appID=>',idApp)
       try {
          await axios.put(`${BASE_URL}/appointments/edit/${idApp}`, payload);
       } catch (error) {
@@ -409,7 +396,6 @@ export function getCities (countryId, stateId){
 }
 
 export function getAppointmentsByAdAvailable(adId) {
-  console.log('llegue')
   
   return async (dispatch) =>{
       try {
@@ -499,6 +485,7 @@ export function getUsersByAdminById(id) {
             })
         }
       } 
+<<<<<<< HEAD
     
       export function getAppointmentsById(idApp){
         console.log('llegue')
@@ -533,3 +520,33 @@ export function getUsersByAdminById(id) {
        payload
     }
 }
+=======
+
+      export function filterByAdmin({ranking, appointment, latestClients, active, noActive}) {
+ 
+        return async function (dispatch) {
+          var json = await axios.get(`${BASE_URL}/filterAdmin?ranking=${ranking}&appointment=${appointment}&latestClients=${latestClients}&active=${active}&noActive=${noActive}`)
+          return dispatch({ type: 'FILTER_BY_ADMIN', payload: json.data})
+        }
+      }
+
+
+      export function designeAdmin(userId){
+        return async function (dispatch){
+            await axios.put(`${BASE_URL}/adminDesigne/${userId}`)
+            return dispatch({
+              type:'DESIGNE_ADMIN',
+            })
+          } 
+        }
+
+        export function degredeAdmin(userId){
+          return async function (dispatch){
+              await axios.put(`${BASE_URL}/adminDegrede/${userId}`)
+              return dispatch({
+                type:'DEGREDE_ADMIN',
+              })
+            } 
+          }
+
+>>>>>>> 067af2385714812726fc40a42cdeaa3d0f3710e4
