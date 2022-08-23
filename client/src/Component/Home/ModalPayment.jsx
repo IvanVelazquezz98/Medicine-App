@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import doc from "../../assets/doc.webp";
 import PaymentForm from "../Payment/PaymentForm";
 import { Elements } from "@stripe/react-stripe-js";
@@ -10,7 +10,7 @@ const Public_key =
 const stripeTestPromise = loadStripe(Public_key);
 
 function ModalPayment({info,professionalMedicalLicense,adId,name,ad}) {
-  console.log('info',info)
+ 
   
   return (
     <div>

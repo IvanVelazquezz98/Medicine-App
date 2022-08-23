@@ -24,10 +24,13 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
-
+import MedicalRecordUser from "./medicalRecordUser";
 import { Button } from "react-bootstrap";
 
+<<<<<<< HEAD
 import MedicalRecordUser from "./medicalRecordUser";
+=======
+>>>>>>> 067af2385714812726fc40a42cdeaa3d0f3710e4
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);

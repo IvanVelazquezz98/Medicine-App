@@ -46,8 +46,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
     setCheckboxSelection(params)
     setShow(true)
   }
-  console.log('soy box ', box)
-  console.log('turnos', professionalApps);
+
 
   let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' },
   { field: 'modalidad' }, { field: 'estado' },
@@ -74,7 +73,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
     }
   }) : [{ id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
 
-  console.log(checkboxSelection)
+ 
 
   return (
 

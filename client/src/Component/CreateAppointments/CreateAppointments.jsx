@@ -24,16 +24,16 @@ const format = "DD/MM/YYYY";
 function CreateAppointments({user}) {
 
   const {adId} = useParams()
-      // console.log('soy Params', )  
+   
   const navigate=useNavigate()
   const dispatch = useDispatch();
       // const User = useSelector((state) => state.userDetail)
   const adDetail = useSelector((state) => state.adDetail)
-      // console.log('adDetail', adDetail);
+
   const morningHours = useSelector((state)=>state.morningHours)
-       console.log('estadomorning', morningHours);
+  
   const afternoonHours = useSelector((state)=>state.afternoonHours)
-      // console.log('estado', afternoonHours);
+    
   const [date, setDate] = useState([]);
 
   const [startTime, setStartTime] = useState();
@@ -58,10 +58,10 @@ function CreateAppointments({user}) {
   
   let myTimeMorning = myTime('8:00','13:00')
   let myTimeAfternoon = myTime('12:30','22:00')
-  // console.log(myTimeMorning)
+  
 
   function handleStartTimeChange(e){
-    // console.log('handleStartTimeChange',e);
+  
      setStartTime(e.startTime)
    }
  
@@ -95,7 +95,7 @@ function CreateAppointments({user}) {
 
 
    function submitTimeRange(){
-      //console.log(end)
+      
       setMorningStartTime(`${start1.hour()}:${start1.minute()}`)
       setMorningEndTime(`${end1.hour()}:${end1.minute()}`)
     
@@ -134,7 +134,7 @@ function CreateAppointments({user}) {
  }
 
    function submitTimeRange2(){
-            //  console.log('soy end=>',end)
+          
       setAfternoonStartTime(`${start2.hour()}:${start2.minute()}`)
       setAfternoonEndTime(`${end2.hour()}:${end2.minute()}`)
      
@@ -143,7 +143,7 @@ function CreateAppointments({user}) {
         endTime:`${end2.hour()}:${end2.minute()}`,
         duration:durationAft,
       }
-          //  console.log('duration aft',afternoonHours.duration)
+         
       dispatch(createAfternoonHours(afternoonHours))
       setDurationAft()
    }
@@ -157,15 +157,14 @@ function CreateAppointments({user}) {
    }
 
    function handleChange(e){
-    // console.log('duration', e);
+   
     setDuration(e.target.value)
    }
    function handleChange2(e){
     setDurationAft(e.target.value)
    }
 
-          // console.log('morningHous',morningHours)
-          // console.log('afternoonHours',afternoonHours)
+        
    
    let hours= morningHours.map(hr=>{return hr.start })
    let aftHours = afternoonHours.map(hr=>{return hr.start})
@@ -182,12 +181,12 @@ function CreateAppointments({user}) {
       let noDay=[]
       for (let i = 0; i < date2.length; i++) {
         // let resp= .fromNow()
-        // console.log('resp', resp)
+       
         let dayCurrent= moment()
-        console.log('day', dayCurrent)
+        
 
         let dayNext= new moment(`${date2[i].year}-${Number(date2[i].month)+1}-${date2[i].day}`)
-        console.log('dayNext', dayNext);
+        ;
 
         if(dayNext>dayCurrent){
           dateArray.push(date2[i])
@@ -197,12 +196,11 @@ function CreateAppointments({user}) {
         }
       };
       
-      console.log('dateArray', dateArray)
-      console.log('noDay', noDay)
+     
       
    function submitAll(e){
         try {
-          console.log('soy e',e);
+      
          
           let appointments={
             dates: dateArray,
@@ -210,7 +208,7 @@ function CreateAppointments({user}) {
             professionalMedicalLicense: adDetail.professionalMedicalLicense,
             ad:adId
           }
-          // console.log(appointments);
+         
           dispatch(postAppointments(appointments))
           navigate(`/home/`+ adId)
           
@@ -220,24 +218,11 @@ function CreateAppointments({user}) {
    }
 
    let apps = adDetail.appointments?.length
-      //console.log(apps);
-      //  console.log('duracion',duration);
-      // console.log('date', date.length);
-      // console.log('startTime',morningTimeS);
-      // console.log('endTime', morningTimeE);
-      // console.log('duration', duration);
+
       // let veremos=  myTimeMorning.includes(morningTimeS)
-      // console.log(typeof morningTimeS);
-      // console.log(typeof myTimeMorning[0]);
-      // console.log('sera acaa??', veremos)
-      // console.log('startTimeAft',afternoonTimeS);
-      // console.log('endTimeAft', afternoonTimeE);
-      // console.log('durationAft', durationAft);
+
       // let veremos2=  myTimeAfternoon.includes(afternoonTimeS)
-      // console.log(typeof afternoonTimeS);
-      // console.log(typeof myTimeAfternoon[0]);
-      // console.log('sera acaa2??', veremos2)
-      // console.log('afternoonHours', afternoonHours);
+
   return (
     <>
      

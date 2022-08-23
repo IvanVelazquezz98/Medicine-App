@@ -31,7 +31,6 @@ const rootReducer = (state = inicialState, action) => {
         allUsers: action.payload,
       };
     case "GET_USER_DETAIL":
-      console.log("soy el user", action);
       return {
         ...state,
         userDetail: action.payload,
@@ -74,7 +73,6 @@ const rootReducer = (state = inicialState, action) => {
         ads: orderRanking,
       };
       case 'ORDER_PRICE':
-        console.log('soy el payload',action.payload)
       let orderPrice= [...state.ads];
        orderPrice= action.payload=== 'minior'?orderPrice.sort((a,b)=>{
 
@@ -87,7 +85,6 @@ const rootReducer = (state = inicialState, action) => {
         if(parseInt(a.price) < parseInt(b.price)) return 1;
         return 0
       })
-      //console.log('soy el reducer',orderPrice);
       
       return {
         ...state,
@@ -107,8 +104,7 @@ const rootReducer = (state = inicialState, action) => {
        }
        
       case 'CREATE_AFTERNOON_HOURS':
-        
-       // console.log('filtrado', aftHoursFilter)
+      
         return {
           ...state,
           afternoonHours: action.payload
@@ -121,14 +117,12 @@ const rootReducer = (state = inicialState, action) => {
       };
 
     case "GET_PROFESSIONAL_APPOINTMENTS":
-      console.log("reducer", action.payload);
       return {
         ...state,
         professionalAppointments: action.payload,
       };
 
     case 'GET_COUNTRIES':
-      console.log('action.payload', action.payload);
       return {
         ...state,
         countries: action.payload,
@@ -162,7 +156,6 @@ const rootReducer = (state = inicialState, action) => {
         selected: true,
       };
     case "GET_AVAILABLE_APPS":
-      console.log("reducer", action.payload);
       return {
         ...state,
         availablesApps: action.payload,

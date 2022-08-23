@@ -20,7 +20,7 @@ function Recover() {
   const navigate = useNavigate();
   const auth = getAuth(firebaseApp); //to get the authorization from credentials.
   //const userRestoreMessage = useSelector((state)=> state.userRestore)
-  //console.log('mensaje de usuario restaurado',userRestoreMessage)
+
   //si trae el mensaje mostrarlo en pantalla!
 
   function handelOnChange(e) {
