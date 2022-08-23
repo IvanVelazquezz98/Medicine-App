@@ -26,7 +26,7 @@ import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
 import MedicalRecordUser from "./medicalRecordUser";
 import { Button } from "react-bootstrap";
-
+import './editAdContainer.css';
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
@@ -122,39 +122,46 @@ const UserProfile = ({ user }) => {
 
               <Link to={"/profile/" + User.email}>
                 <Button variant="success" size="sm">
-               
                   Editar Perfil
                 </Button>
               </Link>
-
 
               <ModalUnsubscribe user={User} />
             </div>
             {User.rol === "professional" &&
               User.professional?.ads &&
               User.professional?.ads.map((e) => {
+
                 return (
-                  <div>
-                    <h1>Tus Anuncios</h1>
-                    <Ad
-                      adID={e.id}
-                      name={User.name}
-                      email={User.email}
-                      medicalLicense={
-                        User.professional.professionalMedicalLicense
-                      }
-                      especialidad={e.specialty}
-                      serviceType={e.serviceType}
-                      precio={User.price}
-                      ranking={User.professional.ranking}
-                      isProfesional={true}
-                    />
-                    <Link to={"/ProfileAd/" + e.id}>edita tu anuncio</Link>
+                  // Component to edit your AD. 
+                  <>
+                  <h1 className="anuncioTitle">Tus Anuncios</h1>
+                  <div className="adProfileContainer">
+                    <div className="yourAd">
+                      <div className="anuncionImage">
+                        <img src={User.userimage}></img>
+                      </div>
+                      <div className="anuncioName">{User.name}</div>
+                      <div className="anuncioEmail">{User.email}</div>
+                      <div className="anuncioLicencia">
+                        {User.professional.professionalMedicalLicense}
+                      </div>
+                      <div className="anuncioEspecialidad">{e.specialty}</div>
+                      <div className="anuncioTipoServicio">{e.serviceType}</div>
+                      <div className="anuncioPrecio">{User.price}</div>
+                      <div className="anuncioRanking">
+                        {User.professional.ranking}
+                      </div>
+                      <div className="anuncioLinkEdit">
+                        <Link to={"/ProfileAd/" + e.id}>Edita Anuncio</Link>
+                      </div>
+                    </div>
                   </div>
+                  </>
                 );
               })}
           </div>
-          <div>{/*  <Footer/> */}</div>
+          
         </div>
       ) : (
         <div className="NavBarLoginFooterContainer">
