@@ -15,38 +15,32 @@ export default function Appointments({userEmail , name}) {
 
   useEffect(() => {
     dispatch(getUserApps(userEmail));
-    comentsUserfunction(userAppointment)
-
     return () => {
       dispatch(clearUserAppointments())
     }
   }, [dispatch]);
 
-  let userAppointment = userApps.appointments?.map((e) => e)
+  let userComentApps = userApps.find((e) => e.status === 'completed' && e.rating === null
+  )
 
-  function comentsUserfunction(userAppointment) {
+ 
+  console.log('uap',userComentApps)
+  console.log('coment' , comentUsers)
 
-    let comentsUser = userAppointment ?
-      userAppointment.find((e) => (e.status === "completed" && e.rating !== null))
-      : null
 
-    return setComentUsers(comentsUser)
-  }
-
-console.log('userapps', userApps)
 
     let columns =[{ field: 'fecha' }, { field: 'hora' },
     { field: 'modalidad' }, { field: 'estado' },{ field: 'Medico' },{ field: 'Especialidad' },
     ]
 
   let userNotPendingApps = userApps.filter((e) => e.status === 'completed'||e.status === 'cancelled'||e.status ==='absent')
-      console.log(userNotPendingApps);
+      
     let rows = userNotPendingApps? userNotPendingApps?.map((app)=>{return{
       id: app?.id,
-      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
+      fecha: app?.date[2]+'/'+app?.date[1]+'/'+app?.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
-      Especialidad:app?.ad.specialty,
-      Medico:'Dr/a '+app?.professional.user.name,
+      Especialidad:app?.ad?.specialty,
+      Medico:'Dr/a '+app?.professional?.user?.name,
       modalidad: app?.ad?.serviceType,
   
       estado: app?.status,
@@ -56,7 +50,7 @@ console.log('userapps', userApps)
   return (
     <>
       <div>Historial de turnos</div>
-      {comentUsers ? <ModalComent userEmail={userEmail} info={comentUsers} /> : null}
+      {userComentApps  ? <ModalComent userEmail={userEmail} info={userComentApps} /> : null}
       <DataGrid
         columns={columns}
         rows={rows}
