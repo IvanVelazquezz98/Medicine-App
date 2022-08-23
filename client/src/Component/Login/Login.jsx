@@ -21,6 +21,7 @@ import Alert from 'react-bootstrap/Alert';
 import Select from "react-select";
 import "./Login.css";
 import { FcCheckmark } from "react-icons/fc"
+import ModalErrors from "../ModalsErrors/ErrorsRouta";
 
 
 
@@ -43,6 +44,7 @@ function Login() {
   const [image, setImage] = useState(null)
   const [imageId, setImageId] = useState(null)
   const [prolicenceImage, setProLicenceImage] = useState(null)
+  const [isRight, setRight] = useState(false)
 
 
 
@@ -297,7 +299,7 @@ function Login() {
       navigate("/")
     } else {
       signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      setTimeout(()=>{if (!auth.currentUser?.email){setRight(true)}else navigate("/")},1500)
     }
   }
  
@@ -306,6 +308,10 @@ function Login() {
   return (
     <div className="ValidateCOntainer">
       <div className="Validate">
+        {isRight && <ModalErrors 
+        error={"el usuario o la contraseña son incorrectos"}
+        route={"/home/validate"}
+        />}
         <h2 className="ValidateTitle"> {isRegister ? "Registrate" : auth?.currentUser?.email ? "Termina de completar tus datos" : "Inicia Sesion"} </h2>
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
@@ -463,6 +469,8 @@ function Login() {
                   onChange={(e) => handleChange(e)}
                 />
               </Form.Group>
+
+  
               {
 
                 //we check whether or not he/she is a professional 
@@ -519,7 +527,7 @@ function Login() {
           }
 
           {
-            (!isRegister && !auth?.currentUser?.email) && (errors.email === "") && (errors.password === "") &&
+            (!isRegister && !auth?.currentUser?.email) && (errors.email == "") && (errors.password === "") &&
             <div className="formButtons">
               {/* Submit form button */}
               <Button variant="success" type="submit">

@@ -32,7 +32,7 @@ function Validate() {
   }
 
   onAuthStateChanged(auth, (userFirebase) => {
-    if (userFirebase) {
+     if (userFirebase) {
       if (!user) {
         setUserWithFirebaseAndRol(userFirebase);
       }
