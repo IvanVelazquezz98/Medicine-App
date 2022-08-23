@@ -35,7 +35,7 @@ export default function ModalMedicalRecord({ info }) {
                         
                     </div>
                     <div>
-                        {parse(info)}
+                        {parse(info.id)}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

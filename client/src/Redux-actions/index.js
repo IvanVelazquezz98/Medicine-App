@@ -485,8 +485,6 @@ export function getUsersByAdminById(id) {
             })
         }
       } 
-<<<<<<< HEAD
-    
       export function getAppointmentsById(idApp){
         console.log('llegue')
         
@@ -520,7 +518,6 @@ export function getUsersByAdminById(id) {
        payload
     }
 }
-=======
 
       export function filterByAdmin({ranking, appointment, latestClients, active, noActive}) {
  
@@ -549,4 +546,3 @@ export function getUsersByAdminById(id) {
             } 
           }
 
->>>>>>> 067af2385714812726fc40a42cdeaa3d0f3710e4
