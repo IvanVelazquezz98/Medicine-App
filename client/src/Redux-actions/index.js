@@ -485,6 +485,39 @@ export function getUsersByAdminById(id) {
             })
         }
       } 
+      export function getAppointmentsById(idApp){
+        console.log('llegue')
+        
+        return async (dispatch) =>{
+            try {
+                var json= await axios.get(`${BASE_URL}/appointments/id/${idApp}`);
+            return dispatch({type:'GET_APP_INFO', payload: json.data})
+            } catch (error) {
+                console.log(error, 'error en action apps by ID')
+            }
+        }
+      
+      };
+
+      export function showModal(payload) {
+        return{
+            type:'SHOW_MODAL',
+           payload
+        }
+    }
+    export function modalMedicalRecord(payload) {
+      return{
+          type:'MODAL_MEDICAL_RECORD',
+         payload
+      }
+  }
+
+  export function modalProfessionalApps(payload) {
+    return{
+        type:'MODAL_PROFESSIONAL_APPS',
+       payload
+    }
+}
 
       export function filterByAdmin({ranking, appointment, latestClients, active, noActive}) {
  

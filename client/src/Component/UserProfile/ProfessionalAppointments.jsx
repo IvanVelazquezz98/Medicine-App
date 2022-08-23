@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, } from "react";
-import { clearUserAppointments, getProfessionalApps, traemeTodo, clearTodo } from "../../Redux-actions/index.js";
+import { clearUserAppointments, getProfessionalApps, traemeTodo, clearTodo, modalProfessionalApps } from "../../Redux-actions/index.js";
 import './Apointments.css'
 import ModalOptions from './ModalOptions'
 import { DataGrid } from '@mui/x-data-grid';
 
 
 
+
 export default function ProfessionalAppointments({ medicalLicense }) {
   const dispatch = useDispatch();
   const professionalApps = useSelector((state) => state.todo)
+  const modalProfApps = useSelector((state)=>state.modalProfessionalApps)
   const [show, setShow] = useState(false)
   const [checkboxSelection, setCheckboxSelection] = useState(null)
   const [box, setBox] = useState(false)
+ 
 
   useEffect(() => {
     dispatch(traemeTodo(medicalLicense));
@@ -44,7 +47,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
   function handleOnCellClick(params) {
     setCheckboxSelection(params)
-    setShow(true)
+    dispatch(modalProfessionalApps(true))
   }
 
 
@@ -86,7 +89,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
         />
       </div>
 
-      {show ? <ModalOptions appointment={checkboxSelection} /> : null}
+      {modalProfApps ? <ModalOptions appointment={checkboxSelection} /> : null}
     </div>
 
 
