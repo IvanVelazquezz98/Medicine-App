@@ -28,11 +28,14 @@ import MedicalRecordUser from "./MedicalRecordUser";
 import { Button } from "react-bootstrap";
 import './editAdContainer.css';
 
-const UserProfile = ({ user }) => {
+const UserProfile = () => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const user = useSelector((state) => state.userValidated);
+  console.log('userProfile', user)
+  
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
   const [show, setShow] = useState(false);
@@ -163,15 +166,7 @@ const UserProfile = ({ user }) => {
           </div>
           
         </div>
-      ) : (
-        <div className="NavBarLoginFooterContainer">
-          <Navbar />
-
-          <div>
-            <Login />
-          </div>
-        </div>
-      )}
+      ) : null}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 const inicialState = {
+  userValidated: null,
   ads: [],
   adDetail: {},
   allAds: [],
@@ -27,6 +28,12 @@ const inicialState = {
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {
+    case 'USER_VALIDATED':
+      return {
+         ...state,
+         userValidated:action.payload
+ 
+       };
     case "GET_USERS":
       return {
         ...state,
