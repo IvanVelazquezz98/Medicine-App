@@ -45,7 +45,10 @@ export default function AdDetail({ isProfesional }) {
         <div className="specialityDetail">
           {adDetail?.specialty} $: {adDetail?.price}
         </div>
-        <div className="serviceDetail"> Tipo de servicio:{adDetail?.serviceType}</div>
+        <div className="serviceDetail">
+          {" "}
+          Tipo de servicio:{adDetail?.serviceType}
+        </div>
         <button
           className="medicalPictureButton"
           onClick={() => setbuttonLi(false)}
@@ -57,20 +60,20 @@ export default function AdDetail({ isProfesional }) {
             <img src={adDetail.professional?.licenceImage} />
           </div>
         )}
-      </div>  
+      </div>
 
-        <div className="calendarContainer">
-          {!adDetail.professional?.medicalLicense ? (
-            <p>Loading ..</p>
-          ) : (
-            // <AppCalendario
-            //   name={adDetail.professional?.user?.name}
-            //   isProfesional={isProfesional}
-            //   ad={adDetail}
-            //   professionalMedicalLicense={adDetail.professional?.medicalLicense}
-            // />
+      <div className="calendarContainer">
+        {!adDetail.professional?.medicalLicense ? (
+          <p>Loading ..</p>
+        ) : (
+          <AppCalendario
+            name={adDetail.professional?.user?.name}
+            isProfesional={isProfesional}
+            ad={adDetail}
+            professionalMedicalLicense={adDetail.professional?.medicalLicense}
+          />
           )}
-        </div>
+          </div>
     </>
   );
 }

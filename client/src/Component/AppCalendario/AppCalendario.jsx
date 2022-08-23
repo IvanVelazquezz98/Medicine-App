@@ -16,6 +16,9 @@ import {
   selectedTime,
 } from "../../Redux-actions";
 import ModalCalendar from "./Modal";
+import './AppCalendario.css'
+
+
 
 const locales = {
   es: es,

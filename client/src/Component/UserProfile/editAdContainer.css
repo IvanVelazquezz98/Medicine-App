@@ -39,9 +39,11 @@
   height: 100%;
 }
 
-.anuncioName{
-    font-size: 1.3rem;
-
+.anuncioName {
+  font-size: 1.3rem;
+}
+.createEditAppointment{
+  margin-top: 0.8rem;
 }
 .anuncioName,
 .anuncioEmail,
@@ -49,7 +51,7 @@
 .anuncioEspecialidad,
 .anuncioTipoServicio,
 .anuncioPrecio,
-.anuncioRanking {
+.anuncioRanking{
   margin-top: 0.5rem;
   font-family: monospace;
   font-weight: bold;

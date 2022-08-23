@@ -24,9 +24,9 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
-import medicalRecordUser from "./medicalRecordUser";
+import MedicalRecordUser from "./MedicalRecordUser";
 import { Button } from "react-bootstrap";
-import './editAdContainer.css';
+import "./editAdContainer.css";
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
@@ -85,7 +85,7 @@ const UserProfile = ({ user }) => {
 
             <div className="seconcont">
               <div className="medicalRecorder">
-                <medicalRecordUser userEmail={user.email} />
+                <MedicalRecordUser userEmail={user.email} />
               </div>
               <div className="miHistoryApp">
                 <Appointments
@@ -131,37 +131,43 @@ const UserProfile = ({ user }) => {
             {User.rol === "professional" &&
               User.professional?.ads &&
               User.professional?.ads.map((e) => {
-
                 return (
-                  // Component to edit your AD. 
+                  // Component to edit your AD.
                   <>
-                  <h1 className="anuncioTitle">Tus Anuncios</h1>
-                  <div className="adProfileContainer">
-                    <div className="yourAd">
-                      <div className="anuncioImage">
-                        <img src={User.userimage}></img>
-                      </div>
-                      <div className="anuncioName">{User.name}</div>
-                      <div className="anuncioEmail">{User.email}</div>
-                      <div className="anuncioLicencia">
-                        {User.professional.professionalMedicalLicense}
-                      </div>
-                      <div className="anuncioEspecialidad">{e.specialty}</div>
-                      <div className="anuncioTipoServicio">{e.serviceType}</div>
-                      <div className="anuncioPrecio">{User.price}</div>
-                      <div className="anuncioRanking">
-                        {User.professional.ranking}
-                      </div>
-                      <div className="anuncioLinkEdit">
-                        <Link to={"/ProfileAd/" + e.id}>Edita Anuncio</Link>
+                    <h1 className="anuncioTitle">Tus Anuncios</h1>
+                    <div className="adProfileContainer">
+                      <div className="yourAd">
+                        <div className="anuncioImage">
+                          <img src={User.userimage}></img>
+                        </div>
+
+                        <div className="anuncioName">{User.name}</div>
+                        <div className="anuncioEmail">{User.email}</div>
+                        <div className="anuncioLicencia">
+                          {User.professional.professionalMedicalLicense}
+                        </div>
+                        <div className="anuncioEspecialidad">{e.specialty}</div>
+                        <div className="anuncioTipoServicio">
+                          {e.serviceType}
+                        </div>
+                        <div className="anuncioPrecio">{User.price}</div>
+                        <div className="anuncioRanking">
+                          {User.professional.ranking}
+                        </div>
+                        <div className="anuncioLinkEdit">
+                          <Link to={"/ProfileAd/" + e.id}>Edita Anuncio</Link>
+                        </div>
+                        <div className="createEditAppointment">
+                        <Link to={`/calendar/` + e.id}>
+                          <Button variant="primary" >Crea/Edita Turnos</Button>
+                        </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   </>
                 );
               })}
           </div>
-          
         </div>
       ) : (
         <div className="NavBarLoginFooterContainer">
