@@ -10,6 +10,7 @@ import EditAd from "./Component/EditAd/EditAd";
 import CreateAppointments from "./Component/CreateAppointments/CreateAppointments";
 import Recover from "./Component/Recover/Recover"
 import DeletedUser from "./Component/DeletedUser/DeletedUser"
+import MedicalRecordLog from "./Component/MedicalRecord/MedicalRecordLog";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/calendar/:adId" element= {<CreateAppointments/>}/>
           <Route path="/recover" element= {<Recover/>}/>
           <Route path="/deletedUser" element= {<DeletedUser/>}/>
+          <Route path = '/appointment/id/:idApp' element={<MedicalRecordLog />}/>
         </Routes>
       </div>
 

@@ -14,7 +14,7 @@ export default function AdDetail({isProfesional}) {
     //const User = useSelector((state) => state.userDetail);
     let adDetail = useSelector(state=>state.adDetail)
     
-
+console.log(adID)
 
     useEffect(()=>{
         dispatch(getAdById(adID))
