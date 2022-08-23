@@ -138,7 +138,7 @@ const UserProfile = ({ user }) => {
                   <h1 className="anuncioTitle">Tus Anuncios</h1>
                   <div className="adProfileContainer">
                     <div className="yourAd">
-                      <div className="anuncionImage">
+                      <div className="anuncioImage">
                         <img src={User.userimage}></img>
                       </div>
                       <div className="anuncioName">{User.name}</div>
