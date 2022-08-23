@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Dashboard from "../Admin/Dashboard";
 import ProfessionalAppointments from "./ProfessionalAppointments";
-import MedicalRecordUser from "./MedicalRecordUser";
+import medicalRecordUser from "./medicalRecordUser";
 import { Button } from "react-bootstrap";
 import './editAdContainer.css';
 
@@ -85,7 +85,7 @@ const UserProfile = ({ user }) => {
 
             <div className="seconcont">
               <div className="medicalRecorder">
-                <MedicalRecordUser userEmail={user.email} />
+                <medicalRecordUser userEmail={user.email} />
               </div>
               <div className="miHistoryApp">
                 <Appointments
