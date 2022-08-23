@@ -19,7 +19,9 @@ const inicialState = {
   availablesApps:[],
   userAppointments:[],
   todo:[],
-  appointmentInfo:[]
+  appointmentInfo:{},
+  showModal:false,
+  modalMedicalRecord:false,
 
 };
 
@@ -212,8 +214,27 @@ case "GET_USERS_BY_ADMIN":
   case 'GET_APP_INFO':
     return{
       ...state,
-      appointmentInfo:[action.payload]
+      appointmentInfo: action.payload
     }
+  case 'SHOW_MODAL':
+    return{
+      ...state,
+      showModal:action.payload
+    }
+  case 'MODAL_MEDICAL_RECORD':
+    return{
+      ...state,
+      modalMedicalRecord:action.payload
+    }
+  case 'MODAL_PROFESSIONAL_APPS':
+    return{
+      ...state,
+      modalProfessionalApps:action.payload
+    }
+    
+    
+    
+      
   default:
     return state;
 }

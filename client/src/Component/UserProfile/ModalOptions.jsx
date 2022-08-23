@@ -4,29 +4,36 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import ModalAbsent from './ModalAbsent'
 import ModalCancelPro from './ModalCancelPro';
+import { useNavigate } from "react-router-dom";
+import { modalProfessionalApps } from "../../Redux-actions/index.js";
 
 export default function ModalOptions({ appointment }) {
     const [show, setShow] = useState(true);
     const [cancel , setCancel] = useState(false);
     const [absent , setAbsent] = useState(false);
     const [readyApp , setReacdyApp] = useState(false);
+    let navigate = useNavigate()
 
     const dispatch = useDispatch()
 
     const handleClose = () => {
         setShow(false)
+        dispatch(modalProfessionalApps(false))
     };
 
     const handleCancelAppointment = () => {
         setCancel(true)
+        
     }
 
     const hanldeReadytowork = () => {
-        
+        navigate('/appointment/id/'+appointment.row?.id)
+        dispatch(modalProfessionalApps(false))
     }
 
     const handleAbsentPatient = () => {
         setAbsent(true)
+        
     }
 
 

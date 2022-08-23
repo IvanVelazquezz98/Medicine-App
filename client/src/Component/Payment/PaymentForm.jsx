@@ -80,7 +80,7 @@ let idApp=info
           setSuccess(true);
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
           dispatch(selectedTime(false))
-          navigate('/home/validate')
+         /*  navigate('/home/validate') */
         }
       } catch (error) {
         console.log("Error", error);

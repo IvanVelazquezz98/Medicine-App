@@ -1,52 +1,23 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, } from "react";
-import { clearUserAppointments, getProfessionalApps, traemeTodo, clearTodo } from "../../Redux-actions/index.js";
+import { clearUserAppointments, getProfessionalApps, traemeTodo, clearTodo, modalProfessionalApps } from "../../Redux-actions/index.js";
 import './Apointments.css'
 import ModalOptions from './ModalOptions'
 import { DataGrid } from '@mui/x-data-grid';
 
 
 
+
 export default function ProfessionalAppointments({ medicalLicense }) {
   const dispatch = useDispatch();
   const professionalApps = useSelector((state) => state.todo)
+  const modalProfApps = useSelector((state)=>state.modalProfessionalApps)
   const [show, setShow] = useState(false)
   const [checkboxSelection, setCheckboxSelection] = useState(null)
   const [box, setBox] = useState(false)
-
-<<<<<<< HEAD
-  function handleClick(e){
-    alert('hola' )
-  }
-  
-  useEffect(() => {
-      dispatch(traemeTodo(medicalLicense));
-      return() =>{
-        dispatch(clearTodo())
-     }
-      
-    }, [dispatch]);
-
-    
-    
-    console.log('turnos', professionalApps);
  
-  let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' }, { field: 'modalidad' }, { field: 'estado' },{ field: 'cancela el turno' },{ field: 'Empezar turno' }]
-  
-  let rows = professionalApps.appointments?.length>0?professionalApps?.appointments?.map((app)=>{return{
-    id:app?.id,
-    fecha: new Date (app?.date),
-    hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
-    paciente: app?.user?.name,
-    modalidad: app?.ad?.serviceType,
-    estado: app?.status,
-    cancel: 'x',
-    startAppointment: app?.status === 'pending'?'startAppointment':null
-  }}):[{id:'1', fecha:'a', hora:'a', paciente:'a', modalidad:'a', estado:'a', cancel:{value:8}, startAppointment:'start'}]
 
- 
-=======
   useEffect(() => {
     dispatch(traemeTodo(medicalLicense));
     return () => {
@@ -76,7 +47,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
   function handleOnCellClick(params) {
     setCheckboxSelection(params)
-    setShow(true)
+    dispatch(modalProfessionalApps(true))
   }
   console.log('soy box ', box)
   console.log('turnos', professionalApps);
@@ -108,7 +79,6 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
   console.log(checkboxSelection)
 
->>>>>>> c5d7b8a5f0613873ee755da29ceb7649ed51aefb
   return (
 
     <div style={{ display: 'flex', height: '15%', width: '70%' }}>
@@ -120,29 +90,9 @@ export default function ProfessionalAppointments({ medicalLicense }) {
         />
       </div>
 
-      {show ? <ModalOptions appointment={checkboxSelection} /> : null}
+      {modalProfApps ? <ModalOptions appointment={checkboxSelection} /> : null}
     </div>
 
-<<<<<<< HEAD
-    //         </div>
-            
-          
-    //     )
-    //   }) : <p>Loading..</p>}
-    //   {/* {show?<ModalCancel input={input} userEmail={userEmail} /* name={user.name} *//*>:null} */}
-      
-    // </div>:
-    
-    <DataGrid
-            onCellClick={(e)=>handleClick(e)}
-            columns={columns}
-            rows={rows}
-            />:null
-    }
-    </>
-  
-=======
->>>>>>> c5d7b8a5f0613873ee755da29ceb7649ed51aefb
 
   )
 }

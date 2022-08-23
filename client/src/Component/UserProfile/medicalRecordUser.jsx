@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import ModalMedicalRecord from './ModalMedicalRecord';
 import { useSelector , useDispatch } from 'react-redux';
-import { getUserApps ,clearUserAppointments } from '../../Redux-actions';
+import { getUserApps ,clearUserAppointments, modalMedicalRecord} from '../../Redux-actions';
 
 
 export default function MedicalRecordUser({userEmail}) {
 
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
-  const [show,setShow]= useState(false)
+  const show = useSelector((state)=>state.modalMedicalRecord)
+  console.log(userApps)
+  //const [show,setShow]= useState(false)
   const [medicalRecord , setMedicalRecord] = useState()
   const [checkboxSelection , setCheckboxSelection] = useState()
 
@@ -20,7 +22,6 @@ export default function MedicalRecordUser({userEmail}) {
       dispatch(clearUserAppointments())
    }
   }, [dispatch]);
-
 
     const renderHistoryRecordButton = (params) => {
         return (
@@ -43,24 +44,24 @@ export default function MedicalRecordUser({userEmail}) {
     
       function handleOnCellClick(params) {
         setCheckboxSelection(params)
-        setShow(true)
+       dispatch(modalMedicalRecord(true))
       }
   
-    let columns = [{ field: 'Especialidad' }, { field: 'Modalidad' }, { field: 'Medico' }, { field: 'fecha de atencion' }, 
+    let columns = [{ field: 'Especialidad' }, { field: 'Modalidad' }, { field: 'Medico' }, { field: 'fecha' }, 
     { field: 'Ver Historia Clinica', renderCell: renderHistoryRecordButton, width: 200,
         disableClickEventBubbling: true
       }]
 
-    let userAppsCompleted = userApps.appointments?.filter((e) => e.status === 'completed')
-  
-      let idinc = 1
+    let userAppsCompleted = userApps?.filter((e) => e.status === 'completed')
+      console.log('holaaaa', checkboxSelection);
     let rows = userAppsCompleted  ?  userAppsCompleted.map((app)=>{return{
-      id:idinc++,
+      id:app?.medicalRecord,
+      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
       Especialidad: app.ad?.specialty,
       Modalidad: app.ad?.serviceType,
-      Medico: app.ad?.professionalMedicalLicense
+      Medico: 'dr/a '+app.professional?.user?.name
     }}):[{id:1,especialidad:'-' , modalidad:'-',Medico:'-',fecha:'-'}]
-  
+    console.log(checkboxSelection)
     return (
     <>
         <div>Historia Clinica</div>
@@ -68,6 +69,7 @@ export default function MedicalRecordUser({userEmail}) {
         <DataGrid
             columns={columns}
             rows={rows}
+            width
         />
     
     </>

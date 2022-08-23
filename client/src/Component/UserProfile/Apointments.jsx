@@ -5,12 +5,12 @@ import { useSelector , useDispatch } from 'react-redux';
 import { getUserApps ,clearUserAppointments } from '../../Redux-actions';
 import ModalCancel from './ModalCancel'
 
-export default function MedicalRecordUser({userEmail , name}) {
+export default function Appointments({userEmail , name}) {
 
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
   const [show,setShow]= useState(false)
-  const [medicalRecord , setMedicalRecord] = useState()
+  //const [medicalRecord , setMedicalRecord] = useState()
   const [checkboxSelection , setCheckboxSelection] = useState()
 
 
@@ -21,11 +21,9 @@ export default function MedicalRecordUser({userEmail , name}) {
    }
   }, [dispatch]);
 
-
-    const renderDetailsButton = (params) => {
+console.log('userapps', userApps)
+/*     const renderDetailsButton = (params) => {
         return (
-    
-    
           <strong>
             <button
               variant="contained"
@@ -39,27 +37,30 @@ export default function MedicalRecordUser({userEmail , name}) {
             </button>
           </strong>
         )
-      }
+      } */
     
-      function handleOnCellClick(params) {
+     /*  function handleOnCellClick(params) {
         setCheckboxSelection(params)
         setShow(true)
       }
-  
+   */
     let columns =[{ field: 'fecha' }, { field: 'hora' },
-    { field: 'modalidad' }, { field: 'estado' },
-    {
+    { field: 'modalidad' }, { field: 'estado' },{ field: 'Medico' },{ field: 'Especialidad' },
+    /* {
       field: 'Opciones', renderCell: renderDetailsButton, width: 200,
       disableClickEventBubbling: true
-    }]
+    } */]
 
-  let userAppointment = userApps.appointments?.map((e) => e)
-      
-    let rows = userAppointment  ?  userAppointment.map((app)=>{return{
+  let userNotPendingApps = userApps.filter((e) => e.status === 'completed'||e.status === 'cancelled'||e.status ==='absent')
+      console.log(userNotPendingApps);
+    let rows = userNotPendingApps? userNotPendingApps?.map((app)=>{return{
       id: app?.id,
-      fecha: app?.date,
+      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      Especialidad:app?.ad.specialty,
+      Medico:'Dr/a '+app?.professional.user.name,
       modalidad: app?.ad?.serviceType,
+  
       estado: app?.status,
     }}):[{id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
   
