@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../assets/logo.png'
 import ContactoForm from '../Contacto/ContactoForm';
 import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom';
 import { BsFacebook,BsLinkedin,BsInstagram } from "react-icons/bs";
 import './Footer.css';
-
+import FormScore from './FormScore'
 
 function Footer() {
+  const [show , setShow] = useState(false)
+  const [userComments , setUserComments] = useState(null)
+  
 
+  useEffect(() => {
+    userC()
+  }, []);
+
+  function userC (){
+   
+  var user = localStorage.getItem('Email');
+   return setUserComments(user)
+   
+  }
+  console.log('user', userComments)
+  
 
   return (
     
@@ -22,13 +36,12 @@ function Footer() {
             
 
             <div className='OpeningHoursDiv'>
-            <h4>Contanos tu experiencia con AYDOC! </h4>
+            <h4>Contanos tu experiencia con Medicine App! </h4>
               <h6>Tu opinion nos ayuda a mejorar</h6>
-              <Link to='/'>
-                <Button  className='homeBtn' >
-                    Home
-                </Button>
-              </Link>
+                {userComments ? <Button onClick={(e) => setShow(true)} className='homeBtn' >
+                    Puntuanos 😊 {show ? <FormScore userEmail={userComments}/> :null}
+                </Button> : <Button>Registrate para puntuarnos</Button>}
+            
             </div>
 
 
@@ -36,16 +49,16 @@ function Footer() {
               <div className='rightMailingContainer'>
 
                 <div className='mailingBox'>
-                  <h4>Subscribe to join our Mailing List</h4>
+                  <h4>Descubre Nuestras Redes</h4>
 
                 </div>
 
                 <div className='mailingBoxSearch'>
-                  <h4>Aca puede ir una search bar</h4>
+                  <h4>Para estar mas  cerca de nosotros </h4>
                 </div>
                 
-                <div className='socialMediaBox'>
-                  <p>Nuestra redes.</p>
+                <div className='mailingBoxSearch'>
+                  <p>Y enterarte de las ultimas novedades</p>
                   <div className='icons'>
 
                     <div className='FB'>

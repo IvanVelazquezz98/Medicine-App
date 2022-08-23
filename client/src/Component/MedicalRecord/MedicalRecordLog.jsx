@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom'
 import ModalConfirma from './ModalConfirma'
 import { getAppointmentsById, showModal, putEditAppointment} from "../../Redux-actions";
-import MedicalRecordUser from '../UserProfile/MedicalRecordUser';
+import medicalRecordUser from '../UserProfile/medicalRecordUser';
 
 function MedicalRecordLog() {
   //const [show, setShow]= useState(false)
@@ -57,7 +57,7 @@ console.log(appInfo.userEmail)
             <h2>Edad: {getAge(appInfo?.user?.dateOfBirth)}</h2>
             <h3>Dia: {appInfo.date?appInfo?.date[2]+'/'+appInfo?.date[1]+'/'+appInfo?.date[0]:null}</h3>
             <button onClick={handleHistoriaClinica}>{!hClinica?'ver Historia Clinica':'Dejar de ver Historia Clinica'}</button>
-            {hClinica?<div style={{ height: 350, width: '100%' }}><MedicalRecordUser userEmail={appInfo?.userEmail}/></div>:null}
+            {hClinica?<div style={{ height: 350, width: '100%' }}><medicalRecordUser userEmail={appInfo?.userEmail}/></div>:null}
         </div>
         <CKEditor
           editor={ClassicEditor}

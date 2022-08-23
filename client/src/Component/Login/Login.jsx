@@ -179,12 +179,14 @@ function Login() {
 
   useEffect(() => {
     dispatch(getCountries())
-    dispatch(getStates(countryId.cid))
+    if(countryId.cid.length)dispatch(getStates(countryId.cid))
     if (countryId.sid.length) dispatch(getCities(countryId.cid, countryId.sid))
 
-
-
   }, [dispatch, countryId])
+
+
+
+
   //estados globales de paises, estados y ciudades
   const countries = useSelector(state => state.countries)
   const states = useSelector(state => state.states)
@@ -495,7 +497,7 @@ function Login() {
                       name="medicalLicense"
                       onChange={(e) => handleChange(e)}
                     />
-                    {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicensea}</Alert>)}
+                    {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicense}</Alert>)}
                     {!professionalError.medicalLicense && (<FcCheckmark />)}
                   </Form.Group>
 
