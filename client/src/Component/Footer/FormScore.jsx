@@ -1,94 +1,106 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { createComment} from '../../Redux-actions';
-import { useDispatch } from 'react-redux';
-import ModalMesage from './ModalMesage'
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { createComment } from "../../Redux-actions";
+import { useDispatch } from "react-redux";
+import ModalMesage from "./ModalMesage";
+import "./FormScore.css";
 
-export default function FormScore({userEmail}) {
+export default function FormScore({ userEmail }) {
   const [show, setShow] = useState(true);
   const [score, setScore] = useState({
-    score:'',
-    text:'',
-    userEmail:userEmail
-  })
-  const [mesage , setMesage] = useState(false)
+    score: "",
+    text: "",
+    userEmail: userEmail,
+  });
+  const [mesage, setMesage] = useState(false);
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   function handleChange(e) {
     e.preventDefault();
     setScore({
-        ...score,
-        [e.target.name]: e.target.value,
+      ...score,
+      [e.target.name]: e.target.value,
     });
-}
-    console.log('form' ,score)
+  }
+  console.log("form", score);
 
-const handleSubmit = () => {
+  const handleSubmit = () => {
     let payload = {
-        comments:score.text,
-        rating:score.score,
-        userEmail:score.userEmail
-    }
-    dispatch(createComment(payload))
-    setMesage(true)
-}
+      comments: score.text,
+      rating: score.score,
+      userEmail: score.userEmail,
+    };
+    dispatch(createComment(payload));
+    setMesage(true);
+  };
 
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
   };
 
   const handleCancel = () => {
-    setShow(false)
-
-  }
-
+    setShow(false);
+  };
 
   return (
     <>
-
-    <Modal show={show} onHide={handleClose}>
+      <Modal className="ModalMainContainer" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-            <Modal.Title>
-            🤗 PUNTUANOS 🤗
-            </Modal.Title>
+          <Modal.Title className="modalTitle">🤗 PUNTUANOS 🤗</Modal.Title>
         </Modal.Header>
         <br></br>
 
-        <form>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Puntaje *10 Excelente *1 Muy malo</label>
-                <select name='score' class="form-control" id="exampleFormControlSelect1"
-                    onChange={(e) => handleChange(e)}>
-                    <option >...</option>
-                    <option value={10}>10</option>
-                    <option value={9}>9</option>
-                    <option value={8}>8</option>
-                    <option value={7}>7</option>
-                    <option value={6}>6</option>
-                    <option value={5}>5</option>
-                    <option value={4}>4</option>
-                    <option value={3}>3</option>
-                    <option value={2}>2</option>
-                    <option value={1}>1</option>
-                </select>
-            </div>
-            <br></br>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Nota extra</label>
-                <textarea name='text' class="form-control"
-                 id="exampleFormControlTextarea1" rows="3" onChange={(e) => handleChange(e)}></textarea>
-            </div>
-            <br></br>
-            <Button variant="primary" onClick={handleSubmit}>
-                Puntuar
-            </Button>
+        <form className="formContainerScore">
+          <div class="form-group">
+            <label className="labelForm" for="exampleFormControlSelect1"><strong>10-</strong>  Amo esta App...</label><br/>
+            <label  className="labelForm" for="exampleFormControlSelect1">
+              <strong>5-</strong> Amo esta App pero...
+            </label><br/>
+            <label className="labelForm"  for="exampleFormControlSelect1">
+            <strong>1-</strong>  Amo esta App pero no tanto...
+            </label>
+
+            <select
+              name="score"
+              class="form-control"
+              id="exampleFormControlSelect1"
+              onChange={(e) => handleChange(e)}
+            >
+              <option className="labelForm">Elegí puntaje</option>
+              <option className="labelForm" value={10}>10</option>
+              <option className="labelForm" value={9}>9</option>
+              <option className="labelForm" value={8}>8</option>
+              <option className="labelForm" value={7}>7</option>
+              <option className="labelForm" value={6}>6</option>
+              <option  className="labelForm" value={5}>5</option>
+              <option className="labelForm" value={4}>4</option>
+              <option className="labelForm" value={3}>3</option>
+              <option  className="labelForm" value={2}>2</option>
+              <option  className="labelForm" value={1}>1</option>
+            </select>
+          </div>
+          <br></br>
+          <div class="form-group">
+            <label className="labelForm"  for="exampleFormControlTextarea1">
+              Dejanos tu comentario
+            </label>
+            <textarea
+              name="text"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              onChange={(e) => handleChange(e)}
+            ></textarea>
+          </div>
+          <br></br>
+          <Button variant="primary" className="buttonScore" onClick={handleSubmit}>
+            Puntuar
+          </Button>
         </form>
-    {mesage ? <ModalMesage/> : null}
-
-    </Modal>
-
-</>
-);
+        {mesage ? <ModalMesage /> : null}
+      </Modal>
+    </>
+  );
 }
