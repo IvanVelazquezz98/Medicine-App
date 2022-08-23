@@ -1,58 +1,76 @@
-import React, { useState } from 'react'
-import {useEffect} from 'react'
+import React, { useState } from "react";
+import { useEffect } from "react";
 // import { Navbar } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import {useParams} from 'react-router-dom'
-import {clearAdDetails, getAdById, getUsersById} from '../../Redux-actions'
-import AppCalendario from '../AppCalendario/AppCalendario'
-import Footer from "../Footer/Footer.jsx"
-import Navbar from '../Navbar/Navbar'
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { clearAdDetails, getAdById, getUsersById } from "../../Redux-actions";
+import AppCalendario from "../AppCalendario/AppCalendario";
+import Navbar from "../Navbar/Navbar";
+import "./AdDetail.css";
 
-export default function AdDetail({isProfesional}) {
-    const dispatch = useDispatch()
-    const {adID} = useParams()
-    //const User = useSelector((state) => state.userDetail);
-    let adDetail = useSelector(state=>state.adDetail)
-    
-console.log(adID)
+export default function AdDetail({ isProfesional }) {
+  const dispatch = useDispatch();
+  const { adID } = useParams();
+  //const User = useSelector((state) => state.userDetail);
+  let adDetail = useSelector((state) => state.adDetail);
 
-    useEffect(()=>{
-        dispatch(getAdById(adID))
-        return() =>{
-          dispatch(clearAdDetails())
-       }
-    },[dispatch])
+  //console.log(adID)
 
-    // useEffect(() => {
-    //     dispatch(getUsersById(adDetail.professional?.userEmail));
-    //   }, [dispatch]);
-    
-    const [buttonLi, setbuttonLi] = useState(true)
+  useEffect(() => {
+    dispatch(getAdById(adID));
+    return () => {
+      dispatch(clearAdDetails());
+    };
+  }, [dispatch]);
 
+  // useEffect(() => {
+  //     dispatch(getUsersById(adDetail.professional?.userEmail));
+  //   }, [dispatch]);
 
-    return (
-    <div>
-        <Navbar/>
-        <div className={'imagenPerfil'}>
-            <img src={adDetail.professional?.user?.userimage}></img>
-          <h3>{adDetail.professional?.user?.name}</h3><h3> Licencia Medica : {adDetail.professional?.medicalLicense}</h3>
-          <h3> Numero de identidad:{adDetail.professional?.user?.identification} </h3>
-          <h5>{adDetail.professional?.user?.country} / {adDetail.professional?.user?.city}</h5>
-          <h5>{adDetail?.specialty} $: {adDetail?.price}</h5>
-          <h5> Tipo de servicio:{adDetail?.serviceType}</h5>
-            <button onClick={() => setbuttonLi(false)}> Ver Imagen de Licencia</button>
-            { !buttonLi ? <img  src={adDetail.professional?.licenceImage} />
-            : <p></p>     
-            }
+  const [buttonLi, setbuttonLi] = useState(true);
 
+  return (
+    <>
+      <Navbar />
+      <div className="AdDetailContainer">
+        <div className="DetailName">{adDetail.professional?.user?.name}</div>
+        <div className="licenseDetail">
+          {" "}
+          Licencia Medica : {adDetail.professional?.medicalLicense}
         </div>
-        <div>
-          { !adDetail.professional?.medicalLicense ? <p>Loading ..</p>:
-            <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={isProfesional}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
-          }
+        <div className="numeroDetail">
+          Numero de identidad:{adDetail.professional?.user?.identification}
         </div>
-        {/* <Footer/> */}
-    </div>
-    
-  )
+
+        <div className="specialityDetail">
+          {adDetail?.specialty} $: {adDetail?.price}
+        </div>
+        <div className="serviceDetail"> Tipo de servicio:{adDetail?.serviceType}</div>
+        <button
+          className="medicalPictureButton"
+          onClick={() => setbuttonLi(false)}
+        >
+          Ver Imagen de Licencia
+        </button>
+        {!buttonLi && (
+          <div className="imagenLicencia">
+            <img src={adDetail.professional?.licenceImage} />
+          </div>
+        )}
+      </div>  
+
+        <div className="calendarContainer">
+          {!adDetail.professional?.medicalLicense ? (
+            <p>Loading ..</p>
+          ) : (
+            // <AppCalendario
+            //   name={adDetail.professional?.user?.name}
+            //   isProfesional={isProfesional}
+            //   ad={adDetail}
+            //   professionalMedicalLicense={adDetail.professional?.medicalLicense}
+            // />
+          )}
+        </div>
+    </>
+  );
 }
