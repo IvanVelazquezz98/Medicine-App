@@ -379,15 +379,17 @@ export default function EditInfo() {
 </div>
   
     }
-<Button type="submit" >
+    {(password.password2 || password.password) && (password.password !== password.password2 || password.password.length < 7 ) ?
+         <Button  >
+           Revisa los datos ingresados
+         </Button> :
+         <Button type="submit" >
            Modificar Datos
          </Button>
+
+  }
 </Form>
 
-
-
-
-<Button>Cerrar la cuenta</Button>
 <div className='hola'></div>
 {/* <Footer/> */}
     </div>
