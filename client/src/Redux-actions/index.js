@@ -2,6 +2,13 @@ import axios from "axios";
 
 const BASE_URL = 'http://localhost:3001';
 
+//user Validated
+export function userValidated(payload) {
+  return {
+    type: 'USER_VALIDATED',
+    payload
+  }
+};
 
 //get all ads
     export function getAds () {

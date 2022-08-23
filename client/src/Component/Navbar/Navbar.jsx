@@ -9,17 +9,18 @@ import navlog from "../../assets/logo23.jpeg";
 import perfil from "../../assets/perfil.png";
 import firebaseApp from "../../Credential/index";
 import { getAuth, signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 
-const NavBarExample = (props) => {
-  
+const NavBarExample = () => {
   const auth = getAuth(firebaseApp);
+  const user = useSelector((state) => state.userValidated)
+  //console.log("auth", auth);
   const navigate = useNavigate();
-  
-  function closeSession(e) {
-    
+
+  function closeSession() {
     signOut(auth);
-    localStorage.removeItem("Email");
-    let path = "/";
+    localStorage.removeItem('Email')
+    let path = '/';
     navigate(path);
   }
 
@@ -39,29 +40,29 @@ const NavBarExample = (props) => {
               <Nav.Link as={Link} to="/services" className="spaceX">
                 Servicios
               </Nav.Link>
+
+              {
+                (user?.email)?
+                <div>
               <Nav.Link as={Link} to="/home/validate" className="spaceX">
-                <img className="imagenPerfil" src={perfil} />{" "}
+               <p>Hola, {user.email}</p> <img className="imagenPerfil" src={perfil} />{" "}
               </Nav.Link>
-                <Nav.Link>
-                  <div className="buttonNav" onClick={closeSession}>
-                    Cerrar Sesión
-                  </div>
-                </Nav.Link>
+                    <Nav.Link>
+                      <div className="buttonNav" onClick={closeSession}>
+                        Cerrar sesion
+                      </div>
+                    </Nav.Link>
+
+                </div>:
+                <Nav.Link as={Link} to="/home/validate" className="spaceX">
+               <img className="imagenPerfil" src={perfil} />{" "}
+              </Nav.Link>
+              }
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      {/* <section>
-        <Outlet>
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
-          <Nav.Link as={Link} to="/home/validate">
-            Inicia Sesión
-          </Nav.Link>
-        </Outlet>
-      </section> */}
     </>
   );
 };
