@@ -27,7 +27,7 @@ import ProfessionalAppointments from "./ProfessionalAppointments";
 
 import { Button } from "react-bootstrap";
 
-import MedicalRecordUser from "./MedicalRecordUser";
+import MedicalRecordUser from "./medicalRecordUser";
 
 const UserProfile = ({ user }) => {
   const auth = getAuth(firebaseApp);
