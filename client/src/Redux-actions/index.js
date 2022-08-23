@@ -499,4 +499,15 @@ export function getUsersByAdminById(id) {
             })
         }
       } 
+
+  export function createComment(payload){
+    return async function (dispatch){
+      try{
+      let json = await axios.post(`${BASE_URL}/comments/user` , payload)
+      return json}
+      catch(err){
+        console.log(err)
+      }
+    }
+  }
     
