@@ -19,6 +19,9 @@ const inicialState = {
   availablesApps:[],
   userAppointments:[],
   todo:[],
+  appointmentInfo:{},
+  showModal:false,
+  modalMedicalRecord:false,
 
 };
 
@@ -31,7 +34,6 @@ const rootReducer = (state = inicialState, action) => {
         allUsers: action.payload,
       };
     case "GET_USER_DETAIL":
-      console.log("soy el user", action);
       return {
         ...state,
         userDetail: action.payload,
@@ -74,7 +76,6 @@ const rootReducer = (state = inicialState, action) => {
         ads: orderRanking,
       };
       case 'ORDER_PRICE':
-        console.log('soy el payload',action.payload)
       let orderPrice= [...state.ads];
        orderPrice= action.payload=== 'minior'?orderPrice.sort((a,b)=>{
 
@@ -87,7 +88,6 @@ const rootReducer = (state = inicialState, action) => {
         if(parseInt(a.price) < parseInt(b.price)) return 1;
         return 0
       })
-      //console.log('soy el reducer',orderPrice);
       
       return {
         ...state,
@@ -107,28 +107,10 @@ const rootReducer = (state = inicialState, action) => {
        }
        
       case 'CREATE_AFTERNOON_HOURS':
-        const aftHours = action.payload
-        const morning=[...state.morningHours]
-        
-          let aftHoursFilter = []
-          for (let i = 0; i < aftHours.length; i++) {
-            for (let j = 0; j <morning.length; j++) {
-              let As= Number(aftHours[i].start.split(':')[0])+ Number(aftHours[i].start.split(':')[1])/60
-                     // console.log(Ah)
-              let Aend= Number(aftHours[i].end.split(':')[0])+ Number(aftHours[i].end.split(':')[1])/60  
-              let Ms= Number(morning[j].start.split(':')[0])+ Number(morning[j].start.split(':')[1])/60
-                     // console.log(Ms)
-              let Me= Number(morning[j].end.split(':')[0])+ Number(morning[j].end.split(':')[1])/60
-                     // console.log(Me)
-              if(! (As >= Ms && As < Me) || !(Ms >=As && Ms < Aend )){
-                aftHoursFilter.push(aftHours[i])
-              }
-            }
-           }
-       // console.log('filtrado', aftHoursFilter)
+      
         return {
           ...state,
-          afternoonHours:aftHoursFilter
+          afternoonHours: action.payload
         }
 
     case "CLEAR_USER_DETAIL":
@@ -138,14 +120,12 @@ const rootReducer = (state = inicialState, action) => {
       };
 
     case "GET_PROFESSIONAL_APPOINTMENTS":
-      console.log("reducer", action.payload);
       return {
         ...state,
         professionalAppointments: action.payload,
       };
 
     case 'GET_COUNTRIES':
-      console.log('action.payload', action.payload);
       return {
         ...state,
         countries: action.payload,
@@ -179,7 +159,6 @@ const rootReducer = (state = inicialState, action) => {
         selected: true,
       };
     case "GET_AVAILABLE_APPS":
-      console.log("reducer", action.payload);
       return {
         ...state,
         availablesApps: action.payload,
@@ -225,10 +204,45 @@ case "GET_USERS_BY_ADMIN":
     ...state,
     users: [action.payload],
   };
+  case 'GET_APP_INFO':
+    return{
+      ...state,
+      appointmentInfo: action.payload
+    }
+  case 'SHOW_MODAL':
+    return{
+      ...state,
+      showModal:action.payload
+    }
+  case 'MODAL_MEDICAL_RECORD':
+    return{
+      ...state,
+      modalMedicalRecord:action.payload
+    }
+  case 'MODAL_PROFESSIONAL_APPS':
+    return{
+      ...state,
+      modalProfessionalApps:action.payload
+    }
+    
+    
+    
+      
+
+
+  case "FILTER_BY_ADMIN":
+    return {
+      ...state,
+      users: action.payload,
+    };
+
+
   default:
     return state;
 }
 };
+
+
 
 
 export default rootReducer;

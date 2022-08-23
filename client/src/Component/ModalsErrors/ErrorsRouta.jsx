@@ -8,7 +8,7 @@ export default function ModalErrors({error, route}) {
   let navigate = useNavigate()
 
   const handleClose = () =>{
-    console.log('que me traes user Email', route)
+    
     if(route){
       navigate(route)
     }

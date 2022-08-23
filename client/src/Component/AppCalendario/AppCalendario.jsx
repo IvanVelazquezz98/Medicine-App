@@ -42,8 +42,7 @@ const selected = useSelector((state)=>state.selectedTime)
 
 
  const [eventSelected, setEventSelected]=useState({})
-//  console.log('lo se todo', selected)
-//  console.log('lo se todo2', professionalMedicalLicense)
+
 
 
  
@@ -72,11 +71,11 @@ const handleSelected = (e) => {
   dispatch(selectedTime(true))
   
 }; 
-// console.log('soy eventSelected',eventSelected)
+
 
  
 
-   console.log('apps',professionalApps);
+
  let appsEvents
 if(isProfesional){
   appsEvents = professionalApps.map(app=>{
@@ -91,7 +90,6 @@ if(isProfesional){
 
 })
 }else{
-  console.log('entrassssss??????')
   appsEvents = availablesApps.map(app=>{
 
     return({
@@ -103,7 +101,7 @@ if(isProfesional){
     )})
 }
 
-console.log('availablesAppsEvents=>', appsEvents)
+
 
 
 

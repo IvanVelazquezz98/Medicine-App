@@ -3,16 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdd } from "../../Redux-actions";
 import { getUsersById } from "../../Redux-actions";
-import firebaseApp from "../../Credential/index";
-import { getAuth, signOut } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./CreateAd.css";
-import { useNavigate } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
-import CreateAppointments from "../CreateAppointments/CreateAppointments";
 import { specialty, typeService } from './Specialty'
-const auth = getAuth(firebaseApp);
 
 export default function CreateAd({ user }) {
   const dispatch = useDispatch();
@@ -54,7 +49,7 @@ export default function CreateAd({ user }) {
     serviceType: "",
   });
 
-  console.log('soy ad', post)
+
 
   function handleSubmit(e) {
     //e.preventDefault();

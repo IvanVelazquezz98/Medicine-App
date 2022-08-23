@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect, useState}from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useSelector , useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Ad.css";
-
+import { removeFavorite, addFavorite, getUsersById } from "../../Redux-actions";
+import firebaseApp from "../../Credential/index";
+import { getAuth } from "firebase/auth";
+import {MdFavorite} from "react-icons/md";
+import {MdFavoriteBorder} from "react-icons/md"
 export default function Ad({
   name,
   medicalLicense,
@@ -13,13 +18,57 @@ export default function Ad({
   ranking,
   adID,
   userimage,
-  isProfesional,
-  email,
+  isProfesional
 }) {
+  const [favorito, setFavorito] =useState(false)
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   function handleNavigate() {
     navigate("/calendar");
   }
+
+  const auth = getAuth(firebaseApp);
+  const CurrentUser = useSelector((state)=>state.userDetail)
+
+  useEffect(() => {
+    dispatch(getUsersById(auth.currentUser?.email));
+  }, [dispatch]);
+
+  let favoritesLocalstorage = [];
+
+  function handleAddFavorites(e) {
+    if (auth.currentUser?.email) {
+      let favorites = {
+        userEmail: auth.currentUser?.email,
+        medicalLicense: [medicalLicense],
+      };
+      e.preventDefault();
+      dispatch(addFavorite(favorites));
+      setFavorito(true)
+    } else {
+      favoritesLocalstorage.push(medicalLicense);
+      localStorage.setItem("ml", JSON.stringify(favoritesLocalstorage));
+      setFavorito(true)
+    }
+  }
+
+  function handleRemoveFavorites(e) {
+    if (auth.currentUser?.email) {
+      let favorites = {
+        userEmail: auth.currentUser?.email,
+        medicalLicense: [medicalLicense],
+      };
+      e.preventDefault();
+      dispatch(removeFavorite(favorites));
+      setFavorito(false)
+    } else {
+      localStorage.removeItem("ml", medicalLicense);
+      setFavorito(false)
+    }
+  }
+
+
+
 
   return (
     <div className="cardDiv">
@@ -58,6 +107,14 @@ export default function Ad({
               <Button variant="primary">Turnos</Button>
             </Link>
           )}
+          {(CurrentUser?.favorites?.includes(medicalLicense)) || (favorito) ?
+
+           <MdFavorite onClick={e=>handleRemoveFavorites(e)}></MdFavorite> :
+           <MdFavoriteBorder onClick={e=>handleAddFavorites(e)}></MdFavoriteBorder>
+          }
+
+
+
           {/* <Link to={`/home/` + adID}></Link> */}
         </div>
       </div>

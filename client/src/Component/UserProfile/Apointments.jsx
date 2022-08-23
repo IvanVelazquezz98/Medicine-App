@@ -1,63 +1,67 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, } from "react";
-import { clearUserAppointments, getUserApps} from "../../Redux-actions/index.js";
-import './Apointments.css'
-import { BsCloudFog } from 'react-icons/bs';
-import ModalCancel from './ModalCancel.jsx';
+import React, { useEffect, useState } from 'react'
+import { DataGrid } from '@mui/x-data-grid';
+//import ModalMedicalRecord from './ModalMedicalRecord';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserApps, clearUserAppointments } from '../../Redux-actions';
+import ModalComent from './ModalComents';
 
+export default function Appointments({userEmail , name}) {
 
-
-
-
-
-
-
-export default function Appointments({ userEmail }) {
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
-  const [pending , setPending] = useState(false)
-  const [completed , setCompleted] = useState(false)
-  const [cancelled , setCancelled] = useState(false)
-  const [input, setInput]=useState()
-  const [show,setShow]= useState(false)
+  //const [medicalRecord , setMedicalRecord] = useState()
+  const [comentUsers, setComentUsers] = useState()
 
-console.log('turnos', userApps);
 
   useEffect(() => {
     dispatch(getUserApps(userEmail));
-    return() =>{
+    comentsUserfunction(userAppointment)
+
+    return () => {
       dispatch(clearUserAppointments())
-   }
+    }
   }, [dispatch]);
 
- function handleClick(e){
-  setInput(e.target.value)  
-  setShow(true)
+  let userAppointment = userApps.appointments?.map((e) => e)
+
+  function comentsUserfunction(userAppointment) {
+
+    let comentsUser = userAppointment ?
+      userAppointment.find((e) => e.status === "completed")
+      : null
+
+    return setComentUsers(comentsUser)
   }
 
+console.log('userapps', userApps)
 
-console.log(userApps);
+    let columns =[{ field: 'fecha' }, { field: 'hora' },
+    { field: 'modalidad' }, { field: 'estado' },{ field: 'Medico' },{ field: 'Especialidad' },
+    ]
+
+  let userNotPendingApps = userApps.filter((e) => e.status === 'completed'||e.status === 'cancelled'||e.status ==='absent')
+      console.log(userNotPendingApps);
+    let rows = userNotPendingApps? userNotPendingApps?.map((app)=>{return{
+      id: app?.id,
+      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
+      hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      Especialidad:app?.ad.specialty,
+      Medico:'Dr/a '+app?.professional.user.name,
+      modalidad: app?.ad?.serviceType,
+  
+      estado: app?.status,
+    }
+  }) : [{ id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
+
   return (
+    <>
+      <div>Historial de turnos</div>
+      {comentUsers ? <ModalComent userEmail={userEmail} info={comentUsers} /> : null}
+      <DataGrid
+        columns={columns}
+        rows={rows}
+      />
 
-    <div className='conteinerApp'>
-      
-      <div><h3 >Historial de turnos</h3></div>
-      {userEmail ? userApps.map((app) => {
-        return (
-            <div className='onecont'>
-              <p className='text'> - {app.startTime[0] + ':' + app.startTime[1] + 'Hs'}</p>
-              <p className='text'>{app.date[2] +  '/' + app.date[1] + '/' + app.date[0] }</p>
-              {app.status === 'pending'? <div><p className='pending'>{app.status}</p><button value={app.id}onClick={handleClick}>cancelar tu turno</button></div>:app.status === 'completed'?<p className='completed'>{app.status}</p>:<p className = 'cancelled'>{app.status}</p>}
-
-            </div>
-            
-          
-        )
-      }) : <p>Loading..</p>}
-      {show?<ModalCancel input={input} userEmail={userEmail} /* name={user.name} *//>:null}
-      
-    </div>
-    
+    </>
   )
 }
