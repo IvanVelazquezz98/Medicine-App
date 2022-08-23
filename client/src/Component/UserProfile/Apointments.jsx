@@ -27,7 +27,7 @@ export default function Appointments({userEmail , name}) {
   function comentsUserfunction(userAppointment) {
 
     let comentsUser = userAppointment ?
-      userAppointment.find((e) => e.status === "completed")
+      userAppointment.find((e) => (e.status === "completed" && e.rating !== null))
       : null
 
     return setComentUsers(comentsUser)
