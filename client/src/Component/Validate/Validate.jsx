@@ -5,13 +5,17 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import UserProfile from "../UserProfile/UserProfile";
 import NavBar from "../Navbar/Navbar";
+import { userValidated } from "../../Redux-actions";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 function Validate() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const user= useSelector(state => state.userValidated)
+  const dispatch =useDispatch()
 
   async function getRol(uid) {
     const docuRef = doc(firestore, `user/${uid}`);
@@ -27,22 +31,23 @@ function Validate() {
         email: userFirebase.email,
         rol: rol,
       };
-      setUser(userData);
+       dispatch(userValidated(userData));
     });
   }
 
   onAuthStateChanged(auth, (userFirebase) => {
-    if (userFirebase) {
+     if (userFirebase) {
       if (!user) {
         setUserWithFirebaseAndRol(userFirebase);
       }
     } else {
-      setUser(null);
+      dispatch(userValidated(null))
     }
   });
+  console.log('user', user)
   return (
     <div>
-      {user ?   <UserProfile user={user} />
+      {user ?   <UserProfile/>
       : 
        (
         <div>
