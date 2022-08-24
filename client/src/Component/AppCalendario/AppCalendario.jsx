@@ -138,7 +138,7 @@ function AppCalendario({
           endAccessor="end"
           min={new Date(1, 1, 1, 8, 0, 0)}
           max={new Date(1, 1, 1, 21, 59, 0)}
-          style={{ height: 500, width: 600, margin: "10px" }}
+          style={{ height: 500, width: 600, margin: "10px",marginBottom:"100px"}}
         />
       </div>
       <div className="modalCalendarContainer">
