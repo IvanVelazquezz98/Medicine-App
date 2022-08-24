@@ -591,5 +591,10 @@ export function getUsersByAdminById(id) {
             }
          }
         }
-
+        export function reload(payload) {
+          return{
+              type:'RELOAD',
+             payload
+          }
+      }
 
