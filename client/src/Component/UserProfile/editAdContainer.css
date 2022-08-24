@@ -1,5 +1,18 @@
-.anuncioTitle {
+.anunciosContainer{
+  display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+.misAnunciosContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
   margin-top: 3rem;
+}
+.anuncioTitle {
+  margin-top: 2rem;
   text-shadow: 11px -3px 15px;
   font-family: monospace;
 }
@@ -42,7 +55,7 @@
 .anuncioName {
   font-size: 1.3rem;
 }
-.createEditAppointment{
+.createEditAppointment {
   margin-top: 0.8rem;
 }
 .anuncioName,
@@ -51,7 +64,7 @@
 .anuncioEspecialidad,
 .anuncioTipoServicio,
 .anuncioPrecio,
-.anuncioRanking{
+.anuncioRanking {
   margin-top: 0.5rem;
   font-family: monospace;
   font-weight: bold;
