@@ -94,7 +94,7 @@ export default function Ad({
         <div className="serviceDiv">{serviceType}</div>
 
         {/* fee */}
-        <div className="fee">Precio:${precio}</div>
+        <div className="fee">Precio:ARS ${precio}</div>
 
         {/* if he/she 's a professional */}
         <div className="ifPro">

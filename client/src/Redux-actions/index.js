@@ -358,11 +358,12 @@ export function deleteUserByID(userId){
 
   
   
-  export function postAppointments(payload) {
+  export function postAppointments(payload, reload) {
+    console.log('llego reload, action', reload)
     return async function (dispatch) {
       try {
         var json = await axios.post(`${BASE_URL}/appointment`, payload);
-        return json;
+        return dispatch({type:"RELOAD", payload: reload});
       } catch (error) {
         console.log(error);
       }
@@ -592,6 +593,7 @@ export function getUsersByAdminById(id) {
          }
         }
         export function reload(payload) {
+          
           return{
               type:'RELOAD',
              payload
