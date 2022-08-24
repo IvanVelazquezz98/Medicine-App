@@ -9,6 +9,7 @@ import {
   createAfternoonHours,
   postAppointments,
   getAdById,
+  reload,
 } from "../../Redux-actions";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -33,6 +34,8 @@ function CreateAppointments({user}) {
   const morningHours = useSelector((state)=>state.morningHours)
   
   const afternoonHours = useSelector((state)=>state.afternoonHours)
+
+  const reload = useSelector((state)=>state.reload)
     
   const [date, setDate] = useState([]);
 
@@ -53,6 +56,9 @@ function CreateAppointments({user}) {
 
   useEffect(() => {
     dispatch(getAdById(adId));
+    return ()=>{
+      window.location.reload()
+    }
   }, [dispatch]);
 
   
@@ -209,8 +215,10 @@ function CreateAppointments({user}) {
             ad:adId
           }
          
-          dispatch(postAppointments(appointments))
-          navigate(`/home/`+ adId)
+          dispatch(postAppointments(appointments, !reload))
+          console.log('mando reload, created', !reload)
+             
+            navigate(`/home/`+ adId)
           
         } catch (error) {
           <ModalErrors error={'no se pudieron crear los turnos'}/>

@@ -162,14 +162,17 @@ const navigate = useNavigate();
       (drawer === 'MIS ANUNCIOS')?  
       <> 
       
-      {User.professional?.ads.length >0 ? User.professional?.ads.map((e) => {
-        return (
-          // Component to edit your AD.
-          <>
-            <h1 className="anuncioTitle">Tus Anuncios</h1>
+      {User.professional?.ads.length >0 ? 
+      <div>
+             <h1 className="anuncioTitle">Tus Anuncios</h1>
               <div>
                 <ModalCreateAdd user={user} />
               </div>
+              {User.professional?.ads.map((e) => {
+        return (
+          // Component to edit your AD.
+          <>
+            
             <div className="adProfileContainer">
               <div className="yourAd">
                 <div className="anuncioImage">
@@ -202,7 +205,9 @@ const navigate = useNavigate();
            
           </>
         );
-      }): <div>
+      })}
+      </div>
+      : <div>
             <ModalCreateAdd user={user} />
           </div>}
       </>:

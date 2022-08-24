@@ -262,9 +262,10 @@ case "GET_USERS_BY_ADMIN":
       modalProfessionalApps:action.payload
     }
     case "RELOAD":
+      console.log('llego reload, reducer', action.payload)
     return{
       ...state,
-      comments:action.payload
+      reload:action.payload
     }
 
   default:
