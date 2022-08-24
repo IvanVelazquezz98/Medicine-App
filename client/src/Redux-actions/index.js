@@ -152,6 +152,18 @@ export function getName(name) {
   }
 };
 
+export function getComments(){
+  return async(dispatch) => {
+    try{
+      var json= await axios.get(`${BASE_URL}/comments/all`);
+      return dispatch({type:'GET_COMMENTS', payload: json.data})
+
+    }catch(err){
+      console.log(err)
+    }
+  }
+}
+
 //ad professional to favourites
 export function addFavorite(payload) {
     return async function (dispatch) {
