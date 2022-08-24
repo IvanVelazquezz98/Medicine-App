@@ -9,3 +9,13 @@
     align-items: center;
   }
 }
+
+.pagination{
+  justify-content: center;
+  margin-top: 1.2rem;
+  
+}
+.page-item .page-link{
+  background-color: rgba(16,72,144,1);
+  color: cornsilk;
+}

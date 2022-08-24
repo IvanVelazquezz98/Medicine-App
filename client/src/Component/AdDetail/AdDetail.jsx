@@ -17,6 +17,7 @@ export default function AdDetail({ isProfesional }) {
   //console.log(adID)
 
   useEffect(() => {
+    
     dispatch(getAdById(adID));
     return () => {
       dispatch(clearAdDetails());
@@ -71,6 +72,7 @@ export default function AdDetail({ isProfesional }) {
             isProfesional={isProfesional}
             ad={adDetail}
             professionalMedicalLicense={adDetail.professional?.medicalLicense}
+            professionalEmail = {adDetail.professional?.user?.email}
           />
           )}
           </div>

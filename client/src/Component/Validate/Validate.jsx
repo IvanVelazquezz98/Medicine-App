@@ -52,8 +52,7 @@ function Validate() {
     }
   });
 
-  
-  // console.log('user', user)
+
   return (
     <div>
       {(user)?  

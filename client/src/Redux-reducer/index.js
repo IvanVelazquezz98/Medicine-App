@@ -23,10 +23,10 @@ const inicialState = {
   appointmentInfo:{},
   showModal:false,
   modalMedicalRecord:false,
+  modalProfessionalApps:false,
   grafic:[],
-  comments:[]
-
-
+  comments:[],
+  reload:false
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -251,6 +251,17 @@ case "GET_USERS_BY_ADMIN":
       users: action.payload,
     };
   case "GET_COMMENTS":
+    return{
+      ...state,
+      comments:action.payload
+    }
+    case 'MODAL_PROFESSIONAL_APPS':
+    console.log('action', action.payload)
+    return{
+      ...state,
+      modalProfessionalApps:action.payload
+    }
+    case "RELOAD":
     return{
       ...state,
       comments:action.payload

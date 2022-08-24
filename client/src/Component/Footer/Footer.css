@@ -82,7 +82,7 @@ h4{
 /* responsive Footer Celulares  max  600px */
 
 @media screen and (max-width: 600px) {
-    .OpeningHoursDiv,.mailingBox,.mailingBoxSearch{
+    .OpeningHoursDiv h6,.OpeningHoursDiv h4,.mailingBox,.mailingBoxSearch{
         display: none;
     }
     .socialMediaBox p{
@@ -100,8 +100,8 @@ h4{
   }
 
   /* responsive Footer Tablets  max  924px */
-  @media (min-width:600px) and (max-width:924px) {
-    .OpeningHoursDiv,.mailingBox,.mailingBoxSearch{
+  @media (min-width:600px) and (max-width:1024px) {
+    .OpeningHoursDiv h6,.OpeningHoursDiv h4, .mailingBox,.mailingBoxSearch{
         display: none;
     }
      .socialMediaBox p{

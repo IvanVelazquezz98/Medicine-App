@@ -578,6 +578,7 @@ export function getUsersByAdminById(id) {
               })
             } 
           }
+  
 
 
          export function getGrafic (medicalLicense) {
@@ -590,5 +591,10 @@ export function getUsersByAdminById(id) {
             }
          }
         }
-
+        export function reload(payload) {
+          return{
+              type:'RELOAD',
+             payload
+          }
+      }
 
