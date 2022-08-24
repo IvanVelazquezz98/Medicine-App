@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
-import { filterAllAds } from "../../Redux-actions";
+import { filterAllAds, getAds } from "../../Redux-actions";
 import "./styleFilter.css";
 import SearchBar1 from "./SearchBar";
 import OrderByPrice from "./OrderByPrice";
@@ -21,6 +21,11 @@ export default function Suppafilter() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //recargar todos los anuncios
+  const handleReload= (e)=>{
+    dispatch(getAds())
+  }
 
   //filter all atributes from ads global state
   //filtrar todos los atributos y los guardamos en variables
@@ -69,9 +74,9 @@ export default function Suppafilter() {
 
   //opciones de servicios
   const services = [
-    { value: "virtual", label: "virtual" },
-    { value: "domicilio", label: "domicilio" },
-    { value: "presencial", label: "presencial" },
+    { value: "Virtual", label: "virtual" },
+    { value: "A Domicilio", label: "domicilio" },
+    { value: "Presencial", label: "presencial" },
   ];
 
   //busco parametros
@@ -125,6 +130,11 @@ export default function Suppafilter() {
         </Offcanvas.Header>
 
         <Offcanvas.Body>
+          <div>
+      <Button  className="ReloadButton" onClick={handleReload}>
+        Todos los anuncios
+      </Button>
+             </div>
           <div className="sidebar">
             <div className="orderPrice">
               <OrderByPrice />

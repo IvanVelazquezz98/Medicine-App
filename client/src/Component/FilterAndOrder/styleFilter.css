@@ -21,6 +21,10 @@
   width: 10rem;
   background-color:rgba(16,72,144,1);
 }
+ReloadButton{
+  width: 10rem;
+  background-color:rgb(222, 228, 235);
+}
 
 
 .OffMainContainer{
