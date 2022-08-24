@@ -15,21 +15,20 @@ function Footer() {
   const [userCommentYes , setUserCommentYes] = useState(null)
   let dispatch = useDispatch()
   const userComment = useSelector((state) => state.comments);
-  console.log('estado coment',userComment)
+
   useEffect(() => {
     userC()
     dispatch(getComments())
   }, []);
-  console.log('usuario ', userComments)
+
   let userComentYes = userComment ? userComment.filter((e) => e.userEmail === userComments ) : null
-  // setUserCommentYes(userComentYes)
-  console.log('soy comentario hecho' , userComentYes)
+
+
   function userC (){
-   
   var user = localStorage.getItem('Email');
    return setUserComments(user)
   }
-  console.log('deberia ser null', userComentYes) 
+
 
   return (
     
