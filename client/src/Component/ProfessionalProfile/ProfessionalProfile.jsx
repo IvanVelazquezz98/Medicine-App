@@ -19,7 +19,7 @@ export default function ProfessionalProfile() {
 
     useEffect(()=>{
         dispatch(getProfessionalById(professionalID))
-        dispatch(getAds)
+        dispatch(getAds())
     },[dispatch, professionalID])
     
     let professionalAds = ads.filter(ad=>ad.professionalMedicalLicense === professionalID)
@@ -63,7 +63,7 @@ export default function ProfessionalProfile() {
                     serviceType = {ad.serviceType}
                     precio = {ad.price}
                     ranking = {ad.professional.ranking}
-                    
+  
                 />
             )}):'no tiene servicios aun'}
                 <Footer/>

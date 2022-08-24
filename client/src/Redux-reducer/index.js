@@ -23,7 +23,8 @@ const inicialState = {
   appointmentInfo:{},
   showModal:false,
   modalMedicalRecord:false,
-  comments:[]
+  comments:[],
+  modalProfessionalApps:false,
 
 };
 
@@ -247,6 +248,12 @@ case "GET_USERS_BY_ADMIN":
     return{
       ...state,
       comments:action.payload
+    }
+    case 'MODAL_PROFESSIONAL_APPS':
+    console.log('action', action.payload)
+    return{
+      ...state,
+      modalProfessionalApps:action.payload
     }
 
   default:

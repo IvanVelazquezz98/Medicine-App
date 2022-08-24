@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 //import ModalMedicalRecord from './ModalMedicalRecord';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserApps, clearUserAppointments } from '../../Redux-actions';
+import { getUserApps, clearUserAppointments, modalProfessionalApps } from '../../Redux-actions';
 import ModalComent from './ModalComents';
 import ModalCancel from '../MedicalRecord/ModalConfirma';
 
-export default function ApointmentsPendinUser({userEmail,name}) {
+export default function AppointmentsPendinUser({userEmail,name}) {
 
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
- 
+  const modalProfApps = useSelector((state)=>state.modalProfessionalApps)
+  const [checkboxSelection , setCheckboxSelection] = useState()
 
 
   useEffect(() => {
