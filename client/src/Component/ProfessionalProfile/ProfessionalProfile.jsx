@@ -59,10 +59,7 @@ export default function ProfessionalProfile() {
           </div>
         </div>
         <div className="sobreMi">
-          <div>
-            <strong>Sobre Mi</strong>
-          </div>
-          <p>{professionalProfile?.aboutMe}</p>
+
         </div>
 
         <div className="appointmentAvailability">

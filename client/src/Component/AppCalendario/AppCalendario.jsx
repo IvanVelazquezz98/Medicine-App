@@ -33,14 +33,12 @@ const localizer = dateFnsLocalizer({
 //App calendario es llamado desde adDetail, entrando desde services,
 //o desde userProfile, cuando el profesional edita sus turnos.
 
-
-
-
 function AppCalendario({
   professionalMedicalLicense,
   name,
   ad,
   isProfesional,
+  professionalEmail,
 }) {
   const dispatch = useDispatch();
   //estado que trae turnos disponibles
@@ -122,6 +120,7 @@ function AppCalendario({
     });
   }
 
+  var user = localStorage.getItem('Email');
   return (
     <>
       <div className="CalendarMainContainer">
@@ -142,7 +141,7 @@ function AppCalendario({
         />
       </div>
       <div className="modalCalendarContainer">
-        {selected && (
+        {selected && user!==professionalEmail? (
           <ModalCalendar
             info={eventSelected}
             professionalMedicalLicense={professionalMedicalLicense}
@@ -150,7 +149,7 @@ function AppCalendario({
             ad={ad}
             isProfesional={isProfesional}
           />
-        )}
+        ):null}
       </div>
     </>
   );
