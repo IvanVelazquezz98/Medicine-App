@@ -163,13 +163,13 @@ const navigate = useNavigate();
       
       <div className="anunciosContainer">
         <h2 className="anuncioTitle">Tus Anuncios</h2>
+              <div>
+                <ModalCreateAdd user={user} />
+              </div>
       {User.professional?.ads.length >0 ? User.professional?.ads.map((e) => {
         return (
           // Component to edit your AD.
           <div className="misAnunciosContainer">
-              <div>
-                <ModalCreateAdd user={user} />
-              </div>
             <div className="adProfileContainer">
               <div className="yourAd">
                 <div className="anuncioImage">
