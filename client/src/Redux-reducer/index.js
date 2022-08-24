@@ -23,6 +23,7 @@ const inicialState = {
   appointmentInfo:{},
   showModal:false,
   modalMedicalRecord:false,
+  grafic:[]
 
 };
 
@@ -165,6 +166,11 @@ const rootReducer = (state = inicialState, action) => {
         eventClick: action.payload,
         selected: true,
       };
+      case 'GET_GRAFIC_INFO':
+        return{
+          ...state,
+          grafic: action.payload
+        }
     case "GET_AVAILABLE_APPS":
       return {
         ...state,

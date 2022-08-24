@@ -8,6 +8,7 @@ import Paginated from './Paginated'
 import Suppafilter from "../FilterAndOrder/Suppafilter";
 
 
+
 export default function Ads() {
   const dispatch = useDispatch();
 
@@ -78,15 +79,7 @@ export default function Ads() {
         changePageNext={changePageNext}
         paginated={paginated}
         />
-      {/* <Paginado
-          DogsPerPage={dogsPerPage}
-          allDogs={allDogs.length}
-          paginado={paginado}
-          currentPage={currentPage}
-          changePagePrev={changePagePrev}
-          changePageNext={changePageNext}
-          
-        /> */}
+     
       <div className="all">
         {currentAds
           ? currentAds.map((ad) => {

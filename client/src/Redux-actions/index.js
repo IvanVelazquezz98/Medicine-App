@@ -568,3 +568,15 @@ export function getUsersByAdminById(id) {
           }
 
 
+         export function getGrafic (medicalLicense) {
+          return async (dispatch) =>{
+            try {
+                var json= await axios.get(`${BASE_URL}/grafic/${medicalLicense.medicalLicense}`);
+            return dispatch({type:'GET_GRAFIC_INFO', payload: json.data})
+            } catch (error) {
+                console.log(error, 'error en action GRAFIC')
+            }
+         }
+        }
+
+
