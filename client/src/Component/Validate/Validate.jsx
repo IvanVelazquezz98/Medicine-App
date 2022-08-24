@@ -46,7 +46,8 @@ function Validate() {
       dispatch(userValidated(null))
     }
   });
-  console.log('user', user)
+  console.log('soy el usuario user en minuscula', user)
+  console.log('soy el usuario User en mayuscula', User)
   return (
     <div>
       {User.email ?   <UserProfile/>
