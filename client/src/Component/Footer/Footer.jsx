@@ -67,7 +67,7 @@ function Footer() {
                   <h4>Para estar mas  cerca de nosotros </h4>
                 </div>
                 
-                <div className='mailingBoxSearch'>
+                <div className='socialMediaBox'>
                   <p>Y enterarte de las ultimas novedades</p>
                   <div className='icons'>
 
