@@ -33,6 +33,9 @@ const localizer = dateFnsLocalizer({
 //App calendario es llamado desde adDetail, entrando desde services,
 //o desde userProfile, cuando el profesional edita sus turnos.
 
+
+
+
 function AppCalendario({
   professionalMedicalLicense,
   name,
@@ -51,6 +54,8 @@ function AppCalendario({
 
   const [eventSelected, setEventSelected] = useState({});
 
+
+  
   useEffect(() => {
     if (isProfesional) {
       return dispatch(getProfessionalApps(professionalMedicalLicense));
