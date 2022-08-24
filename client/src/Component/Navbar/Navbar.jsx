@@ -1,5 +1,3 @@
-
-
 import { Navbar, Nav, Container } from "react-bootstrap";
 import React from "react";
 import "./Navbar.css";
@@ -13,14 +11,14 @@ import { useSelector } from "react-redux";
 
 const NavBarExample = () => {
   const auth = getAuth(firebaseApp);
-  const user = useSelector((state) => state.userValidated)
+  const user = useSelector((state) => state.userValidated);
   //console.log("auth", auth);
   const navigate = useNavigate();
 
   function closeSession() {
     signOut(auth);
-    localStorage.removeItem('Email')
-    let path = '/';
+    localStorage.removeItem("Email");
+    let path = "/";
     navigate(path);
   }
 
@@ -41,28 +39,30 @@ const NavBarExample = () => {
                 Servicios
               </Nav.Link>
 
-              {
-                (user?.email)?
-                <div>
-              <Nav.Link as={Link} to="/home/validate" className="spaceX">
-               <p>Hola, {user.email}</p> <img className="imagenPerfil" src={perfil} />{" "}
-              </Nav.Link>
-                    <Nav.Link>
-                      <div className="buttonNav" onClick={closeSession}>
-                        Cerrar sesion
-                      </div>
-                    </Nav.Link>
+              {user?.email ? (
+                <>
+                  <Nav.Link as={Link} to="/home/validate" className="spaceX">
+                    <img className="imagenPerfil" src={perfil} />
+                  </Nav.Link>
 
-                </div>:
+                  <div className="closeSessionContainer">
+                    <span>Hola, {user.email}</span>
+                  </div>
+                  <Nav.Link>
+                    <div className="buttonNav" onClick={closeSession}>
+                      Cerrar sesion
+                    </div>
+                  </Nav.Link>
+                </>
+              ) : (
                 <Nav.Link as={Link} to="/home/validate" className="spaceX">
-               <img className="imagenPerfil" src={perfil} />{" "}
-              </Nav.Link>
-              }
+                  <img className="imagenPerfil" src={perfil} />{" "}
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
     </>
   );
 };
