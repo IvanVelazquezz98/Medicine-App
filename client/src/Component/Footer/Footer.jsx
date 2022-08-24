@@ -5,24 +5,31 @@ import Button from 'react-bootstrap/Button';
 import { BsFacebook,BsLinkedin,BsInstagram } from "react-icons/bs";
 import './Footer.css';
 import FormScore from './FormScore'
+import {getComments} from '../../Redux-actions/index'
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Footer() {
   const [show , setShow] = useState(false)
   const [userComments , setUserComments] = useState(null)
-  
-
+  const [userCommentYes , setUserCommentYes] = useState(null)
+  let dispatch = useDispatch()
+  const userComment = useSelector((state) => state.comments);
+  console.log('estado coment',userComment)
   useEffect(() => {
     userC()
+    dispatch(getComments())
   }, []);
-
+  console.log('usuario ', userComments)
+  let userComentYes = userComment ? userComment.filter((e) => e.userEmail === userComments ) : null
+  // setUserCommentYes(userComentYes)
+  console.log('soy comentario hecho' , userComentYes)
   function userC (){
    
   var user = localStorage.getItem('Email');
    return setUserComments(user)
-   
   }
-  console.log('user', userComments)
-  
+  console.log('deberia ser null', userComentYes) 
 
   return (
     
@@ -38,9 +45,13 @@ function Footer() {
             <div className='OpeningHoursDiv'>
             <h4>Contanos tu experiencia con Medicine App! </h4>
               <h6>Tu opinion nos ayuda a mejorar</h6>
-                {userComments ? <Button onClick={(e) => setShow(true)} className='homeBtn' >
+              
+              {userComentYes.length >0 ? <Button className='homeBtn' > Gracias por tu comentario 💖</Button> :
+
+                <div> {userComments ? <Button onClick={(e) => setShow(true)} className='homeBtn' >
                     Puntuanos 😊 {show ? <FormScore userEmail={userComments}/> :null}
-                </Button> : <Button>Registrate para puntuarnos</Button>}
+                </Button> : <Button>Registrate para puntuarnos</Button>}</div> }
+            
             
             </div>
 
