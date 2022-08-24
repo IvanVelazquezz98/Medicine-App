@@ -1,10 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAds, removeFavorite, addFavorite } from "../../Redux-actions";
 import Ad from "../Card/Ad";
 import "./Ads.css";
-
+import Paginated from './Paginated'
 import Suppafilter from "../FilterAndOrder/Suppafilter";
 
 
@@ -13,6 +13,26 @@ export default function Ads() {
 
   let ads = useSelector((state) => state.ads);
   let user = useSelector((state) => state.userDetail);
+
+  const [currentPage, setCurrentPage] = useState(1);//estado para la pagina actual  de el paginado, inicialmente es uno pero va cambiando en la funcion paginado
+  const [adsPerPage] = useState(1);//estado que fija la cantidad de 
+  const indexOfLastAd = currentPage * adsPerPage;
+  const indexOfFirstAd = indexOfLastAd - adsPerPage;
+  const currentAds = ads.slice(indexOfFirstAd, indexOfLastAd);
+  
+
+  const paginated = (pageNumber) => {
+    setCurrentPage(pageNumber);//esta funcion recibe un numero del componente "Paginado" que surge de un recorrido for que agrega un numero agrega un numeros
+    // con su valor incrementado en uno a un arreglo, comenzando desde el uno hasta llegar al numero que surge de dividir la cantidad de objetos que existen 
+    //en mi estado de perros por la cantidad requerida en el estado de "dogPerPage", en este caso es 8.
+  };
+  const changePageNext=()=>{
+      setCurrentPage((page)=> page + 1);
+  }
+  const changePagePrev=()=>{
+      setCurrentPage((page)=> page - 1 );
+  }
+  
 
   useEffect(() => {
     dispatch(getAds());
@@ -50,9 +70,26 @@ export default function Ads() {
   return (
     <>
       <Suppafilter />
+      <Paginated
+      currentPage={currentPage}
+       allAds={ads.length}
+       adsPerPage={adsPerPage}
+        changePagePrev={changePagePrev}
+        changePageNext={changePageNext}
+        paginated={paginated}
+        />
+      {/* <Paginado
+          DogsPerPage={dogsPerPage}
+          allDogs={allDogs.length}
+          paginado={paginado}
+          currentPage={currentPage}
+          changePagePrev={changePagePrev}
+          changePageNext={changePageNext}
+          
+        /> */}
       <div className="all">
-        {ads
-          ? ads.map((ad) => {
+        {currentAds
+          ? currentAds.map((ad) => {
               if (
                 ad.professional?.user?.rol === "professional" &&
                 ad.professional.user.active &&
