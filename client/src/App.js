@@ -11,6 +11,7 @@ import CreateAppointments from "./Component/CreateAppointments/CreateAppointment
 import Recover from "./Component/Recover/Recover"
 import DeletedUser from "./Component/DeletedUser/DeletedUser"
 import MedicalRecordLog from "./Component/MedicalRecord/MedicalRecordLog";
+import Correo from './Component/Correo/Correo'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/recover" element= {<Recover/>}/>
           <Route path="/deletedUser" element= {<DeletedUser/>}/>
           <Route path = '/appointment/id/:idApp' element={<MedicalRecordLog />}/>
+          <Route path="/pago" element= {<Correo/>}/>
         </Routes>
       </div>
 

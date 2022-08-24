@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Correo from '../Correo/Correo'
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { putEditAppointment, selectedTime } from "../../Redux-actions";
@@ -42,6 +43,7 @@ let idApp=info
   //localStorage.setItem("Email", post.email)
  //userEmail
  const userEmail=localStorage.getItem("Email")
+ const [getModal, setGetModal] = useState(false)
  
   //modal Elements
   const handleClose = () =>{
@@ -74,8 +76,10 @@ let idApp=info
         if (response.data.success) {
           setSuccess(true);
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
+         // dispatch(getAppointmentsById(info.id));
           dispatch(selectedTime(false))
-         /*  navigate('/home/validate') */
+          navigate( '/pago') 
+         
         }
       } catch (error) {
         console.log("Error", error);
@@ -85,6 +89,11 @@ let idApp=info
     }
   };
 
+  
+  
+console.log(ad, "nose")
+console.log(idApp,"perdido")
+console.log(name,"ver")
   return (
     <>
       <Button variant="danger" size="sm" onClick={handleShow}>
@@ -113,7 +122,9 @@ let idApp=info
           </Button>
           <Button variant="primary" size="sm" onClick={handleSubmit}>
            Pagar
+          
           </Button>
+    
         </Modal.Footer>
       </Modal>
     </>
