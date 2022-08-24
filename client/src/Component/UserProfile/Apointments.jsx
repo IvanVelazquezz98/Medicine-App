@@ -9,8 +9,7 @@ export default function Appointments({userEmail , name}) {
 
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
-  //const [medicalRecord , setMedicalRecord] = useState()
-  const [comentUsers, setComentUsers] = useState()
+ 
 
 
   useEffect(() => {
@@ -24,9 +23,6 @@ export default function Appointments({userEmail , name}) {
   )
 
  
-  console.log('uap',userComentApps)
-  console.log('coment' , comentUsers)
-
 
 
     let columns =[{ field: 'fecha' }, { field: 'hora' },

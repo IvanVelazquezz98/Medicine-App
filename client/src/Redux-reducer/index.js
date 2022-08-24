@@ -23,6 +23,7 @@ const inicialState = {
   appointmentInfo:{},
   showModal:false,
   modalMedicalRecord:false,
+  comments:[]
 
 };
 
@@ -242,7 +243,11 @@ case "GET_USERS_BY_ADMIN":
       ...state,
       users: action.payload,
     };
-
+  case "GET_COMMENTS":
+    return{
+      ...state,
+      comments:action.payload
+    }
 
   default:
     return state;

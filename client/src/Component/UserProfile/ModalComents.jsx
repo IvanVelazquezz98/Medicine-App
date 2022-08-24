@@ -56,6 +56,7 @@ export default function ModalComent({userEmail, info }) {
                         <label for="exampleFormControlSelect1">Evalua el trato del professional *5 Excelente *1 Muy malo</label>
                         <select name='treatment' class="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => handleChange(e)}>
+                            <option value={undefined}>...</option>
                             <option value={5}>5</option>
                             <option value={4}>4</option>
                             <option value={3}>3</option>
@@ -67,6 +68,7 @@ export default function ModalComent({userEmail, info }) {
                         <label for="exampleFormControlSelect1">Puntualidad del profesional</label>
                         <select name='puntuality' class="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => handleChange(e)}>
+                            <option value={undefined}>...</option>
                             <option value={5}>5</option>
                             <option value={4}>4</option>
                             <option value={3}>3</option>
@@ -78,6 +80,7 @@ export default function ModalComent({userEmail, info }) {
                         <label for="exampleFormControlSelect1">Conformidad con el profesional</label>
                         <select name='accordance' class="form-control" id="exampleFormControlSelect1"
                          onChange={(e) => handleChange(e)}>
+                            <option value={undefined}>...</option>
                             <option value={5}>5</option>
                             <option value={4}>4</option>
                             <option value={3}>3</option>
