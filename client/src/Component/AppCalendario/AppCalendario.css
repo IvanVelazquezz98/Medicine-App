@@ -1,9 +1,13 @@
 .CalendarMainContainer{
     display: flex;
     flex-direction: column;
-    border: 3px solid blueviolet;
-}
-.modalCalendarContainer{
-    border: 2px solid rgb(0, 255, 42);
+    align-items: center;
 }
 
+
+.modalTurnoMainContainer{
+    font-family: monospace;
+}
+.modal-title{
+    font-family: monospace;
+}
