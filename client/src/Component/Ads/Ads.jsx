@@ -8,6 +8,7 @@ import Paginated from './Paginated'
 import Suppafilter from "../FilterAndOrder/Suppafilter";
 
 
+
 export default function Ads() {
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ export default function Ads() {
   let user = useSelector((state) => state.userDetail);
 
   const [currentPage, setCurrentPage] = useState(1);//estado para la pagina actual  de el paginado, inicialmente es uno pero va cambiando en la funcion paginado
-  const [adsPerPage] = useState(1);//estado que fija la cantidad de 
+  const [adsPerPage] = useState(10);//estado que fija la cantidad de 
   const indexOfLastAd = currentPage * adsPerPage;
   const indexOfFirstAd = indexOfLastAd - adsPerPage;
   const currentAds = ads.slice(indexOfFirstAd, indexOfLastAd);
@@ -78,15 +79,7 @@ export default function Ads() {
         changePageNext={changePageNext}
         paginated={paginated}
         />
-      {/* <Paginado
-          DogsPerPage={dogsPerPage}
-          allDogs={allDogs.length}
-          paginado={paginado}
-          currentPage={currentPage}
-          changePagePrev={changePagePrev}
-          changePageNext={changePageNext}
-          
-        /> */}
+     
       <div className="all">
         {currentAds
           ? currentAds.map((ad) => {
