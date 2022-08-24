@@ -1,31 +1,35 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import Title from './Title';
+import { filterByAdmin} from '../../Redux-actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 0),
-  createData('06:00', 0),
-  createData('09:00', 0),
-  createData('12:00', 0),
-  createData('15:00', 0),
-  createData('18:00', 0),
-  createData('21:00', 0),
-  createData('24:00', undefined),
-];
 
 export default function Chart() {
+
+  const dispatch = useDispatch();
+  const dataGraffic= useSelector(state=> state.users)
+ console.log(dataGraffic, "soy data graffic");
+
+useEffect(() => {
+  
+dispatch(filterByAdmin({grafic:"allAppoinments"}))
+ 
+}, [dispatch])
+
+  function createData(time, amount) {
+    return { time, amount };
+  }
+  
+  const data = dataGraffic?.map(el=> createData(el.mes, el.totalPrice))
   const theme = useTheme();
+  console.log(data)
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      
       <ResponsiveContainer>
         <LineChart
           data={data}
