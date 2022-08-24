@@ -11,7 +11,7 @@ function circuito() {
     <>
       <div className="Iam">
         <div className="infoCircuito">
-          <span className="titleAyDOc">Ay Doc</span>
+          <span className="titleAyDOc">Medicine App</span>
         </div>
         <div className="CItasCOntainer">
           <p>Citas</p>
