@@ -89,9 +89,9 @@ const navigate = useNavigate();
             <Offcanvas.Body>
 
               <div className="sidebar">
-                {User.rol==='professional'?botonesProf.map(btn=><div className="orderPrice"><button value={btn} onClick={handleClick}>{btn}</button></div>):
-                User.rol === 'admin'?botonesAdmin.map(btn=><div className="orderPrice"><button value={btn} onClick={handleClick}>{btn}</button></div>):
-                botonesUser.map(btn=><div className="orderPrice"><button value={btn} onClick={handleClick}>{btn}</button></div>)} 
+                {User.rol==='professional'?botonesProf.map(btn=><div className="orderPrice"><Button value={btn} onClick={handleClick}>{btn}</Button></div>):
+                User.rol === 'admin'?botonesAdmin.map(btn=><div className="orderPrice"><Button value={btn} onClick={handleClick}>{btn}</Button></div>):
+                botonesUser.map(btn=><div className="orderPrice"><Button value={btn} onClick={handleClick}>{btn}</Button></div>)} 
               </div>
 
             </Offcanvas.Body>
@@ -160,19 +160,16 @@ const navigate = useNavigate();
         <PatientHistory medicalLicense={User.professional?.medicalLicense} />
       </div>:
       (drawer === 'MIS ANUNCIOS')?  
-      <> 
       
-      {User.professional?.ads.length >0 ? 
-      <div>
-             <h1 className="anuncioTitle">Tus Anuncios</h1>
+      <div className="anunciosContainer">
+        <h2 className="anuncioTitle">Tus Anuncios</h2>
               <div>
                 <ModalCreateAdd user={user} />
               </div>
-              {User.professional?.ads.map((e) => {
+      {User.professional?.ads.length >0 ? User.professional?.ads.map((e) => {
         return (
           // Component to edit your AD.
-          <>
-            
+          <div className="misAnunciosContainer">
             <div className="adProfileContainer">
               <div className="yourAd">
                 <div className="anuncioImage">
@@ -202,15 +199,13 @@ const navigate = useNavigate();
                 </div>
               </div>
             </div>
-           
-          </>
+          </div>
+          
         );
-      })}
-      </div>
-      : <div>
+      }): <div>
             <ModalCreateAdd user={user} />
           </div>}
-      </>:
+      </div>:
       (drawer === 'MIS RENDIMIENTOS')?
       <p>grafico de esme</p>:
       (drawer === 'TURNOS DISPONIBLES')?

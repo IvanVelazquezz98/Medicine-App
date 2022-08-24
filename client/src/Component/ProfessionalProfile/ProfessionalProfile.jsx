@@ -1,76 +1,87 @@
-import React from 'react'
-import {useEffect, useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {useParams} from 'react-router-dom'
-import {getProfessionalById, getAds} from '../../Redux-actions'
-import Ad from '../Card/Ad'
-import Footer from "../Footer/Footer.jsx"
-import Navbar from '../Navbar/Navbar'
-import './ProfessionalProfile.css';
+import React from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getProfessionalById, getAds } from "../../Redux-actions";
+import Ad from "../Card/Ad";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import Navbar from "../Navbar/Navbar";
+import "./ProfessionalProfile.css";
 import ImageUser from "../UserProfile/imageProfile";
 
 export default function ProfessionalProfile() {
-    const dispatch = useDispatch()
-    
-    const {professionalID} = useParams()
-    
-    let professionalProfile = useSelector(state=>state.professionalProfile)
-    let ads= useSelector(state=>state.ads)
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-        dispatch(getProfessionalById(professionalID))
-        dispatch(getAds())
-    },[dispatch, professionalID])
-    
-    let professionalAds = ads.filter(ad=>ad.professionalMedicalLicense === professionalID)
+  const { professionalID } = useParams();
 
-    
-    return (
-    <div>
-        <Navbar/>
+  let professionalProfile = useSelector((state) => state.professionalProfile);
+  let ads = useSelector((state) => state.ads);
+
+  useEffect(() => {
+    dispatch(getProfessionalById(professionalID));
+    dispatch(getAds);
+  }, [dispatch, professionalID]);
+
+  let professionalAds = ads.filter(
+    (ad) => ad.professionalMedicalLicense === professionalID
+  );
+
+  return (
+    <>
+      <Navbar />
+      <div className="professionalContainer">
         <div className="primercont">
-        <div className="micontainerImage">
-        <img src={professionalProfile.user?.userimage}  className="image"/>
-      </div>
-        <div>
-            <div className="micontainerInfo ">  
-         
-          <h3>{professionalProfile.medicalLicense} </h3>
-          <h3>{professionalProfile.user?.name}</h3>
-          <h3>{professionalProfile.user?.dateOfBirth}</h3>
-          <h3>{professionalProfile.user?.country}, {professionalProfile.user?.city}</h3>
-          <h3>{professionalProfile?.ranking}</h3>
-          <h3>{professionalProfile?.User?.dateOfBirth}</h3>
-      </div>
-        </div>
+          <div className="pofessionaPicture">
+            <img src={professionalProfile.user?.userimage} className="image" />
+          </div>
+
+          <div className="professionalInfo ">
+            <div>
+              <strong>Matrícula:</strong> {professionalProfile.medicalLicense}{" "}
+            </div>
+            <div>
+              <strong>Nombre:</strong> {professionalProfile.user?.name}
+            </div>
+            <div>
+              <strong>Nacimiento:</strong>{" "}
+              {professionalProfile.user?.dateOfBirth}
+            </div>
+            <div>
+              <strong>País:</strong> {professionalProfile.user?.country},{" "}
+            </div>
+            <div>
+              <strong>Ciudad:</strong>
+              {professionalProfile.user?.city}
+            </div>
+            <div>{professionalProfile?.ranking}</div>
+            <div>{professionalProfile?.User?.dateOfBirth}</div>
+          </div>
         </div>
         <div className="sobreMi">
-        <h1>Sobre Mi</h1>
-        <p>
-        {professionalProfile?.aboutMe}
-        </p>
-      </div>
-        <div>
-            <h3>MIRA LA DISPONIBILIDAD QUE OFRECE EL PROFESIONAL EN SUS SERVICIOS</h3> 
-            
-          
-            {professionalAds?professionalAds.map(ad=>{
-            return(
-                <Ad adID={ad.id}
-                    name = {ad.professional.user.name}
-                    medicalLicense = {ad.professionalMedicalLicense}
-                    especialidad = {ad.specialty}
-                    serviceType = {ad.serviceType}
-                    precio = {ad.price}
-                    ranking = {ad.professional.ranking}
-  
-                />
-            )}):'no tiene servicios aun'}
-                <Footer/>
 
         </div>
-        
-    </div>
-    
-  )
+
+        <div className="appointmentAvailability">
+          <div className="titleAppointment">Turnos del Profesional.</div>
+          <div className="buttonTurnos">
+            {professionalAds
+              ? professionalAds.map((ad) => {
+                  return (
+                    <>
+                    <Link to={`/home/` + ad.id}>
+                      <Button variant="primary">Turnos</Button>
+                    </Link>
+                    <Link to={`/services`}>
+                    <Button variant="secondary">Atras</Button>
+                  </Link>
+                    </>
+                  );
+                })
+              : <div className="noAppointment">No se encontraron turnos del profesional.</div>}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

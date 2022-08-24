@@ -53,12 +53,12 @@ export default function FormScore({ userEmail }) {
         <br></br>
 
         <form className="formContainerScore">
-          <div class="form-group">
-            <label className="labelForm" for="exampleFormControlSelect1"><strong>10-</strong>  Amo esta App...</label><br/>
-            <label  className="labelForm" for="exampleFormControlSelect1">
+          <div className="form-group">
+            <label className="labelForm" htmlFor="exampleFormControlSelect1"><strong>10-</strong>  Amo esta App...</label><br/>
+            <label  className="labelForm" htmlFor="exampleFormControlSelect1">
               <strong>5-</strong> Amo esta App pero...
             </label><br/>
-            <label className="labelForm"  for="exampleFormControlSelect1">
+            <label className="labelForm"  htmlFor="exampleFormControlSelect1">
             <strong>1-</strong>  Amo esta App pero no tanto...
             </label>
 
