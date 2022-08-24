@@ -578,6 +578,7 @@ export function getUsersByAdminById(id) {
               })
             } 
           }
+  
 
 
          export function getGrafic (medicalLicense) {
