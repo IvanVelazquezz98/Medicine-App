@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "../Login/Login";
 import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -13,9 +13,16 @@ const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 function Validate() {
+
   // const [user, setUser] = useState(null);
   const user= useSelector(state => state.userValidated)
   const User = useSelector((state) => state.userDetail)
+  useEffect(()=>{
+    if (user && !User.email) {
+      dispatch(getUsersById(user?.email?.toLowerCase()))  
+    }
+  },[user])
+
   const dispatch =useDispatch()
 
   async function getRol(uid) {
@@ -38,19 +45,19 @@ function Validate() {
 
   onAuthStateChanged(auth, (userFirebase) => {
      if (userFirebase) {
-      if (user) {
-        dispatch(getUsersById(user?.email?.toLowerCase()))  
-      }
-      // setUserWithFirebaseAndRol(userFirebase);
+      if(!user)
+      setUserWithFirebaseAndRol(userFirebase);
     } else {
       dispatch(userValidated(null))
     }
   });
-  console.log('soy el usuario user en minuscula', user)
-  console.log('soy el usuario User en mayuscula', User)
+
+
   return (
     <div>
-      {User.email ?   <UserProfile/>
+      {(user)?  
+        ((User?.email)?<UserProfile/>:<Login/>)
+
       : 
        (
         <div>

@@ -43,7 +43,7 @@ const navigate = useNavigate();
   let favML = JSON.parse(localStorage.getItem("ml"));
 
   useEffect(() => {
-    dispatch(getUsersById(user?.email?.toLowerCase()));
+    // dispatch(getUsersById(user?.email?.toLowerCase()));
     if (favML && user?.email) {
       dispatch(addFavorite(favorites));
     }
