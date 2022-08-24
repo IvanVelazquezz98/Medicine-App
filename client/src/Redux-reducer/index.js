@@ -25,10 +25,8 @@ const inicialState = {
   modalMedicalRecord:false,
   modalProfessionalApps:false,
   grafic:[],
-  comments:[]
-
-
-
+  comments:[],
+  reload:false
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -262,6 +260,11 @@ case "GET_USERS_BY_ADMIN":
     return{
       ...state,
       modalProfessionalApps:action.payload
+    }
+    case "RELOAD":
+    return{
+      ...state,
+      comments:action.payload
     }
 
   default:
