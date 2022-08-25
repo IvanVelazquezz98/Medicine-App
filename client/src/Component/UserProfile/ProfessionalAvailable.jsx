@@ -51,7 +51,7 @@ export default function ProfessionalAvailable({ medicalLicense, userEmail,name }
   }
 
 
-  let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' },
+  let columns = [{ field: 'fecha' }, { field: 'hora' },{ field: 'especialidad' },
   { field: 'modalidad' }, { field: 'estado' },
   {
     field: 'Cancel', renderCell: renderDetailsButton, width: 200,
@@ -69,26 +69,28 @@ export default function ProfessionalAvailable({ medicalLicense, userEmail,name }
       id: app?.id,
       fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      especialidad: app?.ad?.specialty,
       paciente: app?.user?.name,
       modalidad: app?.ad?.serviceType,
       estado: app?.status,
 
     }
-  }) : [{ id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
+  }) : [{ id: '1', fecha: '-', hora: '-', modalidad: '-', especialidad: '-', estado: '-' }]
 
  
 
   return (
 
     <>
+    
         <DataGrid
           columns={columns}
           rows={rows}
           renderCell={(e) => renderDetailsButton(e)}
         />
-     
+    
 
-      {modalProfApps ? <ModalCancelPro idApp={checkboxSelection.id} /> : null}
+      {modalProfApps ? <ModalCancelPro idApp={checkboxSelection} medicalLicense={medicalLicense} /> : null}
       </>
      
 

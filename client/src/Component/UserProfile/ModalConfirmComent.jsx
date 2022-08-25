@@ -21,7 +21,7 @@ export default function ModalConfirmComent() {
             Muchas gracias
             </Modal.Title>
         </Modal.Header>
-        Se a enviado el formulario a nuestro equipo de trabajo, muchas gracias
+        Se ha enviado el formulario a nuestro equipo de trabajo, muchas gracias
         por usar y puntuar a este professional 💖
             <Button variant="primary" onClick={handleClose}>
                 cerrar

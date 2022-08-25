@@ -67,7 +67,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
     return {
       id: app?.id,
-      fecha: app?.date,
+      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
       paciente: app?.user?.name,
       modalidad: app?.ad?.serviceType,
@@ -89,7 +89,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
         />
      
 
-      {modalProfApps ? <ModalOptions appointment={checkboxSelection} /> : null}
+      {modalProfApps ? <ModalOptions appointment={checkboxSelection} medicalLicense={medicalLicense} /> : null}
     </>
 
 

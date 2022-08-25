@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 //import ModalMedicalRecord from './ModalMedicalRecord';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserApps, clearUserAppointments } from '../../Redux-actions';
-import ModalComent from './ModalComents';
+
 
 export default function Appointments({userEmail , name}) {
 
@@ -19,8 +19,7 @@ export default function Appointments({userEmail , name}) {
     }
   }, [dispatch]);
 
-  let userComentApps = userApps.find((e) => e.status === 'completed' && e.rating === null
-  )
+  
 
  
 
@@ -46,7 +45,7 @@ export default function Appointments({userEmail , name}) {
   return (
     <>
       <div>Historial de turnos</div>
-      {userComentApps  ? <ModalComent userEmail={userEmail} info={userComentApps} /> : null}
+     
       <DataGrid
         columns={columns}
         rows={rows}

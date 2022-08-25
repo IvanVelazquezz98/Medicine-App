@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserApps, clearUserAppointments, modalProfessionalApps } from '../../Redux-actions';
 import ModalComent from './ModalComents';
-import ModalCancel from '../MedicalRecord/ModalConfirma';
+import ModalCancel from './ModalCancel';
 
 export default function AppointmentsPendinUser({userEmail,name}) {
 
