@@ -63,31 +63,27 @@ export default function ProfessionalAppointments({ medicalLicense }) {
     },
   ];
 
-  let pendingAppointments = professionalApps.appointments?.filter(
-    (e) => e.status === "pending"
-  );
 
-  let rows = pendingAppointments
-    ? pendingAppointments.map((app) => {
-        return {
-          id: app?.id,
-          fecha: app?.date,
-          hora: app?.startTime[0] + ":" + app?.startTime[1] + "Hs",
-          paciente: app?.user?.name,
-          modalidad: app?.ad?.serviceType,
-          estado: app?.status,
-        };
-      })
-    : [
-        {
-          id: "1",
-          fecha: "-",
-          hora: "-",
-          paciente: "-",
-          modalidad: "-",
-          estado: "-",
-        },
-      ];
+
+
+  let pendingAppointments = professionalApps.appointments?.filter((e) => e.status === 'pending')
+
+
+  let rows = pendingAppointments ? pendingAppointments.map((app) => {
+
+
+    return {
+      id: app?.id,
+      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
+      hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      paciente: app?.user?.name,
+      modalidad: app?.ad?.serviceType,
+      estado: app?.status,
+
+    }
+  }) : [{ id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
+
+ 
 
   return (
     <>
@@ -101,7 +97,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
       />
     </div>
 
-      {modalProfApps ? <ModalOptions appointment={checkboxSelection} /> : null}
+      {modalProfApps ? <ModalOptions appointment={checkboxSelection} medicalLicense={medicalLicense} /> : null}
     </>
   );
 }

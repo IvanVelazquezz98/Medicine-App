@@ -8,7 +8,7 @@ import {
   modalProfessionalApps,
 } from "../../Redux-actions";
 import ModalComent from "./ModalComents";
-import ModalCancel from "../MedicalRecord/ModalConfirma";
+import ModalCancel from './ModalCancel';
 
 export default function AppointmentsPendinUser({ userEmail, name }) {
   const dispatch = useDispatch();

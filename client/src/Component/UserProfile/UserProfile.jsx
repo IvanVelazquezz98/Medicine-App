@@ -11,6 +11,7 @@ import {
   addFavorite,
   clearUserDetail,
   getUsersById,
+  getUserApps
 } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
@@ -38,15 +39,17 @@ import Chart from "../Admin/Chart";
 import Users from "../Admin/Users";
 import Profesionals from "../Admin/Profesionals";
 import AllUsers from "../Admin/allUsers";
+import ModalComent from './ModalComents';
 
 const UserProfile = () => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
   const user = useSelector((state) => state.userValidated);
-  console.log("userProfile", user);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const userApps = useSelector((state)=>state.userAppointments)
+  console.log('userProfile', user)
+  
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
   const [show, setShow] = useState(false);
@@ -61,11 +64,13 @@ const UserProfile = () => {
     if (favML && user?.email) {
       dispatch(addFavorite(favorites));
     }
+    dispatch(getUserApps(user?.email.toLowerCase()))
     return () => {
       dispatch(clearUserDetail());
     };
   }, [dispatch]);
 
+  let userComentApps = userApps.find((e) => e.status === 'completed' && e.rating === null)
   let botonesProf = [
     "MI PERFIL",
     "FAVORITOS",
@@ -102,6 +107,7 @@ const UserProfile = () => {
   console.log(User.professional?.ads);
   return (
     <div>
+      {userComentApps  ? <ModalComent userEmail={user?.email} info={userComentApps} /> : null}  
       {User.email && !User.active && navigate("/recover")}
       {User.email && User.deletedByAdmin && navigate("/deletedUser")}
 
@@ -273,7 +279,7 @@ const UserProfile = () => {
                         </div>
                         <div className="createEditAppointment">
                           <Link to={`/calendar/` + e.id}>
-                            <Button variant="primary">Crea/Edita Turnos</Button>
+                            <Button variant="primary">Crea Turnos</Button>
                           </Link>
                         </div>
                       </div>

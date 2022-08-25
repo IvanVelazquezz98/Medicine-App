@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 //import ModalMedicalRecord from './ModalMedicalRecord';
-import { useSelector, useDispatch } from "react-redux";
-import { getUserApps, clearUserAppointments } from "../../Redux-actions";
-import ModalComent from "./ModalComents";
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserApps, clearUserAppointments } from '../../Redux-actions';
+
+
+
 
 export default function Appointments({ userEmail, name }) {
   const dispatch = useDispatch();
@@ -16,9 +18,7 @@ export default function Appointments({ userEmail, name }) {
     };
   }, [dispatch]);
 
-  let userComentApps = userApps.find(
-    (e) => e.status === "completed" && e.rating === null
-  );
+  
 
   let columns = [
     { field: "Fecha" },
@@ -65,9 +65,7 @@ export default function Appointments({ userEmail, name }) {
   return (
     <>
       <div className="profileTitles">Historial de Atención</div>
-      {userComentApps ? (
-        <ModalComent userEmail={userEmail} info={userComentApps} />
-      ) : null}
+     
       <div style={{ height: 350, width: "90%" }}>
         <DataGrid columns={columns} rows={rows} />
       </div>

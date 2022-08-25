@@ -235,12 +235,7 @@ function CreateAppointments({user}) {
     <>
      
       <div >
-          { apps>0?
-            <div>
-              <h1>Edita tus turnos</h1>
-              <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={true}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
-            </div> :null
-          }
+          
             <div className="conteinerDate">
               <h1>Crea tus turnos</h1>
                 <div style={{ textAlign: "center" }}>

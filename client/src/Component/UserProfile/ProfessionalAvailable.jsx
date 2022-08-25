@@ -103,9 +103,14 @@ export default function ProfessionalAvailable({
           rows={rows}
           renderCell={(e) => renderDetailsButton(e)}
         />
-      </div>
+        </div>
 
-      {modalProfApps ? <ModalCancelPro idApp={checkboxSelection.id} /> : null}
-    </>
-  );
-}
+
+      {modalProfApps ? <ModalCancelPro idApp={checkboxSelection} medicalLicense={medicalLicense} /> : null}
+
+
+      
+      </>
+    );
+  }
+
