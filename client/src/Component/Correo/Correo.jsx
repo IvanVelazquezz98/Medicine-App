@@ -54,95 +54,99 @@ function ContactoForm({ ad, info, medicalLicence, isProfesional }) {
 
   return (
     <>
-      <h1 className="Payment-title">Su pago ha sido Procesado exitosamente</h1>
-      {/* <Button onClick={handleShow} className="mainButton">
-        recibir comproante al correo
-      </Button> */}
-      <Form onSubmit={(e) => sendEmail(e)}>
-        <h1 className="Payment-title">Los datos de tu compra son:</h1>
-        <p>Nombre</p>
-        <input type="text" name="name" value={userDetail.name} />
-        <p>Correo</p>
-        <input type="text" name="email" value={userEmail} />
-        <p>Especialidad</p>
-        <input
-          type="text"
-          name="especialidad"
-          value={appointmentInfo.ad.specialty}
-        />
-        <p>Monto</p>{" "}
-        <input type="text" name="precio" value={appointmentInfo.ad.price} />
-        <p>Fecha </p>
-        <input
-          type="text"
-          name="fecha"
-          value={
-            appointmentInfo.date[2] +
-            "/" +
-            appointmentInfo.date[1] +
-            "/" +
-            appointmentInfo.date[0]
-          }
-        />
-        <p>Hora</p>{" "}
-        <input
-          type="text"
-          name="hora"
-          value={
-            appointmentInfo?.startTime[0] +
-            ":" +
-            appointmentInfo?.startTime[1] +
-            "Hs"
-          }
-        />
-        <p>Especialista</p>
-        <input
-          type="text"
-          name="doctor"
-          value={appointmentInfo?.professional.user.name}
-        />
-        <p>Correo del medico</p>{" "}
-        <input
-          type="text"
-          name="medemail"
-          value={appointmentInfo?.professional.user.email}
-        />
-        <p>Modalidad</p>{" "}
-        <input
-          type="text"
-          name="modalidad"
-          value={appointmentInfo?.ad.serviceType}
-        />
-        <div>
-          {appointmentInfo?.ad.serviceType === "presencial" ? (
+      <div className="correoMainContainer">
+        <h3 className="Payment-title">
+          Su pago ha sido Procesado exitosamente
+        </h3>
+        <h3 className="Payment-title">Los datos de tu compra son:</h3>
+        <div className="correoFormContainer">
+          <Form onSubmit={(e) => sendEmail(e)}>
+            
+            <div > <strong>Nombre</strong></div>
+            <input type="text" name="name" value={userDetail.name} />
+            <div><strong>Correo</strong></div>
+            <input type="text" name="email" value={userEmail} />
+            <div><strong>Especialidad</strong></div>
+            <input
+              type="text"
+              name="especialidad"
+              value={appointmentInfo.ad.specialty}
+            />
+            <div><strong>Precio</strong></div>{" "}
+             Pesos:<input type="text" name="precio" value={appointmentInfo.ad.price} />
+            <div><strong>Fecha</strong> </div>
+            <input
+              type="text"
+              name="fecha"
+              value={
+                appointmentInfo.date[2] +
+                "/" +
+                appointmentInfo.date[1] +
+                "/" +
+                appointmentInfo.date[0]
+              }
+            />
+            <div><strong>Hora</strong></div>{" "}
+            <input
+              type="text"
+              name="hora"
+              value={
+                appointmentInfo?.startTime[0] +
+                ":" +
+                appointmentInfo?.startTime[1] +
+                "Hs"
+              }
+            />
+            <div><strong>Especialista</strong></div>
+            <input
+              type="text"
+              name="doctor"
+              value={appointmentInfo?.professional.user.name}
+            />
+            <div><strong>Correo del Especialista</strong></div>{" "}
+            <input
+              type="text"
+              name="medemail"
+              value={appointmentInfo?.professional.user.email}
+            />
+            <div><strong>Modalidad</strong></div>{" "}
+            <input
+              type="text"
+              name="modalidad"
+              value={appointmentInfo?.ad.serviceType}
+            />
             <div>
-              Direccion{" "}
-              <input
-                type="text"
-                name="direccion"
-                value={
-                  appointmentInfo?.professional.user.country +
-                  "-" +
-                  appointmentInfo?.professional.user.province +
-                  "-" +
-                  appointmentInfo?.professional.user.city +
-                  "-" +
-                  appointmentInfo?.professional.user.address
-                }
-              />{" "}
+              {appointmentInfo?.ad.serviceType === "presencial" ? (
+                <div>
+                  <strong>Direccion</strong>{" "}
+                  <input
+                    type="text"
+                    name="direccion"
+                    value={
+                      appointmentInfo?.professional.user.country +
+                      "-" +
+                      appointmentInfo?.professional.user.province +
+                      "-" +
+                      appointmentInfo?.professional.user.city +
+                      "-" +
+                      appointmentInfo?.professional.user.address
+                    }
+                  />{" "}
+                </div>
+              ) : (
+                <div>
+                  {" "}
+                  <div><strong>Direccion</strong></div>{" "}
+                  <input type="text" name="direccion" value="No corresponde" />
+                </div>
+              )}
             </div>
-          ) : (
-            <div>
-              {" "}
-              <p>Direccion</p>{" "}
-              <input type="text" name="direccion" value="No corresponde" />
-            </div>
-          )}
+            <Button variant="success" type="submit">
+              Cerrar
+            </Button>
+          </Form>
         </div>
-        <Button variant="success" type="submit">
-          enviar
-        </Button>
-      </Form>
+      </div>
     </>
   );
 }
