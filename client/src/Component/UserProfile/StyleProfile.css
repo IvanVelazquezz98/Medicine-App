@@ -6,8 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f8f9fa;
-    height: 2500px;
+    margin-bottom: 3rem;
 }
 .primercont{
     
@@ -15,12 +14,13 @@
    flex-direction: row;
   
 }
+
 .micontainerImage{
    
     display: flex;
     flex-direction: column;
     align-items: center;
-  margin-right: 10px;
+    margin-right: 10px;
     padding: 10px;
     background-color: white;
     border-color: #e4f4f6;
@@ -30,7 +30,7 @@
     scroll-margin: 200px;
     width: 250px;
 }
-.micontainerInfo{
+/* .micontainerInfo{
     
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@
     width: 550px;
     height: 350px;
 
-}
+} */
 .conteinerads{
     padding: 4%;
 }
@@ -156,4 +156,13 @@
     height: 600px;
     margin-left: 15%;
 
+}
+
+.infoPerfilUser{
+    display: flex;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+    align-items: center;
+    justify-content: space-evenly;
 }
