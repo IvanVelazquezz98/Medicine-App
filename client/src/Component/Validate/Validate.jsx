@@ -64,14 +64,11 @@ function Validate() {
         ((User?.email)?<UserProfile/>:<Login/>)
 
       : 
-       (
-        <div>
-          {" "}
-          <NavBar />{" "}
+       (      
           <div>
             <Login />
-          </div>{" "}
-        </div>
+          </div>
+        
       )}
     </div>
   );

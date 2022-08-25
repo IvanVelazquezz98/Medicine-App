@@ -88,7 +88,7 @@ export default function EditAd() {
   return (
 
     <div>
-      <Navbar />
+ 
 
       <Form onSubmit={e => handleSubmit(e)}>
         <div>

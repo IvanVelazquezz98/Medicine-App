@@ -10,6 +10,7 @@ import {
   addFavorite,
   clearUserDetail,
   getUsersById,
+  getUserApps
 } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
@@ -38,15 +39,17 @@ import ChartProf from './Chart'/***GRAFICA DEL PROFESIONAL */
 import Users from '../Admin/Users'
 import Profesionals from '../Admin/Profesionals'
 import AllUsers from "../Admin/allUsers";
+import ModalComent from './ModalComents';
 
 const UserProfile = () => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
   const user = useSelector((state) => state.userValidated);
-  console.log("userProfile", user);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const userApps = useSelector((state)=>state.userAppointments)
+  console.log('userProfile', user)
+  
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
   const [show, setShow] = useState(false);
@@ -61,11 +64,13 @@ const UserProfile = () => {
     if (favML && user?.email) {
       dispatch(addFavorite(favorites));
     }
+    dispatch(getUserApps(user?.email.toLowerCase()))
     return () => {
       dispatch(clearUserDetail());
     };
   }, [dispatch]);
 
+  let userComentApps = userApps.find((e) => e.status === 'completed' && e.rating === null)
   let botonesProf = [
     "MI PERFIL",
     "FAVORITOS",
@@ -102,10 +107,12 @@ const UserProfile = () => {
   console.log(User.professional?.ads);
   return (
     <div>
+      {userComentApps  ? <ModalComent userEmail={user?.email} info={userComentApps} /> : null}  
       {User.email && !User.active && navigate("/recover")}
       {User.email && User.deletedByAdmin && navigate("/deletedUser")}
 
-      <Navbar user={user} />
+
+      {/* <Navbar user={user} /> */}
       <div className="buttonContainer">
         <Button className="FilterButton" onClick={handleShow}>
           Ver Menu
@@ -148,6 +155,7 @@ const UserProfile = () => {
                     </Button>
                   </div>
                 ))}
+
           </div>
         </Offcanvas.Body>
       </Offcanvas>
@@ -176,19 +184,17 @@ const UserProfile = () => {
         ) : null}
         {drawer === "MI PERFIL" ? (
           <div className="nuestracontainer">
-            
             <div className="infoPerfilUser">
               <ImageUser image={User.userimage} />
-              
-                <InfoUser
-                  name={User.name}
-                  email={User.email}
-                  country={User.country}
-                  province={User.province}
-                  city={User.city}
-                  birthdate={User.dateOfBirth}
-                />
-              
+
+              <InfoUser
+                name={User.name}
+                email={User.email}
+                country={User.country}
+                province={User.province}
+                city={User.city}
+                birthdate={User.dateOfBirth}
+              />
             </div>
             <div className="misbotones">
               <Link to={"/profile/" + User.email}>
@@ -201,18 +207,20 @@ const UserProfile = () => {
             </div>
           </div>
         ) : drawer === "FAVORITOS" ? (
+          
           <div className="miFavorites">
           <Favorites favorites={User.favorites}/>
             {/* {User.favorites?.length?.map((pro) => (
-          <Favorites image={pro.user.userimage} />
-          ))} */}
-          </div>
+              <Favorites image={pro.user.userimage} />
+            ))} */}
+            </div>
+          
         ) : drawer === "MIS TURNOS PENDIENTES" ? (
           <div className="miHistoryApp">
             <AppointmentsPendinUser userEmail={user?.email} name={User?.name} />
           </div>
         ) : drawer === "HISTORIAL DE ATENCION" ? (
-          <div className="miHistoryApp">
+          <div className="miHistoryApp" >
             <Appointments
               userEmail={user.email}
               show={show}
@@ -271,7 +279,7 @@ const UserProfile = () => {
                         </div>
                         <div className="createEditAppointment">
                           <Link to={`/calendar/` + e.id}>
-                            <Button variant="primary">Crea/Edita Turnos</Button>
+                            <Button variant="primary">Crea Turnos</Button>
                           </Link>
                         </div>
                       </div>
@@ -279,11 +287,13 @@ const UserProfile = () => {
                   </div>
                 );
               })
-            ) : (
-              <div>
-                <ModalCreateAdd user={user} />
-              </div>
-            )}
+            ) : null
+            // (
+            //   <div>
+            //     <ModalCreateAdd user={user} />
+            //   </div>
+            // )
+            }
           </div>
 
         ) : drawer === "MIS RENDIMIENTOS" ? (

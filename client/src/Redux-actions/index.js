@@ -286,6 +286,8 @@ export function putEditInfoProfessional(payload, idUser) {
 export function putEditAppointment(payload, idApp) {
   return async function (dispatch) {
     try {
+      console.log('idApp', idApp)
+      console.log('payload', payload)
       await axios.put(`${BASE_URL}/appointments/edit/${idApp}`, payload);
     } catch (error) {
       console.log(error);
