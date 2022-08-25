@@ -70,23 +70,22 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
 
   let rows = pendingAppointments ? pendingAppointments.map((app) => {
-
+    console.log('pending' , pendingAppointments)
 
     return {
       id: app?.id,
-      Fecha: app.date[2]+'/'+(Number(app?.date[1])+1).toString()
-      +'/'+app.date[0],
-     Hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      Fecha: app.date[2]+'/'+(Number(app?.date[1])+1).toString()+'/'+app.date[0],
+      Hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
       Paciente: app?.user?.name,
       Modalidad: app?.ad?.serviceType,
       Estado: app?.status,
-
     }
   }) : [{ id: '1', Fecha: '-', Hora: '-', Paciente: '-', Modalidad: '-', Estado: '-' }]
 
  
 
   return (
+
     <>
 
 <div className="profileTitles">Pacientes pendientes </div>
