@@ -69,6 +69,7 @@ export default function PatientHistory({ medicalLicense }) {
     (e) => e.status === "completed"
   );
 
+
   let rows = pendingAppointments
     ? pendingAppointments.map((app) => {
         return {
@@ -90,6 +91,7 @@ export default function PatientHistory({ medicalLicense }) {
           estado: "-",
         },
       ];
+
 
   return (
     <>

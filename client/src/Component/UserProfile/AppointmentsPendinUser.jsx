@@ -60,6 +60,7 @@ export default function AppointmentsPendinUser({ userEmail, name }) {
     },
   ];
 
+<<<<<<< HEAD
   let userNotPendingApps = userApps.filter((e) => e.status === "pending");
 
   let rows = userNotPendingApps
@@ -85,6 +86,21 @@ export default function AppointmentsPendinUser({ userEmail, name }) {
           estado: "-",
         },
       ];
+=======
+  let userNotPendingApps = userApps.filter((e) => e.status === 'pending')
+      
+    let rows = userNotPendingApps? userNotPendingApps?.map((app)=>{return{
+      id: app?.id,
+      fecha: app?.date[2]+'/'+(Number(app.date[1])+1).toString()+'/'+app?.date[0],
+      hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      Especialidad:app?.ad?.specialty,
+      Medico:'Dr/a '+app?.professional?.user?.name,
+      modalidad: app?.ad?.serviceType,
+  
+      estado: app?.status,
+    }
+  }) : [{ id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
+>>>>>>> d7d0c0f7807ae73f88e8d4ae62c2e6d95d08d2f0
 
   return (
     <>

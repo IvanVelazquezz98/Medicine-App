@@ -93,6 +93,7 @@ export default function ProfessionalAvailable({
         },
       ];
 
+
   return (
     <>
       <div className="profileTitles">Turnos disponibles </div>

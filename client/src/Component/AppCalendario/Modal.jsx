@@ -8,11 +8,14 @@ import {
   getUsersById,
   putEditAppointment,
   selectedTime,
+  getAppointmentsById,
   deleteAppointment,
 } from "../../Redux-actions";
 import ModalPayment from "../Home/ModalPayment";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
 import "./AppCalendario.css";
+
+
 
 export default function ModalCalendar({
   isProfesional,
@@ -27,10 +30,12 @@ export default function ModalCalendar({
   const [validate, setValidate] = useState(false);
   const [CompleteRegister, setCompleteRegister] = useState(false);
   const userDetail = useSelector((state) => state.userDetail);
+  const appointmentInfo = useSelector((state) => state.appointmentInfo);
   const dispatch = useDispatch();
   const userEmail = localStorage.getItem("Email");
   useEffect(() => {
     dispatch(getUsersById(userEmail));
+    dispatch(getAppointmentsById(info.id));
   }, [dispatch]);
 
   let navigate = useNavigate();
@@ -108,7 +113,7 @@ export default function ModalCalendar({
             Usted se atendera con: {professionalProfile.user?.name}
           </Modal.Title>
           <Modal.Body className="modalTurnoMainContainer">
-            <div>Especialidad: {professionalProfile.specialty}</div>
+            <div>Especialidad: {appointmentInfo?.ad?.specialty}</div>
             <div>
               El día: {date} de {Months[month].toUpperCase()}
             </div>
@@ -145,7 +150,7 @@ export default function ModalCalendar({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>especialidad: {professionalProfile.specialty}</p>
+            <p>especialidad: {appointmentInfo?.ad?.specialty}</p>
             <p>
               el día: {date} de {Months[month].toUpperCase()}
             </p>
