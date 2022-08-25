@@ -80,7 +80,7 @@ let idApp=info
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
           dispatch(selectedTime(false))
 
-          window.location.reload()
+         
          /*  navigate('/home/validate') */
 
           navigate( '/pago/'+ idApp)
