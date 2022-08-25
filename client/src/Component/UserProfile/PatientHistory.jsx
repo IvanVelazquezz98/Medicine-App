@@ -74,21 +74,21 @@ export default function PatientHistory({ medicalLicense }) {
     ? pendingAppointments.map((app) => {
         return {
           id: app?.medicalRecord,
-          fecha: app.date[2] + "/" + app.date[1] + "/" + app.date[0],
-          hora: app?.startTime[0] + ":" + app?.startTime[1] + "Hs",
-          paciente: app?.user?.name,
-          modalidad: app?.ad?.serviceType,
-          estado: app?.status,
+          Fecha: app.date[2] + "/" + app.date[1] + "/" + app.date[0],
+          Hora: app?.startTime[0] + ":" + app?.startTime[1] + "Hs",
+          Paciente: app?.user?.name,
+          Modalidad: app?.ad?.serviceType,
+          Estado: app?.status,
         };
       })
     : [
         {
           id: "1",
-          fecha: "-",
-          hora: "-",
-          paciente: "-",
-          modalidad: "-",
-          estado: "-",
+          Fecha: "-",
+          Hora: "-",
+          Paciente: "-",
+          Modalidad: "-",
+          Estado: "-",
         },
       ];
 
@@ -96,7 +96,7 @@ export default function PatientHistory({ medicalLicense }) {
   return (
     <>
       <div className="profileTitles">Historial de Pacientes </div>
-      <div style={{ height: 350, width: "90%" }}>
+      <div style={{ height: 350, width: "50%" }}>
         <DataGrid
           columns={columns}
           rows={rows}
