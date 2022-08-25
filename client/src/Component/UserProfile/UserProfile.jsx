@@ -22,7 +22,7 @@ import Login from "../Login/Login";
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
-import Dashboard from "../Admin/Dashboard";
+
 import ProfessionalAppointments from "./ProfessionalAppointments";
 import MedicalRecordUser from "./MedicalRecordUser";
 import PatientHistory from "./PatientHistory";
@@ -31,6 +31,13 @@ import { Button } from "react-bootstrap";
 import "./editAdContainer.css";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import ProfessionalAvailable from "./ProfessionalAvailable";
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Chart from '../Admin/Chart';
+import Users from '../Admin/Users'
+import Profesionals from '../Admin/Profesionals'
+import AllUsers from "../Admin/allUsers";
 
 const UserProfile = () => {
   const auth = getAuth(firebaseApp);
@@ -61,7 +68,7 @@ const navigate = useNavigate();
 
   let botonesProf = ['MI PERFIL','FAVORITOS','MIS TURNOS PENDIENTES','HISTORIAL DE ATENCION','MI HISTORIA CLINICA','TURNOS DISPONIBLES','PACIENTES PENDIENTES DE ATENCION','HISTORIAL DE PACIENTES','MIS ANUNCIOS','MIS RENDIMIENTOS']
   let botonesUser = ['MI PERFIL','FAVORITOS','MIS TURNOS PENDIENTES','HISTORIAL DE ATENCION','MI HISTORIA CLINICA']
-  let botonesAdmin = ['USUARIOS', 'REDIMIENTO ANUAL', 'MODIFICACIONES', 'PERFIL']
+  let botonesAdmin = ['MI PERFIL','USUARIOS', 'REDIMIENTO ANUAL' , 'USUARIOS TOP', 'PROFESIONALES TOP']
   function handleClick(e) {
     setDrawer(e.target.value);
   }
@@ -78,7 +85,7 @@ const navigate = useNavigate();
           <Navbar user={user} />
           <div className="buttonContainer">
             <Button  className="FilterButton" onClick={handleShow}>
-              Ver Perfil
+              Ver Menu
             </Button>
           </div>
           <Offcanvas className="OffMainContainer" show={sidebar} onHide={handleClose}>
@@ -97,6 +104,31 @@ const navigate = useNavigate();
             </Offcanvas.Body>
             </Offcanvas>
           <div>
+            {drawer==='REDIMIENTO ANUAL'?
+             <Container>
+             
+          
+ 
+               <Grid item xs={12} md={8} lg={9}>
+                 <Paper
+                   sx={{
+                     p: 2,
+                     display: 'flex',
+                     flexDirection: 'column',
+                     height: 240,
+                   }}
+                 >
+                   <Chart />
+                 </Paper>
+               </Grid>
+               </Container>:
+               drawer==='USUARIOS TOP'?
+               <Users/>
+               : drawer==='PROFESIONALES TOP'?
+               <Profesionals/>
+               :drawer==='USUARIOS'?
+               <AllUsers/>:null
+            }
             {drawer === 'MI PERFIL'?
           <div className="nuestracontainer">
             <div className="primercont">
