@@ -75,7 +75,7 @@ export default function AppointmentsPendinUser({userEmail,name}) {
 
   return (
     <>
-      <div>Turnos Pendientes</div>
+     
   
       <DataGrid
         columns={columns}

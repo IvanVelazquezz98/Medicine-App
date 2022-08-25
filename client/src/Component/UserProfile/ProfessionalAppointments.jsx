@@ -80,17 +80,17 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
   return (
 
-    <div style={{ display: 'flex', height: '15%', width: '70%' }}>
-      <div style={{ flexGrow: 1 }}>
+    <>
+      
         <DataGrid
           columns={columns}
           rows={rows}
           renderCell={(e) => renderDetailsButton(e)}
         />
-      </div>
+     
 
       {modalProfApps ? <ModalOptions appointment={checkboxSelection} /> : null}
-    </div>
+    </>
 
 
   )
