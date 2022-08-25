@@ -1,6 +1,5 @@
 import React from "react";
 import ImageUser from "./imageProfile";
-import Favorites from "./favoritesProfessionalUser";
 import InfoUser from "./InfoUserProfile";
 import HistoryAppointment from "./historyAppointmentUser";
 import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
@@ -22,7 +21,7 @@ import Login from "../Login/Login";
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
-
+import Favorites from "../Favorites/Favorites";
 import ProfessionalAppointments from "./ProfessionalAppointments";
 import MedicalRecordUser from "./MedicalRecordUser";
 import PatientHistory from "./PatientHistory";
@@ -203,7 +202,7 @@ const UserProfile = () => {
           </div>
         ) : drawer === "FAVORITOS" ? (
           <div className="miFavorites">
-            <h1>Favoritos poner la logica</h1>
+          <Favorites favorites={User.favorites}/>
             {/* {User.favorites?.length?.map((pro) => (
           <Favorites image={pro.user.userimage} />
           ))} */}
