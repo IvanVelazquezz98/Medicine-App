@@ -11,7 +11,7 @@ export default function Chart(medicalLicense) {
 
   const dispatch = useDispatch();
   const dataGraffic= useSelector(state=> state.grafic)
-  console.log(medicalLicense, "soy data graffic");
+ // console.log(medicalLicense, "soy data graffic");
 
 useEffect(() => {
   
