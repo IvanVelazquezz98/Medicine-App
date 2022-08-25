@@ -6,7 +6,7 @@ import Ad from "../Card/Ad";
 import "./Ads.css";
 import Paginated from './Paginated'
 import Suppafilter from "../FilterAndOrder/Suppafilter";
-import AllUsers from "../Admin/allUsers";
+
 
 
 

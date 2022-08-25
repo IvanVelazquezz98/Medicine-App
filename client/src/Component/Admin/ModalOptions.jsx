@@ -12,9 +12,10 @@ export default function ModalOptions(params) {
 
     const dispatch = useDispatch()
 useEffect(() => {
+    
     return()=>{
 
-        dispatch(getUsers())
+      dispatch(getUsers())
     }
 
   

@@ -610,3 +610,12 @@ export function loader(payload) {
     payload,
   };
 }
+export function getAdsFavorites(favorites) {
+  console.log(favorites, "soy el favorito reducer")
+  return async function (dispatch) {
+    var json = await axios.post(`${BASE_URL}/favoritesAds`, favorites);
+    console.log(json.data,"FAVORITOS");
+    return dispatch({ type: "GET_ADS_FAVORITES", payload: json.data });
+  };
+}
+

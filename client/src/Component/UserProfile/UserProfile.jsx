@@ -1,6 +1,5 @@
 import React from "react";
 import ImageUser from "./imageProfile";
-import Favorites from "./favoritesProfessionalUser";
 import InfoUser from "./InfoUserProfile";
 import HistoryAppointment from "./historyAppointmentUser";
 import ModalUnsubscribe from "../Unsubscribe/ModalUnsubscribe";
@@ -23,7 +22,7 @@ import Login from "../Login/Login";
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
-
+import Favorites from "../Favorites/Favorites";
 import ProfessionalAppointments from "./ProfessionalAppointments";
 import MedicalRecordUser from "./MedicalRecordUser";
 import PatientHistory from "./PatientHistory";
@@ -32,12 +31,13 @@ import { Button } from "react-bootstrap";
 import "./editAdContainer.css";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import ProfessionalAvailable from "./ProfessionalAvailable";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Chart from "../Admin/Chart";
-import Users from "../Admin/Users";
-import Profesionals from "../Admin/Profesionals";
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Chart from '../Admin/Chart';/***GRAFICA DEL ADMIN */
+import ChartProf from './Chart'/***GRAFICA DEL PROFESIONAL */
+import Users from '../Admin/Users'
+import Profesionals from '../Admin/Profesionals'
 import AllUsers from "../Admin/allUsers";
 import ModalComent from './ModalComents';
 
@@ -209,7 +209,7 @@ const navigate = useNavigate();
         ) : drawer === "FAVORITOS" ? (
           
           <div className="miFavorites">
-            <h1>Favoritos poner la logica</h1>
+          <Favorites favorites={User.favorites}/>
             {/* {User.favorites?.length?.map((pro) => (
               <Favorites image={pro.user.userimage} />
             ))} */}
@@ -295,8 +295,25 @@ const navigate = useNavigate();
             // )
             }
           </div>
+
         ) : drawer === "MIS RENDIMIENTOS" ? (
-          <p>grafico de esme</p>
+          <Container>
+             
+          
+ 
+      <Grid item xs={12} md={8} lg={9}>
+        <Paper
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            height: 240,
+          }}
+        >
+          <ChartProf medicalLicense={User.professional?.medicalLicense} />
+        </Paper>
+      </Grid>
+      </Container>
         ) : drawer === "TURNOS DISPONIBLES" ? (
           <div className="medicalRecorder">
             <ProfessionalAvailable
@@ -308,6 +325,7 @@ const navigate = useNavigate();
         ) : null}
       </div>
     </div>
+
   );
 };
 
