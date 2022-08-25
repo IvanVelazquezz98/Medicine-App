@@ -109,7 +109,7 @@ export default function Ad({
           )}
           {(CurrentUser?.favorites?.includes(medicalLicense)) || (favorito) ?
 
-           <MdFavorite color="red" size="2em" onClick={e=>handleRemoveFavorites(e)}></MdFavorite> :
+           <MdFavorite  color="red" size="2em" onClick={e=>handleRemoveFavorites(e)}></MdFavorite> :
            <MdFavoriteBorder color="red" size="2em" onClick={e=>handleAddFavorites(e)}></MdFavoriteBorder >
           }
 
