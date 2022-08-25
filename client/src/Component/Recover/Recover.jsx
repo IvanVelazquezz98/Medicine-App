@@ -46,7 +46,7 @@ function Recover() {
 
   return (
     <>
-      <Navbar />
+      
       <div className="mainRecoverContainer">
         <h3 className="titleRecover">Usuario deshabilitado temporalmente</h3>
         <h6 className="secondTitleRecover">

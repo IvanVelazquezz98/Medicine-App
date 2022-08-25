@@ -55,7 +55,7 @@ export default function EditAd() {
     return (
 
       <div>
-        <Navbar/>
+       
 
         <Form onSubmit={e=>handleSubmit(e)}>
     <div>
@@ -123,7 +123,7 @@ export default function EditAd() {
    </Form>
 
 
-       <Footer/>
+      
       </div>
   
   );

@@ -29,7 +29,7 @@ export default function ProfessionalProfile() {
 
   return (
     <>
-      <Navbar />
+      
       <div className="professionalContainer">
         <div className="primercont">
           <div className="pofessionaPicture">

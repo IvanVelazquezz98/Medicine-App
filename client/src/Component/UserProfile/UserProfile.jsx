@@ -82,7 +82,7 @@ const navigate = useNavigate();
       {User.email && !User.active && navigate("/recover")}
       {User.email && User.deletedByAdmin && navigate("/deletedUser")}
       
-          <Navbar user={user} />
+          {/* <Navbar user={user} /> */}
           <div className="buttonContainer">
             <Button  className="FilterButton" onClick={handleShow}>
               Ver Menu

@@ -6,7 +6,7 @@ function Services() {
   return (
     
     <div className="servicesMainContainer">
-      <Navbar />
+     
       
       <Ads />
 

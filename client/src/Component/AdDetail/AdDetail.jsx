@@ -32,7 +32,7 @@ export default function AdDetail({ isProfesional }) {
 
   return (
     <>
-      <Navbar />
+      
       <div className="AdDetailContainer">
         <div className="DetailName">{adDetail.professional?.user?.name}</div>
         <div className="licenseDetail">
