@@ -79,8 +79,12 @@ let idApp=info
           setSuccess(true);
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
           dispatch(selectedTime(false))
+
           window.location.reload()
          /*  navigate('/home/validate') */
+
+          navigate( '/pago/'+ idApp)
+
         }
       } catch (error) {
         console.log("Error", error);
