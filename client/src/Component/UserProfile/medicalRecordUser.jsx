@@ -65,7 +65,7 @@ export default function MedicalRecordUser({ userEmail }) {
     ? userAppsCompleted.map((app) => {
         return {
           id: app?.medicalRecord,
-          Fecha: app.date[2] + "/" + app.date[1] + "/" + app.date[0],
+          Fecha: app.date[2] + "/" + (Number(app?.date[1])+1) + "/" + app.date[0],
           Especialidad: app.ad?.specialty,
           Modalidad: app.ad?.serviceType,
           Medico: "dr/a " + app.professional?.user?.name,

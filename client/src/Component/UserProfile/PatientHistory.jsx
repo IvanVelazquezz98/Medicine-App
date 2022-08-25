@@ -74,11 +74,12 @@ export default function PatientHistory({ medicalLicense }) {
     ? pendingAppointments.map((app) => {
         return {
           id: app?.medicalRecord,
-          Fecha: app.date[2] + "/" + app.date[1] + "/" + app.date[0],
+          Fecha: app.date[2] + "/" + (Number(app?.date[1])+1).toString() + "/" + app.date[0],
           Hora: app?.startTime[0] + ":" + app?.startTime[1] + "Hs",
           Paciente: app?.user?.name,
           Modalidad: app?.ad?.serviceType,
           Estado: app?.status,
+
         };
       })
     : [
