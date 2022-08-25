@@ -92,7 +92,7 @@ export default function AppointmentsPendinUser({ userEmail, name }) {
   return (
     <>
       <div className="profileTitles">Turnos Pendientes</div>
-      <div style={{ height: 350, width: "90%" }}>
+      <div style={{ height: 350, width: "50%" }}>
         <DataGrid
           columns={columns}
           rows={rows}
