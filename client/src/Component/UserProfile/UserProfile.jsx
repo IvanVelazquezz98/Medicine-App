@@ -181,7 +181,7 @@ const navigate = useNavigate();
           <MedicalRecordUser userEmail={user.email} />
         </div>:
       (drawer === 'PACIENTES PENDIENTES DE ATENCION')?
-      <div className="medicalRecorder">
+      <div className="miadminApp">
         <ProfessionalAppointments
                   medicalLicense={User.professional?.medicalLicense}
                   show={show}

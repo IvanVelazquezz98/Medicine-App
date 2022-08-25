@@ -30,7 +30,8 @@ const inicialState = {
   topUsers: [],
   topProfessionals: [],
   specialtys:[],
-  graficAdmin: []
+  graficAdmin: [],
+  Loader:false
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -275,12 +276,37 @@ const rootReducer = (state = inicialState, action) => {
         specialtys: action.payload,
       };
 
+
     case "RELOAD":
       console.log("llego reload, reducer", action.payload);
       return {
         ...state,
         reload: action.payload,
       };
+
+  case "FILTER_BY_ADMIN":
+    return {
+      ...state,
+      users: action.payload,
+    };
+  case "GET_COMMENTS":
+    return{
+      ...state,
+      comments:action.payload
+    }
+    case 'MODAL_PROFESSIONAL_APPS':
+    console.log('action', action.payload)
+    return{
+      ...state,
+      modalProfessionalApps:action.payload
+    }
+    case "LOADER":
+      console.log('llego reload, reducer', action.payload)
+    return{
+      ...state,
+      reload:action.payload
+    }
+
 
     default:
       return state;

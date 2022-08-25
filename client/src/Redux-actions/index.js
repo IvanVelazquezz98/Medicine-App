@@ -589,17 +589,22 @@ export function reload(payload) {
 }
 export function getAllSpecialtys() {
   return async function (dispatch) {
-
     var json = await axios.get(`${BASE_URL}/specialtys`);
-    console.log(json.data)
+    console.log(json.data);
     return dispatch({ type: "GET_ALL_SPECIALTYS", payload: json.data });
   };
 }
 
-
 export function addSpecialty(payload) {
-
   return async function (dispatch) {
-     await axios.post(`${BASE_URL}/specialty`, payload);
+    await axios.post(`${BASE_URL}/specialty`, payload);
+  };
+}
+
+
+export function loader(payload) {
+  return {
+    type: "RELOAD",
+    payload,
   };
 }
