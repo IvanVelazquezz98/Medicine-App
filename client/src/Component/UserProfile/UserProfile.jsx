@@ -105,7 +105,8 @@ const UserProfile = () => {
       {User.email && !User.active && navigate("/recover")}
       {User.email && User.deletedByAdmin && navigate("/deletedUser")}
 
-      <Navbar user={user} />
+
+      {/* <Navbar user={user} /> */}
       <div className="buttonContainer">
         <Button className="FilterButton" onClick={handleShow}>
           Ver Menu
@@ -148,6 +149,7 @@ const UserProfile = () => {
                     </Button>
                   </div>
                 ))}
+
           </div>
         </Offcanvas.Body>
       </Offcanvas>

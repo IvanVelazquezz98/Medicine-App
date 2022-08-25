@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getName} from "../../Redux-actions";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
@@ -8,6 +8,7 @@ import ModalErrors from "../ModalsErrors/ErrorsRouta";
 
 
 const SearchBar1 = () => {
+  const selected = useSelector((state) => state.selectedTime);
   const [name, setName] = useState("");
   const [modal, setModal] =useState(false);
 

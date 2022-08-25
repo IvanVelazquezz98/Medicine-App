@@ -33,7 +33,7 @@ export default function Appointments({userEmail , name}) {
       
     let rows = userNotPendingApps? userNotPendingApps?.map((app)=>{return{
       id: app?.id,
-      fecha: app?.date[2]+'/'+app?.date[1]+'/'+app?.date[0],
+      fecha: app?.date[2]+'/'+(Number(app.date[1])+1).toString()+'/'+app?.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
       Especialidad:app?.ad?.specialty,
       Medico:'Dr/a '+app?.professional?.user?.name,
