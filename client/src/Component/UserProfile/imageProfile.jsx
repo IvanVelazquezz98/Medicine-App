@@ -1,10 +1,10 @@
 import React from "react";
-import './StyleProfile.css';
+import './imageProfile.css'
 
 
 const ImageUser = ({image}) => {
     return ( 
-        <div>
+        <div className="profileImageContainer">
             <img src={image} alt="UserImage" className="image"/>
         </div>
      );
