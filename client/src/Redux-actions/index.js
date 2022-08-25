@@ -152,6 +152,18 @@ export function getName(name) {
   }
 };
 
+export function getComments(){
+  return async(dispatch) => {
+    try{
+      var json= await axios.get(`${BASE_URL}/comments/all`);
+      return dispatch({type:'GET_COMMENTS', payload: json.data})
+
+    }catch(err){
+      console.log(err)
+    }
+  }
+}
+
 //ad professional to favourites
 export function addFavorite(payload) {
     return async function (dispatch) {
@@ -566,5 +578,18 @@ export function getUsersByAdminById(id) {
               })
             } 
           }
+  
+
+
+         export function getGrafic (medicalLicense) {
+          return async (dispatch) =>{
+            try {
+                var json= await axios.get(`${BASE_URL}/grafic/${medicalLicense.medicalLicense}`);
+            return dispatch({type:'GET_GRAFIC_INFO', payload: json.data})
+            } catch (error) {
+                console.log(error, 'error en action GRAFIC')
+            }
+         }
+        }
 
 

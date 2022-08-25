@@ -5,9 +5,9 @@ import Navbar from "../Navbar/Navbar";
 import Circuito from "./circuito";
 import Image from './Image'
 import './Home.css'
-import ModalPayment from "./ModalPayment";
 import {getAuth} from "firebase/auth";
 import firebaseApp from "../../Credential/index";
+import Comments from './Comments'
 
 export default function Home() {
 
@@ -20,6 +20,7 @@ export default function Home() {
       <Navbar />
         <Circuito/>
         <Image />
+        <Comments />
       <Footer />
     </div>
   );

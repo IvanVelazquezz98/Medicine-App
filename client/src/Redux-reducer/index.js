@@ -23,6 +23,11 @@ const inicialState = {
   appointmentInfo:{},
   showModal:false,
   modalMedicalRecord:false,
+  modalProfessionalApps:false,
+  grafic:[],
+  comments:[]
+
+
 
 };
 
@@ -165,6 +170,11 @@ const rootReducer = (state = inicialState, action) => {
         eventClick: action.payload,
         selected: true,
       };
+      case 'GET_GRAFIC_INFO':
+        return{
+          ...state,
+          grafic: action.payload
+        }
     case "GET_AVAILABLE_APPS":
       return {
         ...state,
@@ -242,7 +252,17 @@ case "GET_USERS_BY_ADMIN":
       ...state,
       users: action.payload,
     };
-
+  case "GET_COMMENTS":
+    return{
+      ...state,
+      comments:action.payload
+    }
+    case 'MODAL_PROFESSIONAL_APPS':
+    console.log('action', action.payload)
+    return{
+      ...state,
+      modalProfessionalApps:action.payload
+    }
 
   default:
     return state;

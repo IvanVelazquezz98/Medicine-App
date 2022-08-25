@@ -1,4 +1,4 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { CardElement , useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -78,8 +78,8 @@ let idApp=info
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
          // dispatch(getAppointmentsById(info.id));
           dispatch(selectedTime(false))
-          navigate( '/pago') 
-         
+          navigate( '/pago/'+ idApp) 
+      
         }
       } catch (error) {
         console.log("Error", error);

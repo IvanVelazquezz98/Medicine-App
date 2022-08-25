@@ -38,6 +38,7 @@ function AppCalendario({
   name,
   ad,
   isProfesional,
+  professionalEmail,
 }) {
   const dispatch = useDispatch();
   //estado que trae turnos disponibles
@@ -51,6 +52,8 @@ function AppCalendario({
 
   const [eventSelected, setEventSelected] = useState({});
 
+
+  
   useEffect(() => {
     if (isProfesional) {
       return dispatch(getProfessionalApps(professionalMedicalLicense));
@@ -117,6 +120,7 @@ function AppCalendario({
     });
   }
 
+  var user = localStorage.getItem('Email');
   return (
     <>
       <div className="CalendarMainContainer">
@@ -137,7 +141,7 @@ function AppCalendario({
         />
       </div>
       <div className="modalCalendarContainer">
-        {selected && (
+        {selected && user!==professionalEmail? (
           <ModalCalendar
             info={eventSelected}
             professionalMedicalLicense={professionalMedicalLicense}
@@ -145,7 +149,7 @@ function AppCalendario({
             ad={ad}
             isProfesional={isProfesional}
           />
-        )}
+        ):null}
       </div>
     </>
   );

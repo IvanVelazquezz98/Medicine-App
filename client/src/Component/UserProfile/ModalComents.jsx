@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { putEditAppointment } from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
+import ModalConfirmComent from './ModalConfirmComent'
 
 
 
@@ -15,8 +16,9 @@ export default function ModalComent({userEmail, info }) {
         accordance:'',
         userEmail:userEmail
     })
+    const [confirmMesage , setConfirmMesage] = useState(false)
     let dispatch = useDispatch()
-
+    console.log('score' , score)
     const handleClose = () => {
         setShow(false)
     };
@@ -30,10 +32,11 @@ export default function ModalComent({userEmail, info }) {
       }
 
     const handleSubmit = (userEmail) => {
-        let finalScore = (score.treatment + score.puntuality + score.accordance  /3)
-
-        dispatch(putEditAppointment({ ranting:finalScore , userEmail:userEmail }, info?.id))
-
+        let sumScore = (parseInt(score.treatment) + parseInt(score.puntuality) +parseInt (score.accordance ) )
+        let finalScore = parseInt(sumScore ) /3
+        console.log('final score', finalScore)
+        dispatch(putEditAppointment({ rating:finalScore  , userEmail:score.userEmail }, info?.id))
+        setConfirmMesage(true)
     }
 
 
@@ -47,12 +50,13 @@ export default function ModalComent({userEmail, info }) {
                     </Modal.Title>
                 </Modal.Header>
                     Turno : {info.date} a las : {info.startTime[0] + ':' + info.startTime[1] + 'Hs'}
-
+                {confirmMesage ? <ModalConfirmComent/> : null}
                 <form>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Evalua el trato del professional *5 Excelente *1 Muy malo</label>
                         <select name='treatment' class="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => handleChange(e)}>
+                            <option value={undefined}>...</option>
                             <option value={5}>5</option>
                             <option value={4}>4</option>
                             <option value={3}>3</option>
@@ -64,6 +68,7 @@ export default function ModalComent({userEmail, info }) {
                         <label for="exampleFormControlSelect1">Puntualidad del profesional</label>
                         <select name='puntuality' class="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => handleChange(e)}>
+                            <option value={undefined}>...</option>
                             <option value={5}>5</option>
                             <option value={4}>4</option>
                             <option value={3}>3</option>
@@ -75,6 +80,7 @@ export default function ModalComent({userEmail, info }) {
                         <label for="exampleFormControlSelect1">Conformidad con el profesional</label>
                         <select name='accordance' class="form-control" id="exampleFormControlSelect1"
                          onChange={(e) => handleChange(e)}>
+                            <option value={undefined}>...</option>
                             <option value={5}>5</option>
                             <option value={4}>4</option>
                             <option value={3}>3</option>
