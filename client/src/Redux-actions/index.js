@@ -608,3 +608,11 @@ export function loader(payload) {
     payload,
   };
 }
+export function getAdsFavorites(favorites) {
+  return async function (dispatch) {
+    var json = await axios.get(`${BASE_URL}/favoritesAds`, favorites);
+    console.log(json.data);
+    return dispatch({ type: "GET_ADS_FAVORITES", payload: json.data });
+  };
+}
+

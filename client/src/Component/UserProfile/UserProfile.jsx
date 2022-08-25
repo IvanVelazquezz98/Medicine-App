@@ -34,7 +34,8 @@ import ProfessionalAvailable from "./ProfessionalAvailable";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Chart from '../Admin/Chart';
+import Chart from '../Admin/Chart';/***GRAFICA DEL ADMIN */
+import ChartProf from './Chart'/***GRAFICA DEL PROFESIONAL */
 import Users from '../Admin/Users'
 import Profesionals from '../Admin/Profesionals'
 import AllUsers from "../Admin/allUsers";
@@ -239,7 +240,23 @@ const navigate = useNavigate();
           </div>}
       </div>:
       (drawer === 'MIS RENDIMIENTOS')?
-      <p>grafico de esme</p>:
+      <Container>
+             
+          
+ 
+      <Grid item xs={12} md={8} lg={9}>
+        <Paper
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            height: 240,
+          }}
+        >
+          <ChartProf medicalLicense={User.professional?.medicalLicense} />
+        </Paper>
+      </Grid>
+      </Container>:
       (drawer === 'TURNOS DISPONIBLES')?
       <div className="medicalRecorder">
       <ProfessionalAvailable medicalLicense={User.professional?.medicalLicense} userEmail={user?.email} name={User?.name}/>
