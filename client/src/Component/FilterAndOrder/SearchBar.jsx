@@ -30,15 +30,15 @@ const SearchBar1 = () => {
   return (
     <div key="search1" >
        <InputGroup className="mb-3">
-        {modal && <ModalErrors error={"debes ingresar un Nombre"} route={"/services"}/>}
+        {modal && <ModalErrors error={"Debes ingresar un nombre"} route={"/services"}/>}
         <Form.Control
           placeholder="Nombre Profesional"
           aria-label="buscar por nombre"
-          aria-describedby="basic-addon2"
+          aria-describedby="modalIto"
           value={name}
         onChange={(e) => inputHandler(e)}
         />
-        <Button variant="primary" id="button-addon2" onClick={(e) => onClickHandler(e)}>
+        <Button variant="primary"  id="modalIto" onClick={(e) => onClickHandler(e)}>
           Buscar
         </Button>
       </InputGroup>
