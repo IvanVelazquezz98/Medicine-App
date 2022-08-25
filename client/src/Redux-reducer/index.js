@@ -26,7 +26,7 @@ const inicialState = {
   modalProfessionalApps:false,
   grafic:[],
   comments:[],
-  reload:false
+  Loader:false
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -261,7 +261,7 @@ case "GET_USERS_BY_ADMIN":
       ...state,
       modalProfessionalApps:action.payload
     }
-    case "RELOAD":
+    case "LOADER":
       console.log('llego reload, reducer', action.payload)
     return{
       ...state,

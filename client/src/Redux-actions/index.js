@@ -592,7 +592,7 @@ export function getUsersByAdminById(id) {
             }
          }
         }
-        export function reload(payload) {
+        export function loader(payload) {
           
           return{
               type:'RELOAD',
