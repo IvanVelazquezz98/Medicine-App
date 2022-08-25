@@ -76,11 +76,11 @@ console.log(Users);
  
 
   return (
-<div>
+<>
 <SearchBar/>
 
-    <div className="miadminApp">
-      <div style={{ flexGrow: 1 }}>
+   
+<div style={{ height: 350, width: "90%" }}>
         <DataGrid
           columns={columns}
           rows={rows}
@@ -89,8 +89,8 @@ console.log(Users);
       </div>
 
       {modalProfApps ? <ModalOptions params={checkboxSelection} /> : null}
-    </div>
-    </div>
+    
+    </>
 
   )
 }
