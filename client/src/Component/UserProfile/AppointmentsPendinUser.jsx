@@ -67,24 +67,24 @@ export default function AppointmentsPendinUser({ userEmail, name }) {
     ? userNotPendingApps?.map((app) => {
         return {
           id: app?.id,
-          fecha: app?.date[2] + "/" + (Number(app?.date[1])+1).toString()
+          Fecha: app?.date[2] + "/" + (Number(app?.date[1])+1).toString()
           + "/" + app?.date[0],
-          hora: app?.startTime[0] + ":" + app?.startTime[1] + "Hs",
+          Hora: app?.startTime[0] + ":" + app?.startTime[1] + "Hs",
           Especialidad: app?.ad?.specialty,
           Medico: "Dr/a " + app?.professional?.user?.name,
-          modalidad: app?.ad?.serviceType,
+          Modalidad: app?.ad?.serviceType,
 
-          estado: app?.status,
+          Estado: app?.status,
         };
       })
     : [
         {
           id: "1",
-          fecha: "-",
-          hora: "-",
-          paciente: "-",
-          modalidad: "-",
-          estado: "-",
+          Fecha: "-",
+          Hora: "-",
+          Paciente: "-",
+          Modalidad: "-",
+          Estado: "-",
         },
       ];
 
