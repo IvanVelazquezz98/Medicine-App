@@ -74,7 +74,8 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
     return {
       id: app?.id,
-      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
+      fecha: app.date[2]+'/'+(Number(app?.date[1])+1).toString()
+      +'/'+app.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
       paciente: app?.user?.name,
       modalidad: app?.ad?.serviceType,
