@@ -1,15 +1,27 @@
-import React from 'react'
-import Ads from '../Ads/Ads'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import Navbar from "../Navbar/Navbar";
+import Circuito from "./circuito";
+import Image from './Image'
+import './Home.css'
+import {getAuth} from "firebase/auth";
+import firebaseApp from "../../Credential/index";
+import Comments from './Comments'
 
-function Home() {
+export default function Home() {
+
+  const auth = getAuth(firebaseApp);
+  console.log(auth.currentUser?.email)
+
   return (
-    <div>
-      <h1>Soy Home</h1>
-      <Ads/>
-      <Link to="/home/validate">validate</Link>
+    
+    <div className="HomeMainContainer">
+      <Navbar />
+        <Circuito/>
+        <Image />
+        <Comments />
+      <Footer />
     </div>
-  )
+  );
 }
-
-export default Home
