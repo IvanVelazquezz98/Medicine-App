@@ -31,7 +31,8 @@ const inicialState = {
   topProfessionals: [],
   specialtys:[],
   graficAdmin: [],
-  Loader:false
+  Loader:false,
+  favoritesAds:[]
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -244,12 +245,6 @@ const rootReducer = (state = inicialState, action) => {
         modalProfessionalApps: action.payload,
       };
 
-    case "FILTER_BY_ADMIN":
-      return {
-        ...state,
-        users: action.payload,
-      };
-
     case "GRAFIC_BY_ADMIN":
       return {
         ...state,
@@ -265,11 +260,7 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         topUsers: action.payload,
       };
-    case "GET_COMMENTS":
-      return {
-        ...state,
-        comments: action.payload,
-      };
+    
     case "GET_ALL_SPECIALTYS":
       return {
         ...state,
@@ -306,6 +297,11 @@ const rootReducer = (state = inicialState, action) => {
       ...state,
       reload:action.payload
     }
+    case "GET_ADS_FAVORITES":
+      return{
+        ...state,
+        favoritesAds: action.payload
+      }
 
 
     default:

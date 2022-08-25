@@ -155,11 +155,11 @@ function CreateAppointments({user}) {
    }
 
    function newTimeRange1(){
-    setTimeRanges1(true)
+    setTimeRanges1(!timeRanges1)
    }
 
    function newTimeRange2(){
-    setTimeRanges2(true)
+    setTimeRanges2(!timeRanges2)
    }
 
    function handleChange(e){
