@@ -176,19 +176,17 @@ const UserProfile = () => {
         ) : null}
         {drawer === "MI PERFIL" ? (
           <div className="nuestracontainer">
-            
             <div className="infoPerfilUser">
               <ImageUser image={User.userimage} />
-              
-                <InfoUser
-                  name={User.name}
-                  email={User.email}
-                  country={User.country}
-                  province={User.province}
-                  city={User.city}
-                  birthdate={User.dateOfBirth}
-                />
-              
+
+              <InfoUser
+                name={User.name}
+                email={User.email}
+                country={User.country}
+                province={User.province}
+                city={User.city}
+                birthdate={User.dateOfBirth}
+              />
             </div>
             <div className="misbotones">
               <Link to={"/profile/" + User.email}>
@@ -201,18 +199,20 @@ const UserProfile = () => {
             </div>
           </div>
         ) : drawer === "FAVORITOS" ? (
+          
           <div className="miFavorites">
             <h1>Favoritos poner la logica</h1>
             {/* {User.favorites?.length?.map((pro) => (
-          <Favorites image={pro.user.userimage} />
-          ))} */}
-          </div>
+              <Favorites image={pro.user.userimage} />
+            ))} */}
+            </div>
+          
         ) : drawer === "MIS TURNOS PENDIENTES" ? (
           <div className="miHistoryApp">
             <AppointmentsPendinUser userEmail={user?.email} name={User?.name} />
           </div>
         ) : drawer === "HISTORIAL DE ATENCION" ? (
-          <div className="miHistoryApp">
+          <div className="miHistoryApp" >
             <Appointments
               userEmail={user.email}
               show={show}
