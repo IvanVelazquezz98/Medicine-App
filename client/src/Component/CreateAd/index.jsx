@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./CreateAd.css";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
+import EditAd from "../EditAd/EditAd";
+// import { typeServices } from "./ServiceType";
 
 
 export default function CreateAd({ user}) {
@@ -19,6 +21,12 @@ export default function CreateAd({ user}) {
     dispatch(getUsersById(user.email));
     dispatch(getAllSpecialtys())
   }, [dispatch]);
+
+  const typeServices = [
+    {name:'Virtual'},
+    {name:'Presencial'},
+    {name:'A Domicilio'}
+]
 
   function handleChange(e) {
     e.preventDefault();
@@ -52,12 +60,22 @@ export default function CreateAd({ user}) {
     serviceType: "",
   });
 
-
+  console.log('ad post', post)
 
   function handleSubmit(e) {
     //e.preventDefault();
     try {
-      dispatch(postAdd(post));
+
+      let ad ={
+        specialty: post.specialty,
+        price: post.price,
+        timeAvailability: "",
+        serviceType: post.serviceType,
+        professionalMedicalLicense: post.professionalMedicalLicense
+
+      }
+      console.log('ad final' , ad)
+      dispatch(postAdd(ad));
       setPost({
         specialty: "",
         price: "",
@@ -79,6 +97,7 @@ export default function CreateAd({ user}) {
           <Form.Group className="mb-3">
             <Form.Label>Especialidad: </Form.Label>
             <select onChange={(e) => handleSelectSpecialty(e)}>
+            <option value={null} >...</option>
               {
              specialty?.map((s) => {
                 return (<option value={s.name} key={s.id}>{s.name}</option>)
@@ -106,7 +125,7 @@ export default function CreateAd({ user}) {
           <Form.Group className="mb-3">
             <Form.Label>Tipo de servicio: </Form.Label>
             <select onChange={(e) => handleSelectServiceType(e)}>
-              {specialty&& specialty?.map((p) => {
+              {typeServices&& typeServices?.map((p) => {
                 return (<option value={p.name} key={p.name}>{p.name}</option>)
               })
               }

@@ -4,10 +4,12 @@ import { getName} from "../../Redux-actions";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ModalErrors from "../ModalsErrors/ErrorsRouta";
 
 
 const SearchBar1 = () => {
   const [name, setName] = useState("");
+  const [modal, setModal] =useState(false);
 
   const dispatch = useDispatch();
 
@@ -17,7 +19,7 @@ const SearchBar1 = () => {
   };
   const onClickHandler = (e) => {
     
-    if(name.length===0) return alert('POner nombre --sacar este alert--');
+    if(name.length===0) return setModal(true);
   
     dispatch(getName(name));
     setName('')
@@ -28,14 +30,15 @@ const SearchBar1 = () => {
   return (
     <div key="search1" >
        <InputGroup className="mb-3">
+        {modal && <ModalErrors error={"Debes ingresar un nombre"} route={"/services"}/>}
         <Form.Control
           placeholder="Nombre Profesional"
           aria-label="buscar por nombre"
-          aria-describedby="basic-addon2"
+          aria-describedby="modalIto"
           value={name}
         onChange={(e) => inputHandler(e)}
         />
-        <Button variant="primary" id="button-addon2" onClick={(e) => onClickHandler(e)}>
+        <Button variant="primary"  id="modalIto" onClick={(e) => onClickHandler(e)}>
           Buscar
         </Button>
       </InputGroup>
