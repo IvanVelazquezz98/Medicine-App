@@ -18,7 +18,7 @@ export default function ModalMesage() {
           <Modal.Title className="modalThankYou">Muchas gracias</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalThankYouBody">
-          Se a enviado tu valoración a nuestro equipo de trabajo, muchas gracias
+          Se ha enviado tu valoración a nuestro equipo de trabajo, muchas gracias
           por usar y puntuar nuestra app 💖
         </Modal.Body>
         <Button variant="primary mb-2" onClick={handleClose}>

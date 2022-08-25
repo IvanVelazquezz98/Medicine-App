@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { createCancellAppointmentsByUser, putEditAppointment, modalProfessionalApps } from '../../Redux-actions';
+import { createCancellAppointmentsByUser, putEditAppointment, modalProfessionalApps, getUserApps, clearUserAppointments} from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
 
-export default function ModalCancel({ idApp, userEmail, name }) {
+export default function ModalCancel({ input, userEmail, name }) {
   const [show, setShow] = useState(true);
 
   const dispatch = useDispatch()
+  useEffect(() => {
+        
+    return () => {
+      dispatch(clearUserAppointments())
+      dispatch(getUserApps(userEmail))
+    }
+
+  }, [dispatch]);
 
   const handleClose = () => {
     setShow(false)
@@ -19,9 +27,9 @@ export default function ModalCancel({ idApp, userEmail, name }) {
     
     setShow(false)
     dispatch(modalProfessionalApps(false))
-    dispatch(putEditAppointment({ status: 'cancelled', userEmail: userEmail }, idApp))
-    dispatch(createCancellAppointmentsByUser(idApp))
-    window.location.reload()
+    dispatch(putEditAppointment({ status: 'cancelled', userEmail: userEmail }, input.row?.id))
+    dispatch(createCancellAppointmentsByUser(input.row?.id))
+    
   }
 
 

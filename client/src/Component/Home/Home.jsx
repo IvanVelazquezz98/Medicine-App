@@ -17,10 +17,10 @@ export default function Home() {
   return (
     
     <div className="HomeMainContainer">
-      <Navbar />
+      
+        <Link to = '/comments'><p>¿Qué opinan de Nosotros?</p></Link>
         <Circuito/>
         <Image />
-        <Comments />
       <Footer />
     </div>
   );

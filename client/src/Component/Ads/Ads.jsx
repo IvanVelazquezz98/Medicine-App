@@ -6,6 +6,7 @@ import Ad from "../Card/Ad";
 import "./Ads.css";
 import Paginated from './Paginated'
 import Suppafilter from "../FilterAndOrder/Suppafilter";
+import AllUsers from "../Admin/allUsers";
 
 
 
@@ -73,8 +74,6 @@ export default function Ads() {
   return (
     <>
       <Suppafilter />
-      
-              
       <Paginated
       currentPage={currentPage}
        allAds={ads.length}

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import {getUsers, clearTodo,modalProfessionalApps} from "../../Redux-actions/index.js";
 import ModalOptions from './ModalOptions'
 import { DataGrid } from '@mui/x-data-grid';
-
+import SearchBar from './SearchBar.jsx';
 
 
 
@@ -12,13 +12,14 @@ export default function AllUsers( ) {
   const dispatch = useDispatch();
   const [checkboxSelection, setCheckboxSelection] = useState(null)
   const modalProfApps = useSelector((state)=>state.modalProfessionalApps)
-  const Users = useSelector((state)=> state.users)
+  const Users = useSelector((state)=> state.allUsers)
+
 console.log(Users);
+
+
   useEffect(() => {
     dispatch(getUsers())
-    return () => {
-      dispatch(clearTodo())
-    }
+    
 
   }, [dispatch]);
 
@@ -56,7 +57,7 @@ console.log(Users);
   
 
 
-  let rows = Users ? Users?.map((user) => {
+  let rows = Users ? Users.map((user) => {
 
 
     return {
@@ -76,6 +77,8 @@ console.log(Users);
 
   return (
 <div>
+<SearchBar/>
+
     <div className="miadminApp">
       <div style={{ flexGrow: 1 }}>
         <DataGrid

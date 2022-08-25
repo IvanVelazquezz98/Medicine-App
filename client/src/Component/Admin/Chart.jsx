@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import { filterByAdmin} from '../../Redux-actions';
+import { filterByAdmin, clearTodo} from '../../Redux-actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Generate Sales Data
@@ -13,9 +13,13 @@ export default function Chart() {
   const dataGraffic= useSelector(state=> state.users)
  console.log(dataGraffic, "soy data graffic");
 
+
 useEffect(() => {
   
 dispatch(filterByAdmin({grafic:"allAppoinments"}))
+return () => {
+  dispatch(clearTodo())
+}
  
 }, [dispatch])
 

@@ -1,62 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, } from "react";
-import { clearUserAppointments, getProfessionalApps, traemeTodo, clearTodo, modalProfessionalApps } from "../../Redux-actions/index.js";
-import './Apointments.css'
-import ModalOptions from './ModalOptions'
-import { DataGrid } from '@mui/x-data-grid';
-
-
-
+import { useEffect } from "react";
+import {
+  clearUserAppointments,
+  getProfessionalApps,
+  traemeTodo,
+  clearTodo,
+  modalProfessionalApps,
+} from "../../Redux-actions/index.js";
+import "./Apointments.css";
+import ModalOptions from "./ModalOptions";
+import { DataGrid } from "@mui/x-data-grid";
 
 export default function ProfessionalAppointments({ medicalLicense }) {
   const dispatch = useDispatch();
-  const professionalApps = useSelector((state) => state.todo)
-  const modalProfApps = useSelector((state)=>state.modalProfessionalApps)
-  const [show, setShow] = useState(false)
-  const [checkboxSelection, setCheckboxSelection] = useState(null)
-  const [box, setBox] = useState(false)
- 
+  const professionalApps = useSelector((state) => state.todo);
+  const modalProfApps = useSelector((state) => state.modalProfessionalApps);
+  const [show, setShow] = useState(false);
+  const [checkboxSelection, setCheckboxSelection] = useState(null);
+  const [box, setBox] = useState(false);
 
   useEffect(() => {
     dispatch(traemeTodo(medicalLicense));
     return () => {
-      dispatch(clearTodo())
-    }
-
+      dispatch(clearTodo());
+    };
   }, [dispatch]);
 
   const renderDetailsButton = (params) => {
     return (
-
-
       <strong>
         <button
           variant="contained"
           color="primary"
           size="small"
-          width='40px'
+          width="40px"
           style={{ marginLeft: 16 }}
           onClick={(e) => handleOnCellClick(params)}
         >
           Opciones
         </button>
       </strong>
-    )
-  }
+    );
+  };
 
   function handleOnCellClick(params) {
-    setCheckboxSelection(params)
-    dispatch(modalProfessionalApps(true))
+    setCheckboxSelection(params);
+    dispatch(modalProfessionalApps(true));
   }
 
+  let columns = [
+    { field: "Fecha" },
+    { field: "Hora" },
+    { field: "Paciente" },
+    { field: "Modalidad" },
+    { field: "Estado" },
+    {
+      field: "Opciones",
+      renderCell: renderDetailsButton,
+      width: 200,
+      disableClickEventBubbling: true,
+    },
+  ];
 
-  let columns = [{ field: 'fecha' }, { field: 'hora' }, { field: 'paciente' },
-  { field: 'modalidad' }, { field: 'estado' },
-  {
-    field: 'Opciones', renderCell: renderDetailsButton, width: 200,
-    disableClickEventBubbling: true
-  }]
+
 
 
   let pendingAppointments = professionalApps.appointments?.filter((e) => e.status === 'pending')
@@ -67,7 +74,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
     return {
       id: app?.id,
-      fecha: app?.date,
+      fecha: app.date[2]+'/'+app.date[1]+'/'+app.date[0],
       hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
       paciente: app?.user?.name,
       modalidad: app?.ad?.serviceType,
@@ -79,19 +86,18 @@ export default function ProfessionalAppointments({ medicalLicense }) {
  
 
   return (
-
     <>
-      
-        <DataGrid
-          columns={columns}
-          rows={rows}
-          renderCell={(e) => renderDetailsButton(e)}
-        />
-     
 
-      {modalProfApps ? <ModalOptions appointment={checkboxSelection} /> : null}
+<div className="profileTitles">Pacientes pendientes </div>
+    <div style={{ height: 350, width: "90%" }}>
+      <DataGrid
+        columns={columns}
+        rows={rows}
+        renderCell={(e) => renderDetailsButton(e)}
+      />
+    </div>
+
+      {modalProfApps ? <ModalOptions appointment={checkboxSelection} medicalLicense={medicalLicense} /> : null}
     </>
-
-
-  )
+  );
 }

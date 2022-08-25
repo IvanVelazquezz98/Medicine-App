@@ -1,57 +1,31 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import {filterByAdmin, clearTodo,modalProfessionalApps} from "../../Redux-actions/index.js";
-
-import ModalOptions from './ModalOptions'
+import {filterprofessionalsByAdmin} from "../../Redux-actions/index.js";
 import { DataGrid } from '@mui/x-data-grid';
 
 
 
 
-export default function ProfessionalAppointments( ) {
+export default function Profesionals( ) {
   const dispatch = useDispatch();
-  const [checkboxSelection, setCheckboxSelection] = useState(null)
-  const modalProfApps = useSelector((state)=>state.modalProfessionalApps)
-  const Users = useSelector((state)=> state.users)
+  
+  const Users = useSelector((state)=> state.topProfessionals)
 console.log(Users);
   useEffect(() => {
-    dispatch(filterByAdmin({appointment: 'professional'}))
+    dispatch(filterprofessionalsByAdmin({appointment: 'professional'}))
 
-    return () => {
-      dispatch(clearTodo())
-    }
+    
 
   }, [dispatch]);
 
-  const renderDetailsButton = (params) => {
-    return (
-      <strong>
-        <button
-          variant="contained"
-          color="primary"
-          size="small"
-          width='40px'
-          style={{ marginLeft: 16 }}
-          onClick={(e) => handleOnCellClick(params)}
-        >
-          Opciones
-        </button>
-      </strong>
-    )
-  }
+ 
 
-  function handleOnCellClick(params) {
-    setCheckboxSelection(params)
-    dispatch(modalProfessionalApps(true))
-  }
+ 
 
 
   let columns = [{ field: 'Nombre' }, { field: 'Mail' }, { field: 'totalTurnos' },
-  { field: 'totalIngreso' }, { field: 'activo' }, 
-  {
-    field: 'Opciones', renderCell: renderDetailsButton, width: 300,
-    disableClickEventBubbling: true
-  }]
+  { field: 'totalIngreso' }, { field: 'activo' }
+  ]
 
 
   
@@ -81,7 +55,7 @@ console.log(Users);
         <DataGrid
           columns={columns}
           rows={rows}
-          renderCell={(e) => renderDetailsButton(e)}
+          
           
         />
      
