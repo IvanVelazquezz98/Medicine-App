@@ -12,13 +12,14 @@ import Recover from "./Component/Recover/Recover"
 import DeletedUser from "./Component/DeletedUser/DeletedUser"
 import MedicalRecordLog from "./Component/MedicalRecord/MedicalRecordLog";
 import NavBarExample from "./Component/Navbar/Navbar";
+import Correo from './Component/Correo/Correo';
 
 
 function App() {
   return (
 
       <div className="App">
-        {/* <NavBarExample/> */}
+        <NavBarExample/>
         <Routes>
           <Route path="/" element={<Home /> } />
           <Route path="/services" element={<Services /> } />
@@ -31,7 +32,8 @@ function App() {
           <Route path="/calendar/:adId" element= {<CreateAppointments/>}/>
           <Route path="/recover" element= {<Recover/>}/>
           <Route path="/deletedUser" element= {<DeletedUser/>}/>
-          <Route path = '/appointment/id/:idApp' element={<MedicalRecordLog />}/>
+          <Route path='/appointment/id/:idApp' element={<MedicalRecordLog />}/>
+          <Route path="/pago/:idApp" element= {<Correo/>}/>
         </Routes>
       </div>
 

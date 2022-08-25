@@ -29,7 +29,7 @@ export default function ProfessionalProfile() {
 
   return (
     <>
-      <Navbar />
+      
       <div className="professionalContainer">
         <div className="primercont">
           <div className="pofessionaPicture">
@@ -59,29 +59,41 @@ export default function ProfessionalProfile() {
           </div>
         </div>
         <div className="sobreMi">
-
+            <strong>Sobre mí: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sapiente accusamus error praesentium optio quibusdam aperiam quo debitis libero natus excepturi vitae porro, dolore quasi repudiandae accusantium corrupti eligendi quaerat.
         </div>
 
-        <div className="appointmentAvailability">
           <div className="titleAppointment">Turnos del Profesional.</div>
-          <div className="buttonTurnos">
+        <div className="appointmentAvailability">
             {professionalAds
               ? professionalAds.map((ad) => {
                   return (
                     <>
-                    <Link to={`/home/` + ad.id}>
+                    <Ad
+                      key={ad.id}
+                      adID={ad.id}
+                      name={ad.professional.user.name}
+                      medicalLicense={ad.professionalMedicalLicense}
+                      especialidad={ad.specialty}
+                      serviceType={ad.serviceType}
+                      precio={ad.price}
+                      ranking={ad.professional.ranking}
+                      userimage={ad.professional.user.userimage}
+                      email={ad.professional.user.email}
+                    />
+                    {/* <Link to={`/home/` + ad.id}>
                       <Button variant="primary">Turnos</Button>
                     </Link>
                     <Link to={`/services`}>
                     <Button variant="secondary">Atras</Button>
-                  </Link>
+                  </Link> */}
                     </>
                   );
                 })
               : <div className="noAppointment">No se encontraron turnos del profesional.</div>}
-          </div>
+          
         </div>
       </div>
     </>
   );
 }
+

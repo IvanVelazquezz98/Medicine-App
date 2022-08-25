@@ -227,7 +227,7 @@ export default function EditInfo() {
     {confirmInfo ? <ModalConfirm /> : null}
    
     <div>
-      <Navbar />
+      
       <Form onSubmit={e => handleSubmit(e)}>
         <div>
 

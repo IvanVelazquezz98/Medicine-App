@@ -18,7 +18,7 @@ import moment from "moment";
 import AppCalendario from "../AppCalendario/AppCalendario";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
-import myTime from "./myTime";
+import myTime from "./myTime.js";
 
 
 const format = "DD/MM/YYYY";
@@ -111,7 +111,7 @@ function CreateAppointments({user}) {
         duration:duration
       }
       dispatch(createMorningHours(morningHoursCreate))
-      setDuration()
+      
    }
 
    
@@ -151,7 +151,7 @@ function CreateAppointments({user}) {
       }
          
       dispatch(createAfternoonHours(afternoonHours))
-      setDurationAft()
+      
    }
 
    function newTimeRange1(){
@@ -230,7 +230,7 @@ function CreateAppointments({user}) {
       // let veremos=  myTimeMorning.includes(morningTimeS)
 
       // let veremos2=  myTimeAfternoon.includes(afternoonTimeS)
-
+      // console.log('morningsTime', myTimeMorning)
   return (
     <>
      

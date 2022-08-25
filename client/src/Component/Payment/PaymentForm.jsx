@@ -1,6 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch } from "react-redux";
@@ -30,7 +30,11 @@ const CARD_OPTIONS = {
 
 export default function PaymentForm({ adId, name, ad,info}) {
   
-
+// useEffect(()=>{
+//   // return()=>{
+//   //   window.location.reload()
+//   // }
+// })
 
 
 let idApp=info
@@ -75,7 +79,12 @@ let idApp=info
           setSuccess(true);
           dispatch(putEditAppointment({status:'pending', userEmail: userEmail},idApp))
           dispatch(selectedTime(false))
+
+         
          /*  navigate('/home/validate') */
+
+          navigate( '/pago/'+ idApp)
+
         }
       } catch (error) {
         console.log("Error", error);
