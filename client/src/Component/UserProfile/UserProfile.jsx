@@ -281,11 +281,13 @@ const UserProfile = () => {
                   </div>
                 );
               })
-            ) : (
-              <div>
-                <ModalCreateAdd user={user} />
-              </div>
-            )}
+            ) : null
+            // (
+            //   <div>
+            //     <ModalCreateAdd user={user} />
+            //   </div>
+            // )
+            }
           </div>
         ) : drawer === "MIS RENDIMIENTOS" ? (
           <p>grafico de esme</p>
