@@ -36,8 +36,7 @@ function Comments() {
       {topComments
         ? top4Comments.map((e) => {
             return (
-              
-                <div className="divCOmments">
+              <div className="divCOmments">
                 <div className="puntaje">Puntaje: {e.rating}</div>
                 <div className="comentario">"{e.comments}"</div>
                 <div className="emailComment">{e.userEmail}</div>
