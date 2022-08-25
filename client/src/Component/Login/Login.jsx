@@ -45,6 +45,7 @@ function Login() {
   const [imageId, setImageId] = useState(null)
   const [prolicenceImage, setProLicenceImage] = useState(null)
   const [isRight, setRight] = useState(false)
+  const [creado, setCreado]= useState(false)
 
 
 
@@ -181,7 +182,7 @@ function Login() {
     dispatch(getCountries())
     if(countryId.cid.length)dispatch(getStates(countryId.cid))
     if (countryId.sid.length) dispatch(getCities(countryId.cid, countryId.sid))
-
+    
   }, [dispatch, countryId])
 
 
@@ -279,7 +280,7 @@ function Login() {
       if (post.rol === "professional") {
         await dispatch(postProfessional(professional));
       }
-      alert("User Created");
+      setCreado(true)
       setPost({
         name: "",
         email: "",
@@ -296,7 +297,7 @@ function Login() {
         rol: "",
         favorites: []
       });
-      navigate("/")
+      
     } else {
       signInWithEmailAndPassword(auth, email, password);
       setTimeout(()=>{if (!auth.currentUser?.email){setRight(true)}else navigate("/")},1500)
@@ -307,6 +308,7 @@ function Login() {
 
   return (
     <div className="ValidateCOntainer">
+      {creado ? <ModalErrors error={'usuario creado exitosamente'} /> :null}
       <div className="Validate">
         {isRight && <ModalErrors 
         error={"el usuario o la contraseña son incorrectos"}
