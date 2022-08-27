@@ -8,6 +8,8 @@ import {
   modalMedicalRecord,
 } from "../../Redux-actions";
 
+//por las dudas pongo esta linea, para ver si me toma el cambio del nombre del archivo
+//no lo quiere tomar, habria que eliminar el archivo, subirlo sin ese archivo a git y volverlo a crear
 export default function MedicalRecordUser({ userEmail }) {
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);

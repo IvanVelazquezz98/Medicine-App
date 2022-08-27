@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom'
 import ModalConfirma from './ModalConfirma'
 import { getAppointmentsById, showModal, putEditAppointment} from "../../Redux-actions";
-import MedicalRecordUser from '../UserProfile/MedicalRecordUser';
+import MedicalRecordUser from '../UserProfile/MedicalRecordUser1';
 
 function MedicalRecordLog() {
   //const [show, setShow]= useState(false)
