@@ -24,12 +24,12 @@ export default function ModalCancelPro({ idApp, medicalLicense }) {
     };
 
     const handleCancel = () => {
-        dispatch(putEditAppointment({ status: 'cancelled' }, idApp.id))
+        dispatch(putEditAppointment({ status: 'cancelled' }, idApp))
         setShow(false)
         dispatch(modalProfessionalApps(false))
         //.location.reload()
     }
-
+console.log(idApp)
 
     return (
         <>
