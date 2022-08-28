@@ -73,7 +73,7 @@ export default function Ads() {
 
   return (
     <>
-      <Suppafilter />
+      <Suppafilter state={currentPage} setState={setCurrentPage} />
       <Paginated
       currentPage={currentPage}
        allAds={ads.length}
