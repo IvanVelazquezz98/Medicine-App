@@ -75,8 +75,8 @@ export default function Suppafilter() {
   //opciones de servicios
   const services = [
     { value: "Virtual", label: "virtual" },
-    { value: "A Domicilio", label: "domicilio" },
-    { value: "Presencial", label: "presencial" },
+    { value: "A Domicilio", label: "Domicilio" },
+    { value: "Presencial", label: "Presencial" },
   ];
 
   //busco parametros
