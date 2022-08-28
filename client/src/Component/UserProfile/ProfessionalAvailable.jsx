@@ -106,7 +106,7 @@ export default function ProfessionalAvailable({
         </div>
 
 
-      {modalProfApps ? <ModalCancelPro idApp={checkboxSelection} medicalLicense={medicalLicense} /> : null}
+      {modalProfApps ? <ModalCancelPro idApp={checkboxSelection.row?.id} medicalLicense={medicalLicense} /> : null}
 
 
       
