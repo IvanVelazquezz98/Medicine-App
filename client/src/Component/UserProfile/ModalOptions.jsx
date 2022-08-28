@@ -44,7 +44,7 @@ export default function ModalOptions({ appointment, medicalLicense }) {
         
     }
 
-
+console.log(appointment.row?.id)
     return (
         <>
             {absent ? <ModalAbsent idApp={appointment.row?.id} medicalLicense={medicalLicense} /> : null}
@@ -52,14 +52,14 @@ export default function ModalOptions({ appointment, medicalLicense }) {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Opciones del turno {appointment.row?.modalidad}
+                        Opciones del turno {appointment.row?.Modalidad}
                     </Modal.Title>
                 </Modal.Header>
-                -Con el paciente : {appointment.row?.paciente}
+                -Con el paciente : {appointment.row?.Paciente}
                 <br></br>
-                -El dia : {appointment.row?.fecha}
+                -El dia : {appointment.row?.Fecha}
                 <br></br> 
-                -A la hora : {appointment.row?.hora}
+                -A la hora : {appointment.row?.Hora}
                 <Modal.Footer>
                     <Button variant="secondary" onClick={hanldeReadytowork}>
                         Empezar consulta

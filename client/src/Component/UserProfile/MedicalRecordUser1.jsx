@@ -8,6 +8,8 @@ import {
   modalMedicalRecord,
 } from "../../Redux-actions";
 
+//por las dudas pongo esta linea, para ver si me toma el cambio del nombre del archivo
+//no lo quiere tomar, habria que eliminar el archivo, subirlo sin ese archivo a git y volverlo a crear
 export default function MedicalRecordUser({ userEmail }) {
   const dispatch = useDispatch();
   const userApps = useSelector((state) => state.userAppointments);
@@ -65,21 +67,20 @@ export default function MedicalRecordUser({ userEmail }) {
     ? userAppsCompleted.map((app) => {
         return {
           id: app?.medicalRecord,
-          fecha: app.date[2] + "/" + (Number(app?.date[1])+1).toString()
-          + "/" + app.date[0],
+          Fecha: app.date[2] + "/" + (Number(app?.date[1])+1) + "/" + app.date[0],
           Especialidad: app.ad?.specialty,
           Modalidad: app.ad?.serviceType,
           Medico: "dr/a " + app.professional?.user?.name,
         };
       })
-    : [{ id: 1, especialidad: "-", modalidad: "-", Medico: "-", fecha: "-" }];
+    : [{ id: 1, Especialidad: "-", Modalidad: "-", Medico: "-", Fecha: "-" }];
  //console.log(checkboxSelection);
   return (
     <>
       <div className="profileTitles">Historia Clínica</div>
 
       {show ? <ModalMedicalRecord info={checkboxSelection} /> : null}
-      <div style={{ height: 350, width: "90%" }}>
+      <div style={{ height: 350, width: "50%" }}>
         <DataGrid columns={columns} rows={rows} width />
       </div>
     </>

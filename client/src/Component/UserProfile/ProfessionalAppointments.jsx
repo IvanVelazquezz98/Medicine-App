@@ -74,15 +74,14 @@ export default function ProfessionalAppointments({ medicalLicense }) {
 
     return {
       id: app?.id,
-      fecha: app.date[2]+'/'+(Number(app?.date[1])+1).toString()
-      +'/'+app.date[0],
-      hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
-      paciente: app?.user?.name,
-      modalidad: app?.ad?.serviceType,
-      estado: app?.status,
+      Fecha: app.date[2]+'/'+(Number(app?.date[1])+1).toString()+'/'+app.date[0],
+      Hora: app?.startTime[0] + ':' + app?.startTime[1] + 'Hs',
+      Paciente: app?.user?.name,
+      Modalidad: app?.ad?.serviceType,
+      Estado: app?.status,
 
     }
-  }) : [{ id: '1', fecha: '-', hora: '-', paciente: '-', modalidad: '-', estado: '-' }]
+  }) : [{ id: '1', Fecha: '-', Hora: '-', Paciente: '-', Modalidad: '-', Estado: '-' }]
 
  
 
@@ -90,7 +89,7 @@ export default function ProfessionalAppointments({ medicalLicense }) {
     <>
 
 <div className="profileTitles">Pacientes pendientes </div>
-    <div style={{ height: 350, width: "90%" }}>
+    <div style={{ height: 350, width: "50%" }}>
       <DataGrid
         columns={columns}
         rows={rows}

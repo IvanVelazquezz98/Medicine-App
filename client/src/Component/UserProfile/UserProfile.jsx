@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Favorites from "../Favorites/Favorites";
 import ProfessionalAppointments from "./ProfessionalAppointments";
-import MedicalRecordUser from "./MedicalRecordUser";
+import MedicalRecordUser from "./MedicalRecordUser1";
 import PatientHistory from "./PatientHistory";
 import AppointmentsPendinUser from "./AppointmentsPendinUser";
 import { Button } from "react-bootstrap";
@@ -232,7 +232,7 @@ const navigate = useNavigate();
             <MedicalRecordUser userEmail={user.email} />
           </div>
         ) : drawer === "PACIENTES PENDIENTES DE ATENCION" ? (
-          <div className="miadminApp">
+          <div className="medicalRecorder">
             <ProfessionalAppointments
               medicalLicense={User.professional?.medicalLicense}
               show={show}
