@@ -93,7 +93,7 @@ const navigate = useNavigate();
   let botonesAdmin = [
     "MI PERFIL",
     "USUARIOS",
-    "REDIMIENTO ANUAL",
+    "RENDIMIENTO ANUAL",
     "USUARIOS TOP",
     "PROFESIONALES TOP",
   ];
@@ -160,7 +160,7 @@ const navigate = useNavigate();
         </Offcanvas.Body>
       </Offcanvas>
       <div>
-        {drawer === "REDIMIENTO ANUAL" ? (
+        {drawer === "RENDIMIENTO ANUAL" ? (
           <Container>
             <Grid item xs={12} md={8} lg={9}>
               <Paper

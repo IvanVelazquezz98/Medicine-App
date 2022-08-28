@@ -46,8 +46,8 @@ console.log(Users);
   }
 
 
-  let columns = [{ field: 'Nombre' }, { field: 'rol' }, { field: 'Mail' }, { field: 'Telefono' },
-  { field: 'ranking' }, { field: 'activo' }, { field: 'eliminado' },
+  let columns = [{ field: 'Nombre', width:"200"}, { field: 'rol' }, { field: 'Mail', width:"200" }, { field: 'Telefono', width:"200" },
+  { field: 'ranting' }, { field: 'activo' }, { field: 'eliminado' },
   {
     field: 'Opciones', renderCell: renderDetailsButton, width: 300,
     disableClickEventBubbling: true
@@ -71,16 +71,17 @@ console.log(Users);
       eliminado: user.deletedByAdmin
 
     }
-  }) : [{ id: '1',  Nombre: '-', Mail: '-', Telefono: '-', ranking: '-', activo: '-' , eliminado:"-"}]
+  }) : [{ id: '1',  Nombre: '-', Mail: '-', Telefono: '-', ranting: '-', activo: '-' , eliminado:"-"}]
 
  
 
   return (
-<div>
+<>
+<h2>Todos los usuarios</h2>
 <SearchBar/>
 
-    <div className="miadminApp">
-      <div style={{ flexGrow: 1 }}>
+    <div className='medicalRecorder'></div>
+<div style={{ height: 350, width: "90%" }}>
         <DataGrid
           columns={columns}
           rows={rows}
@@ -89,8 +90,8 @@ console.log(Users);
       </div>
 
       {modalProfApps ? <ModalOptions params={checkboxSelection} /> : null}
-    </div>
-    </div>
+    </>
+  
 
   )
 }
