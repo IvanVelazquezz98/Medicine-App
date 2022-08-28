@@ -163,7 +163,7 @@ export default function Suppafilter() {
 
             <div className="province">
               <Select
-              className="province"
+             
                 isClearable={true}
                 onChange={handleFilter}
                 name={"province"}
