@@ -12,7 +12,7 @@ export default function Users( ) {
  
   
   const Users = useSelector((state)=> state.topUsers)
-console.log(Users);
+
   useEffect(() => {
     dispatch(filterUsersByAdmin({appointment: 'users'}))
 
@@ -48,19 +48,21 @@ console.log(Users);
  
 
   return (
-<div className="miadminApp">
+<>
    
-      
+      <h2>Consumos de Usuarios</h2>
+    <div className='medicalRecorder'>
+<div style={{ height: 350, width: "90%" }}>
         <DataGrid
           columns={columns}
           rows={rows}
          
         />
-     
-
+     </div>
+     </div>
       
    
-    </div>
+    </>
 
   )
 }

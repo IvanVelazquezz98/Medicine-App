@@ -12,7 +12,6 @@ import Suppafilter from "../FilterAndOrder/Suppafilter";
 
 
 
-
 export default function Ads() {
   const dispatch = useDispatch();
 
@@ -75,7 +74,6 @@ export default function Ads() {
   return (
     <>
       <Suppafilter />
-    
       <Paginated
       currentPage={currentPage}
        allAds={ads.length}
