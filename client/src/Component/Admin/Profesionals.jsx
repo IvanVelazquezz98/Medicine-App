@@ -49,20 +49,25 @@ console.log(Users);
  
 
   return (
-<div className="miadminApp">
+<>
    
-      
+    <h2>Ventas totales de los Profesionales </h2>
+
+    <div className='medicalRecorder'>
+
+<div style={{ height: 350, width: "90%" }}>
         <DataGrid
           columns={columns}
           rows={rows}
-          
-          
+         
         />
+     </div>
+     </div>
      
-
+     </>
      
    
-    </div>
+    
 
   )
 }
