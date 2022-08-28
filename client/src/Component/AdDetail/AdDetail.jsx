@@ -28,7 +28,7 @@ export default function AdDetail({ isProfesional }) {
   //     dispatch(getUsersById(adDetail.professional?.userEmail));
   //   }, [dispatch]);
 
-  const [buttonLi, setbuttonLi] = useState(true);
+  const [buttonLi, setbuttonLi] = useState(false);
 
   return (
     <>
@@ -52,11 +52,11 @@ export default function AdDetail({ isProfesional }) {
         </div>
         <button
           className="medicalPictureButton"
-          onClick={() => setbuttonLi(false)}
+          onClick={() => setbuttonLi(!buttonLi)}
         >
           Ver Imagen de Licencia
         </button>
-        {!buttonLi && (
+        {buttonLi && (
           <div className="imagenLicencia">
             <img src={adDetail.professional?.licenceImage} />
           </div>
