@@ -12,7 +12,7 @@ import OrderByRanking from "./OrderByRanking";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export default function Suppafilter() {
+export default function Suppafilter({state, setState}) {
   let dispatch = useDispatch();
   const ads = useSelector((s) => s.ads);
   const allAds = useSelector((state) => state.allAds);
@@ -97,6 +97,7 @@ export default function Suppafilter() {
     }
     searchParams.set([action.name], value.value);
     setSearchParams(searchParams);
+    setState(1)
 
   }
 
