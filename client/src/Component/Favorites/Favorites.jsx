@@ -5,6 +5,8 @@ import { getAdsFavorites } from "../../Redux-actions";
 import Ad from "../Card/Ad";
 
 function Favorites(favorites) {
+
+  //console.log('esto es lo que llega a favoritos',favorites);
   const allFavorites = useSelector((state) => state.favoritesAds);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -12,26 +14,28 @@ function Favorites(favorites) {
     dispatch(getAdsFavorites(favorites));
   },[]);
   const adsFavorites= allFavorites.flat()
-  console.log("soy estado global en favoritos",adsFavorites);
+  //console.log("soy estado global en favoritos",adsFavorites);
 
 return (
-  <div>
+  <>
+  
   {adsFavorites?.map((ad) => {
-          return( <Ad
-              key={ad.id}
-              adID={ad.id}
-              name={ad.professional?.user.name}
-              medicalLicense={ad.professionalMedicalLicense}
-              especialidad={ad.specialty}
-              serviceType={ad.serviceType}
-              precio={ad.price}
-              ranking={ad.professional?.ranking}
-              userimage={ad.professional?.user.userimage}
-              email={ad.professional?.user?.email}
-            />)
-          })
-        }
-        </div>
+    return( <Ad
+      key={ad.id}
+      adID={ad.id}
+      name={ad.professional?.user.name}
+      medicalLicense={ad.professionalMedicalLicense}
+      especialidad={ad.specialty}
+      serviceType={ad.serviceType}
+      precio={ad.price}
+      ranking={ad.professional?.ranking}
+      userimage={ad.professional?.user.userimage}
+      email={ad.professional?.user?.email}
+      />)
+    })
+  }
+        
+  </>
       )
     
   
