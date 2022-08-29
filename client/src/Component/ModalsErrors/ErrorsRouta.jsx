@@ -11,8 +11,12 @@ export default function ModalErrors({error, route, funcion}) {
     if(funcion){
       funcion()
     }
-    
+  
     if(route){
+      navigate(route)
+    }
+    if(funcion && route){
+      funcion();
       navigate(route)
     }
     setShow(false)};
