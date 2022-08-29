@@ -39,9 +39,9 @@ export default function AdDetail({ isProfesional }) {
           {" "}
           Licencia Medica : {adDetail.professional?.medicalLicense}
         </div>
-        <div className="numeroDetail">
+        {/* <div className="numeroDetail">
           Numero de identidad:{adDetail.professional?.user?.identification}
-        </div>
+        </div> */}
 
         <div className="specialityDetail">
           {adDetail?.specialty} $: {adDetail?.price}
@@ -50,7 +50,7 @@ export default function AdDetail({ isProfesional }) {
           {" "}
           Tipo de servicio:{adDetail?.serviceType}
         </div>
-        <button
+        {/* <button
           className="medicalPictureButton"
           onClick={() => setbuttonLi(!buttonLi)}
         >
@@ -60,7 +60,7 @@ export default function AdDetail({ isProfesional }) {
           <div className="imagenLicencia">
             <img src={adDetail.professional?.licenceImage} />
           </div>
-        )}
+        )} */}
       </div>
 
       <div className="calendarContainer">
