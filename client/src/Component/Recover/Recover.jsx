@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Navbar from "../Navbar/Navbar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,6 +8,7 @@ import firebaseApp from "../../Credential/index";
 import { restoreUser } from "../../Redux-actions/index";
 import { useDispatch } from "react-redux";
 import "./Recover.css";
+import ModalErrors from "../ModalsErrors/ErrorsRouta";
 
 function Recover() {
   //local state
@@ -15,7 +16,7 @@ function Recover() {
     email: "",
     password: "",
   });
-
+  const [modalRecover, setModalRecover]= useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = getAuth(firebaseApp); //to get the authorization from credentials.
@@ -42,11 +43,15 @@ function Recover() {
         password: inputRestore.password,
       })
     );
+    setModalRecover(true)
+  }
+  function closeModal(){
+    setModalRecover(false)
   }
 
   return (
     <>
-      
+      {modalRecover?<ModalErrors route={"/home/validate"} funcion={closeModal} error={'Su perfil fue recuperado con exito' }/>:null}
       <div className="mainRecoverContainer">
         <h3 className="titleRecover">Usuario deshabilitado temporalmente</h3>
         <h6 className="secondTitleRecover">
