@@ -125,6 +125,7 @@ export default function CreateAd({ user}) {
           <Form.Group className="mb-3">
             <Form.Label>Tipo de servicio: </Form.Label>
             <select onChange={(e) => handleSelectServiceType(e)}>
+            <option value={null} >...</option>
               {typeServices&& typeServices?.map((p) => {
                 return (<option value={p.name} key={p.name}>{p.name}</option>)
               })
