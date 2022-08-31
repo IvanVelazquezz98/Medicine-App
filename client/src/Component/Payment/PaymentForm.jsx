@@ -68,7 +68,7 @@ let idApp=info
     if (!error) {
       try {
         const { id } = paymentMethod;
-        const response = await axios.post("http://localhost:3001/payment", {
+        const response = await axios.post("https://medicine-app-back.herokuapp.com/payment", {
           amount: price ,
           id,
           currency: "ars",
