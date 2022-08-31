@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://medicine-app-back.herokuapp.com";
 
 //user Validated
 export function userValidated(payload) {
