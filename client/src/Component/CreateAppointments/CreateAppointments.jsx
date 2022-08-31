@@ -18,7 +18,7 @@ import moment from "moment";
 import AppCalendario from "../AppCalendario/AppCalendario";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
-import myTime from "./myTime";
+import myTime from "./myTime.js";
 
 
 const format = "DD/MM/YYYY";
@@ -79,25 +79,32 @@ function CreateAppointments({user}) {
    const end1 = moment(new Date(endTime))
    let morningTimeS=`${start1.hour()}:${start1.minute()}`
    let morningTimeE=`${end1.hour()}:${end1.minute()}`
-   if(morningTimeS.split(':')[1]==='0' || morningTimeE.split(':')[1]==='0' ){
-      if(morningTimeS){
-        let hrS=morningTimeS.split(':')[0]
-        if(hrS.length===1){
-          let x= hrS
-          hrS= '0'+ x
-        }
+   if(morningTimeS){
+     let hrS=morningTimeS.split(':')[0]
+     let min= morningTimeS.split(':')[1]
+          //  console.log('hrS', hrS);
+     if(hrS.length===1){
+       let x= hrS
+       hrS= '0'+ x
+       morningTimeS = hrS +':'+ min
+     }
+    if(min==='0' ){
         morningTimeS = hrS +':'+'00'
       }
-      if(morningTimeE){
+   }
+    if(morningTimeE){
         let hrE=morningTimeE.split(':')[0]
+        let minE= morningTimeE.split(':')[1]
         if(hrE.length===1){
           let x= hrE
           hrE= '0'+ x
+          morningTimeE = hrE + ':' + minE
         }
-
-        morningTimeE = hrE +':'+'00'
+        if(minE==='0' ){
+          morningTimeE = hrE +':'+'00'
+        }
       }
-   }
+   
 
 
    function submitTimeRange(){
@@ -110,8 +117,9 @@ function CreateAppointments({user}) {
         endTime:`${end1.hour()}:${end1.minute()}`,
         duration:duration
       }
+      // console.log('morningHours mando a crear', morningHoursCreate)
       dispatch(createMorningHours(morningHoursCreate))
-      setDuration()
+      
    }
 
    
@@ -119,25 +127,31 @@ function CreateAppointments({user}) {
    const end2 = moment(new Date(endTime))
    let afternoonTimeS=`${start2.hour()}:${start2.minute()}`
    let afternoonTimeE=`${end2.hour()}:${end2.minute()}`
-   if(afternoonTimeS.split(':')[1]==='0' || afternoonTimeE.split(':')[1]==='0' ){
-    if(afternoonTimeS){
-      let hrS=afternoonTimeS.split(':')[0]
-      if(hrS.length===1){
-        let x= hrS
-        hrS= '0'+ x
-      }
-      afternoonTimeS = hrS +':'+'00'
+   if(afternoonTimeS){
+    let hrS=afternoonTimeS.split(':')[0]
+    let min= afternoonTimeS.split(':')[1]
+          // console.log('hrS', hrS);
+    if(hrS.length===1){
+      let x= hrS
+      hrS= '0'+ x
+      afternoonTimeS = hrS +':'+ min
     }
-    if(afternoonTimeE){
-      let hrE=afternoonTimeE.split(':')[0]
-      if(hrE.length===1){
-        let x= hrE
-        hrE= '0'+ x
-      }
-
-      afternoonTimeE = hrE +':'+'00'
-    }
- }
+   if(min==='0' ){
+       afternoonTimeS = hrS +':'+'00'
+     }
+  }
+   if(afternoonTimeE){
+       let hrE=afternoonTimeE.split(':')[0]
+       let minE= afternoonTimeE.split(':')[1]
+       if(hrE.length===1){
+         let x= hrE
+         hrE= '0'+ x
+         afternoonTimeE = hrE + ':' + minE
+       }
+       if(minE==='0' ){
+         afternoonTimeE = hrE +':'+'00'
+       }
+     }
 
    function submitTimeRange2(){
           
@@ -151,15 +165,15 @@ function CreateAppointments({user}) {
       }
          
       dispatch(createAfternoonHours(afternoonHours))
-      setDurationAft()
+      
    }
 
    function newTimeRange1(){
-    setTimeRanges1(true)
+    setTimeRanges1(!timeRanges1)
    }
 
    function newTimeRange2(){
-    setTimeRanges2(true)
+    setTimeRanges2(!timeRanges2)
    }
 
    function handleChange(e){
@@ -170,16 +184,16 @@ function CreateAppointments({user}) {
     setDurationAft(e.target.value)
    }
 
-        
+
    
    let hours= morningHours.map(hr=>{return hr.start })
    let aftHours = afternoonHours.map(hr=>{return hr.start})
-      if(aftHours.length>0){
-        hours=hours.concat(aftHours)
-      }
-      if(morningHours===0){
-        hours=aftHours
-      }
+      // if(aftHours.length>0){
+      //   hours=hours.concat(aftHours)
+      // }
+      // if(morningHours===0){
+      //   hours=aftHours
+      // }
    
 
       let date2 = date.map(d=>({day:d.day, month:d.month.index, year:d.year}))
@@ -207,16 +221,26 @@ function CreateAppointments({user}) {
    function submitAll(e){
         try {
       
-         
-          let appointments={
+         if(morningHours){
+           let appointmentsMorning={
+             dates: dateArray,
+             hours: hours,
+             professionalMedicalLicense: adDetail.professionalMedicalLicense,
+             ad:adId
+           }
+           dispatch(postAppointments(appointmentsMorning, !reload))
+         }
+         if(afternoonHours){
+          let appointmentsAfternoon={
             dates: dateArray,
-            hours: hours,
+            hours: aftHours,
             professionalMedicalLicense: adDetail.professionalMedicalLicense,
             ad:adId
           }
+          dispatch(postAppointments(appointmentsAfternoon, !reload))
+        }
          
-          dispatch(postAppointments(appointments, !reload))
-          console.log('mando reload, created', !reload)
+          // console.log('mando reload, created', !reload)
              
             navigate(`/home/`+ adId)
           
@@ -226,21 +250,30 @@ function CreateAppointments({user}) {
    }
 
    let apps = adDetail.appointments?.length
-
-      // let veremos=  myTimeMorning.includes(morningTimeS)
+   let hourAftbyRender = [...afternoonHours]
+   hourAftbyRender.pop() 
+   let hourMornbyRender =[...morningHours]
+    hourMornbyRender.pop()
+      // let veremos=  myTimeAfternoon.includes(afternoonTimeS)
+      // let veremos1=  myTimeAfternoon.includes(afternoonTimeE)
 
       // let veremos2=  myTimeAfternoon.includes(afternoonTimeS)
-
-  return (
+      // console.log('afternoonsTime', myTimeAfternoon)
+      // console.log('MORNING_HOURS', morningHours)
+      // console.log('AFTERNOON_HOURS', afternoonHours)
+      // console.log('MORNING_HOURS_BY_RENDER', hourMornbyRender)
+      // console.log('AFTERNOON_HOURS_BY_RENDER', hourAftbyRender)
+      
+      //console.log('veremos', veremos);
+      //console.log('hora q elijo', afternoonTimeS)
+    //  console.log('morningTime', myTimeMorning)
+      //console.log('veremos', veremos1);
+      //console.log('hora q elijo', afternoonTimeE)
+      return (
     <>
      
       <div >
-          { apps>0?
-            <div>
-              <h1>Edita tus turnos</h1>
-              <AppCalendario  name={adDetail.professional?.user?.name} isProfesional={true}ad={adDetail} professionalMedicalLicense={adDetail.professional?.medicalLicense}/>
-            </div> :null
-          }
+          
             <div className="conteinerDate">
               <h1>Crea tus turnos</h1>
                 <div style={{ textAlign: "center" }}>
@@ -307,7 +340,7 @@ function CreateAppointments({user}) {
                     
                   } 
                   <div className="hourContainer">
-                    {morningHours.length>0?morningHours.map((h,i)=><div className="li"><p className="li" key={i}> {h.start}; </p></div>):null}
+                    { morningHours.length>0?hourMornbyRender.map((h,i)=><div className="li"><p className="li" key={i}> {h.start}; </p></div>):null}
                   </div>
                   </>: null
 
@@ -347,7 +380,7 @@ function CreateAppointments({user}) {
                     durationAft=== undefined? <p>Falta que seleccione la duración que van a tener los turnos</p>: 
                     null
                   } 
-                  {afternoonHours.length>0?afternoonHours.map((h,i)=><div className="li"> <p key={i}> {h.start}; </p></div>):null}
+                  {afternoonHours.length>0?hourAftbyRender.map((h,i)=><div className="li"> <p key={i}> {h.start}; </p></div>):null}
                 </>   :null 
               }
               {

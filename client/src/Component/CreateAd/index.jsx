@@ -2,20 +2,31 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdd } from "../../Redux-actions";
-import { getUsersById } from "../../Redux-actions";
+import { getUsersById, getAllSpecialtys} from "../../Redux-actions";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./CreateAd.css";
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
-import { specialty, typeService } from './Specialty'
+import EditAd from "../EditAd/EditAd";
+// import { typeServices } from "./ServiceType";
 
-export default function CreateAd({ user }) {
+
+export default function CreateAd({ user}) {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.userDetail);
+  const specialty =useSelector((state)=> state.specialtys)
+ 
 
   useEffect(() => {
     dispatch(getUsersById(user.email));
+    dispatch(getAllSpecialtys())
   }, [dispatch]);
+
+  const typeServices = [
+    {name:'Virtual'},
+    {name:'Presencial'},
+    {name:'A Domicilio'}
+]
 
   function handleChange(e) {
     e.preventDefault();
@@ -49,12 +60,22 @@ export default function CreateAd({ user }) {
     serviceType: "",
   });
 
-
+  console.log('ad post', post)
 
   function handleSubmit(e) {
     //e.preventDefault();
     try {
-      dispatch(postAdd(post));
+
+      let ad ={
+        specialty: post.specialty,
+        price: post.price,
+        timeAvailability: "",
+        serviceType: post.serviceType,
+        professionalMedicalLicense: post.professionalMedicalLicense
+
+      }
+      console.log('ad final' , ad)
+      dispatch(postAdd(ad));
       setPost({
         specialty: "",
         price: "",
@@ -76,15 +97,18 @@ export default function CreateAd({ user }) {
           <Form.Group className="mb-3">
             <Form.Label>Especialidad: </Form.Label>
             <select onChange={(e) => handleSelectSpecialty(e)}>
-              {specialty && specialty?.map((s) => {
-                return (<option value={s.name} key={s.name}>{s.name}</option>)
+            <option value='selected' hidden >especialidad</option>
+              {
+             specialty?.map((s) => {
+                return (<option value={s.name} key={s.id}>{s.name}</option>)
               })
+             
               }
             </select>
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Precio: ARS $</Form.Label>
+            <Form.Label>Precio: ARS $:</Form.Label>
             <Form.Control
               type="number"
               id="price"
@@ -101,7 +125,8 @@ export default function CreateAd({ user }) {
           <Form.Group className="mb-3">
             <Form.Label>Tipo de servicio: </Form.Label>
             <select onChange={(e) => handleSelectServiceType(e)}>
-              {typeService && typeService?.map((p) => {
+            <option value='selected' hidden >servicio</option>
+              {typeServices&& typeServices?.map((p) => {
                 return (<option value={p.name} key={p.name}>{p.name}</option>)
               })
               }

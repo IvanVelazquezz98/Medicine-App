@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import ModalAbsent from './ModalAbsent'
 import ModalCancelPro from './ModalCancelPro';
 import { useNavigate } from "react-router-dom";
-import { modalProfessionalApps } from "../../Redux-actions/index.js";
+import { modalProfessionalApps, traemeTodo, clearTodo } from "../../Redux-actions/index.js";
 
-export default function ModalOptions({ appointment }) {
+export default function ModalOptions({ appointment, medicalLicense }) {
     const [show, setShow] = useState(true);
     const [cancel , setCancel] = useState(false);
     const [absent , setAbsent] = useState(false);
@@ -15,6 +15,14 @@ export default function ModalOptions({ appointment }) {
     let navigate = useNavigate()
 
     const dispatch = useDispatch()
+    useEffect(() => {
+        
+        return () => {
+          dispatch(clearTodo())
+          dispatch(traemeTodo(medicalLicense))
+        }
+    
+      }, [dispatch]);
 
     const handleClose = () => {
         setShow(false)
@@ -36,22 +44,22 @@ export default function ModalOptions({ appointment }) {
         
     }
 
-
+console.log(appointment.row?.id)
     return (
         <>
-            {absent ? <ModalAbsent idApp={appointment.row?.id} /> : null}
-            {cancel ? <ModalCancelPro idApp={appointment.row?.id}/> : null }
+            {absent ? <ModalAbsent idApp={appointment.row?.id} medicalLicense={medicalLicense} /> : null}
+            {cancel ? <ModalCancelPro idApp={appointment.row?.id} medicalLicense={medicalLicense}/> : null }
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Opciones del turno {appointment.row?.id}
+                        Opciones del turno {appointment.row?.Modalidad}
                     </Modal.Title>
                 </Modal.Header>
-                -Con el paciente : {appointment.row?.paciente}
+                -Con el paciente : {appointment.row?.Paciente}
                 <br></br>
-                -El dia : {appointment.row?.fecha}
+                -El dia : {appointment.row?.Fecha}
                 <br></br> 
-                -A la hora : {appointment.row?.hora}
+                -A la hora : {appointment.row?.Hora}
                 <Modal.Footer>
                     <Button variant="secondary" onClick={hanldeReadytowork}>
                         Empezar consulta

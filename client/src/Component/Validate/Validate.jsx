@@ -7,6 +7,7 @@ import UserProfile from "../UserProfile/UserProfile";
 import NavBar from "../Navbar/Navbar";
 import { userValidated, getUsersById } from "../../Redux-actions";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from '../Loader/Loader'
 
 
 const auth = getAuth(firebaseApp);
@@ -17,11 +18,15 @@ function Validate() {
   // const [user, setUser] = useState(null);
   const user= useSelector(state => state.userValidated)
   const User = useSelector((state) => state.userDetail)
+  const [isLoading, setIsLoading] =useState(false)
   useEffect(()=>{
     if (user && !User.email) {
-      dispatch(getUsersById(user?.email?.toLowerCase()))  
+      setIsLoading(true)
+      dispatch(getUsersById(user?.email?.toLowerCase())) 
+      setIsLoading(false) 
     }
   },[user])
+
 
   const dispatch =useDispatch()
 
@@ -55,18 +60,15 @@ function Validate() {
 
   return (
     <div>
-      {(user)?  
+      {isLoading?<Loader/>:(user)?  
         ((User?.email)?<UserProfile/>:<Login/>)
 
       : 
-       (
-        <div>
-          {" "}
-          <NavBar />{" "}
+       (      
           <div>
             <Login />
-          </div>{" "}
-        </div>
+          </div>
+        
       )}
     </div>
   );

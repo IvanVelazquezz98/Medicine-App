@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { putEditAppointment, modalProfessionalApps } from '../../Redux-actions';
+import { putEditAppointment, modalProfessionalApps, clearTodo, traemeTodo } from '../../Redux-actions';
 import { useDispatch } from 'react-redux';
 
-export default function ModalCancelPro({ idApp }) {
+export default function ModalCancelPro({ idApp, medicalLicense }) {
     const [show, setShow] = useState(true);
-
+// console.log('idApp',idApp)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        
+        return () => {
+            dispatch(clearTodo())
+          dispatch(traemeTodo(medicalLicense))
+        }
+    
+      }, [dispatch]);
 
     const handleClose = () => {
         setShow(false)
@@ -18,7 +27,7 @@ export default function ModalCancelPro({ idApp }) {
         dispatch(putEditAppointment({ status: 'cancelled' }, idApp))
         setShow(false)
         dispatch(modalProfessionalApps(false))
-        window.location.reload()
+        //.location.reload()
     }
 
 

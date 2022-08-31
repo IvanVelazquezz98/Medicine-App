@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // Generate Sales Data
 
 
-export default function Chart(medicalLicense) {
+export default function ChartProf(medicalLicense) {
 
   const dispatch = useDispatch();
   const dataGraffic= useSelector(state=> state.grafic)

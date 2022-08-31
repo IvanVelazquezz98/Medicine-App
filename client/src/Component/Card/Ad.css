@@ -41,3 +41,6 @@
 .specialityDiv,.serviceDiv,.fee,.ifPro{
   margin-top: 3px;
 }
+.ifPro svg{
+  cursor: pointer;
+}
