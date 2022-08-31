@@ -22,6 +22,8 @@ import Select from "react-select";
 import "./Login.css";
 import { FcCheckmark } from "react-icons/fc"
 import ModalErrors from "../ModalsErrors/ErrorsRouta";
+// import { Right } from "react-bootstrap/lib/Media";
+// import { Right } from "react-bootstrap/lib/Media";
 
 
 
@@ -305,7 +307,10 @@ function Login() {
       
     } else {
       signInWithEmailAndPassword(auth, email, password);
-      setTimeout(()=>{if (!auth.currentUser?.email){setRight(true)}else navigate("/")},1500)
+      if(isRight){
+      setRight(false)
+      setTimeout(()=>{if (!auth.currentUser?.email){ setRight(true) }else navigate("/")},1500)
+    }else{ navigate("/") }
     }
   }
  
@@ -313,12 +318,10 @@ function Login() {
 
   return (
     <div className="ValidateCOntainer">
-      {creado ? <ModalErrors error={'usuario creado exitosamente'} /> :null}
+      {creado ? <ModalErrors error={'Usuario creado exitosamente'} /> :null}
       <div className="Validate">
-        {isRight && <ModalErrors 
-        error={"el usuario o la contraseña son incorrectos"}
-        route={"/home/validate"}
-        />}
+      {isRight ?
+       <div> <ModalErrors error={'Usuario o contraseña incorrecta'} /> </div> :null }
         <h2 className="ValidateTitle"> {isRegister ? "Registrate" : auth?.currentUser?.email ? "Termina de completar tus datos" : "Inicia Sesion"} </h2>
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
