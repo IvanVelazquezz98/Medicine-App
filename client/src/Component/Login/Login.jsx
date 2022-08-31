@@ -144,9 +144,9 @@ function Login() {
 
 
   const handlefile = async (e) => {
-    e.preventDefault();
+   // e.preventDefault();
     try {
-      let url = await uploadFile(file);
+      let url = await uploadFile(e);
       setImage(url);
     } catch (err) {
       console.log(err);
@@ -154,25 +154,30 @@ function Login() {
 
   };
   const handleImageId = async (e) => {
-    e.preventDefault();
+    console.log(e)
+    //e.preventDefault();
     try {
-      let url = await uploadFile(fileId);
+      let url = await uploadFile(e);
       setImageId(url);
     } catch (err) {
       console.log(err);
     }
-
   };
   const handleLicenceImage = async (e) => {
-    e.preventDefault();
+   // e.preventDefault();
     try {
-      let url = await uploadFile(filelicence);
+      let url = await uploadFile(e);
       setProLicenceImage(url);
     } catch (err) {
       console.log(err);
     }
 
   };
+
+
+
+
+
   //---select ----input de paises--
   const [countryId, setCountryId] = useState({
     cid: "",
@@ -321,7 +326,7 @@ function Login() {
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
           <Form.Group className="mb-3">
-            <Form.Label>Correo: </Form.Label>
+            <Form.Label>Correo*: </Form.Label>
             <Form.Control
               type="email"
               id="email"
@@ -329,14 +334,15 @@ function Login() {
               placeholder={auth.currentUser?.email ? auth.currentUser?.email : null}
               value={post.email}
               onChange={(e) => handleChange(e)}
+              required
             />
-            {errors.email && (<Alert variant='warning' className="error" >{errors.email}</Alert>)}
+            {/* {errors.email && (<Alert variant='warning' className="error" >{errors.email}</Alert>)} */}
             {!errors.email && (<FcCheckmark />)}
           </Form.Group>
 
           {/* password */}
           <Form.Group className="mb-3">
-            <Form.Label>Password: </Form.Label>
+            <Form.Label>Password*: </Form.Label>
             <Form.Control
               type="password"
               id="password"
@@ -353,20 +359,21 @@ function Login() {
 
 
               <Form.Group className="mb-3" >
-                <Form.Label>Nombre y Apellido: </Form.Label>
+                <Form.Label>Nombre y Apellido*: </Form.Label>
                 <Form.Control
                   type="text"
                   value={post.name}
                   name="name"
                   onChange={(e) => handleChange(e)}
+                  required
                 />
-                {errors.name && (<Alert variant='warning' className="error" >{errors.name}</Alert>)}
+                {/* {errors.name && (<Alert variant='warning' className="error" >{errors.name}</Alert>)} */}
                 {!errors.name && (<FcCheckmark />)}
               </Form.Group>
 
               {/* rol */}
               <Form.Group className="mb-3">
-                <Form.Label>Rol: </Form.Label>
+                <Form.Label>Rol*: </Form.Label>
                 <Form.Select
                   id="rol"
                   name="rol"
@@ -383,26 +390,28 @@ function Login() {
 
               {/* fecha de nacimiento */}
               <Form.Group className="mb-3">
-                <Form.Label>Fecha de nacimiento: </Form.Label>
+                <Form.Label>Fecha de nacimiento*: </Form.Label>
                 <Form.Control
                   type="date"
                   value={post.dateOfBirth}
                   name="dateOfBirth"
                   onChange={(e) => handleChange(e)}
+                  required
                 />
-                {errors.dateOfBirth && (<Alert variant='warning' className="error" >{errors.dateOfBirth}</Alert>)}
+                {/* {errors.dateOfBirth && (<Alert variant='warning' className="error" >{errors.dateOfBirth}</Alert>)} */}
                 {!errors.dateOfBirth && (<FcCheckmark />)}
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Numero Documento: </Form.Label>
+                <Form.Label>Numero Documento*: </Form.Label>
                 <Form.Control
                   type="text"
                   value={post.identification}
                   name="identification"
                   onChange={(e) => handleChange(e)}
+                  required
                 />
-                {errors.identification && (<Alert variant='warning' className="error" >{errors.identification}</Alert>)}
+                {/* {errors.identification && (<Alert variant='warning' className="error" >{errors.identification}</Alert>)} */}
                 {!errors.identification && (<FcCheckmark />)}
               </Form.Group>
 
@@ -412,29 +421,32 @@ function Login() {
                 <Form.Control
                   type="file"
                   name="userimage"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  id='image'
+                  onChange={(e) => handlefile(e.target.files[0])}
                 />
-                <button onClick={(e) => handlefile(e)}>Subir Imagen</button>
+                {imageId && (<FcCheckmark />)}
+                {/* <button onClick={(e) => handlefile(e)}>Subir Imagen</button> */}
               </Form.Group>
 
               {/* ID Imagen */}
               <Form.Group className="mb-3">
-                <Form.Label>ID Imagen: </Form.Label>
+                <Form.Label>Imagen Documento de Identidad*: </Form.Label>
                 <Form.Control
                   type="file"
                   name="idImage"
-                  onChange={(e) => setFileId(e.target.files[0])}
+                  onChange={(e) => handleImageId(e.target.files[0])}
+                  required
                 />
-                <button onClick={(e) => handleImageId(e)}>Subir Imagen</button>
-                {!imageId && (<Alert variant='warning' className="error"  >la foto dni es necesaria</Alert>)}
+                {/* <button onClick={(e) => handleImageId(e)}>Subir Imagen</button> */}
+                {!imageId && (<Alert variant='warning' className="error"  >este cartel desaparecerá una vez se cargue la imagen</Alert>)}
                 {imageId && (<FcCheckmark />)}
               </Form.Group>
 
               {/* Pais */}
               <Form.Group className="mb-3" >
-                <Form.Label>Pais: </Form.Label>
+                <Form.Label>Pais*: </Form.Label>
                 <Select onChange={handleCountries} name='countries' options={countriesOptions} placeholder='Seleccione un Pais' />
-                {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)}
+                {/* {errors.country && (<Alert variant='warning' className="error" >{errors.country}</Alert>)} */}
                 {!errors.country && (<FcCheckmark />)}
               </Form.Group>
 
@@ -453,14 +465,15 @@ function Login() {
 
               {/*  Address */}
               <Form.Group className="mb-3">
-                <Form.Label>Dirección: </Form.Label>
+                <Form.Label>Dirección*: </Form.Label>
                 <Form.Control
                   type="text"
                   value={post.address}
                   name="address"
                   onChange={(e) => handleChange(e)}
+                  required
                 />
-                {errors.address && (<Alert variant='warning' className="error" >{errors.address}</Alert>)}
+                {/* {errors.address && (<Alert variant='warning' className="error" >{errors.address}</Alert>)} */}
                 {!errors.address && (<FcCheckmark />)}
               </Form.Group>
 
@@ -483,26 +496,28 @@ function Login() {
                 <>
 
                   <Form.Group className="mb-3" >
-                    <Form.Label>Imagen de Licencia: </Form.Label>
+                    <Form.Label>Imagen de Licencia*: </Form.Label>
                     <Form.Control
                       type="file"
                       name="licenceImage"
-                      onChange={(e) => setFilelicence(e.target.files[0])}
+                      onChange={(e) => handleLicenceImage(e.target.files[0])}
+                      required
                     />
-                    <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button>
-                    {!prolicenceImage && (<Alert variant='warning' className="error" >la foto de la licencia es necesaria</Alert>)}
+                    {/* <button onClick={(e) => handleLicenceImage(e)}>Subir Imagen</button> */}
+                    {/* {!prolicenceImage && (<Alert variant='warning' className="error" >este cartel desaparecerá una vez se cargue la imagen</Alert>)} */}
                     {prolicenceImage && (<FcCheckmark />)}
                   </Form.Group>
 
                   <Form.Group className="mb-3" >
-                    <Form.Label>Licencia Medica: </Form.Label>
+                    <Form.Label>Licencia Medica*: </Form.Label>
                     <Form.Control
                       type="text"
                       value={postprofessional.medicalLicense}
                       name="medicalLicense"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
-                    {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicense}</Alert>)}
+                    {/* {professionalError.medicalLicense && (<Alert variant='warning' className="error" >{professionalError.medicalLicense}</Alert>)} */}
                     {!professionalError.medicalLicense && (<FcCheckmark />)}
                   </Form.Group>
 
@@ -513,7 +528,7 @@ function Login() {
               }
             </>
           )}
-
+           <p>(*)Los datos son obligatorios</p>
           {post.rol === "user" ?
             (isRegister || auth?.currentUser?.email) && (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") &&
             <div className="formButtons">
@@ -530,7 +545,7 @@ function Login() {
               </Button>
             </div>
           }
-
+            
           {
             (!isRegister && !auth?.currentUser?.email) && (errors.email == "") && (errors.password === "") &&
             <div className="formButtons">
