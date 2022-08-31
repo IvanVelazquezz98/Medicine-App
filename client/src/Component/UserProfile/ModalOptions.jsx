@@ -44,7 +44,7 @@ export default function ModalOptions({ appointment, medicalLicense }) {
         
     }
 
-console.log(appointment)
+console.log(appointment.row?.id)
     return (
         <>
             {absent ? <ModalAbsent idApp={appointment.row?.id} medicalLicense={medicalLicense} /> : null}

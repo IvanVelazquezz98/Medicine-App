@@ -18,15 +18,26 @@ export default function ProfessionalProfile() {
   let professionalProfile = useSelector((state) => state.professionalProfile);
   let ads = useSelector((state) => state.ads);
 
+  console.log('profesionalPRofile', professionalProfile)
   useEffect(() => {
     dispatch(getProfessionalById(professionalID));
-    dispatch(getAds);
+    dispatch(getAds());
   }, [dispatch, professionalID]);
-
+  
+  console.log('ads', ads)
   let professionalAds = ads.filter(
     (ad) => ad.professionalMedicalLicense === professionalID
   );
-
+  console.log('profesionalAds', professionalAds);
+  const [buttonLi, setbuttonLi] = useState(false);
+  let name
+  if(professionalProfile.user?.name){
+    let name1 = professionalProfile?.user?.name.split(' ');
+     name= name1.map(el=>(
+              el.charAt(0).toUpperCase() + el.toLowerCase().slice(1)
+              )).join(' ')
+  }
+    console.log('name',name)
   return (
     <>
       
@@ -41,7 +52,7 @@ export default function ProfessionalProfile() {
               <strong>Matrícula:</strong> {professionalProfile.medicalLicense}{" "}
             </div>
             <div>
-              <strong>Nombre:</strong> {professionalProfile.user?.name}
+              <strong>Nombre:</strong> {name}
             </div>
             <div>
               <strong>Nacimiento:</strong>{" "}
@@ -61,11 +72,23 @@ export default function ProfessionalProfile() {
         <div className="sobreMi">
             <strong>Sobre mí: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sapiente accusamus error praesentium optio quibusdam aperiam quo debitis libero natus excepturi vitae porro, dolore quasi repudiandae accusantium corrupti eligendi quaerat.
         </div>
+        <div>
+        <button
+          className="medicalPictureButton"
+          onClick={() => setbuttonLi(!buttonLi)}
+        >
+          Ver Imagen de Licencia
+        </button>
+        {buttonLi && (
+          <div className="imagenLicencia">
+            <img src={professionalProfile.licenceImage} />
+          </div>
+        )}
+        </div>
 
-          <div className="titleAppointment">Turnos del Profesional.</div>
+          <div className="titleAppointment">TODOS LOS ANUNCIOS.</div>
         <div className="appointmentAvailability">
-            {professionalAds
-              ? professionalAds.map((ad) => {
+            {professionalAds? professionalAds.map((ad) => {
                   return (
                     <>
                     <Ad

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 export default function ModalCancelPro({ idApp, medicalLicense }) {
     const [show, setShow] = useState(true);
-
+// console.log('idApp',idApp)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function ModalCancelPro({ idApp, medicalLicense }) {
     };
 
     const handleCancel = () => {
-        dispatch(putEditAppointment({ status: 'cancelled' }, idApp.id))
+        dispatch(putEditAppointment({ status: 'cancelled' }, idApp))
         setShow(false)
         dispatch(modalProfessionalApps(false))
         //.location.reload()

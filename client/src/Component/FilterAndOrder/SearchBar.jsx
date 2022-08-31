@@ -25,13 +25,16 @@ const SearchBar1 = () => {
     dispatch(getName(name));
     setName('')
   };
+  const closeModal=()=>{
+    setModal(false)
+  }
 
 
 
   return (
     <div key="search1" >
        <InputGroup className="mb-3">
-        {modal && <ModalErrors error={"Debes ingresar un nombre"} route={"/services"}/>}
+        {modal && <ModalErrors error={"Debes ingresar un nombre"} route={"/services"} funcion={closeModal}/>}
         <Form.Control
           placeholder="Nombre Profesional"
           aria-label="buscar por nombre"

@@ -10,7 +10,7 @@ import {
   addFavorite,
   clearUserDetail,
   getUsersById,
-  getUserApps
+  getUserApps,
 } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
@@ -24,32 +24,32 @@ import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
 import Favorites from "../Favorites/Favorites";
 import ProfessionalAppointments from "./ProfessionalAppointments";
-import MedicalRecordUser from "./MedicalRecordUser";
+import MedicalRecordUser from "./MedicalRecordUser1";
 import PatientHistory from "./PatientHistory";
 import AppointmentsPendinUser from "./AppointmentsPendinUser";
 import { Button } from "react-bootstrap";
 import "./editAdContainer.css";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import ProfessionalAvailable from "./ProfessionalAvailable";
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Chart from '../Admin/Chart';/***GRAFICA DEL ADMIN */
-import ChartProf from './Chart'/***GRAFICA DEL PROFESIONAL */
-import Users from '../Admin/Users'
-import Profesionals from '../Admin/Profesionals'
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Chart from "../Admin/Chart"; /***GRAFICA DEL ADMIN */
+import ChartProf from "./Chart"; /***GRAFICA DEL PROFESIONAL */
+import Users from "../Admin/Users";
+import Profesionals from "../Admin/Profesionals";
 import AllUsers from "../Admin/allUsers";
-import ModalComent from './ModalComents';
+import ModalComent from "./ModalComents";
 
 const UserProfile = () => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
   const user = useSelector((state) => state.userValidated);
-  const userApps = useSelector((state)=>state.userAppointments)
-  console.log('userProfile', user)
-  
-const dispatch = useDispatch();
-const navigate = useNavigate();
+  const userApps = useSelector((state) => state.userAppointments);
+  // console.log('userProfile', user)
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [button, setButton] = useState(false);
   const [show, setShow] = useState(false);
@@ -64,13 +64,15 @@ const navigate = useNavigate();
     if (favML && user?.email) {
       dispatch(addFavorite(favorites));
     }
-    dispatch(getUserApps(user?.email.toLowerCase()))
+    dispatch(getUserApps(user?.email.toLowerCase()));
     return () => {
       dispatch(clearUserDetail());
     };
   }, [dispatch]);
 
-  let userComentApps = userApps.find((e) => e.status === 'completed' && e.rating === null)
+  let userComentApps = userApps.find(
+    (e) => e.status === "completed" && e.rating === null
+  );
   let botonesProf = [
     "MI PERFIL",
     "FAVORITOS",
@@ -93,7 +95,7 @@ const navigate = useNavigate();
   let botonesAdmin = [
     "MI PERFIL",
     "USUARIOS",
-    "REDIMIENTO ANUAL",
+    "RENDIMIENTO ANUAL",
     "USUARIOS TOP",
     "PROFESIONALES TOP",
   ];
@@ -104,13 +106,14 @@ const navigate = useNavigate();
     userEmail: user?.email,
     medicalLicense: favML,
   };
-  console.log(User.professional?.ads);
+  //console.log(User.professional?.ads);
   return (
     <div>
-      {userComentApps  ? <ModalComent userEmail={user?.email} info={userComentApps} /> : null}  
+      {userComentApps ? (
+        <ModalComent userEmail={user?.email} info={userComentApps} />
+      ) : null}
       {User.email && !User.active && navigate("/recover")}
       {User.email && User.deletedByAdmin && navigate("/deletedUser")}
-
 
       {/* <Navbar user={user} /> */}
       <div className="buttonContainer">
@@ -155,12 +158,11 @@ const navigate = useNavigate();
                     </Button>
                   </div>
                 ))}
-
           </div>
         </Offcanvas.Body>
       </Offcanvas>
       <div>
-        {drawer === "REDIMIENTO ANUAL" ? (
+        {drawer === "RENDIMIENTO ANUAL" ? (
           <Container>
             <Grid item xs={12} md={8} lg={9}>
               <Paper
@@ -207,20 +209,21 @@ const navigate = useNavigate();
             </div>
           </div>
         ) : drawer === "FAVORITOS" ? (
-          
           <div className="miFavorites">
-          <Favorites favorites={User.favorites}/>
-            {/* {User.favorites?.length?.map((pro) => (
+            <div className="favoritesTitle"> Tus profesionales Favoritos </div>
+            <div className="favoritesInnerContent">
+              <Favorites favorites={User.favorites} />
+              {/* {User.favorites?.length?.map((pro) => (
               <Favorites image={pro.user.userimage} />
             ))} */}
             </div>
-          
+          </div>
         ) : drawer === "MIS TURNOS PENDIENTES" ? (
           <div className="miHistoryApp">
             <AppointmentsPendinUser userEmail={user?.email} name={User?.name} />
           </div>
         ) : drawer === "HISTORIAL DE ATENCION" ? (
-          <div className="miHistoryApp" >
+          <div className="miHistoryApp">
             <Appointments
               userEmail={user.email}
               show={show}
@@ -250,70 +253,71 @@ const navigate = useNavigate();
             <div>
               <ModalCreateAdd user={user} />
             </div>
-            {User.professional?.ads.length > 0 ? (
-              User.professional?.ads.map((e) => {
-                return (
-                  // Component to edit your AD.
-                  <div className="misAnunciosContainer">
-                    <div className="adProfileContainer">
-                      <div className="yourAd">
-                        <div className="anuncioImage">
-                          <img src={User.userimage}></img>
-                        </div>
+            {
+              User.professional?.ads.length > 0
+                ? User.professional?.ads.map((e) => {
+                    return (
+                      // Component to edit your AD.
+                      <div className="misAnunciosContainer">
+                        <div className="adProfileContainer">
+                          <div className="yourAd">
+                            <div className="anuncioImage">
+                              <img src={User.userimage}></img>
+                            </div>
 
-                        <div className="anuncioName">{User.name}</div>
-                        <div className="anuncioEmail">{User.email}</div>
-                        <div className="anuncioLicencia">
-                          {User.professional.professionalMedicalLicense}
-                        </div>
-                        <div className="anuncioEspecialidad">{e.specialty}</div>
-                        <div className="anuncioTipoServicio">
-                          {e.serviceType}
-                        </div>
-                        <div className="anuncioPrecio">{User.price}</div>
-                        <div className="anuncioRanking">
-                          {User.professional.ranking}
-                        </div>
-                        <div className="anuncioLinkEdit">
-                          <Link to={"/ProfileAd/" + e.id}>Edita Anuncio</Link>
-                        </div>
-                        <div className="createEditAppointment">
-                          <Link to={`/calendar/` + e.id}>
-                            <Button variant="primary">Crea Turnos</Button>
-                          </Link>
+                            <div className="anuncioName">{User.name}</div>
+                            <div className="anuncioEmail">{User.email}</div>
+                            <div className="anuncioLicencia">
+                              {User.professional.professionalMedicalLicense}
+                            </div>
+                            <div className="anuncioEspecialidad">
+                              {e.specialty}
+                            </div>
+                            <div className="anuncioTipoServicio">
+                              {e.serviceType}
+                            </div>
+                            <div className="anuncioPrecio">{User.price}</div>
+                            <div className="anuncioRanking">
+                              {User.professional.ranking}
+                            </div>
+                            <div className="anuncioLinkEdit">
+                              <Link to={"/ProfileAd/" + e.id}>
+                                Edita Anuncio
+                              </Link>
+                            </div>
+                            <div className="createEditAppointment">
+                              <Link to={`/calendar/` + e.id}>
+                                <Button variant="primary">Crea Turnos</Button>
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })
-            ) : null
-            // (
-            //   <div>
-            //     <ModalCreateAdd user={user} />
-            //   </div>
-            // )
+                    );
+                  })
+                : null
+              // (
+              //   <div>
+              //     <ModalCreateAdd user={user} />
+              //   </div>
+              // )
             }
           </div>
-
         ) : drawer === "MIS RENDIMIENTOS" ? (
           <Container>
-             
-          
- 
-      <Grid item xs={12} md={8} lg={9}>
-        <Paper
-          sx={{
-            p: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            height: 240,
-          }}
-        >
-          <ChartProf medicalLicense={User.professional?.medicalLicense} />
-        </Paper>
-      </Grid>
-      </Container>
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: 240,
+                }}
+              >
+                <ChartProf medicalLicense={User.professional?.medicalLicense} />
+              </Paper>
+            </Grid>
+          </Container>
         ) : drawer === "TURNOS DISPONIBLES" ? (
           <div className="medicalRecorder">
             <ProfessionalAvailable
@@ -325,7 +329,6 @@ const navigate = useNavigate();
         ) : null}
       </div>
     </div>
-
   );
 };
 

@@ -28,7 +28,7 @@ export default function AdDetail({ isProfesional }) {
   //     dispatch(getUsersById(adDetail.professional?.userEmail));
   //   }, [dispatch]);
 
-  const [buttonLi, setbuttonLi] = useState(true);
+  const [buttonLi, setbuttonLi] = useState(false);
 
   return (
     <>
@@ -39,9 +39,9 @@ export default function AdDetail({ isProfesional }) {
           {" "}
           Licencia Medica : {adDetail.professional?.medicalLicense}
         </div>
-        <div className="numeroDetail">
+        {/* <div className="numeroDetail">
           Numero de identidad:{adDetail.professional?.user?.identification}
-        </div>
+        </div> */}
 
         <div className="specialityDetail">
           {adDetail?.specialty} $: {adDetail?.price}
@@ -50,17 +50,17 @@ export default function AdDetail({ isProfesional }) {
           {" "}
           Tipo de servicio:{adDetail?.serviceType}
         </div>
-        <button
+        {/* <button
           className="medicalPictureButton"
-          onClick={() => setbuttonLi(false)}
+          onClick={() => setbuttonLi(!buttonLi)}
         >
           Ver Imagen de Licencia
         </button>
-        {!buttonLi && (
+        {buttonLi && (
           <div className="imagenLicencia">
             <img src={adDetail.professional?.licenceImage} />
           </div>
-        )}
+        )} */}
       </div>
 
       <div className="calendarContainer">

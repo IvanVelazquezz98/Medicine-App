@@ -12,7 +12,7 @@ import OrderByRanking from "./OrderByRanking";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export default function Suppafilter() {
+export default function Suppafilter({state, setState}) {
   let dispatch = useDispatch();
   const ads = useSelector((s) => s.ads);
   const allAds = useSelector((state) => state.allAds);
@@ -75,8 +75,8 @@ export default function Suppafilter() {
   //opciones de servicios
   const services = [
     { value: "Virtual", label: "virtual" },
-    { value: "A Domicilio", label: "domicilio" },
-    { value: "Presencial", label: "presencial" },
+    { value: "A Domicilio", label: "Domicilio" },
+    { value: "Presencial", label: "Presencial" },
   ];
 
   //busco parametros
@@ -97,6 +97,7 @@ export default function Suppafilter() {
     }
     searchParams.set([action.name], value.value);
     setSearchParams(searchParams);
+    setState(1)
 
   }
 
@@ -163,7 +164,7 @@ export default function Suppafilter() {
 
             <div className="province">
               <Select
-              className="province"
+             
                 isClearable={true}
                 onChange={handleFilter}
                 name={"province"}
