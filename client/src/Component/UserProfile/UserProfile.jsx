@@ -40,6 +40,8 @@ import Users from "../Admin/Users";
 import Profesionals from "../Admin/Profesionals";
 import AllUsers from "../Admin/allUsers";
 import ModalComent from "./ModalComents";
+import axios from "axios";
+import ModalDelete from "./ModalDelete";
 
 const UserProfile = () => {
   const auth = getAuth(firebaseApp);
@@ -53,6 +55,7 @@ const UserProfile = () => {
 
   const [button, setButton] = useState(false);
   const [show, setShow] = useState(false);
+  const [showDelete, setShowDelete]= useState(false)
   const [drawer, setDrawer] = useState("MI PERFIL");
   const [sidebar, setSidebar] = useState(false);
   const handleClose = () => setSidebar(false);
@@ -99,6 +102,13 @@ const UserProfile = () => {
     "USUARIOS TOP",
     "PROFESIONALES TOP",
   ];
+  function handleModalDelete(){
+    setShowDelete(true)
+  }
+  function handleDelete(idAd){
+    axios.delete(`http://localhost:3001/deleteAd/${idAd}`)
+    
+  }
   function handleClick(e) {
     setDrawer(e.target.value);
   }
@@ -290,6 +300,11 @@ const UserProfile = () => {
                                 <Button variant="primary">Crea Turnos</Button>
                               </Link>
                             </div>
+                            {/* delete button */}
+                            <div>
+                              <Button variant="danger" onClick={handleModalDelete}>Eliminar</Button>
+                            </div>
+                            {showDelete?<ModalDelete idUser={User.email} funcion={handleDelete} idAd={e.id} state={showDelete} setState={setShowDelete}/>:null}
                           </div>
                         </div>
                       </div>
