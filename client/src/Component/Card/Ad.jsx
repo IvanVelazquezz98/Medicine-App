@@ -67,7 +67,10 @@ export default function Ad({
     }
   }
 
-
+  let nombre = name.split(' ');
+  nombre = nombre.map(el=>(
+     el.charAt(0).toUpperCase() + el.toLowerCase().slice(1)
+     )).join(' ')
 
 
   return (
@@ -84,7 +87,7 @@ export default function Ad({
         {/* card title */}
         <div className="CardTitle">
           <Link to={`/professional/` + medicalLicense}>
-            <div>{name}-MN</div>
+            <div>{nombre}-MN</div>
             <div>{medicalLicense}</div>
           </Link>
         </div>

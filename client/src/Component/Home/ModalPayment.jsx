@@ -15,7 +15,6 @@ function ModalPayment({info,professionalMedicalLicense,adId,name,ad}) {
   return (
     <div>
     <h3>${ad.price}</h3> 
-      <img src={doc} alt="Doc"  />
       <Elements stripe={stripeTestPromise}>
         <PaymentForm info={info} professionalMedicalLicense={professionalMedicalLicense}adId={adId}name={name}ad={ad}/>
       </Elements>
