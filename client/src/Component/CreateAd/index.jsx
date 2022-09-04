@@ -74,7 +74,7 @@ export default function CreateAd({ user}) {
 //         professionalMedicalLicense: post.professionalMedicalLicense
 
 //       }
-      console.log('ad final' , ad)
+//       console.log('ad final' , ad)
       dispatch(postAdd(post));
       setPost({
         specialty: "",
