@@ -42,7 +42,7 @@ export function postUser(payload) {
 }
 
 //Create a Professional
-export function postProfessional(payload) {
+export function postProfesional(payload) {
   return async function (dispatch) {
     try {
       var json = await axios.post(`${BASE_URL}/professionals`, payload);
