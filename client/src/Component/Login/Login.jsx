@@ -92,7 +92,7 @@ function Login() {
   const [postprofessional, setpostprofessional] = useState({
     medicalLicense: "",
     licenseImage: "",
-    userEmail: ""
+    userEmail: post.email
   })
 
 
