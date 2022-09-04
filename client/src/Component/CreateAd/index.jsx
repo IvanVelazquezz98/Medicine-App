@@ -32,8 +32,7 @@ export default function CreateAd({ user}) {
     e.preventDefault();
     setPost({
       ...post,
-      [e.target.name]: e.target.value,
-      professionalMedicalLicense: User.professional?.medicalLicense,
+      [e.target.name]: e.target.value
     });
   }
   function handleSelectSpecialty(e) {
@@ -58,7 +57,7 @@ export default function CreateAd({ user}) {
     price: "",
     timeAvailability: "",
     serviceType: "",
-    professionalMedicalLicense: post.professionalMedicalLicense
+    professionalMedicalLicense: User.professional?.medicalLicense
   });
 
   console.log('ad post', post)
