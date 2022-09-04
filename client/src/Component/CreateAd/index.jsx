@@ -58,6 +58,7 @@ export default function CreateAd({ user}) {
     price: "",
     timeAvailability: "",
     serviceType: "",
+    professionalMedicalLicense: post.professionalMedicalLicense
   });
 
   console.log('ad post', post)
@@ -66,16 +67,16 @@ export default function CreateAd({ user}) {
     //e.preventDefault();
     try {
 
-      let ad ={
-        specialty: post.specialty,
-        price: post.price,
-        timeAvailability: "",
-        serviceType: post.serviceType,
-        professionalMedicalLicense: post.professionalMedicalLicense
+//       let ad ={
+//         specialty: post.specialty,
+//         price: post.price,
+//         timeAvailability: "",
+//         serviceType: post.serviceType,
+//         professionalMedicalLicense: post.professionalMedicalLicense
 
-      }
+//       }
       console.log('ad final' , ad)
-      dispatch(postAdd(ad));
+      dispatch(postAdd(post));
       setPost({
         specialty: "",
         price: "",
