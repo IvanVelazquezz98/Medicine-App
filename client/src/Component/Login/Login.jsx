@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { uploadFile } from "../../Credential/index";
-import { postUser, postProfessional, getStates, getCountries, getCities} from "../../Redux-actions/index";
+import { postUser, postProfesional, getStates, getCountries, getCities} from "../../Redux-actions/index";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -285,7 +285,7 @@ function Login() {
       };
       let userCreate = await dispatch(postUser(user));
       if (post.rol === "professional") {
-        await dispatch(postProfessional(professional));
+        await dispatch(postProfesional(professional));
       }
       setCreado(true)
       setPost({
