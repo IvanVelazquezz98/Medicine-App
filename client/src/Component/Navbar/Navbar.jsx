@@ -38,6 +38,9 @@ const NavBarExample = () => {
               <Nav.Link as={Link} to="/services" className="spaceX">
                 Servicios
               </Nav.Link>
+              <Nav.Link as={Link} to="/about" className="spaceX">
+                Nosotros
+              </Nav.Link>
 
               {user?.email ? (
                 <>
