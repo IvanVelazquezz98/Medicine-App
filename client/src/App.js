@@ -14,6 +14,7 @@ import MedicalRecordLog from "./Component/MedicalRecord/MedicalRecordLog";
 import NavBarExample from "./Component/Navbar/Navbar";
 import Correo from './Component/Correo/Correo';
 import Comments from './Component/Home/Comments';
+import About from "./Component/About/About";
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path='/appointment/id/:idApp' element={<MedicalRecordLog />}/>
           <Route path="/pago/:idApp" element= {<Correo/>}/>
           <Route path="/comments" element= {<Comments/>}/>
+          <Route path="/about" element= {<About/>}/>
         </Routes>
       </div>
 
