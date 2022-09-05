@@ -75,7 +75,9 @@ export default function Ad({
 
   return (
     <div className="cardDiv">
+      
       {/* card image */}
+
       <div className="CardImage">
         <img src={userimage} alt="User Image" />
       </div>
