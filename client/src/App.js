@@ -15,6 +15,10 @@ import NavBarExample from "./Component/Navbar/Navbar";
 import Correo from './Component/Correo/Correo';
 import Comments from './Component/Home/Comments';
 import About from "./Component/About/About";
+import SingIn from "./Component/Validate/SingIn"
+import UserProfile from "./Component/UserProfile/UserProfile";
+import LoginClear from "./Component/Login/LoginClear";
+import Register from "./Component/Login/Register";
 
 
 
@@ -26,7 +30,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home /> } />
           <Route path="/services" element={<Services /> } />
-          <Route path="/home/validate" element={<Validate /> } />
+          <Route path="/home/register" element={<Register/> } />
+          <Route path="/home/singin" element={<LoginClear/> } />
+          <Route path="/home/profile" element={<UserProfile/> } />
           <Route path= '/home/:adID' element ={<AdDetail/>}/>
           <Route path='/professional/:professionalID' element={<ProfessionalProfile />}/>
           <Route path="/contact" element={<Contact /> } />

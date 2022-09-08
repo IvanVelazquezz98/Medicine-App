@@ -11,9 +11,10 @@ import { useSelector } from "react-redux";
 
 const NavBarExample = () => {
   const auth = getAuth(firebaseApp);
-  const user = useSelector((state) => state.userValidated);
+  const user = localStorage.getItem("Email");
   //console.log("auth", auth);
   const navigate = useNavigate();
+  console.log('useNav', user);
 
   function closeSession() {
     signOut(auth);
@@ -21,6 +22,7 @@ const NavBarExample = () => {
     let path = "/";
     navigate(path);
   }
+
 
   return (
     <>
@@ -42,14 +44,14 @@ const NavBarExample = () => {
                 Nosotros
               </Nav.Link>
 
-              {user?.email ? (
+              {user? (
                 <>
-                  <Nav.Link as={Link} to="/home/validate" className="spaceX">
+                  <Nav.Link as={Link} to="/home/profile" className="spaceX">
                     <img className="imagenPerfil" src={perfil} />
                   </Nav.Link>
 
                   <div className="closeSessionContainer">
-                    <span>Hola, {user.email}</span>
+                    <span>Hola, {user}</span>
                   </div>
                   <Nav.Link>
                     <div className="buttonNav" onClick={closeSession}>
@@ -58,8 +60,8 @@ const NavBarExample = () => {
                   </Nav.Link>
                 </>
               ) : (
-                <Nav.Link as={Link} to="/home/validate" className="spaceX">
-                  <img className="imagenPerfil" src={perfil} />{" "}
+                <Nav.Link as={Link} to="/home/singin" className="spaceX">
+                  <p>iniciar sesión</p>
                 </Nav.Link>
               )}
             </Nav>

@@ -18,7 +18,6 @@ import Ad from "../Card/Ad";
 import firebaseApp from "../../Credential/index";
 import { getAuth } from "firebase/auth";
 import Navbar from "../Navbar/Navbar";
-import Login from "../Login/Login";
 import ModalCreateAdd from "../CreateAd/Modal";
 import { useNavigate } from "react-router-dom";
 import Appointments from "./Apointments";
@@ -42,13 +41,14 @@ import AllUsers from "../Admin/allUsers";
 import ModalComent from "./ModalComents";
 import axios from "axios";
 import ModalDelete from "./ModalDelete";
+import Loader from "../Loader/Loader";
 
 const UserProfile = () => {
   const auth = getAuth(firebaseApp);
   const User = useSelector((state) => state.userDetail);
   const user = useSelector((state) => state.userValidated);
   const userApps = useSelector((state) => state.userAppointments);
-  // console.log('userProfile', user)
+  console.log('userProfile', user)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -58,19 +58,29 @@ const UserProfile = () => {
   const [showDelete, setShowDelete]= useState(false)
   const [drawer, setDrawer] = useState("MI PERFIL");
   const [sidebar, setSidebar] = useState(false);
+  const [isLoading, setIsLoading] =useState(false)
   const handleClose = () => setSidebar(false);
   const handleShow = () => setSidebar(true);
   let favML = JSON.parse(localStorage.getItem("ml"));
+  let profEmail = localStorage.getItem("Email");
 
+  console.log('profEmail',profEmail)
   useEffect(() => {
-    dispatch(getUsersById(user?.email?.toLowerCase()));
-    if (favML && user?.email) {
+    // setState(false)
+   
+       dispatch(getUsersById(profEmail?.toLowerCase()));
+    
+       
+   
+
+    if (favML) {
       dispatch(addFavorite(favorites));
     }
-    dispatch(getUserApps(user?.email.toLowerCase()));
-    return () => {
-      dispatch(clearUserDetail());
-    };
+    dispatch(getUserApps(profEmail?.toLowerCase()));
+
+    // return () => {
+    //   dispatch(clearUserDetail());
+    // };
   }, [dispatch]);
 
   let userComentApps = userApps.find(
@@ -119,6 +129,7 @@ const UserProfile = () => {
   //console.log(User.professional?.ads);
   return (
     <div>
+      {/* {isLoading? <Loader/>:null} */}
       {userComentApps ? (
         <ModalComent userEmail={user?.email} info={userComentApps} />
       ) : null}
