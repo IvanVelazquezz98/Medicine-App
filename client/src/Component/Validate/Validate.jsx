@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Login from "../Login/Login";
+
 import firebaseApp from "../../Credential/index";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -8,6 +8,7 @@ import NavBar from "../Navbar/Navbar";
 import { userValidated, getUsersById } from "../../Redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from '../Loader/Loader'
+import Register from "../Login/Register";
 
 
 const auth = getAuth(firebaseApp);
@@ -61,12 +62,12 @@ function Validate() {
   return (
     <div>
       {isLoading?<Loader/>:(user)?  
-        ((User?.email)?<UserProfile/>:<Login/>)
+        ((User?.email)?<UserProfile/>:null)
 
       : 
        (      
           <div>
-            <Login />
+            <Register/>
           </div>
         
       )}

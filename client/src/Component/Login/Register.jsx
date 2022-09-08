@@ -33,7 +33,7 @@ import ModalErrors from "../ModalsErrors/ErrorsRouta";
 const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 
-function Login() {
+function Register() {
 
 
   const firestore = getFirestore(firebaseApp);
@@ -320,9 +320,9 @@ function Login() {
     <div className="ValidateCOntainer">
       {creado ? <ModalErrors error={'Usuario creado exitosamente'} /> :null}
       <div className="Validate">
-      {isRight ?
-       <div> <ModalErrors error={'Usuario o contraseña incorrecta'} /> </div> :null }
-        <h2 className="ValidateTitle"> {isRegister ? "Registrate" : auth?.currentUser?.email ? "Termina de completar tus datos" : "Inicia Sesion"} </h2>
+      
+        <h2 className="ValidateTitle"> Registrate </h2>,
+        
         <Form onSubmit={handleSubmit} className="formContainer mb-2">
           {/* mail */}
           <Form.Group className="mb-3">
@@ -353,7 +353,7 @@ function Login() {
             {errors.password && (<Alert variant='warning' className="error" >{errors.password}</Alert>)}
             {!errors.password && (<FcCheckmark />)}
           </Form.Group>
-          {(isRegister || auth?.currentUser?.email) && (
+          
             <>
               {/* name */}
 
@@ -527,17 +527,17 @@ function Login() {
                 </>
               }
             </>
-          )}
+         
            <p>(*)Los datos son obligatorios</p>
           {post.rol === "user" ?
-            (isRegister || auth?.currentUser?.email) && (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") &&
+            (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") &&
             <div className="formButtons">
               {/* Submit form button */}
               <Button variant="success" type="submit">
                 Registrarse
               </Button>
             </div> :
-            (isRegister || auth?.currentUser?.email) && (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") && (prolicenceImage) && (professionalError.medicalLicense === "") &&
+            (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") && (prolicenceImage) && (professionalError.medicalLicense === "") &&
             <div className="formButtons">
               {/* Submit form button */}
               <Button variant="success" type="submit">
@@ -546,16 +546,7 @@ function Login() {
             </div>
           }
             
-          {
-            (!isRegister && !auth?.currentUser?.email) && (errors.email == "") && (errors.password === "") &&
-            <div className="formButtons">
-              {/* Submit form button */}
-              <Button variant="success" type="submit">
-                iniciar sesion
-              </Button>
-            </div>
-          }
-
+          
         </Form>
 
         <div className="registerNforgottenButtons">
@@ -566,27 +557,11 @@ function Login() {
             type="submit"
             onClick={() => setIsRegister(!isRegister)}
           >
-            {isRegister || auth?.currentUser?.email ? "Ya estoy Registrado" : "Quiero Registrarme "}
+            Ya estoy Registrado
           </Button>
 
-          {/* Olvido contraseña */}
-          <ModalForgotPsw />
-          <Button
-            variant="info"
-            size="sm"
-            type="submit"
-            onClick={() => signInWithRedirect(auth, googleProvider)}
-          >
-            Accede con Google
-          </Button>
-          {/* <Button
-            variant="info"
-            size="sm"
-            // type="submit"
-            onClick={() =>  signOut(auth)}
-          >
-            Cerrar sesion
-          </Button> */}
+          
+         
         </div>
       </div>
       {/* <Footer/> */}
@@ -594,4 +569,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
