@@ -11,6 +11,8 @@ import {
   clearUserDetail,
   getUsersById,
   getUserApps,
+  userValidated
+
 } from "../../Redux-actions/index.js";
 import { Link } from "react-router-dom";
 import "./StyleProfile.css";
@@ -69,7 +71,7 @@ const UserProfile = () => {
     // setState(false)
    
        dispatch(getUsersById(profEmail?.toLowerCase()));
-    
+       dispatch(userValidated(profEmail?.toLowerCase()));
        
    
 
