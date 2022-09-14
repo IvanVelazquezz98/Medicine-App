@@ -137,7 +137,10 @@ function Register() {
       return userFirebase;
     }).then(function () {
       Verify()
+    }).catch((err)=>{
+      console.log('error',err)
     })
+
     const docuRef = doc(firestore, `user/${userInfo.user.uid}`);
     setDoc(docuRef, { email: email, rol: rol });
   }
@@ -237,7 +240,7 @@ function Register() {
         city: value.value
       })
     }
-
+ 
 
   }
 
@@ -247,18 +250,18 @@ function Register() {
     localStorage.setItem("Email", post.email);
 
     e.preventDefault();
-    validate(post);
-    validateProfessional(postprofessional);
+    let val=validate(post);
+    let valP=validateProfessional(postprofessional);
+   
 
 
     var email = e.target.elements.email.value;
     var password = e.target.elements.password.value;
-
-    if (isRegister || auth?.currentUser?.email) {
+   
+   
       userRegister(email, password);
-      
 
-
+ 
       let user = {
         name: post.name,
         email: post.email,
@@ -275,7 +278,7 @@ function Register() {
         rol: post.rol,
         favorites: []
       };
-
+      
 
       //b
       let professional = {
@@ -283,6 +286,7 @@ function Register() {
         licenceImage: prolicenceImage,
         userEmail: postprofessional.userEmail,
       };
+      
       let userCreate = await dispatch(postUser(user));
       if (post.rol === "professional") {
         await dispatch(postProfessional(professional));
@@ -305,20 +309,16 @@ function Register() {
         favorites: []
       });
       
-    } else {
-      signInWithEmailAndPassword(auth, email, password);
-      if(isRight){
-      setRight(false)
-      setTimeout(()=>{if (!auth.currentUser?.email){ setRight(true) }else navigate("/")},1500)
-    }else{ navigate("/") }
-    }
+    
+    
+    
   }
  
 
 
   return (
     <div className="ValidateCOntainer">
-      {creado ? <ModalErrors error={'Usuario creado exitosamente'} /> :null}
+      {creado ? <ModalErrors error={'Usuario creado exitosamente'} route={'/'}/> :null}
       <div className="Validate">
       
         <h2 className="ValidateTitle"> Registrate </h2>,
@@ -533,14 +533,14 @@ function Register() {
             (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") &&
             <div className="formButtons">
               {/* Submit form button */}
-              <Button variant="success" type="submit">
+              <Button variant="success" type="submit" >
                 Registrarse
               </Button>
             </div> :
             (errors.email === "") && (errors.name === "") && (errors.dateOfBirth === "") && (errors.identification === "") && (imageId) && (errors.country === "") && (errors.address === "") && (errors.rol === "") && (prolicenceImage) && (professionalError.medicalLicense === "") &&
             <div className="formButtons">
               {/* Submit form button */}
-              <Button variant="success" type="submit">
+              <Button variant="success" type="submit" >
                 Registrarse
               </Button>
             </div>

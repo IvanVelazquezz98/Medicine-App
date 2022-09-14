@@ -30,10 +30,11 @@ export function getProfessionalById(id) {
 
 // Create a  USER
 export function postUser(payload) {
+  //console.log('postUser=>',payload)
   return async function (dispatch) {
     try {
       var json = await axios.post(`${BASE_URL}/users`, payload);
-
+      //console.log('postUser Respuesta=>',json)
       return json;
     } catch (error) {
       console.log(error);
@@ -43,9 +44,11 @@ export function postUser(payload) {
 
 //Create a Professional
 export function postProfessional(payload) {
+  //console.log('postProf=>',payload);
   return async function (dispatch) {
     try {
       var json = await axios.post(`${BASE_URL}/professionals`, payload);
+      //console.log('postProf respuesta=>',json)
       return json;
     } catch (error) {
       console.log(error);
