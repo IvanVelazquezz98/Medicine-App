@@ -240,7 +240,7 @@ function Register() {
         city: value.value
       })
     }
-
+ 
 
   }
 
