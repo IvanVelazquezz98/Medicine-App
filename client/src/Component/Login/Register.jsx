@@ -261,7 +261,7 @@ function Register() {
    
       userRegister(email, password);
 
-
+ 
       let user = {
         name: post.name,
         email: post.email,
