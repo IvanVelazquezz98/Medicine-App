@@ -274,7 +274,7 @@ const UserProfile = () => {
           <div className="anunciosContainer">
             <h2 className="anuncioTitle">Tus Anuncios</h2>
             <div>
-              <ModalCreateAdd user={user} />
+              <ModalCreateAdd user={profEmail} /> 
             </div>
             {
               User.professional?.ads.length > 0
@@ -287,7 +287,6 @@ const UserProfile = () => {
                             <div className="anuncioImage">
                               <img src={User.userimage}></img>
                             </div>
-
                             <div className="anuncioName">{User.name}</div>
                             <div className="anuncioEmail">{User.email}</div>
                             <div className="anuncioLicencia">

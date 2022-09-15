@@ -18,7 +18,8 @@ export default function CreateAd({ user}) {
  
 
   useEffect(() => {
-    dispatch(getUsersById(user.email));
+    dispatch(getUsersById(user));
+    console.log('user.email', user)
     dispatch(getAllSpecialtys())
   }, [dispatch]);
 
@@ -64,6 +65,7 @@ export default function CreateAd({ user}) {
 
   function handleSubmit(e) {
     //e.preventDefault();
+    console.log('aca entre')
     try {
 
       let ad ={

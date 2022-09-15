@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://medicine-app-back.herokuapp.com"; //https://medicine-app-back.herokuapp.com
 
 //user Validated
 export function userValidated(payload) {
@@ -73,6 +73,7 @@ export function getUsers() {
 
 //get user by id
 export function getUsersById(id) {
+ // console.log('id=>', id)
   return async function (dispatch) {
     var json = await axios.get(`${BASE_URL}/user/${id}`);
     return dispatch({ type: "GET_USER_DETAIL", payload: json.data });
@@ -81,6 +82,7 @@ export function getUsersById(id) {
 
 //get add by ID
 export function getAdById(id) {
+  
   return async function (dispatch) {
     var json = await axios.get(`${BASE_URL}/ad/${id}`);
     return dispatch({ type: "GET_AD_DETAILS", payload: json.data });
