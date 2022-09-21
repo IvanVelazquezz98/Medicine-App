@@ -53,8 +53,8 @@ export default function ModalComent({userEmail, info }) {
                 {confirmMesage ? <ModalConfirmComent/> : null}
                 <form>
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Evalua el trato del professional *5 Excelente *1 Muy malo</label>
-                        <select name='treatment' class="form-control" id="exampleFormControlSelect1"
+                        <label for="exampleFormControlSelect1" style="margin-left: 20px">Evalua el trato del professional *5 Excelente *1 Muy malo</label>
+                        <select name='treatment' class="form-control" id="exampleFormControlSelect1" style="margin-left: 20px"
                         onChange={(e) => handleChange(e)}>
                             <option value={undefined}>...</option>
                             <option value={5}>5</option>
@@ -65,8 +65,8 @@ export default function ModalComent({userEmail, info }) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Puntualidad del profesional</label>
-                        <select name='puntuality' class="form-control" id="exampleFormControlSelect1"
+                        <label for="exampleFormControlSelect1" style="margin-left: 20px">Puntualidad del profesional</label>
+                        <select style="margin-left: 20px" name='puntuality' class="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => handleChange(e)}>
                             <option value={undefined}>...</option>
                             <option value={5}>5</option>
@@ -77,8 +77,8 @@ export default function ModalComent({userEmail, info }) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Conformidad con el profesional</label>
-                        <select name='accordance' class="form-control" id="exampleFormControlSelect1"
+                        <label for="exampleFormControlSelect1" style="margin-left: 20px">Conformidad con el profesional</label>
+                        <select style="margin-left: 20px" name='accordance' class="form-control" id="exampleFormControlSelect1"
                          onChange={(e) => handleChange(e)}>
                             <option value={undefined}>...</option>
                             <option value={5}>5</option>
@@ -89,10 +89,10 @@ export default function ModalComent({userEmail, info }) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Nota extra</label>
+                        <label for="exampleFormControlTextarea1" style="margin-left: 20px">Nota extra</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
-                    <Button variant="primary" onClick={handleSubmit}>
+                    <Button variant="primary" onClick={handleSubmit} style="margin-left: 20px">
                         Puntuar
                     </Button>
                 </form>
