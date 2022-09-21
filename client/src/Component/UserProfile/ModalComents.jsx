@@ -54,7 +54,7 @@ export default function ModalComent({userEmail, info }) {
                 <form>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1" style="margin-left: 20px">Evalua el trato del professional *5 Excelente *1 Muy malo</label>
-                        <select name='treatment' class="form-control" id="exampleFormControlSelect1" style="margin-left: 20px"
+                        <select name='treatment' class="form-control" id="exampleFormControlSelect1" style="margin-left: 20px ; margin-right: 20px"
                         onChange={(e) => handleChange(e)}>
                             <option value={undefined}>...</option>
                             <option value={5}>5</option>
@@ -66,7 +66,7 @@ export default function ModalComent({userEmail, info }) {
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1" style="margin-left: 20px">Puntualidad del profesional</label>
-                        <select style="margin-left: 20px" name='puntuality' class="form-control" id="exampleFormControlSelect1"
+                        <select style="margin-left: 20px ; margin-right: 20px" name='puntuality' class="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => handleChange(e)}>
                             <option value={undefined}>...</option>
                             <option value={5}>5</option>
@@ -78,7 +78,7 @@ export default function ModalComent({userEmail, info }) {
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1" style="margin-left: 20px">Conformidad con el profesional</label>
-                        <select style="margin-left: 20px" name='accordance' class="form-control" id="exampleFormControlSelect1"
+                        <select style="margin-left: 20px ; margin-right: 20px" name='accordance' class="form-control" id="exampleFormControlSelect1"
                          onChange={(e) => handleChange(e)}>
                             <option value={undefined}>...</option>
                             <option value={5}>5</option>
