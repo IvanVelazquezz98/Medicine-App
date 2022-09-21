@@ -14,7 +14,7 @@ export default function ModalComent({userEmail, info }) {
         treatment:'',
         puntuality:'',
         accordance:'',
-        userEmail:emailUser
+        userEmail:userEmail
     })
     const [confirmMesage , setConfirmMesage] = useState(false)
     let dispatch = useDispatch()
@@ -38,7 +38,7 @@ export default function ModalComent({userEmail, info }) {
         dispatch(putEditAppointment({ rating:finalScore  , userEmail:score.userEmail }, info?.id))
         setConfirmMesage(true)
     }
-    let emailUser = JSON.parse(localStorage.getItem("Email"))
+//     let emailUser = JSON.parse(localStorage.getItem("Email"))
 
     return (
         <>
