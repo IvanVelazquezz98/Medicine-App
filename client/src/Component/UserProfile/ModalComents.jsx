@@ -49,7 +49,7 @@ export default function ModalComent({userEmail, info }) {
                         Queres dejar una puntuacion con respecto a tu ultima consulta?
                     </Modal.Title>
                 </Modal.Header>
-                    Turno : {info.date} a las : {info.startTime[0] + ':' + info.startTime[1] + 'Hs'}
+                    Turno : {info.date[0] + "/" +  info.date[1] + "/" + info.date[2]} a las : {info.startTime[0] + ':' + info.startTime[1] + 'Hs'}
                 {confirmMesage ? <ModalConfirmComent/> : null}
                 <form>
                     <div class="form-group">
