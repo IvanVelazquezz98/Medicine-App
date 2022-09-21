@@ -31,7 +31,7 @@ export default function ModalComent({userEmail, info }) {
         });
       }
 
-    const handleSubmit = (userEmail) => {
+    const handleSubmit = () => {
         let sumScore = (parseInt(score.treatment) + parseInt(score.puntuality) +parseInt (score.accordance ) )
         let finalScore = parseInt(sumScore ) /3
         console.log('final score', finalScore)
