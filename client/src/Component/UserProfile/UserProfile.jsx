@@ -120,7 +120,7 @@ const UserProfile = () => {
   return (
     <div>
       {userComentApps ? (
-        <ModalComent userEmail={user?.email} info={userComentApps} />
+        <ModalComent userEmail={User?.email} info={userComentApps} />
       ) : null}
       {User.email && !User.active && navigate("/recover")}
       {User.email && User.deletedByAdmin && navigate("/deletedUser")}
